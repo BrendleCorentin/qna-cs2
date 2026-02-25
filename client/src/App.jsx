@@ -7,9 +7,10 @@ import Match from "./components/Match.jsx";
 import Result from "./components/Result.jsx";
 import Leaderboard from "./components/Leaderboard.jsx";
 
-// MODIFIER ICI AVEC L'IP DE VOTRE VPS pour la production
-// Si vous buildez pour la prod, assurez-vous que cette URL est correcte
-const SERVER_URL = import.meta.env.VITE_API_URL || "http://51.68.139.39:3001"; 
+// CONFIGURATION POUR NGINX REVERSE PROXY
+// Si on utilise Nginx en proxy sur le port 80, l'URL est relative (le même domaine)
+// "http://51.68.139.39" tout court (sans le port 3001)
+const SERVER_URL = import.meta.env.VITE_API_URL || "http://51.68.139.39"; 
 
 export default function App() {
   const socketRef = useSocket(SERVER_URL);

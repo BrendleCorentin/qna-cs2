@@ -67,8 +67,10 @@ Si vous avez fait des modifications (comme changer l'IP), faites ceci sur le VPS
     pm2 restart qna-server
     ```
 
-### Dépannage
-- **Erreur de connexion (Socket):**
-    - Vérifiez que le port 3001 est ouvert: `ufw allow 3001`
-    - Vérifiez la console du navigateur (F12) pour voir l'URL de connexion.
+### Nginx Reverse Proxy (RECOMMANDE)
+1. Créer la config Nginx: `nano /etc/nginx/sites-available/qna.conf`
+2. Copiez la config de `nginx.conf`
+3. Activez le site: `ln -s /etc/nginx/sites-available/qna.conf /etc/nginx/sites-enabled/`
+4. Recharger Nginx: `nginx -t && systemctl reload nginx`
+
 
