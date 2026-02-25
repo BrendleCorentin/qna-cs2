@@ -4,6 +4,8 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import bcrypt from 'bcryptjs';
 
+import { QUESTIONS_DB_SEED } from '../config/questions_db.js';
+
 // Use default import if sqlite3 exports default, otherwise fallback
 const sqlite3 = sqlite3Description.verbose();
 
@@ -52,6 +54,19 @@ function initDB() {
       } else {
         console.log("Table 'matches' prête.");
       }
+    });
+
+    // Table Questions
+    db.run(`
+      CREATE TABLE IF NOT EXISTS questions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        question TEXT NOT NULL,
+        choices TEXT NOT NULL,
+        answerIndex INTEGER NOT NULL
+      )
+    `, (err) => {
+        if (err) console.error("Erreur table questions:", err.message);
+        else seedQuestions();
     });
 
     // Optionnel: Créer un index sur match_id
@@ -159,4 +174,37 @@ export function logMatchResult(matchData) {
     }
     console.log(`Match ${matchId} enregistré avec l'ID ${this.lastID}`);
   });
+}
+
+function seedQuestions() {
+    db.get("SELECT COUNT(*) as count FROM questions", [], (err, row) => {
+        if (err || row.count > 0) return;
+        
+        console.log("[DB] Seeding questions...");
+        const stmt = db.prepare("INSERT INTO questions (question, choices, answerIndex) VALUES (?, ?, ?)");
+        
+        QUESTIONS_DB_SEED.forEach(q => {
+            stmt.run(q.question, JSON.stringify(q.choices), q.answerIndex);
+        });
+        
+        stmt.finalize();
+        console.log(`[DB] Seeded ${QUESTIONS_DB_SEED.length} questions.`);
+    });
+}
+
+export function getRandomQuestions(limit = 5) {
+    return new Promise((resolve, reject) => {
+        db.all("SELECT * FROM questions ORDER BY RANDOM() LIMIT ?", [limit], (err, rows) => {
+            if (err) reject(err);
+            else {
+                // Parse choices from JSON string
+                const questions = rows.map(r => ({
+                    ...r,
+                    id: r.id.toString(), // client expects string ID
+                    choices: JSON.parse(r.choices)
+                }));
+                resolve(questions);
+            }
+        });
+    });
 }

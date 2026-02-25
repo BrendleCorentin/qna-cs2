@@ -1,18 +1,11 @@
 import { makeId } from "../utils/id.js";
-import { QUESTIONS } from "../config/questions.js";
-import { logMatchResult, registerUser, loginUser, getUserByUsername, updateUserElo, getLeaderboard } from "../db/database.js";
+// QUESTIONS import removed, we use DB now
+import { logMatchResult, registerUser, loginUser, getUserByUsername, updateUserElo, getLeaderboard, getRandomQuestions } from "../db/database.js";
 import { calculateElo } from "../utils/elo.js";
 
 let waitingSocketId = null;
 const matches = new Map();
 const QUESTION_DURATION = 5000;
-
-/**
- * Create a payload without answers for clients
- */
-function publicQuestions() {
-  return QUESTIONS.map(({ id, question, choices }) => ({ id, question, choices }));
-}
 
 function startNextQuestion(io, match) {
   if (match.timer) clearTimeout(match.timer);
@@ -20,7 +13,7 @@ function startNextQuestion(io, match) {
   
   match.currentQuestionIndex++;
   
-  if (match.currentQuestionIndex >= QUESTIONS.length) {
+  if (match.currentQuestionIndex >= match.questions.length) {
     if (!match.ended) { // Prevent double ending
         endMatch(io, match);
         matches.delete(match.matchId);
@@ -28,7 +21,7 @@ function startNextQuestion(io, match) {
     return;
   }
 
-  const question = QUESTIONS[match.currentQuestionIndex];
+  const question = match.questions[match.currentQuestionIndex];
   const deadline = Date.now() + QUESTION_DURATION;
 
   io.to(match.matchId).emit("nextQuestion", {
@@ -82,7 +75,7 @@ export function attachMatchmaking(io) {
         }
     });
 
-    socket.on("joinQueue", () => {
+    socket.on("joinQueue", async () => {
       // Require login? For now let's say "Guest" if not logged in, but user asked for login system.
       // If not logged in, create a guest profile or force login.
       // Let's support guests too for backward compat, but ELO only for logged users.
@@ -118,6 +111,15 @@ export function attachMatchmaking(io) {
       if (socketA) socketA.join(matchId);
       if (socketB) socketB.join(matchId);
 
+      let questions = [];
+      try {
+          questions = await getRandomQuestions(5);
+      } catch (e) {
+          console.error("Error fetching questions:", e);
+          // Fallback if needed, or abort match
+          questions = [];
+      }
+
       const match = {
         matchId,
         players: [a, b],
@@ -129,7 +131,7 @@ export function attachMatchmaking(io) {
           [a]: socketA?.data.elo || 1000,
           [b]: socketB?.data.elo || 1000,
         },
-        isRanked: socketA?.data.user && socketB?.data.user, // Only ranked if both are logged in
+        isRanked: socketA?.data.user && socketB?.data.user,
         startedAt: Date.now(),
         ended: false,
         currentQuestionIndex: -1,
@@ -142,17 +144,19 @@ export function attachMatchmaking(io) {
           [a]: 0,
           [b]: 0,
         },
+        questions, // Add questions directly to match object
       };
 
       matches.set(matchId, match);
 
-      const questions = publicQuestions();
+      // Prepare sanitized questions for client
+      const clientQuestions = questions.map(({ id, question, choices }) => ({ id, question, choices }));
 
       io.to(a).emit("matchFound", {
         matchId,
         you: { id: a, nickname: match.nicknames[a], elo: match.elos[a] },
         opponent: { id: b, nickname: match.nicknames[b], elo: match.elos[b] },
-        questions,
+        questions: clientQuestions,
         startedAt: match.startedAt,
       });
 
@@ -160,7 +164,7 @@ export function attachMatchmaking(io) {
         matchId,
         you: { id: b, nickname: match.nicknames[b], elo: match.elos[b] },
         opponent: { id: a, nickname: match.nicknames[a], elo: match.elos[a] },
-        questions,
+        questions: clientQuestions,
         startedAt: match.startedAt,
       });
 
@@ -176,7 +180,7 @@ export function attachMatchmaking(io) {
       if (!match.players.includes(socket.id)) return;
 
       // Only accept answers for the current question
-      const currentQ = QUESTIONS[match.currentQuestionIndex];
+      const currentQ = match.questions[match.currentQuestionIndex];
       if (!currentQ || currentQ.id !== questionId) return;
 
       // prevent double answer
@@ -295,7 +299,7 @@ function getOpponent(match, sid) {
 function isAllAnswered(match) {
   return match.players.every((pid) => {
     const a = match.answers[pid];
-    return QUESTIONS.every((q) => a[q.id] !== undefined);
+    return match.questions.every((q) => a[q.id] !== undefined);
   });
 }
 
