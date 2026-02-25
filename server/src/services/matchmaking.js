@@ -5,7 +5,7 @@ import { calculateElo } from "../utils/elo.js";
 
 let waitingSocketId = null;
 const matches = new Map();
-const QUESTION_DURATION = 5000;
+const QUESTION_DURATION = 10000;
 
 function startNextQuestion(io, match) {
   if (match.timer) clearTimeout(match.timer);

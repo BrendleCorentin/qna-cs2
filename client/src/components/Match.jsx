@@ -12,6 +12,7 @@ export default function Match({
   onAnswer,
   onLeave,
 }) {
+  const ROUND_DURATION_SECONDS = 10;
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
@@ -73,7 +74,7 @@ export default function Match({
       <div className="cs-timer-bar">
          <div 
            className="cs-timer-fill" 
-           style={{ width: `${(timeLeft / 15) * 100}%`, background: timeLeft < 5 ? 'var(--cs-t-red)' : 'var(--cs-accent)' }} 
+           style={{ width: `${(timeLeft / ROUND_DURATION_SECONDS) * 100}%`, background: timeLeft < 5 ? 'var(--cs-t-red)' : 'var(--cs-accent)' }} 
          ></div>
       </div>
 
