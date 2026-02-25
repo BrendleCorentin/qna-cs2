@@ -194,7 +194,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
         </div>
       </div>
       <div style={{ textAlign: 'center', marginTop: '1rem', opacity: 0.5, fontSize: '0.8rem', color: 'var(--cs-text-muted)' }}>
-        VERSION 2.1 • RANKED UPDATE
+        VERSION 2.2 • SOLO MODE ACTIVÉ
       </div>
     </div>
   );
