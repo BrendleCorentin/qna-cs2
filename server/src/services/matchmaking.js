@@ -1,0 +1,378 @@
+import { makeId } from "../utils/id.js";
+import { QUESTIONS } from "../config/questions.js";
+import { logMatchResult, registerUser, loginUser, getUserByUsername, updateUserElo, getLeaderboard } from "../db/database.js";
+import { calculateElo } from "../utils/elo.js";
+
+let waitingSocketId = null;
+const matches = new Map();
+const QUESTION_DURATION = 5000;
+
+/**
+ * Create a payload without answers for clients
+ */
+function publicQuestions() {
+  return QUESTIONS.map(({ id, question, choices }) => ({ id, question, choices }));
+}
+
+function startNextQuestion(io, match) {
+  if (match.timer) clearTimeout(match.timer);
+  if (match.ended) return; // Add this line
+  
+  match.currentQuestionIndex++;
+  
+  if (match.currentQuestionIndex >= QUESTIONS.length) {
+    if (!match.ended) { // Prevent double ending
+        endMatch(io, match);
+        matches.delete(match.matchId);
+    }
+    return;
+  }
+
+  const question = QUESTIONS[match.currentQuestionIndex];
+  const deadline = Date.now() + QUESTION_DURATION;
+
+  io.to(match.matchId).emit("nextQuestion", {
+    index: match.currentQuestionIndex,
+    id: question.id,
+    deadline,
+  });
+
+  // Clear any existing timer to avoid overlaps if called manually
+  if (match.timer) clearTimeout(match.timer);
+
+  match.timer = setTimeout(() => {
+    startNextQuestion(io, match);
+  }, QUESTION_DURATION + 1000); // 1s buffer
+}
+
+export function attachMatchmaking(io) {
+  io.on("connection", (socket) => {
+    // Auth listeners
+    socket.on("register", async ({ username, password }, cb) => {
+        try {
+            if (!username || !password) throw new Error("Champs manquants");
+            await registerUser(username, password);
+            cb({ success: true });
+        } catch (e) {
+            cb({ success: false, error: e.message });
+        }
+    });
+
+    socket.on("login", async ({ username, password }, cb) => {
+        try {
+            const user = await loginUser(username, password);
+             // Store user in socket session
+            socket.data.user = user;
+            socket.data.nickname = user.username;
+            socket.data.elo = user.elo;
+            
+            cb({ success: true, user: { username: user.username, elo: user.elo } });
+        } catch (e) {
+            cb({ success: false, error: e.message });
+        }
+    });
+
+    socket.on("getLeaderboard", async (cb) => {
+        try {
+            const leaderboard = await getLeaderboard(50);
+            cb(leaderboard);
+        } catch (e) {
+            console.error(e);
+            cb([]);
+        }
+    });
+
+    socket.on("joinQueue", () => {
+      // Require login? For now let's say "Guest" if not logged in, but user asked for login system.
+      // If not logged in, create a guest profile or force login.
+      // Let's support guests too for backward compat, but ELO only for logged users.
+      
+      const isGuest = !socket.data.user;
+      const nickname = socket.data.nickname || `Guest-${makeId(4)}`;
+      socket.data.nickname = nickname;
+      
+      if (isGuest) {
+          // Default ELO for matchmaking logic if we had one, but we don't use it for matching yet
+          socket.data.elo = 1000; 
+      }
+
+      if (!waitingSocketId) {
+        socket.join(socket.id); // ensure joined own room? Not needed usually but ok
+        waitingSocketId = socket.id;
+        socket.emit("queueStatus", { status: "waiting" });
+        return;
+      }
+
+      if (waitingSocketId === socket.id) return;
+
+      const a = waitingSocketId;
+      const b = socket.id;
+      waitingSocketId = null;
+
+      const matchId = makeId(10);
+      
+      // Join a room for easier broadcasting
+      const socketA = io.sockets.sockets.get(a);
+      const socketB = io.sockets.sockets.get(b);
+      
+      if (socketA) socketA.join(matchId);
+      if (socketB) socketB.join(matchId);
+
+      const match = {
+        matchId,
+        players: [a, b],
+        nicknames: {
+          [a]: socketA?.data.nickname || "Player 1",
+          [b]: socketB?.data.nickname || "Player 2",
+        },
+        elos: {
+          [a]: socketA?.data.elo || 1000,
+          [b]: socketB?.data.elo || 1000,
+        },
+        isRanked: socketA?.data.user && socketB?.data.user, // Only ranked if both are logged in
+        startedAt: Date.now(),
+        ended: false,
+        currentQuestionIndex: -1,
+        timer: null,
+        answers: {
+          [a]: {},
+          [b]: {},
+        },
+        scores: {
+          [a]: 0,
+          [b]: 0,
+        },
+      };
+
+      matches.set(matchId, match);
+
+      const questions = publicQuestions();
+
+      io.to(a).emit("matchFound", {
+        matchId,
+        you: { id: a, nickname: match.nicknames[a], elo: match.elos[a] },
+        opponent: { id: b, nickname: match.nicknames[b], elo: match.elos[b] },
+        questions,
+        startedAt: match.startedAt,
+      });
+
+      io.to(b).emit("matchFound", {
+        matchId,
+        you: { id: b, nickname: match.nicknames[b], elo: match.elos[b] },
+        opponent: { id: a, nickname: match.nicknames[a], elo: match.elos[a] },
+        questions,
+        startedAt: match.startedAt,
+      });
+
+      // Start the first question after a short delay
+      setTimeout(() => {
+        startNextQuestion(io, match);
+      }, 1000);
+    });
+
+    socket.on("answer", ({ matchId, questionId, choiceIndex }) => {
+      const match = matches.get(matchId);
+      if (!match || match.ended) return;
+      if (!match.players.includes(socket.id)) return;
+
+      // Only accept answers for the current question
+      const currentQ = QUESTIONS[match.currentQuestionIndex];
+      if (!currentQ || currentQ.id !== questionId) return;
+
+      // prevent double answer
+      if (match.answers[socket.id]?.[questionId] !== undefined) return;
+
+      const q = currentQ;
+      // if (!q) return; // already checked
+
+      const idx = Number(choiceIndex);
+      if (!Number.isInteger(idx) || idx < 0 || idx >= q.choices.length) return;
+
+      match.answers[socket.id][questionId] = idx;
+
+      const correct = idx === q.answerIndex;
+      if (correct) {
+        match.scores[socket.id] += 1;
+        // If correct answer, move to next question immediately
+        startNextQuestion(io, match);
+      } // else: wait for timer or other player (but mostly timer in this logic)
+
+      socket.emit("answerAck", {
+        questionId,
+        correct,
+        score: match.scores[socket.id],
+      });
+
+      const opp = getOpponent(match, socket.id);
+      io.to(opp).emit("opponentAnswered", { questionId });
+      
+      // Removed isAllAnswered logic because loop is driven by timer or correct answer
+    });
+
+    socket.on("leaveMatch", ({ matchId }) => {
+      const match = matches.get(matchId);
+      if (!match || match.ended) return;
+      if (!match.players.includes(socket.id)) return;
+
+      const opp = getOpponent(match, socket.id);
+      match.ended = true;
+
+      // Extract nicknames before deleting
+      const p1 = socket.id;
+      const p2 = opp;
+      const n1 = match.nicknames[p1];
+      const n2 = match.nicknames[p2];
+      const s1 = match.scores[p1];
+      const s2 = match.scores[p2];
+
+      // Log database
+      logMatchResult({
+        matchId,
+        player1: n1,
+        player2: n2,
+        score1: s1,
+        score2: s2,
+        winner: n2, // opponent won because player left
+        reason: "abandon"
+      });
+
+      io.to(opp).emit("matchEnd", { result: "win", reason: "opponent_left" });
+      io.to(socket.id).emit("matchEnd", { result: "lose", reason: "left" });
+
+      matches.delete(matchId);
+    });
+
+    socket.on("disconnect", () => {
+      if (waitingSocketId === socket.id) waitingSocketId = null;
+
+      // if in match -> opponent wins
+      for (const [mid, match] of matches.entries()) {
+        if (match.ended) continue;
+        if (!match.players.includes(socket.id)) continue;
+
+        const opp = getOpponent(match, socket.id);
+        match.ended = true;
+
+        const p1 = socket.id;
+        const p2 = opp;
+        const n1 = match.nicknames[p1];
+        const n2 = match.nicknames[p2];
+        const s1 = match.scores[p1];
+        const s2 = match.scores[p2];
+
+        logMatchResult({
+            matchId: mid,
+            player1: n1,
+            player2: n2,
+            score1: s1,
+            score2: s2,
+            winner: n2,
+            reason: "disconnect"
+        });
+
+        // ELO penalty for disconnect? For now let's treat it as a loss if ranked
+        // But since we are inside a loop and async might be tricky, let's keep it simple: no ELO update on disconnect for now,
+        // OR better: treat as loss.
+        if (match.isRanked) {
+             const actualScoreA = 0; // p1 disconnected -> loss
+             const [nA, nB] = calculateElo(match.elos[p1], match.elos[p2], actualScoreA);
+             updateUserElo(n1, nA).catch(console.error);
+             updateUserElo(n2, nB).catch(console.error);
+        }
+
+        io.to(opp).emit("matchEnd", { result: "win", reason: "opponent_disconnected" });
+        matches.delete(mid);
+      }
+    });
+  });
+}
+
+function getOpponent(match, sid) {
+  const [a, b] = match.players;
+  return sid === a ? b : a;
+}
+
+function isAllAnswered(match) {
+  return match.players.every((pid) => {
+    const a = match.answers[pid];
+    return QUESTIONS.every((q) => a[q.id] !== undefined);
+  });
+}
+
+function endMatch(io, match) {
+  match.ended = true;
+  const [a, b] = match.players;
+
+  const sa = match.scores[a];
+  const sb = match.scores[b];
+  
+  let resultA = "draw";
+  let resultB = "draw";
+  
+  if (sa > sb) {
+      resultA = "win";
+      resultB = "loss";
+  } else if (sb > sa) {
+      resultA = "loss";
+      resultB = "win";
+  }
+  
+  // Calculate ELO if ranked
+  let newEloA = match.elos[a];
+  let newEloB = match.elos[b];
+  let eloChangeA = 0;
+  let eloChangeB = 0;
+
+  if (match.isRanked) {
+      const actualScoreA = sa > sb ? 1 : sa < sb ? 0 : 0.5;
+      const [nA, nB] = calculateElo(match.elos[a], match.elos[b], actualScoreA);
+      
+      eloChangeA = nA - match.elos[a];
+      eloChangeB = nB - match.elos[b];
+      
+      newEloA = nA;
+      newEloB = nB;
+
+      // Update DB asynchronously
+      updateUserElo(match.nicknames[a], newEloA).catch(console.error);
+      updateUserElo(match.nicknames[b], newEloB).catch(console.error);
+      
+      // Update socket data if still connected
+      const sockA = io.sockets.sockets.get(a);
+      if (sockA) sockA.data.elo = newEloA;
+      
+      const sockB = io.sockets.sockets.get(b);
+      if (sockB) sockB.data.elo = newEloB;
+  }
+
+  // Determine winner name
+  let winnerName = "draw";
+  if (sa > sb) winnerName = match.nicknames[a];
+  else if (sb > sa) winnerName = match.nicknames[b];
+
+  logMatchResult({
+    matchId: match.matchId,
+    player1: match.nicknames[a],
+    player2: match.nicknames[b],
+    score1: sa,
+    score2: sb,
+    winner: winnerName,
+    reason: "normal"
+  });
+
+  io.to(a).emit("matchEnd", { 
+      result: resultA, 
+      yourScore: sa, 
+      oppScore: sb,
+      elo: newEloA,
+      eloChange: eloChangeA
+  });
+  
+  io.to(b).emit("matchEnd", { 
+      result: resultB, 
+      yourScore: sb, 
+      oppScore: sa,
+      elo: newEloB,
+      eloChange: eloChangeB
+  });
+}
