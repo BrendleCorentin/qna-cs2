@@ -8,8 +8,7 @@ import Result from "./components/Result.jsx";
 import Leaderboard from "./components/Leaderboard.jsx";
 
 // CONFIGURATION POUR NGINX REVERSE PROXY
-// Si on utilise Nginx en proxy sur le port 80, l'URL est relative (le même domaine)
-// "http://51.68.139.39" tout court (sans le port 3001)
+// Important : pas de slash à la fin, pas de port
 const SERVER_URL = import.meta.env.VITE_API_URL || "http://51.68.139.39"; 
 
 export default function App() {
