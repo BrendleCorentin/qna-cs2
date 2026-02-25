@@ -98,19 +98,19 @@ export default function App() {
     setPhase("queue");
   }
 
-  function answer(questionId, choiceIndex) {
+  function answer(questionId, ans) {
     if (!match) return;
-    if (answered[questionId]?.choiceIndex !== undefined) return;
+    if (answered[questionId]?.answer !== undefined) return;
 
     setAnswered((prev) => ({
       ...prev,
-      [questionId]: { choiceIndex },
+      [questionId]: { answer: ans },
     }));
 
     socketRef.current?.emit("answer", {
       matchId: match.matchId,
       questionId,
-      choiceIndex,
+      answer: ans,
     });
   }
 

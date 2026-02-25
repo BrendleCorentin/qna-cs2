@@ -35,7 +35,7 @@ export default function Match({
   if (!q) return <div className="cs-container" style={{ justifyContent: 'center', textAlign: 'center' }}>Chargement du round...</div>;
 
   const my = answered[q.id];
-  const selectedIndex = my?.choiceIndex;
+  const selectedIndex = my?.answer;
   const correct = my?.correct;
   const oppDid = !!opponentAnswered[q.id];
 
@@ -72,11 +72,12 @@ export default function Match({
       </div>
 
       <QuestionCard
+        type={q.type || 'mcq'}
         question={q.question}
         choices={q.choices}
         disabled={selectedIndex !== undefined}
         selectedIndex={selectedIndex}
-        onSelect={(idx) => onAnswer(q.id, idx)}
+        onSelect={(ans) => onAnswer(q.id, ans)}
       />
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem' }}>

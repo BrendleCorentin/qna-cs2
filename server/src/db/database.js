@@ -56,16 +56,18 @@ function initDB() {
       }
     });
 
-    // Table Questions
+    // Table Questions (Nouvelle version avec support TEXT et MCQ)
     db.run(`
-      CREATE TABLE IF NOT EXISTS questions (
+      CREATE TABLE IF NOT EXISTS questions_v2 (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        type TEXT DEFAULT 'mcq',
         question TEXT NOT NULL,
-        choices TEXT NOT NULL,
-        answerIndex INTEGER NOT NULL
+        choices TEXT,
+        answerIndex INTEGER,
+        answer TEXT
       )
     `, (err) => {
-        if (err) console.error("Erreur table questions:", err.message);
+        if (err) console.error("Erreur table questions_v2:", err.message);
         else seedQuestions();
     });
 
@@ -177,14 +179,18 @@ export function logMatchResult(matchData) {
 }
 
 function seedQuestions() {
-    db.get("SELECT COUNT(*) as count FROM questions", [], (err, row) => {
+    db.get("SELECT COUNT(*) as count FROM questions_v2", [], (err, row) => {
         if (err || row.count > 0) return;
         
-        console.log("[DB] Seeding questions...");
-        const stmt = db.prepare("INSERT INTO questions (question, choices, answerIndex) VALUES (?, ?, ?)");
+        console.log("[DB] Seeding questions_v2...");
+        const stmt = db.prepare("INSERT INTO questions_v2 (type, question, choices, answerIndex, answer) VALUES (?, ?, ?, ?, ?)");
         
         QUESTIONS_DB_SEED.forEach(q => {
-            stmt.run(q.question, JSON.stringify(q.choices), q.answerIndex);
+            const type = q.type || 'mcq';
+            const choices = q.choices ? JSON.stringify(q.choices) : null;
+            const idx = q.answerIndex !== undefined ? q.answerIndex : null;
+            const ans = q.answer || null;
+            stmt.run(type, q.question, choices, idx, ans);
         });
         
         stmt.finalize();
@@ -194,14 +200,14 @@ function seedQuestions() {
 
 export function getRandomQuestions(limit = 5) {
     return new Promise((resolve, reject) => {
-        db.all("SELECT * FROM questions ORDER BY RANDOM() LIMIT ?", [limit], (err, rows) => {
+        db.all("SELECT * FROM questions_v2 ORDER BY RANDOM() LIMIT ?", [limit], (err, rows) => {
             if (err) reject(err);
             else {
-                // Parse choices from JSON string
+                // Parse choices from JSON string if present
                 const questions = rows.map(r => ({
                     ...r,
                     id: r.id.toString(), // client expects string ID
-                    choices: JSON.parse(r.choices)
+                    choices: r.choices ? JSON.parse(r.choices) : null
                 }));
                 resolve(questions);
             }

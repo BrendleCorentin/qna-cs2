@@ -150,7 +150,7 @@ export function attachMatchmaking(io) {
       matches.set(matchId, match);
 
       // Prepare sanitized questions for client
-      const clientQuestions = questions.map(({ id, question, choices }) => ({ id, question, choices }));
+      const clientQuestions = questions.map(({ id, question, choices, type }) => ({ id, question, choices, type }));
 
       io.to(a).emit("matchFound", {
         matchId,
@@ -174,7 +174,7 @@ export function attachMatchmaking(io) {
       }, 1000);
     });
 
-    socket.on("answer", ({ matchId, questionId, choiceIndex }) => {
+    socket.on("answer", ({ matchId, questionId, answer }) => {
       const match = matches.get(matchId);
       if (!match || match.ended) return;
       if (!match.players.includes(socket.id)) return;
@@ -187,19 +187,32 @@ export function attachMatchmaking(io) {
       if (match.answers[socket.id]?.[questionId] !== undefined) return;
 
       const q = currentQ;
-      // if (!q) return; // already checked
+      let correct = false;
 
-      const idx = Number(choiceIndex);
-      if (!Number.isInteger(idx) || idx < 0 || idx >= q.choices.length) return;
+      // Check answer type
+      if (q.type === 'text') {
+          const submitted = (typeof answer === 'string' ? answer : "").trim().toLowerCase();
+          const expected = (q.answer || "").trim().toLowerCase();
+          
+          // Basic exact match (case-insensitive)
+          // We could add Levenshtein distance for typos later
+          correct = submitted === expected;
+          
+          match.answers[socket.id][questionId] = answer;
+      } else {
+          // Default to MCQ
+          const idx = Number(answer);
+          if (!Number.isInteger(idx) || idx < 0 || idx >= (q.choices ? q.choices.length : 0)) return;
 
-      match.answers[socket.id][questionId] = idx;
+          match.answers[socket.id][questionId] = idx;
+          correct = idx === q.answerIndex;
+      }
 
-      const correct = idx === q.answerIndex;
       if (correct) {
         match.scores[socket.id] += 1;
-        // If correct answer, move to next question immediately
+        // If correct answer, move to next question immediately (First to answer logic)
         startNextQuestion(io, match);
-      } // else: wait for timer or other player (but mostly timer in this logic)
+      } 
 
       socket.emit("answerAck", {
         questionId,
