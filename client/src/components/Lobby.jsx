@@ -41,7 +41,15 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
               onClick={onPlay}
               style={{ width: '100%', marginBottom: '1rem' }}
             >
-              LANCER LA RECHERCHE (CLASSÉ)
+              LANCER LE MATCHMAKING (RANKED)
+            </button>
+
+            <button 
+              className="cs-btn" 
+              onClick={() => onPlay(true)} // true = solo mode
+              style={{ width: '100%', marginBottom: '1rem', background: 'var(--cs-accent)', border: 'none' }}
+            >
+              MODE SOLO (ENTRAÎNEMENT)
             </button>
             
             <button
@@ -167,9 +175,16 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
             <button 
                 className="cs-btn" 
                 onClick={() => { setNickname("Invité"); onPlay(); }}
-                style={{ width: '100%', fontSize: '0.9rem', padding: '0.8rem' }}
+                style={{ width: '100%', fontSize: '0.9rem', padding: '0.8rem', marginBottom: '1rem' }}
             >
                 PARTIE RAPIDE (NON CLASSÉ)
+            </button>
+            <button 
+                className="cs-btn" 
+                onClick={() => { setNickname("TrainingBot"); onPlay(true); }}
+                style={{ width: '100%', fontSize: '0.9rem', padding: '0.8rem', background: 'var(--cs-accent)', border: 'none' }}
+            >
+                MODE SOLO (ENTRAÎNEMENT)
             </button>
         </div>
             

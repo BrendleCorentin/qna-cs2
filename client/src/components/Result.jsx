@@ -2,11 +2,15 @@ import React from 'react';
 
 export default function Result({ endInfo, onReplay }) {
   const r = endInfo?.result;
+  const isSolo = endInfo?.isSolo;
   
   let title = "ÉGALITÉ";
   let color = "var(--cs-ct-blue)";
   
-  if (r === "win") {
+  if (isSolo) {
+      title = "FIN DE SÉRIE";
+      color = "var(--cs-accent)";
+  } else if (r === "win") {
       title = "VICTOIRE";
       color = "var(--cs-accent)";
   } else if (r === "loss" || r === "lose") { // handle both just in case
@@ -26,7 +30,11 @@ export default function Result({ endInfo, onReplay }) {
                 <div className="cs-label">VOTRE SCORE</div>
                 <div style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>{endInfo?.yourScore ?? "-"}</div>
                 
-                {endInfo?.eloChange !== undefined && endInfo.eloChange !== 0 ? (
+                {isSolo ? (
+                     <div style={{ marginTop: '0.5rem', fontSize: '1rem', color: 'var(--cs-text-muted)' }}>
+                        ENTRAÎNEMENT
+                    </div>
+                ) : endInfo?.eloChange !== undefined && endInfo.eloChange !== 0 ? (
                     <div style={{ marginTop: '0.5rem', fontSize: '1.2rem', color: endInfo.eloChange > 0 ? 'var(--cs-success)' : 'var(--cs-t-red)' }}>
                         RANK: {endInfo.elo} ({endInfo.eloChange > 0 ? '+' : ''}{endInfo.eloChange})
                     </div>

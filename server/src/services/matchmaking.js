@@ -75,6 +75,59 @@ export function attachMatchmaking(io) {
         }
     });
 
+    socket.on("startSolo", async ({ nickname }) => {
+        socket.data.nickname = nickname;
+        const matchId = makeId(10);
+        socket.join(matchId);
+
+        let questions = [];
+        try {
+            questions = await getRandomQuestions(5);
+        } catch (e) {
+            questions = [];
+        }
+
+        const match = {
+            matchId,
+            players: [socket.id],
+            nicknames: {
+                [socket.id]: nickname,
+            },
+            elos: {
+                [socket.id]: socket.data.elo || 1000,
+            },
+            isRanked: false, // Solo is never ranked
+            isSolo: true,
+            startedAt: Date.now(),
+            ended: false,
+            currentQuestionIndex: -1,
+            timer: null,
+            answers: {
+                [socket.id]: {},
+            },
+            scores: {
+                [socket.id]: 0,
+            },
+            questions,
+        };
+
+        matches.set(matchId, match);
+
+        const clientQuestions = questions.map(({ id, question, choices, type }) => ({ id, question, choices, type }));
+
+        socket.emit("matchFound", {
+            matchId,
+            you: { id: socket.id, nickname: nickname, elo: match.elos[socket.id] },
+            opponent: { id: "bot", nickname: "Bot d'Entraînement", elo: 0 },
+            questions: clientQuestions,
+            startedAt: match.startedAt,
+        });
+
+        setTimeout(() => {
+            startNextQuestion(io, match);
+        }, 1000);
+    });
+
     socket.on("joinQueue", async () => {
       // Require login? For now let's say "Guest" if not logged in, but user asked for login system.
       // If not logged in, create a guest profile or force login.
@@ -221,7 +274,9 @@ export function attachMatchmaking(io) {
       });
 
       const opp = getOpponent(match, socket.id);
-      io.to(opp).emit("opponentAnswered", { questionId });
+      if (opp) {
+        io.to(opp).emit("opponentAnswered", { questionId });
+      }
       
       // Removed isAllAnswered logic because loop is driven by timer or correct answer
     });
@@ -236,24 +291,29 @@ export function attachMatchmaking(io) {
 
       // Extract nicknames before deleting
       const p1 = socket.id;
-      const p2 = opp;
       const n1 = match.nicknames[p1];
-      const n2 = match.nicknames[p2];
+      
+      const p2 = opp || 'bot';
+      const n2 = opp ? match.nicknames[p2] : "Bot d'Entraînement";
+      
       const s1 = match.scores[p1];
-      const s2 = match.scores[p2];
+      const s2 = opp ? match.scores[p2] : 0;
 
-      // Log database
-      logMatchResult({
-        matchId,
-        player1: n1,
-        player2: n2,
-        score1: s1,
-        score2: s2,
-        winner: n2, // opponent won because player left
-        reason: "abandon"
-      });
+      // Log database (only if not solo or if we want to log practice)
+      if (!match.isSolo) {
+            logMatchResult({
+                matchId,
+                player1: n1,
+                player2: n2,
+                score1: s1,
+                score2: s2,
+                winner: n2, // opponent won because player left
+                reason: "abandon"
+            });
 
-      io.to(opp).emit("matchEnd", { result: "win", reason: "opponent_left" });
+            if(opp) io.to(opp).emit("matchEnd", { result: "win", reason: "opponent_left" });
+      }
+
       io.to(socket.id).emit("matchEnd", { result: "lose", reason: "left" });
 
       matches.delete(matchId);
@@ -266,6 +326,11 @@ export function attachMatchmaking(io) {
       for (const [mid, match] of matches.entries()) {
         if (match.ended) continue;
         if (!match.players.includes(socket.id)) continue;
+
+        if (match.isSolo) {
+            matches.delete(mid);
+            continue;
+        }
 
         const opp = getOpponent(match, socket.id);
         match.ended = true;
@@ -305,6 +370,7 @@ export function attachMatchmaking(io) {
 }
 
 function getOpponent(match, sid) {
+  if (match.isSolo) return null; // Solo mode
   const [a, b] = match.players;
   return sid === a ? b : a;
 }
@@ -318,6 +384,23 @@ function isAllAnswered(match) {
 
 function endMatch(io, match) {
   match.ended = true;
+
+  if (match.isSolo) {
+      const pid = match.players[0];
+      const score = match.scores[pid];
+      
+      // No ELO for solo
+      io.to(pid).emit("matchEnd", { 
+          result: "win", // Or just 'finished'
+          yourScore: score, 
+          oppScore: 0,
+          elo: match.elos[pid],
+          eloChange: 0,
+          isSolo: true
+      });
+      return;
+  }
+
   const [a, b] = match.players;
 
   const sa = match.scores[a];

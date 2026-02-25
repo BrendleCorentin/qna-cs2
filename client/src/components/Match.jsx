@@ -39,16 +39,22 @@ export default function Match({
   const correct = my?.correct;
   const oppDid = !!opponentAnswered[q.id];
 
+  const isBot = opponentName === "Bot d'Entraînement";
+
   return (
     <div className="cs-container cs-match-container">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <div>
            <div className="cs-label">ADVERSAIRE</div>
            <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{opponentName}</div>
-           <div className={`cs-status-dot ${oppDid ? 'online' : ''}`} style={{ marginTop: '0.5rem' }}></div>
-           <span style={{ marginLeft: '0.5rem', fontSize: '0.8rem', color: 'var(--cs-text-muted)' }}>
-             {oppDid ? "A RÉPONDU" : "EN ATTENTE..."}
-           </span>
+           {!isBot && ( // Hide opponent indicator if bot/solo
+               <>
+                   <div className={`cs-status-dot ${oppDid ? 'online' : ''}`} style={{ marginTop: '0.5rem' }}></div>
+                   <span style={{ marginLeft: '0.5rem', fontSize: '0.8rem', color: 'var(--cs-text-muted)' }}>
+                     {oppDid ? "A RÉPONDU" : "EN ATTENTE..."}
+                   </span>
+               </>
+           )}
         </div>
 
         <div style={{ textAlign: 'center' }}>

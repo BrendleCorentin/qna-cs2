@@ -91,11 +91,16 @@ export default function App() {
     };
   }, [socketRef]);
 
-  function joinQueue() {
+  function joinQueue(isSolo = false) {
     const s = socketRef.current;
     if (!s) return;
-    s.emit("joinQueue", { nickname: nickname || "Player" });
-    setPhase("queue");
+    
+    if (isSolo) {
+        s.emit("startSolo", { nickname: nickname || "Player" });
+    } else {
+        s.emit("joinQueue", { nickname: nickname || "Player" });
+        setPhase("queue");
+    }
   }
 
   function answer(questionId, ans) {
