@@ -7,7 +7,9 @@ import Match from "./components/Match.jsx";
 import Result from "./components/Result.jsx";
 import Leaderboard from "./components/Leaderboard.jsx";
 
-const SERVER_URL = "http://localhost:3001";
+// MODIFIER ICI AVEC L'IP DE VOTRE VPS pour la production
+// Si vous buildez pour la prod, assurez-vous que cette URL est correcte
+const SERVER_URL = import.meta.env.VITE_API_URL || "http://51.68.139.39:3001"; 
 
 export default function App() {
   const socketRef = useSocket(SERVER_URL);
