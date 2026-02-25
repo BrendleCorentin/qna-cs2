@@ -38,7 +38,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
 
             <button 
               className="cs-btn cs-btn-primary" 
-              onClick={onPlay}
+              onClick={() => onPlay(false)}
               style={{ width: '100%', marginBottom: '1rem' }}
             >
               LANCER LE MATCHMAKING (RANKED)
@@ -194,7 +194,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
         </div>
       </div>
       <div style={{ textAlign: 'center', marginTop: '1rem', opacity: 0.5, fontSize: '0.8rem', color: 'var(--cs-text-muted)' }}>
-        VERSION 2.2 • SOLO MODE ACTIVÉ
+        VERSION 2.3 • RANKED FIX
       </div>
     </div>
   );
