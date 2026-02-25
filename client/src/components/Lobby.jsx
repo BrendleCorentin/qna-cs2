@@ -62,6 +62,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
       setErrorLocal("");
       
       if (!socket || !socket.connected) {
+          console.error("Socket non connecté lors de la soumission");
           setErrorLocal("Erreur: Non connecté au serveur. Vérifiez votre connexion.");
           return;
       }

@@ -6,7 +6,17 @@ export function useSocket(serverUrl) {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
+    console.log(`[Socket] Tentative de connexion vers: ${serverUrl}`);
     const s = io(serverUrl);
+    
+    s.on("connect", () => {
+        console.log(`[Socket] Connecté avec succès ! ID: ${s.id}`);
+    });
+    
+    s.on("connect_error", (err) => {
+        console.error(`[Socket] Erreur de connexion:`, err.message);
+    });
+
     socketRef.current = s;
     setSocket(s);
 

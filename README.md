@@ -45,37 +45,30 @@ npm run build
 ```
 Cela va créer un dossier `dist` dans `client/`.
 
-### 4. Démarrer le Serveur
-Le serveur servira l'API et les fichiers statiques du frontend (si configuré) ou vous pouvez servir le frontend séparément.
+### Mise à jour sur le VPS
+Si vous avez fait des modifications (comme changer l'IP), faites ceci sur le VPS :
 
-**Mode Développement (avec rechargement auto) :**
-Ouvrir deux terminaux :
-- Terminal 1 (Serveur) : `cd server && npm run dev`
-- Terminal 2 (Client) : `cd client && npm run dev`
+1.  **Récupérer le code:**
+    ```bash
+    cd ~/qna-cs2
+    git pull
+    ```
 
-**Mode Production (VPS) :**
-```bash
-# Dans le dossier server
-cd server
-npm start
-```
-*Note : Assurez-vous que le serveur pointe bien vers le build du client si vous voulez tout servir sur le même port, ou configurez un reverse proxy (Nginx).*
+2.  **Reconstruire le Client (Frontend):**
+    ```bash
+    cd client
+    npm install
+    npm run build
+    ```
+    *C'est cette étape qui intègre la nouvelle IP dans le site.*
 
-## Déploiement VPS (Recommandé avec PM2)
+3.  **Redémarrez le serveur (Backend):**
+    ```bash
+    pm2 restart qna-server
+    ```
 
-1. Installer PM2 globalement : `npm install -g pm2`
-2. Lancer le serveur avec PM2 :
-```bash
-cd server
-pm2 start src/index.js --name "cs2-qna"
-```
-3. Sauvegarder pour le redémarrage auto :
-```bash
-pm2 save
-pm2 startup
-```
+### Dépannage
+- **Erreur de connexion (Socket):**
+    - Vérifiez que le port 3001 est ouvert: `ufw allow 3001`
+    - Vérifiez la console du navigateur (F12) pour voir l'URL de connexion.
 
-## Structure du projet
-
-- `/client` : Frontend React + Vite
-- `/server` : Backend Node.js + Express + Socket.io + SQLite
