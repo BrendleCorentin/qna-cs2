@@ -9,19 +9,30 @@ const QUESTION_DURATION = 5000;
 
 function startNextQuestion(io, match) {
   if (match.timer) clearTimeout(match.timer);
-  if (match.ended) return; // Add this line
+  if (match.ended) return;
   
   match.currentQuestionIndex++;
   
   if (match.currentQuestionIndex >= match.questions.length) {
-    if (!match.ended) { // Prevent double ending
+    if (!match.ended) { 
         endMatch(io, match);
-        matches.delete(match.matchId);
+        // Clean up match after a short delay to allow for any late acks or disconnects
+        setTimeout(() => {
+            matches.delete(match.matchId);
+        }, 5000);
     }
     return;
   }
 
   const question = match.questions[match.currentQuestionIndex];
+  
+  // Safety check: ensure question exists
+  if (!question) {
+      console.error(`Match ${match.matchId}: Question at index ${match.currentQuestionIndex} is undefined.`);
+      endMatch(io, match);
+      return;
+  }
+
   const deadline = Date.now() + QUESTION_DURATION;
 
   io.to(match.matchId).emit("nextQuestion", {
@@ -234,39 +245,67 @@ export function attachMatchmaking(io) {
 
       // Only accept answers for the current question
       const currentQ = match.questions[match.currentQuestionIndex];
-      if (!currentQ || currentQ.id !== questionId) return;
+      // Convert both IDs to string for comparison to avoid type mismatch
+      if (!currentQ || String(currentQ.id) !== String(questionId)) {
+          console.warn(`[Match ${matchId}] Invalid question ID. Expected ${currentQ?.id}, got ${questionId}`);
+          return;
+      }
 
       // prevent double answer
-      if (match.answers[socket.id]?.[questionId] !== undefined) return;
+      if (match.answers[socket.id]?.[questionId] !== undefined) {
+        // Already answered, just re-send ack in case client missed it
+        const existingAns = match.answers[socket.id][questionId];
+        let wasCorrect = false;
+        if (currentQ.type === 'text') {
+            const expected = (currentQ.answer || "").trim().toLowerCase();
+            wasCorrect = (typeof existingAns === 'string' ? existingAns : "").trim().toLowerCase() === expected;
+        } else {
+             wasCorrect = existingAns === currentQ.answerIndex;
+        }
+        
+        socket.emit("answerAck", {
+            questionId,
+            correct: wasCorrect,
+            score: match.scores[socket.id],
+        });
+        return;
+      }
 
       const q = currentQ;
       let correct = false;
 
       // Check answer type
+      let validAnswer = true;
+
       if (q.type === 'text') {
           const submitted = (typeof answer === 'string' ? answer : "").trim().toLowerCase();
           const expected = (q.answer || "").trim().toLowerCase();
           
-          // Basic exact match (case-insensitive)
-          // We could add Levenshtein distance for typos later
           correct = submitted === expected;
-          
           match.answers[socket.id][questionId] = answer;
       } else {
           // Default to MCQ
           const idx = Number(answer);
-          if (!Number.isInteger(idx) || idx < 0 || idx >= (q.choices ? q.choices.length : 0)) return;
-
-          match.answers[socket.id][questionId] = idx;
-          correct = idx === q.answerIndex;
+          if (!Number.isInteger(idx) || idx < 0 || idx >= (q.choices ? q.choices.length : 0)) {
+              validAnswer = false;
+          } else {
+              match.answers[socket.id][questionId] = idx;
+              correct = idx === q.answerIndex;
+          }
       }
 
-      if (correct) {
-        match.scores[socket.id] += 1;
-        // If correct answer, move to next question immediately (First to answer logic)
-        startNextQuestion(io, match);
-      } 
+      if (!validAnswer) {
+          console.warn(`[Match ${matchId}] Invalid answer index: ${answer}`);
+          // Send ack with error/false to unblock client
+           socket.emit("answerAck", {
+            questionId,
+            correct: false,
+            score: match.scores[socket.id],
+          });
+          return;
+      }
 
+      // Send Ack FIRST before moving to next question (to ensure client processes it)
       socket.emit("answerAck", {
         questionId,
         correct,
@@ -277,8 +316,22 @@ export function attachMatchmaking(io) {
       if (opp) {
         io.to(opp).emit("opponentAnswered", { questionId });
       }
+
+      if (correct) {
+        match.scores[socket.id] += 1;
+        
+        // If correct answer, move to next question with a small delay
+        setTimeout(() => {
+            if (match.ended) return;
+            // Only proceed if we are still on the same question index
+            // (Use simple index check)
+            const currentIndex = match.questions.indexOf(currentQ);
+            if (match.currentQuestionIndex === currentIndex) {
+                 startNextQuestion(io, match);
+            }
+        }, 1000); 
+      } 
       
-      // Removed isAllAnswered logic because loop is driven by timer or correct answer
     });
 
     socket.on("leaveMatch", ({ matchId }) => {
@@ -312,6 +365,11 @@ export function attachMatchmaking(io) {
             });
 
             if(opp) io.to(opp).emit("matchEnd", { result: "win", reason: "opponent_left" });
+      }
+
+      // If solo, just end it 
+      if (match.isSolo) {
+           // Maybe nothing needed here if we just delete it
       }
 
       io.to(socket.id).emit("matchEnd", { result: "lose", reason: "left" });

@@ -70,6 +70,7 @@ export default function App() {
     };
 
     const onMatchEnd = (msg) => {
+      console.log("Match ended:", msg);
       setEndInfo(msg);
       setPhase("end");
     };
