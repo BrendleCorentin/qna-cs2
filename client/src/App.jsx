@@ -8,8 +8,8 @@ import Result from "./components/Result.jsx";
 import Leaderboard from "./components/Leaderboard.jsx";
 
 // CONFIGURATION POUR NGINX REVERSE PROXY
-// Important : pas de slash à la fin, pas de port
-const SERVER_URL = import.meta.env.VITE_API_URL || "http://51.68.139.39"; 
+// Force l'utilisation de l'IP sans port pour éviter tout conflit avec des fichiers .env existants
+const SERVER_URL = "http://51.68.139.39"; 
 
 export default function App() {
   const socketRef = useSocket(SERVER_URL);
