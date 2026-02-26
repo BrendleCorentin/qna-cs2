@@ -38,7 +38,9 @@ export default function App() {
 
     const onQueueStatus = (msg) => {
       setQueueStatus(msg.status);
-      setPhase("queue");
+      if (msg.status === "waiting") {
+         setPhase("queue");
+      }
     };
 
     const onMatchFound = (msg) => {
