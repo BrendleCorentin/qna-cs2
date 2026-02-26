@@ -172,8 +172,8 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
 
   return (
     <div className="cs-container">
-      <VideoBackground />
-      <div className="cs-card" style={{ maxWidth: '500px', margin: '0 auto', width: '100%', position: 'relative', background: 'rgba(28, 30, 36, 0.85)', backdropFilter: 'blur(10px)' }}>
+      {/* Background simplifie */}
+      <div className="cs-card" style={{ maxWidth: '400px', margin: '0 auto', width: '100%', position: 'relative', background: 'rgba(28, 30, 36, 0.95)', border: '1px solid var(--cs-border)' }}>
         <h1 className="cs-hero-title" style={{ fontSize: '2.5rem', textAlign: 'center', borderLeft: 'none' }}>
           COUNTER <span style={{ color: 'var(--cs-accent)' }}>QUIZ</span>
         </h1>
