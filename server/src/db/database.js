@@ -156,6 +156,15 @@ export function updateUserElo(username, newElo) {
     });
 }
 
+export function updateUserEloById(id, newElo) {
+    return new Promise((resolve, reject) => {
+        db.run("UPDATE users SET elo = ? WHERE id = ?", [newElo, id], function(err) {
+            if (err) reject(err);
+            else resolve();
+        });
+    });
+}
+
 export function getLeaderboard(limit = 50) {
     return new Promise((resolve, reject) => {
         db.all("SELECT username, elo FROM users ORDER BY elo DESC LIMIT ?", [limit], (err, rows) => {
@@ -286,3 +295,33 @@ export function deleteQuestion(id) {
     });
   });
 }
+
+// --- ADMIN FUNCTIONS ---
+
+export function getAllUsers() {
+    return new Promise((resolve, reject) => {
+        db.all("SELECT id, username, elo, created_at FROM users ORDER BY created_at DESC", [], (err, rows) => {
+            if (err) reject(err);
+            else resolve(rows);
+        });
+    });
+}
+
+export function deleteUser(id) {
+    return new Promise((resolve, reject) => {
+        db.run("DELETE FROM users WHERE id = ?", [id], function (err) {
+            if (err) reject(err);
+            else resolve({ deletedId: id });
+        });
+    });
+}
+
+export function getAllMatches() {
+    return new Promise((resolve, reject) => {
+        db.all("SELECT * FROM matches ORDER BY timestamp DESC LIMIT 100", [], (err, rows) => {
+            if (err) reject(err);
+            else resolve(rows);
+        });
+    });
+}
+
