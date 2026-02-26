@@ -198,6 +198,35 @@ function seedQuestions() {
     });
 }
 
+export function forceSeedQuestions() {
+  return new Promise((resolve, reject) => {
+    console.log("[DB] Force seeding questions...");
+    const stmt = db.prepare(
+      "INSERT INTO questions_v2 (type, question, choices, answerIndex, answer) VALUES (?, ?, ?, ?, ?)"
+    );
+
+    let completed = 0;
+    const total = QUESTIONS_DB_SEED.length;
+
+    QUESTIONS_DB_SEED.forEach((q) => {
+      const type = q.type || "mcq";
+      const choices = q.choices ? JSON.stringify(q.choices) : null;
+      const idx = q.answerIndex !== undefined ? q.answerIndex : null;
+      const ans = q.answer || null;
+      
+      stmt.run([type, q.question, choices, idx, ans], (err) => {
+        if (err) console.error("Error inserting seed question:", err.message);
+        completed++;
+        if (completed === total) {
+            stmt.finalize(() => {
+                resolve({ count: total });
+            });
+        }
+      });
+    });
+  });
+}
+
 export function getRandomQuestions(limit = 5) {
     return new Promise((resolve, reject) => {
         db.all("SELECT * FROM questions_v2 ORDER BY RANDOM() LIMIT ?", [limit], (err, rows) => {

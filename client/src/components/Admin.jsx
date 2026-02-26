@@ -106,9 +106,30 @@ export default function Admin({ serverUrl, onBack }) {
           >
             ADMINISTRA<span style={{ color: "var(--cs-accent)" }}>TION</span>
           </h1>
-          <button className="cs-btn" onClick={onBack}>
-            RETOUR AU JEU
-          </button>
+          <div>
+            <button 
+                className="cs-btn" 
+                onClick={async () => {
+                    if(!confirm("Importer les 15 questions par défaut ? Cela va les ajouter à la liste.")) return;
+                    try {
+                        const res = await fetch(`${serverUrl}/admin/questions/import`, { method: "POST" });
+                        if(res.ok) {
+                            const data = await res.json();
+                            setQuestions(data); // Refresh list
+                            alert("Import réussi !");
+                        }
+                    } catch(e) {
+                         alert("Erreur: " + e.message);
+                    }
+                }}
+                style={{ marginRight: "1rem", background: "var(--cs-accent)", border: "none", color: "black", fontWeight: "bold" }}
+            >
+                IMPORTER DÉFAUT
+            </button>
+            <button className="cs-btn" onClick={onBack}>
+                RETOUR AU JEU
+            </button>
+          </div>
         </div>
 
         <div

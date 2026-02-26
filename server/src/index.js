@@ -2,7 +2,7 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import { attachMatchmaking } from "./services/matchmaking.js";
-import { getAllQuestions, addQuestion, deleteQuestion } from "./db/database.js";
+import { getAllQuestions, addQuestion, deleteQuestion, forceSeedQuestions } from "./db/database.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -42,6 +42,18 @@ app.post("/admin/questions", async (req, res) => {
     const result = await addQuestion(q);
     res.json(result);
   } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/admin/questions/import", async (req, res) => {
+  try {
+    console.log("Importing default questions via Admin API...");
+    await forceSeedQuestions();
+    const questions = await getAllQuestions();
+    res.json(questions);
+  } catch (err) {
+    console.error("Error importing:", err);
     res.status(500).json({ error: err.message });
   }
 });
