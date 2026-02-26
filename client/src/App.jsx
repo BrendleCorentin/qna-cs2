@@ -6,6 +6,7 @@ import Queue from "./components/Queue.jsx";
 import Match from "./components/Match.jsx";
 import Result from "./components/Result.jsx";
 import Leaderboard from "./components/Leaderboard.jsx";
+import Admin from "./components/Admin.jsx";
 
 // CONFIGURATION POUR NGINX REVERSE PROXY
 // Force l'utilisation de l'IP sans port pour éviter tout conflit avec des fichiers .env existants
@@ -16,7 +17,7 @@ export default function App() {
 
   const [user, setUser] = useState(null); // { username, elo }
   const [nickname, setNickname] = useState("");
-  const [phase, setPhase] = useState("lobby"); // lobby | queue | match | end
+  const [phase, setPhase] = useState("lobby"); // lobby | queue | match | end | admin
 
   const [queueStatus, setQueueStatus] = useState("");
   const [match, setMatch] = useState(null); // { matchId, opponent, questions }
@@ -131,6 +132,10 @@ export default function App() {
     setPhase("lobby");
   }
 
+  if (phase === "admin") {
+    return <Admin serverUrl={SERVER_URL} onBack={() => setPhase("lobby")} />;
+  }
+
   if (phase === "lobby") {
     return (
       <Lobby
@@ -141,6 +146,7 @@ export default function App() {
         setNickname={setNickname}
         onPlay={joinQueue}
         onLeaderboard={() => setPhase("leaderboard")}
+        onAdmin={() => setPhase("admin")}
       />
     );
   }

@@ -1,7 +1,7 @@
 // src/components/Lobby.jsx
 import React, { useState } from 'react';
 
-export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLeaderboard }) {
+export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLeaderboard, onAdmin }) {
   const [isRegistering, setIsRegistering] = useState(false);
   const [username, setLocalUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -55,9 +55,17 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
             <button
                 className="cs-btn"
                 onClick={() => { setUser(null); setNickname(""); }}
-                style={{ width: '100%', fontSize: '0.8rem', padding: '0.8rem', opacity: 0.7 }}
+                style={{ width: '100%', fontSize: '0.8rem', padding: '0.8rem', opacity: 0.7, marginBottom: '1rem' }}
             >
                 DÉCONNEXION
+            </button>
+
+            <button
+                className="cs-btn"
+                onClick={onAdmin}
+                style={{ width: '100%', fontSize: '0.8rem', padding: '0.8rem', opacity: 0.5, background: 'none', border: 'none' }}
+            >
+                ADMIN PANEL
             </button>
           </div>
         </div>
@@ -194,7 +202,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
         </div>
       </div>
       <div style={{ textAlign: 'center', marginTop: '1rem', opacity: 0.5, fontSize: '0.8rem', color: 'var(--cs-text-muted)' }}>
-        VERSION 2.3 • RANKED FIX
+        VERSION 2.4 • RANKED FIX • <span onClick={onAdmin} style={{ cursor: "pointer", textDecoration: "underline" }}>ADMIN</span>
       </div>
     </div>
   );

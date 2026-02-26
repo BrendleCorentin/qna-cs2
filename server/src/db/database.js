@@ -214,3 +214,46 @@ export function getRandomQuestions(limit = 5) {
         });
     });
 }
+
+export function getAllQuestions() {
+  return new Promise((resolve, reject) => {
+    db.all("SELECT * FROM questions_v2 ORDER BY id DESC", [], (err, rows) => {
+      if (err) reject(err);
+      else {
+        const questions = rows.map((r) => ({
+          ...r,
+          id: r.id.toString(),
+          choices: r.choices ? JSON.parse(r.choices) : null,
+        }));
+        resolve(questions);
+      }
+    });
+  });
+}
+
+export function addQuestion(q) {
+  return new Promise((resolve, reject) => {
+    const type = q.type || "mcq";
+    const choices = q.choices ? JSON.stringify(q.choices) : null;
+    const idx = q.answerIndex !== undefined ? q.answerIndex : null;
+    const ans = q.answer || null;
+
+    db.run(
+      "INSERT INTO questions_v2 (type, question, choices, answerIndex, answer) VALUES (?, ?, ?, ?, ?)",
+      [type, q.question, choices, idx, ans],
+      function (err) {
+        if (err) reject(err);
+        else resolve({ id: this.lastID, ...q });
+      }
+    );
+  });
+}
+
+export function deleteQuestion(id) {
+  return new Promise((resolve, reject) => {
+    db.run("DELETE FROM questions_v2 WHERE id = ?", [id], function (err) {
+      if (err) reject(err);
+      else resolve({ deletedId: id });
+    });
+  });
+}
