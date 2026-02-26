@@ -182,22 +182,6 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
             >
                 {loading ? "CHARGEMENT..." : (isRegistering ? "CRÉER UN COMPTE" : "SE CONNECTER")}
             </button>
-            
-            {/* BOUTON SECRET ADMIN (Visible si on tape ADMIN ou juste cliquable pour test) */}
-             <div style={{textAlign: 'center', marginTop: '10px'}}>
-                <span 
-                    onClick={onAdmin} 
-                    style={{ 
-                        fontSize: '0.75rem', 
-                        color: '#666', 
-                        cursor: 'pointer', 
-                        textDecoration: 'underline' 
-                    }}
-                >
-                    Connexion Admin (Cliquer ici si le raccourci ne marche pas)
-                </span>
-             </div>
-
         </form>
 
         <div style={{ margin: '2rem 0', textAlign: 'center', borderTop: '1px solid var(--cs-border)', paddingTop: '1rem' }}>
