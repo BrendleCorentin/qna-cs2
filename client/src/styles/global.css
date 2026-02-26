@@ -16,14 +16,23 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--cs-bg-dark);
-  /* Fond par défaut si la vidéo ne charge pas, mais transparent pour laisser voir la vidéo */
-  background: var(--cs-bg-dark); 
+  /* Retrait de la couleur de fond opaque pour laisser voir la vidéo en z-index -1 */
+  background: transparent; 
+  background-color: transparent;
   color: var(--cs-text-main);
   font-family: var(--font-stack);
   overflow-x: hidden;
   min-height: 100vh;
 }
+
+#root {
+  min-height: 100vh;
+  /* Fallback pour les pages sans vidéo */
+  background-color: var(--cs-bg-dark); 
+}
+
+/* On override le background pour le Lobby spécifiquement si besoin, ou on laisse transparent */
+/* Pour que ça marche, le composant qui a la vidéo doit être dans #root */
 
 * {
   box-sizing: border-box;
