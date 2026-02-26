@@ -27,8 +27,8 @@ body {
 
 #root {
   min-height: 100vh;
-  /* Fallback pour les pages sans vidéo */
-  background-color: var(--cs-bg-dark); 
+  /* On laisse transparent pour voir la vidéo à travers */
+  background-color: transparent; 
 }
 
 /* On override le background pour le Lobby spécifiquement si besoin, ou on laisse transparent */
