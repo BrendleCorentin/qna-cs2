@@ -28,6 +28,9 @@ export default function App() {
   const [opponentAnswered, setOpponentAnswered] = useState({}); // questionId -> true
   const [deadline, setDeadline] = useState(null); // timestamp for next question
   const [endInfo, setEndInfo] = useState(null);
+  
+  // Emotes system
+  const [activeEmote, setActiveEmote] = useState(null); // { senderId, message, id }
 
   useEffect(() => {
     const s = socketRef.current;
@@ -49,6 +52,8 @@ export default function App() {
       setAnswered({});
       setOpponentAnswered({});
       setEndInfo(null);
+      // Reset Emotes
+      setActiveEmote(null);
       setPhase("match");
     };
 
@@ -62,6 +67,18 @@ export default function App() {
 
     const onOpponentAnswered = ({ questionId }) => {
       setOpponentAnswered((prev) => ({ ...prev, [questionId]: true }));
+    };
+
+    const onEmoteReceived = (msg) => {
+       // msg = { senderId, nickname, message }
+       // On remplace l'emote active (une seule à la fois pour simplifier l'affichage)
+       // On ajoute un timestamp unique pour forcer le re-render si même message
+       setActiveEmote({ ...msg, id: Date.now() });
+       
+       // Auto-clear after 3s
+       setTimeout(() => {
+           setActiveEmote(current => (current && current.id === msg.id ? null : current));
+       }, 3000);
     };
 
     const onNextQuestion = ({ index, deadline }) => {
@@ -80,6 +97,7 @@ export default function App() {
     s.on("matchFound", onMatchFound);
     s.on("answerAck", onAnswerAck);
     s.on("opponentAnswered", onOpponentAnswered);
+    s.on("emoteReceived", onEmoteReceived);
     s.on("nextQuestion", onNextQuestion);
     s.on("matchEnd", onMatchEnd);
 
@@ -88,6 +106,7 @@ export default function App() {
       s.off("matchFound", onMatchFound);
       s.off("answerAck", onAnswerAck);
       s.off("opponentAnswered", onOpponentAnswered);
+      s.off("emoteReceived", onEmoteReceived);
       s.off("nextQuestion", onNextQuestion);
       s.off("matchEnd", onMatchEnd);
     };
@@ -121,6 +140,14 @@ export default function App() {
     });
   }
 
+  function sendEmote(message) {
+      if(!match) return;
+      socketRef.current?.emit("sendEmote", {
+          matchId: match.matchId,
+          message
+      });
+  }
+
   function leaveMatch() {
     if (!match) return;
     socketRef.current?.emit("leaveMatch", { matchId: match.matchId });
@@ -129,6 +156,7 @@ export default function App() {
   function replay() {
     setMatch(null);
     setEndInfo(null);
+    setActiveEmote(null);
     setPhase("lobby");
   }
 
@@ -167,15 +195,28 @@ export default function App() {
   if (phase === "match" && match) {
     return (
       <Match
+        // Player Info
         opponentName={match.opponent.nickname}
+        opponentId={match.opponent.id} // NEW: Needed to know who sent emote
+        myId={socketRef.current?.id}   // NEW: Needed to know who sent emote
+
+        // Game State
         questions={match.questions}
         qIndex={qIndex}
         deadline={deadline}
+        
+        // Answers & Scores
         answered={answered}
         opponentAnswered={opponentAnswered}
         myScore={myScore}
+        
+        // Actions
         onAnswer={answer}
         onLeave={leaveMatch}
+        
+        // Emotes
+        activeEmote={activeEmote}
+        onSendEmote={sendEmote}
       />
     );
   }

@@ -334,6 +334,21 @@ export function attachMatchmaking(io) {
       
     });
 
+      // --- SEND EMOTE (Chat rapide) ---
+    socket.on("sendEmote", ({ matchId, message }) => {
+        const match = matches.get(matchId);
+        if (!match) return;
+
+        const senderNickname = socket.data.nickname || `Guest`; // Utiliser le nickname stocké dans socket.data
+
+        // Envoyer à tout le monde dans la room (donc l'adversaire ET soi-même pour confirmation visuelle)
+        io.to(matchId).emit("emoteReceived", {
+            senderId: socket.id,
+            nickname: senderNickname,
+            message: message.substring(0, 30) // Limite de caractères par sécurité
+        });
+    });
+
     socket.on("leaveMatch", ({ matchId }) => {
       const match = matches.get(matchId);
       if (!match || match.ended) return;
