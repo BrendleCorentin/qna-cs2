@@ -1,27 +1,7 @@
 // src/components/Lobby.jsx
 import React, { useState } from 'react';
 
-// Video Background Component
-const VideoBackground = () => {
-    // ID d'une vidéo showcase CS2 de haute qualité (Ex: Maps montage)
-    // On utilise une playlist pour boucler proprement
-    const videoId = "u3tC8CdB9kE"; // CS2 Trailer / Showcase Cinematic
-    
-    return (
-        <div className="video-background">
-            <div className="video-foreground">
-                <iframe 
-                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${videoId}&disablekb=1&modestbranding=1`}
-                    title="CS2 Background" 
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                ></iframe>
-            </div>
-            <div className="video-overlay"></div>
-        </div>
-    );
-};
-
+// Plus de vidéo, on revient à un design épuré mais stylé
 export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLeaderboard, onAdmin }) {
   const [isRegistering, setIsRegistering] = useState(false);
 
@@ -30,73 +10,112 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
   const [errorLocal, setErrorLocal] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // If user is logged in, show profile
+  // --- NOUVEAU DESIGN DU LOBBY CONNECTÉ ---
   if (user) {
+    // Génération d'un avatar basé sur le pseudo (seed)
+    const avatarUrl = `https://api.dicebear.com/7.x/adventurer/svg?seed=${user.username}&backgroundColor=b6e3f4`;
+
     return (
-        <div className="cs-container">
-          <VideoBackground />
-          <div className="cs-card" style={{ maxWidth: '600px', margin: '0 auto', width: '100%', position: 'relative', background: 'rgba(28, 30, 36, 0.85)', backdropFilter: 'blur(10px)' }}>
-            <h1 className="cs-hero-title" style={{ fontSize: '3rem', textAlign: 'center', borderLeft: 'none' }}>
-              PROFIL <span style={{ color: 'var(--cs-accent)' }}>JOUEUR</span>
-            </h1>
-            
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', margin: '2rem 0' }}>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1rem', borderTop: '4px solid var(--cs-ct-blue)' }}>
-                    <div className="cs-label">PSEUDO</div>
-                    <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{user.username}</div>
+        <div className="cs-lobby-container">
+            {/* Header / Top Bar */}
+            <header className="cs-lobby-header">
+                <div className="cs-brand">
+                    COUNTER <span className="text-accent">QUIZ</span>
                 </div>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1rem', borderTop: '4px solid var(--cs-accent)' }}>
-                    <div className="cs-label">CLASSEMENT ELO</div>
-                    <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--cs-accent)' }}>{user.elo}</div>
+                <div className="cs-user-pill">
+                    <img src={avatarUrl} alt="Avatar" className="cs-avatar-sm" />
+                    <span>{user.username}</span>
+                    <span className="cs-elo-badge">{user.elo} ELO</span>
+                    <button className="cs-btn-icon" onClick={() => { setUser(null); setNickname(""); }} title="Déconnexion">
+                        ✕
+                    </button>
                 </div>
-            </div>
-    
-            <button 
-                className="cs-btn"
-                onClick={onLeaderboard}
-                style={{ width: '100%', marginBottom: '1rem', background: 'transparent', border: '1px solid var(--cs-text-light)', opacity: 0.8 }}
-            >
-                TOP 50 JOUEURS
-            </button>
+            </header>
 
-            <button 
-              className="cs-btn cs-btn-primary" 
-              onClick={() => onPlay(false)}
-              style={{ width: '100%', marginBottom: '1rem' }}
-            >
-              LANCER LE MATCHMAKING (RANKED)
-            </button>
+            <main className="cs-lobby-content">
+                {/* Section Gauche: Profil & Stats */}
+                <div className="cs-panel cs-profile-panel">
+                    <div className="cs-profile-header">
+                        <div className="cs-avatar-lg-wrapper">
+                            <img src={avatarUrl} alt="Profile" className="cs-avatar-lg" />
+                            <div className="cs-online-status"></div>
+                        </div>
+                        <h2>{user.username}</h2>
+                        <div className="cs-rank-display">
+                            <span className="cs-rank-label">RANG ACTUEL</span>
+                            <span className="cs-rank-value">{user.elo} <small>pts</small></span>
+                        </div>
+                    </div>
+                    
+                    <div className="cs-stats-grid">
+                        <div className="cs-stat-box">
+                            <span className="label">Victoires</span>
+                            <span className="value">-</span>
+                        </div>
+                        <div className="cs-stat-box">
+                            <span className="label">Ratio V/D</span>
+                            <span className="value">-</span>
+                        </div>
+                    </div>
 
-            <button 
-              className="cs-btn" 
-              onClick={() => onPlay(true)} // true = solo mode
-              style={{ width: '100%', marginBottom: '1rem', background: 'var(--cs-accent)', border: 'none' }}
-            >
-              MODE SOLO (ENTRAÎNEMENT)
-            </button>
-            
-            <button
-                className="cs-btn"
-                onClick={() => { setUser(null); setNickname(""); }}
-                style={{ width: '100%', fontSize: '0.8rem', padding: '0.8rem', opacity: 0.7, marginBottom: '1rem' }}
-            >
-                DÉCONNEXION
-            </button>
+                    <div className="cs-action-list">
+                         <button className="cs-btn-text">Modifier le profil</button>
+                         <button className="cs-btn-text">Paramètres</button>
+                    </div>
+                </div>
 
-            {/* Admin Button - Only visible if username is admin */}
-            {user.username.toLowerCase() === "admin" && (
-                <button
-                    className="cs-btn"
-                    onClick={onAdmin}
-                    style={{ width: '100%', fontSize: '0.8rem', padding: '0.8rem', opacity: 0.5, background: 'none', border: 'none' }}
-                >
-                    ADMIN PANEL
-                </button>
-            )}
-          </div>
+                {/* Section Droite: Actions de Jeu */}
+                <div className="cs-panel cs-play-panel">
+                    <h3 className="cs-panel-title">JOUER</h3>
+                    
+                    <div className="cs-gamemodes">
+                        <button className="cs-gamemode-card primary" onClick={() => onPlay(false)}>
+                            <div className="mode-icon">⚔️</div>
+                            <div className="mode-info">
+                                <span className="mode-title">CLASSÉ 1v1</span>
+                                <span className="mode-desc">Affrontez un joueur de votre niveau. Gain d'ELO.</span>
+                            </div>
+                        </button>
+
+                        <button className="cs-gamemode-card secondary" onClick={() => onPlay(true)}>
+                            <div className="mode-icon">🎯</div>
+                            <div className="mode-info">
+                                <span className="mode-title">ENTRAÎNEMENT</span>
+                                <span className="mode-desc">Entraînez-vous contre un bot. Pas d'enjeu.</span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div className="cs-social-area">
+                        <h3 className="cs-panel-title">CLASSEMENT</h3>
+                        <button className="cs-btn-wide" onClick={onLeaderboard}>
+                            🏆 VOIR LE TOP 50 HLTV
+                        </button>
+                    </div>
+                    
+                    {/* Admin Button Discreet */}
+                    {user.username.toLowerCase() === "admin" && (
+                         <div style={{ marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--cs-border)' }}>
+                            <button onClick={onAdmin} className="cs-btn-text text-red">
+                                🔧 Administration
+                            </button>
+                         </div>
+                    )}
+                </div>
+
+                {/* Section Amis (Placeholder pour futur) */}
+                <div className="cs-panel cs-friends-panel">
+                    <h3 className="cs-panel-title">AMIS <span className="cs-tag">0/20</span></h3>
+                    <div className="cs-friends-list-empty">
+                        <p>Aucun ami connecté.</p>
+                        <button className="cs-btn-small">+ Ajouter</button>
+                    </div>
+                </div>
+            </main>
         </div>
       );
   }
+
 
   // Auth Form
   const handleSubmit = (e) => {

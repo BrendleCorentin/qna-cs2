@@ -16,9 +16,11 @@
 body {
   margin: 0;
   padding: 0;
-  /* Retrait de la couleur de fond opaque pour laisser voir la vidéo en z-index -1 */
-  background: transparent; 
-  background-color: transparent;
+  background-color: var(--cs-bg-dark);
+  /* Superbe fond texturé type CS2 */
+  background: 
+    linear-gradient(135deg, rgba(20, 24, 30, 0.95), rgba(14, 16, 19, 0.98)),
+    url("https://www.transparenttextures.com/patterns/carbon-fibre.png"); /* Pattern subtil */
   color: var(--cs-text-main);
   font-family: var(--font-stack);
   overflow-x: hidden;
@@ -27,54 +29,300 @@ body {
 
 #root {
   min-height: 100vh;
-  /* On laisse transparent pour voir la vidéo à travers */
-  background-color: transparent; 
+  background-color: transparent;
 }
 
-/* VIDEO BACKGROUND */
-.video-background {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -99;
+/* ====== NEW LOBBY DESIGN ====== */
+
+.cs-lobby-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    padding: 20px;
+    gap: 20px;
+    box-sizing: border-box;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.cs-lobby-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background: rgba(45, 50, 55, 0.4);
+    border-radius: 4px;
+    height: 60px;
+    backdrop-filter: blur(5px);
+}
+
+.cs-brand {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+.text-accent { color: var(--cs-accent); }
+
+.cs-user-pill {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 5px 15px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+.cs-avatar-sm {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #444;
+}
+
+.cs-elo-badge {
+    color: var(--cs-accent);
+    font-size: 0.9em;
+    background: rgba(220, 163, 54, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.cs-btn-icon {
+    background: none;
+    border: none;
+    color: var(--cs-text-muted);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+.cs-btn-icon:hover { color: var(--cs-t-red); }
+
+/* Main Grid Layout */
+.cs-lobby-content {
+    display: grid;
+    grid-template-columns: 300px 1fr 250px;
+    gap: 20px;
+    height: 100%;
     overflow: hidden;
 }
 
-.video-foreground,
-.video-background iframe {
+/* Panels */
+.cs-panel {
+    background: rgba(28, 30, 36, 0.85);
+    border: 1px solid var(--cs-border);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cs-panel-title {
+    font-size: 0.9rem;
+    color: var(--cs-text-muted);
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--cs-border);
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Profile Panel (Left) */
+.cs-profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.cs-avatar-lg-wrapper {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.cs-avatar-lg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--cs-accent);
+}
+
+.cs-online-status {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+    bottom: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    background: var(--cs-success);
+    border: 3px solid #1c1e24;
+    border-radius: 50%;
 }
 
-/* Scaling trick to hide youtube controls/branding */
-@media (min-aspect-ratio: 16/9) {
-    .video-foreground {
-        height: 300%;
-        top: -100%;
-    }
-}
-@media (max-aspect-ratio: 16/9) {
-    .video-foreground {
-        width: 300%;
-        left: -100%;
-    }
+.cs-rank-display {
+    background: rgba(0,0,0,0.3);
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.video-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(18, 20, 21, 0.4); /* Less opaque overlay */
-    z-index: -98;
-    pointer-events: none;
+.cs-rank-label {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--cs-text-muted);
+    margin-bottom: 5px;
+}
+
+.cs-rank-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--cs-accent);
+}
+
+.cs-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+.cs-stat-box {
+    background: rgba(0,0,0,0.2);
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+}
+.cs-stat-box .label { display: block; font-size: 0.7rem; color: var(--cs-text-muted); }
+.cs-stat-box .value { font-weight: bold; font-size: 1.1rem; }
+
+.cs-action-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: auto; /* Pushes to bottom */
+}
+.cs-btn-text {
+    background: none;
+    border: none;
+    color: var(--cs-text-muted);
+    text-align: left;
+    padding: 8px 0;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+}
+.cs-btn-text:hover { color: white; border-bottom-color: var(--cs-accent); }
+.cs-btn-text.text-red:hover { color: var(--cs-t-red); border-bottom-color: var(--cs-t-red); }
+
+/* Play Panel (Center) */
+.cs-play-panel {
+    justify-content: center;
+    gap: 20px;
+    /* Special background like maps */
+    background: linear-gradient(rgba(28,30,36,0.95), rgba(28,30,36,0.85)), url('https://clutch.co/sites/default/files/portfolio/7174/1566487955_Cover.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.cs-gamemodes {
+    display: grid;
+    grid-template-columns: 1fr; /* Stack on mobile */
+    gap: 20px;
+}
+@media(min-width: 900px) {
+    .cs-gamemodes { grid-template-columns: 1fr 1fr; }
+}
+
+
+.cs-gamemode-card {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid transparent;
+    padding: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cs-gamemode-card:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-5px);
+}
+.cs-gamemode-card.primary {
+    border-color: var(--cs-accent);
+    background: linear-gradient(45deg, rgba(220,163,54,0.1), rgba(0,0,0,0));
+}
+.cs-gamemode-card.primary:hover {
+    box-shadow: 0 10px 30px rgba(220,163,54,0.2);
+}
+
+.mode-icon { font-size: 2rem; }
+.mode-title { display: block; font-weight: 800; font-size: 1.2rem; margin-bottom: 5px; font-style: italic; }
+.mode-desc { display: block; font-size: 0.8rem; color: var(--cs-text-muted); }
+
+.cs-social-area {
+    margin-top: 40px;
+}
+
+.cs-btn-wide {
+    width: 60%; 
+    margin: 0 auto; 
+    display: block; 
+    background: transparent; 
+    border: 1px solid var(--cs-text-muted); 
+    color: var(--cs-text-main);
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+.cs-btn-wide:hover { background: rgba(255,255,255,0.05); border-color: white; }
+
+/* Friends Panel (Right) */
+.cs-friends-panel {
+    /* Optional: hide on small screens */
+}
+.cs-tag {
+    background: #333;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    vertical-align: middle;
+}
+.cs-friends-list-empty {
+    text-align: center;
+    color: var(--cs-text-muted);
+    font-size: 0.9rem;
+    margin-top: 50px;
+}
+.cs-btn-small {
+    background: var(--cs-ct-blue);
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+    .cs-lobby-content {
+        grid-template-columns: 1fr;
+        overflow-y: auto;
+    }
+    .cs-lobby-container {
+        padding: 10px;
+        height: auto;
+    }
 }
 
 
