@@ -3,6 +3,43 @@ import { makeId } from "../utils/id.js";
 import { logMatchResult, registerUser, loginUser, getUserByUsername, updateUserElo, getLeaderboard, getRandomQuestions } from "../db/database.js";
 import { calculateElo } from "../utils/elo.js";
 
+// Levenshtein distance helper for fuzzy matching
+function getLevenshteinDistance(a, b) {
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+
+  const matrix = [];
+
+  // increment along the first column of each row
+  for (let i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+
+  // increment each column in the first row
+  for (let j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  // Fill in the rest of the matrix
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1, // substitution
+          Math.min(
+            matrix[i][j - 1] + 1, // insertion
+            matrix[i - 1][j] + 1 // deletion
+          )
+        );
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
+}
+
 let waitingSocketId = null;
 const matches = new Map();
 const QUESTION_DURATION = 10000;
@@ -257,8 +294,10 @@ export function attachMatchmaking(io) {
         const existingAns = match.answers[socket.id][questionId];
         let wasCorrect = false;
         if (currentQ.type === 'text') {
+            const submitted = (typeof existingAns === 'string' ? existingAns : "").trim().toLowerCase();
             const expected = (currentQ.answer || "").trim().toLowerCase();
-            wasCorrect = (typeof existingAns === 'string' ? existingAns : "").trim().toLowerCase() === expected;
+            const dist = getLevenshteinDistance(submitted, expected);
+            wasCorrect = dist <= 1; // Allow 1 typo
         } else {
              wasCorrect = existingAns === currentQ.answerIndex;
         }
@@ -281,7 +320,8 @@ export function attachMatchmaking(io) {
           const submitted = (typeof answer === 'string' ? answer : "").trim().toLowerCase();
           const expected = (q.answer || "").trim().toLowerCase();
           
-          correct = submitted === expected;
+          const dist = getLevenshteinDistance(submitted, expected);
+          correct = dist <= 1; // Allow 1 typo
           match.answers[socket.id][questionId] = answer;
       } else {
           // Default to MCQ
