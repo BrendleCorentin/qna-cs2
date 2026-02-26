@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Queue({ status }) {
+export default function Queue({ status, onBack }) {
   return (
     <div className="cs-container" style={{ textAlign: 'center' }}>
       <div className="cs-card" style={{ maxWidth: '400px', margin: '0 auto', textAlign: 'center' }}>
@@ -19,6 +19,14 @@ export default function Queue({ status }) {
         <div className="cs-hint" style={{ justifyContent: 'center', marginTop: '1rem' }}>
           Temps estimé : 00:05
         </div>
+
+        <button 
+          className="cs-button" 
+          onClick={onBack}
+          style={{ marginTop: '2rem', backgroundColor: 'rgba(255, 50, 50, 0.2)', border: '1px solid rgba(255, 50, 50, 0.5)' }}
+        >
+          ANNULER LA RECHERCHE
+        </button>
       </div>
     </div>
   );

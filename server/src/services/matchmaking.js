@@ -432,6 +432,14 @@ export function attachMatchmaking(io) {
       matches.delete(matchId);
     });
 
+    socket.on("leaveQueue", () => {
+      console.log(`[Queue] User ${socket.id} left queue.`);
+      if (waitingSocketId === socket.id) {
+        waitingSocketId = null;
+        socket.emit("queueStatus", { status: "left" });
+      }
+    });
+
     socket.on("disconnect", () => {
       if (waitingSocketId === socket.id) waitingSocketId = null;
 

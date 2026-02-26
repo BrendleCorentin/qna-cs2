@@ -151,6 +151,13 @@ export default function App() {
   function leaveMatch() {
     if (!match) return;
     socketRef.current?.emit("leaveMatch", { matchId: match.matchId });
+    setPhase("lobby");
+  }
+  
+  function leaveQueue() {
+    if (phase !== "queue") return;
+    socketRef.current?.emit("leaveQueue");
+    setPhase("lobby");
   }
 
   function replay() {
@@ -189,7 +196,7 @@ export default function App() {
   }
 
   if (phase === "queue") {
-    return <Queue status={queueStatus} onBack={() => setPhase("lobby")} />;
+    return <Queue status={queueStatus} onBack={leaveQueue} />;
   }
 
   if (phase === "match" && match) {
