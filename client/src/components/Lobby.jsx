@@ -173,22 +173,42 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
   return (
     <div className="cs-container">
       {/* Background simplifie */}
-      <div className="cs-card" style={{ maxWidth: '400px', margin: '0 auto', width: '100%', position: 'relative', background: 'rgba(28, 30, 36, 0.95)', border: '1px solid var(--cs-border)' }}>
+      <div className="cs-card" style={{ maxWidth: '600px', margin: '0 auto', width: '100%', position: 'relative', background: 'rgba(28, 30, 36, 0.95)', border: '1px solid var(--cs-border)', padding: '40px' }}>
         <h1 className="cs-hero-title" style={{ fontSize: '2.5rem', textAlign: 'center', borderLeft: 'none' }}>
           COUNTER <span style={{ color: 'var(--cs-accent)' }}>QUIZ</span>
         </h1>
         
-        <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+        <div style={{ display: 'flex', gap: '0', marginBottom: '2rem', background: 'rgba(0,0,0,0.3)', padding: '5px', borderRadius: '8px' }}>
             <button 
-                className={`cs-btn ${!isRegistering ? '' : 'cs-btn-disabled'}`} 
-                style={{ flex: 1, opacity: !isRegistering ? 1 : 0.4, borderBottom: !isRegistering ? '2px solid var(--cs-accent)' : 'none' }}
+                className="cs-btn"
+                style={{ 
+                    flex: 1, 
+                    background: !isRegistering ? 'var(--cs-accent)' : 'transparent',
+                    color: !isRegistering ? '#000' : 'var(--cs-text-muted)',
+                    opacity: 1,
+                    borderRadius: '6px',
+                    border: 'none',
+                    fontWeight: 'bold',
+                    transition: 'all 0.2s',
+                    padding: '12px'
+                }}
                 onClick={() => { setIsRegistering(false); setErrorLocal(""); }}
             >
                 CONNEXION
             </button>
             <button 
-                className={`cs-btn ${isRegistering ? '' : 'cs-btn-disabled'}`} 
-                style={{ flex: 1, opacity: isRegistering ? 1 : 0.4, borderBottom: isRegistering ? '2px solid var(--cs-accent)' : 'none' }}
+                className="cs-btn"
+                style={{ 
+                    flex: 1, 
+                    background: isRegistering ? 'var(--cs-accent)' : 'transparent',
+                    color: isRegistering ? '#000' : 'var(--cs-text-muted)',
+                    opacity: 1,
+                    borderRadius: '6px',
+                    border: 'none',
+                    fontWeight: 'bold',
+                    transition: 'all 0.2s',
+                    padding: '12px'
+                }}
                 onClick={() => { setIsRegistering(true); setErrorLocal(""); }}
             >
                 INSCRIPTION
