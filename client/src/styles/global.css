@@ -31,8 +31,52 @@ body {
   background-color: transparent; 
 }
 
-/* On override le background pour le Lobby spécifiquement si besoin, ou on laisse transparent */
-/* Pour que ça marche, le composant qui a la vidéo doit être dans #root */
+/* VIDEO BACKGROUND */
+.video-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -99;
+    overflow: hidden;
+}
+
+.video-foreground,
+.video-background iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Scaling trick to hide youtube controls/branding */
+@media (min-aspect-ratio: 16/9) {
+    .video-foreground {
+        height: 300%;
+        top: -100%;
+    }
+}
+@media (max-aspect-ratio: 16/9) {
+    .video-foreground {
+        width: 300%;
+        left: -100%;
+    }
+}
+
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 20, 21, 0.4); /* Less opaque overlay */
+    z-index: -98;
+    pointer-events: none;
+}
+
 
 * {
   box-sizing: border-box;

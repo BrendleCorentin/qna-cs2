@@ -8,45 +8,16 @@ const VideoBackground = () => {
     const videoId = "u3tC8CdB9kE"; // CS2 Trailer / Showcase Cinematic
     
     return (
-        <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            zIndex: -1,
-            overflow: 'hidden',
-        }}>
-            {/* Overlay sombre pour la lisibilité */}
-            <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                background: 'rgba(18, 20, 21, 0.75)', // Assombri pour le texte
-                zIndex: 1
-            }}></div>
-            
-            <div style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                width: '120vw', 
-                height: '120vh',
-                transform: 'translate(-50%, -50%)',
-                pointerEvents: 'none' // Empêche l'interaction avec la vidéo
-            }}>
+        <div className="video-background">
+            <div className="video-foreground">
                 <iframe 
-                    width="100%" 
-                    height="100%" 
                     src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${videoId}&disablekb=1&modestbranding=1`}
                     title="CS2 Background" 
                     frameBorder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    style={{ objectFit: 'cover', opacity: 0.6 }}
                 ></iframe>
             </div>
+            <div className="video-overlay"></div>
         </div>
     );
 };
