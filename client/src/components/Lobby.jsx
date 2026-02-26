@@ -60,13 +60,16 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
                 DÉCONNEXION
             </button>
 
-            <button
-                className="cs-btn"
-                onClick={onAdmin}
-                style={{ width: '100%', fontSize: '0.8rem', padding: '0.8rem', opacity: 0.5, background: 'none', border: 'none' }}
-            >
-                ADMIN PANEL
-            </button>
+            {/* Admin Button - Only visible if username is admin */}
+            {user.username.toLowerCase() === "admin" && (
+                <button
+                    className="cs-btn"
+                    onClick={onAdmin}
+                    style={{ width: '100%', fontSize: '0.8rem', padding: '0.8rem', opacity: 0.5, background: 'none', border: 'none' }}
+                >
+                    ADMIN PANEL
+                </button>
+            )}
           </div>
         </div>
       );
