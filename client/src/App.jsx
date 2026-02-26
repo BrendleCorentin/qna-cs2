@@ -9,8 +9,8 @@ import Leaderboard from "./components/Leaderboard.jsx";
 import Admin from "./components/Admin.jsx";
 
 // CONFIGURATION POUR NGINX REVERSE PROXY
-// Force l'utilisation de l'IP sans port pour éviter tout conflit avec des fichiers .env existants
-const SERVER_URL = "http://51.68.139.39"; 
+// Utilisation du domaine sécurisé pour éviter les erreurs "Mixed Content"
+const SERVER_URL = "https://counter-quiz.com"; 
 
 export default function App() {
   const socketRef = useSocket(SERVER_URL);
