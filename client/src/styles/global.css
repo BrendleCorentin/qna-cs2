@@ -17,10 +17,8 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--cs-bg-dark);
-  /* Utilisation d'un gradient sombre + motif au lieu d'une image pour éviter les 404 */
-  background: 
-    linear-gradient(135deg, rgba(14,16,19,0.95), rgba(20,24,30,0.85)),
-    radial-gradient(circle at 50% 50%, #2a313c 0%, #121415 70%);
+  /* Fond par défaut si la vidéo ne charge pas, mais transparent pour laisser voir la vidéo */
+  background: var(--cs-bg-dark); 
   color: var(--cs-text-main);
   font-family: var(--font-stack);
   overflow-x: hidden;
