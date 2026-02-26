@@ -196,7 +196,10 @@ function seedQuestions() {
         
         QUESTIONS_DB_SEED.forEach(q => {
             const type = q.type || 'mcq';
-            const choices = q.choices ? JSON.stringify(q.choices) : null;
+            let choices = null;
+            if (q.choices) choices = JSON.stringify(q.choices);
+            else if (q.clues && type === 'progressive_clue') choices = JSON.stringify(q.clues);
+            
             const idx = q.answerIndex !== undefined ? q.answerIndex : null;
             const ans = q.answer || null;
             stmt.run(type, q.question, choices, idx, ans);
@@ -206,7 +209,7 @@ function seedQuestions() {
         console.log(`[DB] Seeded ${QUESTIONS_DB_SEED.length} questions.`);
     });
 }
-
+    
 export function forceSeedQuestions() {
   return new Promise((resolve, reject) => {
     console.log("[DB] Force seeding questions...");
@@ -219,7 +222,10 @@ export function forceSeedQuestions() {
 
     QUESTIONS_DB_SEED.forEach((q) => {
       const type = q.type || "mcq";
-      const choices = q.choices ? JSON.stringify(q.choices) : null;
+      let choices = null;
+      if (q.choices) choices = JSON.stringify(q.choices);
+      else if (q.clues && type === 'progressive_clue') choices = JSON.stringify(q.clues);
+
       const idx = q.answerIndex !== undefined ? q.answerIndex : null;
       const ans = q.answer || null;
       
@@ -242,11 +248,15 @@ export function getRandomQuestions(limit = 5) {
             if (err) reject(err);
             else {
                 // Parse choices from JSON string if present
-                const questions = rows.map(r => ({
-                    ...r,
-                    id: r.id.toString(), // client expects string ID
-                    choices: r.choices ? JSON.parse(r.choices) : null
-                }));
+                const questions = rows.map(r => {
+                    const parsed = r.choices ? JSON.parse(r.choices) : null;
+                    return {
+                        ...r,
+                        id: r.id.toString(), // client expects string ID
+                        choices: r.type === 'mcq' ? parsed : null,
+                        clues: r.type === 'progressive_clue' ? parsed : null
+                    };
+                });
                 resolve(questions);
             }
         });
@@ -258,11 +268,15 @@ export function getAllQuestions() {
     db.all("SELECT * FROM questions_v2 ORDER BY id DESC", [], (err, rows) => {
       if (err) reject(err);
       else {
-        const questions = rows.map((r) => ({
-          ...r,
-          id: r.id.toString(),
-          choices: r.choices ? JSON.parse(r.choices) : null,
-        }));
+        const questions = rows.map((r) => {
+            const parsed = r.choices ? JSON.parse(r.choices) : null;
+            return {
+                ...r,
+                id: r.id.toString(),
+                choices: r.type === 'mcq' ? parsed : null,
+                clues: r.type === 'progressive_clue' ? parsed : null,
+            };
+        });
         resolve(questions);
       }
     });
@@ -272,13 +286,17 @@ export function getAllQuestions() {
 export function addQuestion(q) {
   return new Promise((resolve, reject) => {
     const type = q.type || "mcq";
-    const choices = q.choices ? JSON.stringify(q.choices) : null;
+    // Store clues in choices column if type is progressive_clue
+    let choicesStr = null;
+    if (q.choices) choicesStr = JSON.stringify(q.choices);
+    else if (q.clues) choicesStr = JSON.stringify(q.clues);
+    
     const idx = q.answerIndex !== undefined ? q.answerIndex : null;
     const ans = q.answer || null;
 
     db.run(
       "INSERT INTO questions_v2 (type, question, choices, answerIndex, answer) VALUES (?, ?, ?, ?, ?)",
-      [type, q.question, choices, idx, ans],
+      [type, q.question, choicesStr, idx, ans],
       function (err) {
         if (err) reject(err);
         else resolve({ id: this.lastID, ...q });

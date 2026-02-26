@@ -83,10 +83,11 @@ export default function App() {
        }, 3000);
     };
 
-    const onNextQuestion = ({ index, deadline }) => {
+    const onNextQuestion = ({ index, deadline, duration }) => {
       setQIndex(index);
-      // Optional: Store deadline in state to show a timer
-      setDeadline(deadline); 
+      setDeadline(deadline);
+      // Hack: store duration in match object state or a new state
+      setMatch(prev => ({ ...prev, currentDuration: duration || 10000 }));
     };
 
     const onMatchEnd = (msg) => {
@@ -211,8 +212,9 @@ export default function App() {
 
         // Game State
         questions={match.questions}
-        qIndex={qIndex}
+        qIndex={qIndex || 0}
         deadline={deadline}
+        currentDuration={match.currentDuration}
         
         // Answers & Scores
         answered={answered}

@@ -70,12 +70,15 @@ function startNextQuestion(io, match) {
       return;
   }
 
-  const deadline = Date.now() + QUESTION_DURATION;
+  // Dynamic duration based on question type
+  const duration = question.type === 'progressive_clue' ? 20000 : 10000;
+  const deadline = Date.now() + duration;
 
   io.to(match.matchId).emit("nextQuestion", {
     index: match.currentQuestionIndex,
     id: question.id,
     deadline,
+    duration // Send duration to help client sync
   });
 
   // Clear any existing timer to avoid overlaps if called manually
@@ -83,7 +86,7 @@ function startNextQuestion(io, match) {
 
   match.timer = setTimeout(() => {
     startNextQuestion(io, match);
-  }, QUESTION_DURATION + 1000); // 1s buffer
+  }, duration + 1000); // 1s buffer
 }
 
 export function attachMatchmaking(io) {
@@ -251,7 +254,13 @@ export function attachMatchmaking(io) {
       matches.set(matchId, match);
 
       // Prepare sanitized questions for client
-      const clientQuestions = questions.map(({ id, question, choices, type }) => ({ id, question, choices, type }));
+      const clientQuestions = questions.map(({ id, question, choices, type, clues }) => ({ 
+          id, 
+          question, 
+          choices, 
+          type,
+          clues // Include clues for progressive questions
+      }));
 
       io.to(a).emit("matchFound", {
         matchId,
@@ -293,7 +302,7 @@ export function attachMatchmaking(io) {
         // Already answered, just re-send ack in case client missed it
         const existingAns = match.answers[socket.id][questionId];
         let wasCorrect = false;
-        if (currentQ.type === 'text') {
+        if (currentQ.type === 'text' || currentQ.type === 'progressive_clue') {
             const submitted = (typeof existingAns === 'string' ? existingAns : "").trim().toLowerCase();
             const expected = (currentQ.answer || "").trim().toLowerCase();
             const dist = getLevenshteinDistance(submitted, expected);
@@ -316,7 +325,7 @@ export function attachMatchmaking(io) {
       // Check answer type
       let validAnswer = true;
 
-      if (q.type === 'text') {
+      if (q.type === 'text' || q.type === 'progressive_clue') {
           const submitted = (typeof answer === 'string' ? answer : "").trim().toLowerCase();
           const expected = (q.answer || "").trim().toLowerCase();
           

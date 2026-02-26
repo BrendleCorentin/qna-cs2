@@ -6,6 +6,7 @@ export default function Match({
   questions,
   qIndex,
   deadline,
+  currentDuration, // NEW
   answered,
   opponentAnswered,
   myScore,
@@ -17,7 +18,7 @@ export default function Match({
   myId,
   opponentId
 }) {
-  const ROUND_DURATION_SECONDS = 10;
+  const maxDuration = currentDuration ? currentDuration / 1000 : 10;
   // Timer logic
   const [timeLeft, setTimeLeft] = useState(0);
 
@@ -104,7 +105,7 @@ export default function Match({
       <div className="cs-timer-bar">
          <div 
            className="cs-timer-fill" 
-           style={{ width: `${(timeLeft / ROUND_DURATION_SECONDS) * 100}%`, background: timeLeft < 3 ? 'var(--cs-t-red)' : 'var(--cs-accent)' }} 
+           style={{ width: `${(timeLeft / maxDuration) * 100}%`, background: timeLeft < 3 ? 'var(--cs-t-red)' : 'var(--cs-accent)' }} 
          ></div>
       </div>
 
@@ -113,7 +114,9 @@ export default function Match({
         type={q.type || 'mcq'}
         question={q.question}
         choices={q.choices}
-        disabled={selectedIndex !== undefined}
+        clues={q.clues}
+        timeLeft={timeLeft}
+        disabled={selectedIndex !== undefined || timeLeft <= 0}
         selectedIndex={selectedIndex}
         onSelect={(ans) => onAnswer(q.id, ans)}
       />
