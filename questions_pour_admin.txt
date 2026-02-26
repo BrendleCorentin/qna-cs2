@@ -1,0 +1,96 @@
+--- QUESTIONS TYPE "TEXTE LIBRE" (QUI SUIS-JE ?) ---
+
+1.
+Question : QUI SUIS-JE ?
+Je suis Français. J'ai été élu Top 1 HLTV en 2019, 2020 et 2023. Je joue pour Vitality.
+Réponse : ZywOo
+
+2.
+Question : QUI SUIS-JE ?
+Je suis Ukrainien. J'ai gagné le Major Stockholm 2021. Je suis considéré comme le GOAT de CS:GO.
+Réponse : s1mple
+
+3.
+Question : QUI SUIS-JE ?
+Je suis un jeune AWPer russe prodige. J'ai rejoint G2 Esports en 2022 après avoir brillé chez NAVI Junior.
+Réponse : m0NESY
+
+4.
+Question : QUI SUIS-JE ?
+Je suis Canadien. J'ai joué pour Liquid et remporté l'Intel Grand Slam. Je suis connu pour mes headshots.
+Réponse : Twistzz
+
+5.
+Question : QUI SUIS-JE ?
+Je suis Bosnien. Je suis une star du Deagle. Je suis le cousin de huNter-.
+Réponse : NiKo
+
+6.
+Question : QUI SUIS-JE ?
+Je suis le capitaine (IGL) d'Astralis durant leur ère dominante (4 Majors). Je suis Danois.
+Réponse : gla1ve
+
+7.
+Question : QUI SUIS-JE ?
+Je suis un joueur Estonien. J'ai joué pour MOUZ et FaZe. J'ai été le premier joueur à gagner un Major avec une équipe internationale (FaZe).
+Réponse : ropz
+
+
+--- QUESTIONS TYPE "QCM" (4 CHOIX) ---
+(La bonne réponse est marquée d'une étoile *)
+
+1.
+Question : Quel joueur détient le record du nombre de Majors remportés (5) ?
+- s1mple
+- dupreeh (*)
+- karrigan
+- olofmeister
+
+2.
+Question : Quelle organisation a remporté le dernier Major de l'ère CS:GO à Paris ?
+- G2 Esports
+- Team Vitality (*)
+- Heroic
+- FaZe Clan
+
+3.
+Question : Quel est le prix du gilet-casque (kevlar + helmet) en CT ?
+- 650$
+- 1000$ (*)
+- 900$
+- 1200$
+
+4.
+Question : Sur quelle carte se trouve la position "Top Mid" et "Window" ?
+- Mirage (*)
+- Inferno
+- Vertigo
+- Ancient
+
+5.
+Question : En compétitif MR12 (CS2), combien de rounds font une mi-temps ?
+- 15
+- 12 (*)
+- 10
+- 16
+
+6.
+Question : Quelle arme tue en une balle dans la tête, même avec un casque ?
+- M4A1-S
+- AK-47 (*)
+- Galil AR
+- MP9
+
+7.
+Question : Quel est le code pour planter la bombe ? (Lore)
+- 7355608 (*)
+- 1337
+- 0000
+- 123456
+
+8.
+Question : Qui est l'éditeur du jeu Counter-Strike ?
+- Riot Games
+- Blizzard
+- Valve (*)
+- Ubisoft
