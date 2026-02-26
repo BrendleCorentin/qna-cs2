@@ -1,8 +1,59 @@
 // src/components/Lobby.jsx
 import React, { useState } from 'react';
 
+// Video Background Component
+const VideoBackground = () => {
+    // ID d'une vidéo showcase CS2 de haute qualité (Ex: Maps montage)
+    // On utilise une playlist pour boucler proprement
+    const videoId = "u3tC8CdB9kE"; // CS2 Trailer / Showcase Cinematic
+    
+    return (
+        <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: -1,
+            overflow: 'hidden',
+        }}>
+            {/* Overlay sombre pour la lisibilité */}
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                background: 'rgba(18, 20, 21, 0.75)', // Assombri pour le texte
+                zIndex: 1
+            }}></div>
+            
+            <div style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                width: '120vw', 
+                height: '120vh',
+                transform: 'translate(-50%, -50%)',
+                pointerEvents: 'none' // Empêche l'interaction avec la vidéo
+            }}>
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${videoId}&disablekb=1&modestbranding=1`}
+                    title="CS2 Background" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    style={{ objectFit: 'cover', opacity: 0.6 }}
+                ></iframe>
+            </div>
+        </div>
+    );
+};
+
 export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLeaderboard, onAdmin }) {
   const [isRegistering, setIsRegistering] = useState(false);
+
   const [username, setLocalUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorLocal, setErrorLocal] = useState("");
@@ -12,7 +63,8 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
   if (user) {
     return (
         <div className="cs-container">
-          <div className="cs-card" style={{ maxWidth: '600px', margin: '0 auto', width: '100%' }}>
+          <VideoBackground />
+          <div className="cs-card" style={{ maxWidth: '600px', margin: '0 auto', width: '100%', position: 'relative', background: 'rgba(28, 30, 36, 0.85)', backdropFilter: 'blur(10px)' }}>
             <h1 className="cs-hero-title" style={{ fontSize: '3rem', textAlign: 'center', borderLeft: 'none' }}>
               PROFIL <span style={{ color: 'var(--cs-accent)' }}>JOUEUR</span>
             </h1>
@@ -130,7 +182,8 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
 
   return (
     <div className="cs-container">
-      <div className="cs-card" style={{ maxWidth: '500px', margin: '0 auto', width: '100%' }}>
+      <VideoBackground />
+      <div className="cs-card" style={{ maxWidth: '500px', margin: '0 auto', width: '100%', position: 'relative', background: 'rgba(28, 30, 36, 0.85)', backdropFilter: 'blur(10px)' }}>
         <h1 className="cs-hero-title" style={{ fontSize: '2.5rem', textAlign: 'center', borderLeft: 'none' }}>
           COUNTER <span style={{ color: 'var(--cs-accent)' }}>QUIZ</span>
         </h1>
@@ -216,7 +269,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
         </div>
       </div>
       <div style={{ textAlign: 'center', marginTop: '1rem', opacity: 0.5, fontSize: '0.8rem', color: 'var(--cs-text-muted)' }}>
-        VERSION 2.4 • RANKED FIX • <span onClick={onAdmin} style={{ cursor: "pointer", textDecoration: "underline" }}>ADMIN</span>
+        VERSION 2.4 • RANKED FIX
       </div>
     </div>
   );
