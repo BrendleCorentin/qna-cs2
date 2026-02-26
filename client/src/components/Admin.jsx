@@ -85,108 +85,214 @@ export default function Admin({ serverUrl, onBack }) {
   };
 
   return (
-    <div className="admin-panel" style={{ padding: "2rem", color: "white", maxWidth: "800px", margin: "0 auto" }}>
-      <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
-        <h1>Administration des Questions</h1>
-        <button onClick={onBack} style={{ padding: "5px 10px" }}>Retour au jeu</button>
-      </header>
+    <div className="cs-container" style={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
+      <div
+        className="cs-card"
+        style={{ maxWidth: "800px", margin: "0 auto", width: "100%" }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "2rem",
+            borderBottom: "1px solid var(--cs-border)",
+            paddingBottom: "1rem",
+          }}
+        >
+          <h1
+            className="cs-hero-title"
+            style={{ fontSize: "2rem", margin: 0, borderLeft: "none" }}
+          >
+            ADMINISTRA<span style={{ color: "var(--cs-accent)" }}>TION</span>
+          </h1>
+          <button className="cs-btn" onClick={onBack}>
+            RETOUR AU JEU
+          </button>
+        </div>
 
-      <div className="add-question-section" style={{ background: "#222", padding: "1rem", borderRadius: "8px", marginBottom: "2rem" }}>
-        <h3>Ajouter une question</h3>
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: "1rem" }}>
-            <label>Type: </label>
-            <select value={type} onChange={(e) => setType(e.target.value)} style={{ padding: "5px" }}>
-              <option value="mcq">QCM (4 choix)</option>
-              <option value="text">Texte Libre (Qui suis-je ?)</option>
-            </select>
-          </div>
-
-          <div style={{ marginBottom: "1rem" }}>
-            <label style={{ display: "block", marginBottom: "5px" }}>Question:</label>
-            <textarea
-              required
-              value={questionText}
-              onChange={(e) => setQuestionText(e.target.value)}
-              style={{ width: "100%", height: "80px", padding: "8px" }}
-            />
-          </div>
-
-          {type === "mcq" && (
-            <div className="mcq-fields">
-              <p>Choix de réponses :</p>
-              {choices.map((c, i) => (
-                <div key={i} style={{ marginBottom: "5px", display: "flex", gap: "10px" }}>
-                  <input
-                    type="radio"
-                    name="correctAnswer"
-                    checked={answerIndex === i}
-                    onChange={() => setAnswerIndex(i)}
-                  />
-                  <input
-                    type="text"
-                    required
-                    placeholder={`Choix ${i + 1}`}
-                    value={c}
-                    onChange={(e) => {
-                      const newChoices = [...choices];
-                      newChoices[i] = e.target.value;
-                      setChoices(newChoices);
-                    }}
-                    style={{ flex: 1, padding: "5px" }}
-                  />
-                </div>
-              ))}
-              <small style={{ color: "#aaa" }}>Cochez la bonne réponse.</small>
+        <div
+          style={{
+            background: "rgba(0,0,0,0.3)",
+            padding: "1.5rem",
+            borderRadius: "4px",
+            marginBottom: "2rem",
+            border: "1px solid var(--cs-border)",
+          }}
+        >
+          <h3 style={{ marginTop: 0, color: "var(--cs-accent)" }}>
+            AJOUTER UNE QUESTION
+          </h3>
+          <form onSubmit={handleSubmit}>
+            <div className="cs-input-group">
+              <label className="cs-label">TYPE DE QUESTION</label>
+              <select
+                className="cs-input"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              >
+                <option value="mcq">QCM (4 choix)</option>
+                <option value="text">Texte Libre (Qui suis-je ?)</option>
+              </select>
             </div>
-          )}
 
-          {type === "text" && (
-            <div style={{ marginBottom: "1rem" }}>
-              <label style={{ display: "block", marginBottom: "5px" }}>Réponse attendue:</label>
-              <input
-                type="text"
+            <div className="cs-input-group">
+              <label className="cs-label">ÉNONCÉ DE LA QUESTION</label>
+              <textarea
+                className="cs-input"
                 required
-                value={textAnswer}
-                onChange={(e) => setTextAnswer(e.target.value)}
-                style={{ width: "100%", padding: "8px" }}
+                value={questionText}
+                onChange={(e) => setQuestionText(e.target.value)}
+                style={{ height: "100px", resize: "vertical" }}
+                placeholder="Posez votre question ici..."
               />
             </div>
-          )}
 
-          <button type="submit" style={{ marginTop: "1rem", padding: "10px 20px", background: "#4CAF50", color: "white", border: "none", cursor: "pointer" }}>
-            Ajouter la question
-          </button>
-        </form>
-      </div>
+            {type === "mcq" && (
+              <div style={{ marginBottom: "1.5rem" }}>
+                <label className="cs-label" style={{ marginBottom: "0.5rem" }}>
+                  CHOIX DE RÉPONSES (Coche la bonne)
+                </label>
+                {choices.map((c, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      marginBottom: "10px",
+                      alignItems: "center",
+                    }}
+                  >
+                    <input
+                      type="radio"
+                      name="correctAnswer"
+                      checked={answerIndex === i}
+                      onChange={() => setAnswerIndex(i)}
+                      style={{
+                        accentColor: "var(--cs-accent)",
+                        transform: "scale(1.5)",
+                        cursor: "pointer",
+                      }}
+                    />
+                    <input
+                      type="text"
+                      className="cs-input"
+                      required
+                      placeholder={`Choix n°${i + 1}`}
+                      value={c}
+                      onChange={(e) => {
+                        const newChoices = [...choices];
+                        newChoices[i] = e.target.value;
+                        setChoices(newChoices);
+                      }}
+                      style={{ flex: 1 }}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
 
-      <div className="questions-list">
-        <h3>Questions existantes ({questions.length})</h3>
-        {loading ? (
-          <p>Chargement...</p>
-        ) : (
-          <ul style={{ listStyle: "none", padding: 0 }}>
-            {questions.map((q) => (
-              <li key={q.id} style={{  background: "#333", border: "1px solid #444", marginBottom: "10px", padding: "10px", borderRadius: "5px", display: "flex", justifyContent: "space-between", alignItems: "start" }}>
-                <div>
-                  <strong>[{q.type === 'text' ? 'TEXT' : 'QCM'}]</strong> {q.question}
-                  <br />
-                  <small style={{ color: "#aaa" }}>
-                    {q.type === 'mcq' 
-                      ? `Réponse: ${q.choices[q.answerIndex]}` 
-                      : `Réponse: ${q.answer}`}
-                  </small>
+            {type === "text" && (
+              <div className="cs-input-group">
+                <label className="cs-label">RÉPONSE ATTENDUE</label>
+                <input
+                  type="text"
+                  className="cs-input"
+                  required
+                  value={textAnswer}
+                  onChange={(e) => setTextAnswer(e.target.value)}
+                  placeholder="La réponse exacte..."
+                />
+              </div>
+            )}
+
+            <button
+              type="submit"
+              className="cs-btn cs-btn-primary"
+              style={{ width: "100%" }}
+            >
+              ENREGISTRER LA QUESTION
+            </button>
+          </form>
+        </div>
+
+        <div>
+          <h3
+            style={{
+              borderBottom: "1px solid var(--cs-border)",
+              paddingBottom: "0.5rem",
+              marginBottom: "1rem",
+            }}
+          >
+            QUESTIONS EN BASE ({questions.length})
+          </h3>
+          {loading ? (
+            <div style={{ textAlign: "center", padding: "2rem", opacity: 0.7 }}>
+              Chargement des questions...
+            </div>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              {questions.length === 0 && (
+                <div style={{ textAlign: "center", opacity: 0.5, padding: "2rem" }}>
+                  Aucune question trouvée. Ajoutez-en une !
                 </div>
-                <button 
-                  onClick={() => handleDelete(q.id)}
-                  style={{ background: "#ff4444", color: "white", border: "none", padding: "5px 10px", cursor: "pointer", marginLeft: "10px" }}
+              )}
+              {questions.map((q) => (
+                <div
+                  key={q.id}
+                  style={{
+                    background: "#1e1e24",
+                    border: "1px solid #333",
+                    padding: "1rem",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    borderRadius: "4px",
+                  }}
                 >
-                  X
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "5px" }}>
+                      <span
+                        style={{
+                          background: q.type === "text" ? "#9c27b0" : "var(--cs-accent)",
+                          color: "black",
+                          fontWeight: "bold",
+                          fontSize: "0.7rem",
+                          padding: "2px 6px",
+                          borderRadius: "2px",
+                        }}
+                      >
+                        {q.type === "text" ? "TEXT" : "QCM"}
+                      </span>
+                      <strong style={{ fontSize: "1.1rem" }}>{q.question}</strong>
+                    </div>
+                    
+                    <div style={{ color: "var(--cs-text-muted)", fontSize: "0.9rem" }}>
+                      <span style={{ color: "#4caf50", marginRight: "5px" }}>✔</span>
+                      {q.type === "mcq"
+                        ? q.choices[q.answerIndex]
+                        : q.answer}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleDelete(q.id)}
+                    className="cs-btn"
+                    style={{
+                        padding: "0.5rem",
+                        background: "rgba(255, 68, 68, 0.2)",
+                        color: "#ff4444",
+                        border: "1px solid #ff4444",
+                        marginLeft: "1rem"
+                    }}
+                    title="Supprimer"
+                  >
+                    SUPPRIMER
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
