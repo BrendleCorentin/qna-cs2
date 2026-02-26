@@ -77,10 +77,15 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
       e.preventDefault();
       setErrorLocal("");
 
-      // SHORTCUT: Si l'utilisateur tente de se connecter en tant que "ADMIN", on le redirige vers le panel
+      // SHORTCUT ADMIN DIRECT
+      // Si l'identifiant est ADMIN et le mot de passe est "admin123", on passe directement au panel
       if (username.toUpperCase() === "ADMIN") {
-        onAdmin();
-        return;
+         if (password === "admin123") {
+             onAdmin(); 
+         } else {
+             setErrorLocal("Mot de passe Admin incorrect");
+         }
+         return;
       }
       
       if (!socket || !socket.connected) {

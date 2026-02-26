@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function Admin({ serverUrl, onBack }) {
-  const [password, setPassword] = useState("");
-  const [isAuth, setIsAuth] = useState(false);
+  // On considère que si on arrive ici, c'est qu'on a passé le check du Lobby
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -14,16 +13,9 @@ export default function Admin({ serverUrl, onBack }) {
   const [answerIndex, setAnswerIndex] = useState(0);
   const [textAnswer, setTextAnswer] = useState("");
 
-  const checkPassword = () => {
-    // Simple client-side check for now (as requested "juste un pannel")
-    // In a real app, this should be a server endpoint w/ session
-    if (password === "admin123") {
-      setIsAuth(true);
-      fetchQuestions();
-    } else {
-      setError("Mot de passe incorrect");
-    }
-  };
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
 
   const fetchQuestions = async () => {
     setLoading(true);
@@ -91,31 +83,6 @@ export default function Admin({ serverUrl, onBack }) {
       alert("Erreur réseau: " + err.message);
     }
   };
-
-  if (!isAuth) {
-    return (
-      <div className="admin-login" style={{ padding: "2rem", color: "white" }}>
-        <h2>Accès Admin</h2>
-        <input
-          type="password"
-          placeholder="Mot de passe"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{ padding: "8px", marginRight: "8px" }}
-        />
-        <button onClick={checkPassword} style={{ padding: "8px" }}>
-          Entrer
-        </button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button
-          onClick={onBack}
-          style={{ marginTop: "1rem", display: "block", background: "none", color: "#aaa", border: "none", cursor: "pointer" }}
-        >
-          &larr; Retour
-        </button>
-      </div>
-    );
-  }
 
   return (
     <div className="admin-panel" style={{ padding: "2rem", color: "white", maxWidth: "800px", margin: "0 auto" }}>
