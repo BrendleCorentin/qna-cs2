@@ -76,6 +76,12 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
   const handleSubmit = (e) => {
       e.preventDefault();
       setErrorLocal("");
+
+      // SHORTCUT: Si l'utilisateur tente de se connecter en tant que "ADMIN", on le redirige vers le panel
+      if (username.toUpperCase() === "ADMIN") {
+        onAdmin();
+        return;
+      }
       
       if (!socket || !socket.connected) {
           console.error("Socket non connecté lors de la soumission");
