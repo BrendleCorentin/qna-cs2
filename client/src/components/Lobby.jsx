@@ -1,14 +1,26 @@
 // src/components/Lobby.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Plus de vidéo, on revient à un design épuré mais stylé
 export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLeaderboard, onAdmin }) {
   const [isRegistering, setIsRegistering] = useState(false);
+  const [topPlayers, setTopPlayers] = useState([]);
+  const [loadingLeaderboard, setLoadingLeaderboard] = useState(true);
 
   const [username, setLocalUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorLocal, setErrorLocal] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // Fetch leaderboard when logged in
+  useEffect(() => {
+    if (user && socket) {
+        socket.emit("getLeaderboard", (data) => {
+            setTopPlayers(data || []);
+            setLoadingLeaderboard(false);
+        });
+    }
+  }, [user, socket]);
 
   // --- NOUVEAU DESIGN DU LOBBY CONNECTÉ ---
   if (user) {
@@ -86,11 +98,42 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
                         </button>
                     </div>
 
-                    <div className="cs-social-area">
-                        <h3 className="cs-panel-title">CLASSEMENT</h3>
-                        <button className="cs-btn-wide" onClick={onLeaderboard}>
-                            🏆 VOIR LE TOP 50 HLTV
-                        </button>
+                    <div className="cs-social-area" style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
+                        <h3 className="cs-panel-title">CLASSEMENT TOP JOUEURS</h3>
+                        <div className="cs-leaderboard-widget">
+                             {loadingLeaderboard ? (
+                                 <div style={{ textAlign: 'center', color: 'var(--cs-text-muted)', padding: '20px' }}>Chargement...</div>
+                             ) : (
+                                 <table className="cs-table-compact">
+                                     <thead>
+                                         <tr>
+                                             <th>#</th>
+                                             <th>JOUEUR</th>
+                                             <th style={{ textAlign: 'right' }}>ELO</th>
+                                         </tr>
+                                     </thead>
+                                     <tbody>
+                                         {topPlayers.slice(0, 50).map((p, i) => (
+                                             <tr key={i} className={p.username === user.username ? 'highlight' : ''}>
+                                                 <td className="rank">{i + 1}</td>
+                                                 <td className="name">
+                                                     <img 
+                                                       src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${p.username}&backgroundColor=b6e3f4`} 
+                                                       className="cs-avatar-mini" 
+                                                       alt="" 
+                                                     />
+                                                     {p.username}
+                                                 </td>
+                                                 <td className="elo">{p.elo}</td>
+                                             </tr>
+                                         ))}
+                                         {topPlayers.length === 0 && (
+                                             <tr><td colSpan="3" style={{ textAlign: 'center', padding: '20px' }}>Aucun classement</td></tr>
+                                         )}
+                                     </tbody>
+                                 </table>
+                             )}
+                        </div>
                     </div>
                     
                     {/* Admin Button Discreet */}

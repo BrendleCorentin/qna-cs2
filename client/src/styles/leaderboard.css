@@ -1,0 +1,90 @@
+/* Leaderboard Widget Styles - appended to global.css */
+
+.cs-leaderboard-widget {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    max-height: 250px; /* Limit height */
+}
+
+/* Custom scrollbar for widget */
+.cs-leaderboard-widget::-webkit-scrollbar {
+    width: 6px;
+}
+.cs-leaderboard-widget::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.2);
+}
+.cs-leaderboard-widget::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+}
+
+.cs-table-compact {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.cs-table-compact th {
+    text-align: left;
+    padding: 10px 12px;
+    color: var(--cs-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    background: rgba(30, 32, 36, 1); /* Sticky header bg opaque */
+    z-index: 2;
+}
+
+.cs-table-compact td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    vertical-align: middle;
+}
+
+.cs-table-compact tr:last-child td {
+    border-bottom: none;
+}
+
+.cs-table-compact tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.cs-table-compact tr.highlight {
+    background: rgba(220, 163, 54, 0.15);
+    border-left: 2px solid var(--cs-accent);
+}
+
+.cs-table-compact .rank {
+    width: 30px;
+    color: var(--cs-text-muted);
+    font-weight: bold;
+    text-align: center;
+}
+
+.cs-table-compact .name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.cs-table-compact .elo {
+    text-align: right;
+    font-weight: bold;
+    color: var(--cs-accent);
+    font-family: monospace;
+    font-size: 1rem;
+}
+
+.cs-avatar-mini {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #333;
+}
