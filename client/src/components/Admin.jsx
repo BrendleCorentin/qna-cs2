@@ -10,6 +10,7 @@ export default function Admin({ serverUrl, onBack }) {
   const [type, setType] = useState("mcq");
   const [questionText, setQuestionText] = useState("");
   const [choices, setChoices] = useState(["", "", "", ""]);
+  const [clues, setClues] = useState(["", "", "", ""]); // New state for clues
   const [answerIndex, setAnswerIndex] = useState(0);
   const [textAnswer, setTextAnswer] = useState("");
 
@@ -69,6 +70,9 @@ export default function Admin({ serverUrl, onBack }) {
     if (type === "mcq") {
       payload.choices = choices;
       payload.answerIndex = parseInt(answerIndex);
+    } else if (type === "progressive_clue") {
+      payload.clues = clues;
+      payload.answer = textAnswer;
     } else {
       payload.answer = textAnswer;
     }
@@ -84,6 +88,8 @@ export default function Admin({ serverUrl, onBack }) {
         setQuestions([newQ, ...questions]);
         setQuestionText("");
         setChoices(["", "", "", ""]);
+        setClues(["", "", "", ""]);
+        setTextAnswer("");
         alert("Question ajoutée !");
       }
     } catch (err) { alert(err.message); }
@@ -163,8 +169,29 @@ export default function Admin({ serverUrl, onBack }) {
                                 <select className="cs-input" value={type} onChange={(e) => setType(e.target.value)}>
                                     <option value="mcq">QCM</option>
                                     <option value="text">Texte</option>
+                                    <option value="progressive_clue">Indices Progressifs (20s)</option>
                                 </select>
                             </div>
+
+                            {type === 'progressive_clue' && (
+                                <div style={{ marginBottom: '1rem' }}>
+                                    <label className="cs-label">INDICES (Ordre: Début -> 15s -> 10s -> 5s)</label>
+                                    {clues.map((c, i) => (
+                                        <div key={i} style={{ marginBottom: '5px' }}>
+                                            <input 
+                                                className="cs-input" 
+                                                value={c} 
+                                                onChange={(e) => {
+                                                    const n = [...clues]; n[i] = e.target.value; setClues(n);
+                                                }} 
+                                                placeholder={`Indice ${i+1} (${i === 0 ? 'Immédiat' : (4-i)*5 + 's restants'})`} 
+                                            />
+                                        </div>
+                                    ))}
+                                     <input className="cs-input" value={textAnswer} onChange={(e) => setTextAnswer(e.target.value)} placeholder="Réponse attendue" style={{ marginTop: '10px' }} />
+                                </div>
+                            )}
+
                             {type === 'mcq' && choices.map((c, i) => (
                                 <div key={i} style={{ display: 'flex', gap: '10px', marginBottom: '5px' }}>
                                     <input type="radio" checked={answerIndex === i} onChange={() => setAnswerIndex(i)} />
