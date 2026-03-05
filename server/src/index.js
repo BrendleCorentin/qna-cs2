@@ -74,8 +74,8 @@ app.post("/admin/questions/import", async (req, res) => {
   }
 });
 
-app.post("/admin/hltv-import", (req, res) => {
-  console.log("[Admin] Starting HLTV Import process...");
+app.post("/admin/sync-liquipedia", (req, res) => {
+  console.log("[Admin] Starting Liquipedia Import process...");
   
   // 1. Generate Questions
   const generateScript = path.resolve(__dirname, "../scripts/generate-questions.js");
@@ -85,7 +85,9 @@ app.post("/admin/hltv-import", (req, res) => {
   
   // Create cache directory if it doesn't exist (important for writable access)
   const cacheDir = path.resolve(__dirname, "../cache");
-  fs.mkdirSync(cacheDir, { recursive: true });
+  if (!fs.existsSync(cacheDir)) {
+      fs.mkdirSync(cacheDir, { recursive: true });
+  }
 
   exec(`node "${generateScript}"`, { cwd: path.dirname(generateScript) }, (error, stdout, stderr) => {
       if (error) {

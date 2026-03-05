@@ -95,11 +95,11 @@ export default function Admin({ serverUrl, onBack }) {
     } catch (err) { alert(err.message); }
   };
 
-  const handleImportHLTV = async () => {
-    if (!confirm("Cette opération va générer de nouvelles questions depuis HLTV puis les importer. Cela peut prendre 10-20 secondes. Continuer ?")) return;
+  const handleSyncLiquipedia = async () => {
+    if (!confirm("Cette opération va récupérer les dernières infos rosters depuis Liquipedia puis générer de nouvelles questions. Cela peut prendre 30-60 secondes. Continuer ?")) return;
     setLoading(true);
     try {
-        const res = await fetch(`${serverUrl}/admin/hltv-import`, { method: "POST" });
+        const res = await fetch(`${serverUrl}/admin/sync-liquipedia`, { method: "POST" });
         const data = await res.json();
         if (data.success) {
             alert(`Succès ! ${data.count} questions disponibles.`);
@@ -174,10 +174,10 @@ export default function Admin({ serverUrl, onBack }) {
         <div className="cs-admin-content">
             {activeTab === 'questions' && (
                 <div>
-                    {/* IMPORT HLTV */}
+                    {/* IMPORT LIQUIPEDIA */}
                     <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "flex-end" }}>
-                        <button className="cs-btn cs-btn-blue" onClick={handleImportHLTV} disabled={loading}>
-                            {loading ? "GÉNÉRATION..." : "🔄 SYNC AVEC HLTV"}
+                        <button className="cs-btn cs-btn-blue" onClick={handleSyncLiquipedia} disabled={loading}>
+                            {loading ? "GÉNÉRATION..." : "🔄 SYNC LIQUIPEDIA"}
                         </button>
                     </div>
 
@@ -234,16 +234,7 @@ export default function Admin({ serverUrl, onBack }) {
                     </div>
 
                     {/* Liste Questions */}
-                    cd /root/qna-cs2
-                    git pull
-                    
-                    # ⚠️ IMPORTANT : Installer le module HLTV sur le serveur
-                    cd server
-                    npm install
-                    
-                    # Redémarrer le serveur pour prendre en compte les nouvelles routes API
-                    # (Adapte selon ta méthode de lancement : pm2, systemctl...)
-                    pm2 restart all  # ou systemctl restart qna-server                    <div>
+                    <div>
                         <h3 style={{ borderBottom: '1px solid var(--cs-border)', paddingBottom: '0.5rem', marginBottom: '1rem', color: "var(--cs-text-main)" }}>
                             LISTE DES QUESTIONS ({questions.length})
                         </h3>

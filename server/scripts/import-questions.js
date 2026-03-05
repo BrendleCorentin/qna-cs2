@@ -5,7 +5,7 @@ import { db, addQuestion, getAllQuestions } from '../src/db/database.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const questionsFile = path.resolve(__dirname, '../src/config/questions_hltv.json');
+const questionsFile = path.resolve(__dirname, '../src/config/questions_generated.json');
 
 async function importQuestions() {
   if (!fs.existsSync(questionsFile)) {
@@ -15,9 +15,9 @@ async function importQuestions() {
   }
 
   const rawData = fs.readFileSync(questionsFile, 'utf-8');
-  const hltvQuestions = JSON.parse(rawData);
+  const questions = JSON.parse(rawData);
   
-  console.log(`[Import] Found ${hltvQuestions.length} generated questions.`);
+  console.log(`[Import] Found ${questions.length} generated questions.`);
   
   // Get existing questions to avoid duplicates
   const existingQuestions = await getAllQuestions();
@@ -28,7 +28,7 @@ async function importQuestions() {
 
   console.log(`[Import] Checking against ${existingQuestions.length} existing questions...`);
 
-  for (const q of hltvQuestions) {
+  for (const q of questions) {
     if (existingSet.has(q.question)) {
       skippedCount++;
       continue;
