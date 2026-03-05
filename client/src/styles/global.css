@@ -459,6 +459,19 @@ h1, h2, h3 {
   transform: scale(1.02);
 }
 
+.cs-btn-blue {
+  background: linear-gradient(135deg, var(--cs-ct-blue) 0%, #3044a5 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.cs-btn-blue:not(:disabled):hover {
+  background: linear-gradient(135deg, #6b82ff 0%, var(--cs-ct-blue) 100%);
+  box-shadow: 0 0 25px rgba(75, 105, 255, 0.4);
+  transform: scale(1.02);
+}
+
 .cs-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;

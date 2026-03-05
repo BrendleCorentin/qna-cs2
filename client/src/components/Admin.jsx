@@ -95,6 +95,25 @@ export default function Admin({ serverUrl, onBack }) {
     } catch (err) { alert(err.message); }
   };
 
+  const handleImportHLTV = async () => {
+    if (!confirm("Cette opération va générer de nouvelles questions depuis HLTV puis les importer. Cela peut prendre 10-20 secondes. Continuer ?")) return;
+    setLoading(true);
+    try {
+        const res = await fetch(`${serverUrl}/admin/hltv-import`, { method: "POST" });
+        const data = await res.json();
+        if (data.success) {
+            alert(`Succès ! ${data.count} questions disponibles.`);
+            fetchQuestions(); // Refresh list
+        } else {
+            alert("Erreur: " + JSON.stringify(data.error));
+        }
+    } catch (err) {
+        alert("Erreur réseau: " + err.message);
+    } finally {
+        setLoading(false);
+    }
+  };
+
   const handleDeleteUser = async (id) => {
       if (!confirm("Voulez-vous vraiment supprimer cet utilisateur ? Cette action est irréversible.")) return;
       try {
@@ -155,6 +174,13 @@ export default function Admin({ serverUrl, onBack }) {
         <div className="cs-admin-content">
             {activeTab === 'questions' && (
                 <div>
+                    {/* IMPORT HLTV */}
+                    <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "flex-end" }}>
+                        <button className="cs-btn cs-btn-blue" onClick={handleImportHLTV} disabled={loading}>
+                            {loading ? "GÉNÉRATION..." : "🔄 SYNC AVEC HLTV"}
+                        </button>
+                    </div>
+
                     {/* Formulaire existant simplifié pour la lisibilité */}
                     <div style={{ background: "rgba(0,0,0,0.3)", padding: "1.5rem", borderRadius: "4px", marginBottom: "2rem", border: "1px solid var(--cs-border)" }}>
                         <h3 style={{ marginTop: 0, color: "var(--cs-accent)" }}>AJOUTER UNE QUESTION</h3>

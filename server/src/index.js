@@ -1,6 +1,9 @@
 import express from "express";
 import http from "http";
 import { Server } from "socket.io";
+import { exec } from "child_process";
+import path from "path";
+import { fileURLToPath } from "url";
 import { attachMatchmaking } from "./services/matchmaking.js";
 import { 
   getAllQuestions, 
@@ -12,6 +15,9 @@ import {
   getAllMatches,
   updateUserEloById
 } from "./db/database.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const server = http.createServer(app);
@@ -65,6 +71,43 @@ app.post("/admin/questions/import", async (req, res) => {
     console.error("Error importing:", err);
     res.status(500).json({ error: err.message });
   }
+});
+
+app.post("/admin/hltv-import", (req, res) => {
+  console.log("[Admin] Starting HLTV Import process...");
+  
+  // 1. Generate Questions
+  const generateScript = path.resolve(__dirname, "../scripts/generate-questions.js");
+  const importScript = path.resolve(__dirname, "../scripts/import-questions.js");
+
+  // We use exec to run the scripts. 
+  // It might timeout if it takes too long, but usually exec has a high buffer/timeout.
+  // We can also trigger it and return immediately, but the user wants to know when it's done.
+  
+  exec(`node "${generateScript}"`, (error, stdout, stderr) => {
+      if (error) {
+          console.error(`exec error: ${error}`);
+          return res.status(500).json({ error: "Generation failed", details: stderr });
+      }
+      console.log(`[Generation] ${stdout}`);
+
+      // 2. Import Questions
+      exec(`node "${importScript}"`, async (error2, stdout2, stderr2) => {
+          if (error2) {
+              console.error(`exec error: ${error2}`);
+              return res.status(500).json({ error: "Import failed", details: stderr2 });
+          }
+          console.log(`[Import] ${stdout2}`);
+          
+          // 3. Update question list and return
+          try {
+            const questions = await getAllQuestions();
+            res.json({ success: true, count: questions.length, log: stdout2 });
+          } catch(e) {
+            res.status(500).json({ error: e.message });
+          }
+      });
+  });
 });
 
 app.delete("/admin/questions/:id", async (req, res) => {
