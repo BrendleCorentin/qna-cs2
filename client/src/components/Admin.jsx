@@ -234,10 +234,17 @@ export default function Admin({ serverUrl, onBack }) {
                     </div>
 
                     {/* Liste Questions */}
+                    <div>
+                        <h3 style={{ borderBottom: '1px solid var(--cs-border)', paddingBottom: '0.5rem', marginBottom: '1rem', color: "var(--cs-text-main)" }}>
+                            LISTE DES QUESTIONS ({questions.length})
+                        </h3>
+                    </div>
+                    
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        {questions.length === 0 && <p style={{ color: "var(--cs-text-muted)" }}>Aucune question trouvée. Utilisez le bouton SYNC ou ajoutez-en une.</p>}
                         {questions.map(q => (
-                            <div key={q.id} style={{ background: '#1e1e24', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <span><b>{q.question}</b> <small>({q.type})</small></span>
+                            <div key={q.id} style={{ background: '#1e1e24', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderRadius: '4px' }}>
+                                <span><b>{q.question}</b> <small style={{ color: "var(--cs-accent)" }}>({q.type})</small></span>
                                 <button className="cs-btn cs-btn-t text-red" onClick={() => handleDeleteQuestion(q.id)}>SUPPRIMER</button>
                             </div>
                         ))}
