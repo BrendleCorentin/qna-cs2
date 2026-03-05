@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "node src/index.js",
-    "generate:questions": "node scripts/generate-questions.js"
+    "generate:questions": "node scripts/generate-questions.js",
+    "import:questions": "node scripts/import-questions.js"
   },
   "dependencies": {
     "express": "^4.19.2",
