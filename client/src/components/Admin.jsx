@@ -234,7 +234,16 @@ export default function Admin({ serverUrl, onBack }) {
                     </div>
 
                     {/* Liste Questions */}
-                    <div>
+                    cd /root/qna-cs2
+                    git pull
+                    
+                    # ⚠️ IMPORTANT : Installer le module HLTV sur le serveur
+                    cd server
+                    npm install
+                    
+                    # Redémarrer le serveur pour prendre en compte les nouvelles routes API
+                    # (Adapte selon ta méthode de lancement : pm2, systemctl...)
+                    pm2 restart all  # ou systemctl restart qna-server                    <div>
                         <h3 style={{ borderBottom: '1px solid var(--cs-border)', paddingBottom: '0.5rem', marginBottom: '1rem', color: "var(--cs-text-main)" }}>
                             LISTE DES QUESTIONS ({questions.length})
                         </h3>

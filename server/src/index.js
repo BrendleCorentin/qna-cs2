@@ -3,6 +3,7 @@ import http from "http";
 import { Server } from "socket.io";
 import { exec } from "child_process";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 import { attachMatchmaking } from "./services/matchmaking.js";
 import { 
@@ -80,22 +81,25 @@ app.post("/admin/hltv-import", (req, res) => {
   const generateScript = path.resolve(__dirname, "../scripts/generate-questions.js");
   const importScript = path.resolve(__dirname, "../scripts/import-questions.js");
 
-  // We use exec to run the scripts. 
-  // It might timeout if it takes too long, but usually exec has a high buffer/timeout.
-  // We can also trigger it and return immediately, but the user wants to know when it's done.
+  // We use exec to run the scripts.
   
-  exec(`node "${generateScript}"`, (error, stdout, stderr) => {
+  // Create cache directory if it doesn't exist (important for writable access)
+  const cacheDir = path.resolve(__dirname, "../cache");
+  fs.mkdirSync(cacheDir, { recursive: true });
+
+  exec(`node "${generateScript}"`, { cwd: path.dirname(generateScript) }, (error, stdout, stderr) => {
       if (error) {
           console.error(`exec error: ${error}`);
-          return res.status(500).json({ error: "Generation failed", details: stderr });
+          // Send stdout too, because sometimes non-fatal errors go to stderr or helpful logs go to stdout
+          return res.status(500).json({ error: "Generation failed", details: stderr + "\n" + stdout });
       }
       console.log(`[Generation] ${stdout}`);
 
       // 2. Import Questions
-      exec(`node "${importScript}"`, async (error2, stdout2, stderr2) => {
+      exec(`node "${importScript}"`, { cwd: path.dirname(importScript) }, async (error2, stdout2, stderr2) => {
           if (error2) {
               console.error(`exec error: ${error2}`);
-              return res.status(500).json({ error: "Import failed", details: stderr2 });
+              return res.status(500).json({ error: "Import failed", details: stderr2 + "\n" + stdout2 });
           }
           console.log(`[Import] ${stdout2}`);
           
