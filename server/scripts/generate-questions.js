@@ -10,7 +10,7 @@ await fse.ensureDir(OUT_DIR);
 await fse.ensureDir(CACHE_DIR);
 
 // --- CONFIG ---
-const TOP_TEAMS = 100;            // ✅ top 100 HLTV
+const TOP_TEAMS = 50;            // ✅ top 50 HLTV
 const DELAY_MS = 1800;            // anti CF
 const PLAYER_DETAIL_LIMIT = 1000;  // combien de profils HLTV.getPlayer on charge (lourd)
 const QUESTIONS_TARGET = 8000;    // stop quand tu as assez
