@@ -40,7 +40,7 @@ const manualQuestions = [
 
 let generatedQuestions = [];
 try {
-  const filePath = path.join(__dirname, "questions_hltv.json");
+  const filePath = path.join(__dirname, "questions_generated.json");
   if (fs.existsSync(filePath)) {
     const data = fs.readFileSync(filePath, "utf-8");
     generatedQuestions = JSON.parse(data);

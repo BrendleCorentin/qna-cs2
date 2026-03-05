@@ -1,323 +1,170 @@
-import fs from "fs";
-import fse from "fs-extra";
-import path from "path";
-import { HLTV } from "hltv";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { getTeamRoster, TOP_TEAMS } from '../src/utils/liquipediaScraper.js';
 
-const OUT_DIR = path.resolve("./src/config");
-const CACHE_DIR = path.resolve("./cache");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const projectRoot = path.resolve(__dirname, '..'); // Points to server root
 
-await fse.ensureDir(OUT_DIR);
-await fse.ensureDir(CACHE_DIR);
+// Output file path
+const OUT_FILE = path.join(projectRoot, 'src', 'config', 'questions_generated.json');
 
-// --- CONFIG ---
-const TOP_TEAMS = 50;            // ✅ top 50 HLTV
-const DELAY_MS = 1800;            // anti CF
-const PLAYER_DETAIL_LIMIT = 1000;  // combien de profils HLTV.getPlayer on charge (lourd)
-const QUESTIONS_TARGET = 8000;    // stop quand tu as assez
-const MIN_HISTORY_TEAMS = 3;      // minimum d’équipes dans la carrière pour whoami career
-const WHOAMI_TEAMS_CLUES = [3,4,5]; // nombre d’équipes montrées
-const WHOAMI_TEAMMATES_CLUES = [3,4]; // nombre de teammates montrés
-const HARD_WEIGHT = 0.75;         // % de questions "hard" dans le mix
-
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
-const pickN = (arr, n) => shuffle(arr).slice(0, n);
-
-function normalize(str) {
-  return (str || "").replace(/\s+/g, " ").trim();
-}
-
-function playerName(p) {
-  return normalize(p?.name || p?.nickname || p?.ign || p?.title || "");
-}
-
-function safeCountry(player) {
-  if (!player) return null;
-  if (typeof player.country === "string") return player.country;
-  if (player.country?.name) return player.country.name;
-  return null;
-}
-
-async function cachedJSON(cacheKey, fetcher) {
-  const file = path.join(CACHE_DIR, `${cacheKey}.json`);
-  if (fs.existsSync(file)) return JSON.parse(await fse.readFile(file, "utf-8"));
-  const data = await fetcher();
-  await fse.writeFile(file, JSON.stringify(data, null, 2), "utf-8");
-  return data;
-}
-
-function formatQuestion(id, questionText, correctAnswer, wrongAnswers, meta = {}) {
-  const choices = shuffle([correctAnswer, ...wrongAnswers].map(normalize));
-  return {
-    id,
-    question: questionText,
-    choices,
-    answerIndex: choices.indexOf(normalize(correctAnswer)),
-    meta,
-    difficulty: "hard"
-  };
-}
-
-function easyQuestion(id, questionText, correctAnswer, wrongAnswers, meta = {}) {
-  const q = formatQuestion(id, questionText, correctAnswer, wrongAnswers, meta);
-  q.difficulty = "easy";
-  return q;
-}
-
-// ---------- HELPERS (career parsing) ----------
-function extractTeamsFromPlayer(playerDetails) {
-  // La structure varie selon la lib / HLTV. On essaye plusieurs patterns.
-  // L’idée: récupérer une liste de noms d’équipes dans sa carrière.
-  const teams = new Set();
-
-  // 1) playerDetails.teams (souvent current/past)
-  if (Array.isArray(playerDetails?.teams)) {
-    for (const t of playerDetails.teams) {
-      const n = normalize(t?.name || t?.team?.name || t);
-      if (n) teams.add(n);
-    }
+// Helper to shuffle array
+function shuffle(array) {
+  const newArr = [...array];
+  for (let i = newArr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
   }
-
-  // 2) playerDetails.history / playerDetails.teamHistory
-  const hist = playerDetails?.history || playerDetails?.teamHistory || playerDetails?.teamsHistory;
-  if (Array.isArray(hist)) {
-    for (const h of hist) {
-      const n = normalize(h?.team?.name || h?.name || h?.teamName);
-      if (n) teams.add(n);
-    }
-  }
-
-  // 3) fallback: currentTeam
-  const ct = normalize(playerDetails?.team?.name || playerDetails?.currentTeam?.name);
-  if (ct) teams.add(ct);
-
-  return [...teams].filter(Boolean);
+  return newArr;
 }
 
-function buildTeammatesIndex(teamDataList) {
-  // Pour chaque joueur, liste des coéquipiers (basé sur rosters top100)
-  const mates = new Map(); // playerName -> Set(mateName)
+// Generate unique ID
+const generateId = () => Math.random().toString(36).substr(2, 9);
 
-  for (const team of teamDataList) {
-    const roster = team?.players || team?.roster || [];
-    const names = roster.map(playerName).filter(Boolean);
-    for (const pName of names) {
-      if (!mates.has(pName)) mates.set(pName, new Set());
-      for (const other of names) {
-        if (other !== pName) mates.get(pName).add(other);
+async function generate() {
+  console.log('Starting question generation from Liquipedia...');
+  console.log(`Targeting ${TOP_TEAMS.length} top teams.`);
+
+  const allPlayers = [];
+  const teamRosters = {};
+
+  // 1. Fetch all rosters
+  for (const teamName of TOP_TEAMS) {
+    try {
+      console.log(`Fetching roster for ${teamName}...`);
+      const roster = await getTeamRoster(teamName);
+      
+      if (roster && roster.length > 0) {
+        teamRosters[teamName] = roster;
+        allPlayers.push(...roster);
+        console.log(`  -> Found ${roster.length} members.`);
+      } else {
+        console.warn(`  -> Skipping ${teamName} (empty roster or fetch failed)`);
       }
+      
+      // Be nice to the API
+      await new Promise(r => setTimeout(r, 1500));
+    } catch (err) {
+      console.error(`Error processing ${teamName}:`, err.message);
     }
   }
 
-  return mates;
-}
+  console.log(`Collected ${allPlayers.length} total players/coaches from ${Object.keys(teamRosters).length} teams.`);
+  
+  const questions = [];
 
-// ---------- GENERATORS ----------
-function genWhoAmI_Career(playerDetails, globalPlayerNames) {
-  const name = normalize(playerDetails?.name || playerDetails?.nickname);
-  if (!name) return null;
+  // 2. Generate Questions
+  
+  // Type A: "Which team does [Player] play for?"
+  for (const player of allPlayers) {
+    if (player.role === 'Coach') continue; 
 
-  const teams = extractTeamsFromPlayer(playerDetails);
-  if (teams.length < MIN_HISTORY_TEAMS) return null;
+    // Find correct team
+    const correctTeam = player.team;
+    
+    // Get 3 random OTHER teams from our list
+    const otherTeams = TOP_TEAMS
+      .map(t => t.replace(/_/g, ' '))
+      .filter(t => t !== correctTeam);
+      
+    if (otherTeams.length < 3) continue;
 
-  const cluesCount = WHOAMI_TEAMS_CLUES[Math.floor(Math.random() * WHOAMI_TEAMS_CLUES.length)];
-  const clues = pickN(teams, Math.min(cluesCount, teams.length));
-
-  const distractors = pickN(globalPlayerNames.filter(p => p !== name), 3);
-  if (distractors.length < 3) return null;
-
-  return formatQuestion(
-    `whoami:career:${name}:${clues.join("|")}`,
-    `Qui suis-je ? (Teams: ${clues.join(" → ")})`,
-    name,
-    distractors,
-    { type: "whoami_career", clues }
-  );
-}
-
-function genWhoAmI_Teammates(playerNameStr, matesIndex, globalPlayerNames) {
-  const mates = matesIndex.get(playerNameStr);
-  if (!mates || mates.size < 3) return null;
-
-  const matesArr = [...mates];
-  const cluesCount = WHOAMI_TEAMMATES_CLUES[Math.floor(Math.random() * WHOAMI_TEAMMATES_CLUES.length)];
-  const clues = pickN(matesArr, Math.min(cluesCount, matesArr.length));
-
-  const distractors = pickN(globalPlayerNames.filter(p => p !== playerNameStr), 3);
-  if (distractors.length < 3) return null;
-
-  return formatQuestion(
-    `whoami:mates:${playerNameStr}:${clues.join("|")}`,
-    `Qui suis-je ? (J’ai joué avec: ${clues.join(", ")})`,
-    playerNameStr,
-    distractors,
-    { type: "whoami_teammates", clues }
-  );
-}
-
-function genWhoAmI_Mix(playerDetails, matesIndex, globalPlayerNames) {
-  const name = normalize(playerDetails?.name || playerDetails?.nickname);
-  if (!name) return null;
-
-  const teams = extractTeamsFromPlayer(playerDetails);
-  const mates = matesIndex.get(name);
-
-  if (!teams?.length || !mates || mates.size < 2) return null;
-
-  const teamClues = pickN(teams, Math.min(2, teams.length));
-  const mateClues = pickN([...mates], 2);
-
-  const distractors = pickN(globalPlayerNames.filter(p => p !== name), 3);
-  if (distractors.length < 3) return null;
-
-  return formatQuestion(
-    `whoami:mix:${name}:${teamClues.join("|")}:${mateClues.join("|")}`,
-    `Qui suis-je ? (Teams: ${teamClues.join(" → ")} | Teammates: ${mateClues.join(", ")})`,
-    name,
-    distractors,
-    { type: "whoami_mix", teamClues, mateClues }
-  );
-}
-
-// Une question "easy" pour remplir si besoin
-function genEasy_Country(player, globalTeamNames) {
-  const name = playerName(player);
-  const country = safeCountry(player);
-  if (!name || !country) return null;
-
-  // Distracteurs pays simples
-  const COMMON_COUNTRIES = [
-    "Sweden","Russia","Ukraine","France","Denmark",
-    "USA","Brazil","Poland","Germany","Finland",
-    "Canada","Australia","China","United Kingdom","Norway"
-  ];
-  const wrong = pickN(COMMON_COUNTRIES.filter(c => c !== country), 3);
-  if (wrong.length < 3) return null;
-
-  return easyQuestion(
-    `easy:country:${name}`,
-    `De quel pays vient ${name} ?`,
-    country,
-    wrong,
-    { type: "country" }
-  );
-}
-
-async function main() {
-  console.log("Fetching team ranking...");
-  const ranking = await cachedJSON("teamRanking_latest", async () => {
-    await sleep(DELAY_MS);
-    return HLTV.getTeamRanking();
-  });
-
-  const top = ranking.slice(0, TOP_TEAMS);
-  console.log(`Top teams loaded: ${top.length}`);
-
-  // Les structures de getTeamRanking varient: parfois t.team.name/id
-  const rankingTeams = top.map(t => {
-    const team = t.team || t; // selon la lib
-    return { id: team.id, name: team.name };
-  }).filter(t => t.id && t.name);
-
-  const allTeamNames = rankingTeams.map(t => t.name);
-
-  // Fetch teams + rosters
-  const teamDataList = [];
-  const playerPool = []; // { id, name, country?, teamName? }
-  const playerSeen = new Set();
-
-  for (let i = 0; i < rankingTeams.length; i++) {
-    const { id: teamId, name: teamName } = rankingTeams[i];
-    console.log(`[${i + 1}/${rankingTeams.length}] Fetch team ${teamName} (${teamId})`);
-
-    const team = await cachedJSON(`team_${teamId}`, async () => {
-      await sleep(DELAY_MS);
-      return HLTV.getTeam({ id: teamId });
+    const distractors = shuffle(otherTeams).slice(0, 3);
+    const choicesRaw = shuffle([correctTeam, ...distractors]);
+    
+    questions.push({
+      id: generateId(),
+      question: `For which team does ${player.ign} play?`,
+      choices: choicesRaw,
+      answerIndex: choicesRaw.indexOf(correctTeam)
     });
-
-    if (!team) continue;
-    teamDataList.push(team);
-
-    const roster = team.players || team.roster || [];
-    for (const p of roster) {
-      const n = playerName(p);
-      const pid = p?.id;
-      if (!n) continue;
-      if (!playerSeen.has(n)) {
-        playerSeen.add(n);
-        playerPool.push({ id: pid, name: n, country: safeCountry(p), teamName });
-      }
-    }
   }
 
-  const globalPlayerNames = shuffle(playerPool.map(p => p.name));
-  const matesIndex = buildTeammatesIndex(teamDataList);
+  // Type B: "Who is the coach of [Team]?"
+  for (const [teamName, roster] of Object.entries(teamRosters)) {
+    const coach = roster.find(p => p.role === 'Coach');
+    if (!coach) continue;
 
-  console.log(`Player pool (unique): ${playerPool.length}`);
+    const teamDisplay = teamName.replace(/_/g, ' ');
+    
+    // Distractors: other coaches or random players
+    const otherCoaches = allPlayers
+        .filter(p => p.role === 'Coach' && p.team !== teamDisplay)
+        .map(p => p.ign);
+    
+    // Fill with players if needed
+    const distractorPool = [...otherCoaches, ...allPlayers.filter(p => p.role !== 'Coach').map(p => p.ign)];
+    let distractors = shuffle(distractorPool.filter(n => n !== coach.ign)).slice(0, 3);
+    
+    if (distractors.length < 3) continue;
 
-  // Pré-fetch player details (limited)
-  const detailedPlayers = [];
-  const detailCandidates = shuffle(playerPool.filter(p => p.id)); // besoin de l’id HLTV
+    const choicesRaw = shuffle([coach.ign, ...distractors]);
 
-  for (let i = 0; i < Math.min(PLAYER_DETAIL_LIMIT, detailCandidates.length); i++) {
-    const p = detailCandidates[i];
-    console.log(`[player ${i + 1}/${Math.min(PLAYER_DETAIL_LIMIT, detailCandidates.length)}] getPlayer ${p.name} (${p.id})`);
-
-    const details = await cachedJSON(`player_${p.id}`, async () => {
-      await sleep(DELAY_MS);
-      return HLTV.getPlayer({ id: p.id });
+    questions.push({
+      id: generateId(),
+      question: `Who is the coach of ${teamDisplay}?`,
+      choices: choicesRaw,
+      answerIndex: choicesRaw.indexOf(coach.ign)
     });
-
-    if (details) detailedPlayers.push(details);
   }
 
-  console.log(`Detailed players loaded: ${detailedPlayers.length}`);
+  // Type C: "Which player is NOT part of [Team]?"
+  for (const [teamName, roster] of Object.entries(teamRosters)) {
+      const activePlayers = roster.filter(p => p.role === 'Player');
+      if (activePlayers.length < 3) continue;
 
-  // Generate questions
-  const seen = new Set();
-  const allQuestions = [];
+      const teamDisplay = teamName.replace(/_/g, ' ');
 
-  function pushQ(q) {
-    if (!q) return;
-    if (seen.has(q.id)) return;
-    seen.add(q.id);
-    allQuestions.push(q);
+      // Pick 3 correct players
+      const correctSubset = shuffle(activePlayers).slice(0, 3);
+      
+      // Pick 1 impostor (player from another team)
+      const otherPlayers = allPlayers.filter(p => p.team !== teamDisplay && p.role === 'Player');
+      if (otherPlayers.length === 0) continue;
+      
+      const impostor = shuffle(otherPlayers)[0];
+
+      // Format choices: 3 correct + 1 impostor
+      const choicesRaw = shuffle([...correctSubset.map(p => p.ign), impostor.ign]);
+      const answerIndex = choicesRaw.indexOf(impostor.ign);
+      
+      questions.push({
+          id: generateId(),
+          question: `Which player is NOT part of ${teamDisplay}?`,
+          choices: choicesRaw,
+          answerIndex
+      });
   }
 
-  // HARD: career + teammates + mix
-  while (allQuestions.length < QUESTIONS_TARGET) {
-    const roll = Math.random();
-    const hard = Math.random() < HARD_WEIGHT;
+  // Type D: Nationality
+   for (const player of allPlayers) {
+    if (!player.country || player.country === 'Unknown') continue;
 
-    if (hard && detailedPlayers.length) {
-      const d = detailedPlayers[Math.floor(Math.random() * detailedPlayers.length)];
+    const correctCountry = player.country;
+    
+    // Distractors
+    const standardCountries = ['France', 'Denmark', 'Russia', 'Ukraine', 'Brazil', 'USA', 'Sweden', 'Poland', 'Germany', 'China'];
+    let otherCountries = standardCountries.filter(c => c !== correctCountry);
+    const distractors = shuffle(otherCountries).slice(0, 3);
 
-      if (roll < 0.45) pushQ(genWhoAmI_Career(d, globalPlayerNames));
-      else if (roll < 0.75) {
-        const name = normalize(d?.name || d?.nickname);
-        pushQ(genWhoAmI_Teammates(name, matesIndex, globalPlayerNames));
-      } else pushQ(genWhoAmI_Mix(d, matesIndex, globalPlayerNames));
+    const choicesRaw = shuffle([correctCountry, ...distractors]);
+    const answerIndex = choicesRaw.indexOf(correctCountry);
 
-    } else {
-      // EASY filler (si tu veux quand même un peu de easy)
-      const p = playerPool[Math.floor(Math.random() * playerPool.length)];
-      pushQ(genEasy_Country(p, allTeamNames));
-    }
-
-    // safety break si plus rien de nouveau
-    if (seen.size > 200000) break;
-    if (allQuestions.length >= QUESTIONS_TARGET) break;
+    questions.push({
+      id: generateId(),
+      question: `What is the nationality of ${player.ign}?`,
+      choices: choicesRaw,
+      answerIndex
+    });
   }
 
-  const outJson = path.join(OUT_DIR, "questions_hltv.json");
-  await fse.writeFile(outJson, JSON.stringify(shuffle(allQuestions), null, 2), "utf-8");
 
-  console.log(`✅ Generated: ${allQuestions.length} questions`);
-  console.log(`➡️ ${outJson}`);
-  console.log(`ℹ️ Player details cached in ${CACHE_DIR}/player_*.json`);
+  console.log(`Generated ${questions.length} questions.`);
+
+  fs.writeFileSync(OUT_FILE, JSON.stringify(questions, null, 2));
+  console.log(`Saved to ${OUT_FILE}`);
 }
 
-main().catch((e) => {
-  console.error("ERROR:", e);
-  process.exit(1);
-});
+generate();
