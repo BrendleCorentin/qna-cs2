@@ -10,40 +10,25 @@ await fse.ensureDir(OUT_DIR);
 await fse.ensureDir(CACHE_DIR);
 
 // --- CONFIG ---
-const TOP_TEAMS = 20;          // Reduce requests for testing, increase if needed
-const DELAY_MS = 2000;         // safe delay for HLTV
-const MAX_Q_PER_PLAYER = 2;    // Limit per player to avoid spam
+const TOP_TEAMS = 100;            // ✅ top 100 HLTV
+const DELAY_MS = 1800;            // anti CF
+const PLAYER_DETAIL_LIMIT = 1000;  // combien de profils HLTV.getPlayer on charge (lourd)
+const QUESTIONS_TARGET = 8000;    // stop quand tu as assez
+const MIN_HISTORY_TEAMS = 3;      // minimum d’équipes dans la carrière pour whoami career
+const WHOAMI_TEAMS_CLUES = [3,4,5]; // nombre d’équipes montrées
+const WHOAMI_TEAMMATES_CLUES = [3,4]; // nombre de teammates montrés
+const HARD_WEIGHT = 0.75;         // % de questions "hard" dans le mix
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const pickN = (arr, n) => [...arr].sort(() => Math.random() - 0.5).slice(0, n);
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+const pickN = (arr, n) => shuffle(arr).slice(0, n);
 
 function normalize(str) {
-  return (str || "")
-    .replace(/\s+/g, " ")
-    .trim();
+  return (str || "").replace(/\s+/g, " ").trim();
 }
 
-// Simple JSON file cache
-async function cachedJSON(cacheKey, fetcher) {
-  const file = path.join(CACHE_DIR, `${cacheKey}.json`);
-  if (fs.existsSync(file)) {
-    return JSON.parse(await fse.readFile(file, "utf-8"));
-  }
-  const data = await fetcher();
-  await fse.writeFile(file, JSON.stringify(data, null, 2), "utf-8");
-  return data;
-}
-
-// Helper to format question for the game
-function formatQuestion(id, questionText, correctAnswer, wrongAnswers) {
-  const choices = shuffle([correctAnswer, ...wrongAnswers]);
-  return {
-    id,
-    question: questionText,
-    choices,
-    answerIndex: choices.indexOf(correctAnswer),
-  };
+function playerName(p) {
+  return normalize(p?.name || p?.nickname || p?.ign || p?.title || "");
 }
 
 function safeCountry(player) {
@@ -53,201 +38,283 @@ function safeCountry(player) {
   return null;
 }
 
-function playerName(p) {
-  return normalize(p?.name || p?.nickname || p?.ign || p?.title || "");
+async function cachedJSON(cacheKey, fetcher) {
+  const file = path.join(CACHE_DIR, `${cacheKey}.json`);
+  if (fs.existsSync(file)) return JSON.parse(await fse.readFile(file, "utf-8"));
+  const data = await fetcher();
+  await fse.writeFile(file, JSON.stringify(data, null, 2), "utf-8");
+  return data;
 }
 
-// Common CS countries for distractors
-const COMMON_COUNTRIES = [
-    "Sweden", "Russia", "Ukraine", "France", "Denmark", 
-    "USA", "Brazil", "Poland", "Germany", "Finland", 
-    "Canada", "Australia", "China", "United Kingdom", "Norway"
-];
-
-function getRandomCountries(exclude, count) {
-    const pool = COMMON_COUNTRIES.filter(c => c !== exclude);
-    return pickN(pool, count);
+function formatQuestion(id, questionText, correctAnswer, wrongAnswers, meta = {}) {
+  const choices = shuffle([correctAnswer, ...wrongAnswers].map(normalize));
+  return {
+    id,
+    question: questionText,
+    choices,
+    answerIndex: choices.indexOf(normalize(correctAnswer)),
+    meta,
+    difficulty: "hard"
+  };
 }
 
-// Global data for distractors
-let allPlayerNames = [];
-let allTeamNames = [];
+function easyQuestion(id, questionText, correctAnswer, wrongAnswers, meta = {}) {
+  const q = formatQuestion(id, questionText, correctAnswer, wrongAnswers, meta);
+  q.difficulty = "easy";
+  return q;
+}
 
-// Generate questions for a player
-function generateForPlayer(player, team) {
-  const questions = [];
+// ---------- HELPERS (career parsing) ----------
+function extractTeamsFromPlayer(playerDetails) {
+  // La structure varie selon la lib / HLTV. On essaye plusieurs patterns.
+  // L’idée: récupérer une liste de noms d’équipes dans sa carrière.
+  const teams = new Set();
+
+  // 1) playerDetails.teams (souvent current/past)
+  if (Array.isArray(playerDetails?.teams)) {
+    for (const t of playerDetails.teams) {
+      const n = normalize(t?.name || t?.team?.name || t);
+      if (n) teams.add(n);
+    }
+  }
+
+  // 2) playerDetails.history / playerDetails.teamHistory
+  const hist = playerDetails?.history || playerDetails?.teamHistory || playerDetails?.teamsHistory;
+  if (Array.isArray(hist)) {
+    for (const h of hist) {
+      const n = normalize(h?.team?.name || h?.name || h?.teamName);
+      if (n) teams.add(n);
+    }
+  }
+
+  // 3) fallback: currentTeam
+  const ct = normalize(playerDetails?.team?.name || playerDetails?.currentTeam?.name);
+  if (ct) teams.add(ct);
+
+  return [...teams].filter(Boolean);
+}
+
+function buildTeammatesIndex(teamDataList) {
+  // Pour chaque joueur, liste des coéquipiers (basé sur rosters top100)
+  const mates = new Map(); // playerName -> Set(mateName)
+
+  for (const team of teamDataList) {
+    const roster = team?.players || team?.roster || [];
+    const names = roster.map(playerName).filter(Boolean);
+    for (const pName of names) {
+      if (!mates.has(pName)) mates.set(pName, new Set());
+      for (const other of names) {
+        if (other !== pName) mates.get(pName).add(other);
+      }
+    }
+  }
+
+  return mates;
+}
+
+// ---------- GENERATORS ----------
+function genWhoAmI_Career(playerDetails, globalPlayerNames) {
+  const name = normalize(playerDetails?.name || playerDetails?.nickname);
+  if (!name) return null;
+
+  const teams = extractTeamsFromPlayer(playerDetails);
+  if (teams.length < MIN_HISTORY_TEAMS) return null;
+
+  const cluesCount = WHOAMI_TEAMS_CLUES[Math.floor(Math.random() * WHOAMI_TEAMS_CLUES.length)];
+  const clues = pickN(teams, Math.min(cluesCount, teams.length));
+
+  const distractors = pickN(globalPlayerNames.filter(p => p !== name), 3);
+  if (distractors.length < 3) return null;
+
+  return formatQuestion(
+    `whoami:career:${name}:${clues.join("|")}`,
+    `Qui suis-je ? (Teams: ${clues.join(" → ")})`,
+    name,
+    distractors,
+    { type: "whoami_career", clues }
+  );
+}
+
+function genWhoAmI_Teammates(playerNameStr, matesIndex, globalPlayerNames) {
+  const mates = matesIndex.get(playerNameStr);
+  if (!mates || mates.size < 3) return null;
+
+  const matesArr = [...mates];
+  const cluesCount = WHOAMI_TEAMMATES_CLUES[Math.floor(Math.random() * WHOAMI_TEAMMATES_CLUES.length)];
+  const clues = pickN(matesArr, Math.min(cluesCount, matesArr.length));
+
+  const distractors = pickN(globalPlayerNames.filter(p => p !== playerNameStr), 3);
+  if (distractors.length < 3) return null;
+
+  return formatQuestion(
+    `whoami:mates:${playerNameStr}:${clues.join("|")}`,
+    `Qui suis-je ? (J’ai joué avec: ${clues.join(", ")})`,
+    playerNameStr,
+    distractors,
+    { type: "whoami_teammates", clues }
+  );
+}
+
+function genWhoAmI_Mix(playerDetails, matesIndex, globalPlayerNames) {
+  const name = normalize(playerDetails?.name || playerDetails?.nickname);
+  if (!name) return null;
+
+  const teams = extractTeamsFromPlayer(playerDetails);
+  const mates = matesIndex.get(name);
+
+  if (!teams?.length || !mates || mates.size < 2) return null;
+
+  const teamClues = pickN(teams, Math.min(2, teams.length));
+  const mateClues = pickN([...mates], 2);
+
+  const distractors = pickN(globalPlayerNames.filter(p => p !== name), 3);
+  if (distractors.length < 3) return null;
+
+  return formatQuestion(
+    `whoami:mix:${name}:${teamClues.join("|")}:${mateClues.join("|")}`,
+    `Qui suis-je ? (Teams: ${teamClues.join(" → ")} | Teammates: ${mateClues.join(", ")})`,
+    name,
+    distractors,
+    { type: "whoami_mix", teamClues, mateClues }
+  );
+}
+
+// Une question "easy" pour remplir si besoin
+function genEasy_Country(player, globalTeamNames) {
   const name = playerName(player);
   const country = safeCountry(player);
+  if (!name || !country) return null;
 
-  if (!name) return questions;
+  // Distracteurs pays simples
+  const COMMON_COUNTRIES = [
+    "Sweden","Russia","Ukraine","France","Denmark",
+    "USA","Brazil","Poland","Germany","Finland",
+    "Canada","Australia","China","United Kingdom","Norway"
+  ];
+  const wrong = pickN(COMMON_COUNTRIES.filter(c => c !== country), 3);
+  if (wrong.length < 3) return null;
 
-  // 1) Country Question
-  if (country) {
-    const distractors = getRandomCountries(country, 3);
-    if (distractors.length === 3) {
-        questions.push(
-            formatQuestion(
-                `country:${name}`,
-                `De quel pays vient ${name} ?`,
-                country,
-                distractors
-            )
-        );
-    }
-  }
-
-  // 2) Current Team Question
-  if (team?.name) {
-    const distractors = pickN(allTeamNames.filter(t => t !== team.name), 3);
-    if (distractors.length === 3) {
-        questions.push(
-            formatQuestion(
-                `team:${name}:${team.name}`,
-                `${name} joue dans quelle équipe ?`,
-                team.name,
-                distractors
-            )
-        );
-    }
-  }
-
-  // 3) "Who am I?"
-  if (country && team?.name) {
-    const distractors = pickN(allPlayerNames.filter(p => p !== name), 3);
-    if (distractors.length === 3) {
-        questions.push(
-            formatQuestion(
-                `who:${name}:${team.name}:${country}`,
-                `Qui suis-je ? (Pays: ${country}, Équipe: ${team.name})`,
-                name,
-                distractors
-            )
-        );
-    }
-  }
-
-  return questions.slice(0, MAX_Q_PER_PLAYER);
-}
-
-// Roster MCQ
-function generateRosterMCQ(team, roster) {
-  const questions = [];
-  if (!team?.name || !Array.isArray(roster) || roster.length < 4) return questions;
-
-  const correct = roster[Math.floor(Math.random() * roster.length)];
-  const correctName = playerName(correct);
-  if (!correctName) return questions;
-
-  // Distractors from other teams (to make it harder/clearer) rather than same team? 
-  // User's original script picked from SAME team? "Lequel de ces joueurs fait partie de TEAM?" 
-  // The original logic: options = pickN(roster..., 3). 
-  // Wait, if I pick 3 players from the SAME roster, they are ALL correct answers for "Who is in Team X?".
-  // The question is "Lequel de ces joueurs fait partie de [Team] ?". 
-  // So the distractors must be players NOT in the team.
-  
-  // The original logic was:
-  // options = pickN(roster.filter(p => ... !== correctName), 3)
-  // And question was "Lequel de ces joueurs fait partie de Team?"
-  // If options come from roster, then ALL options are correct. That's a bad MCQ. 
-  // It should be: Pick 1 correct from roster, pick 3 distractors from OTHER teams.
-
-  const distractors = pickN(allPlayerNames.filter(p => !roster.some(rp => playerName(rp) === p)), 3);
-
-  if (distractors.length === 3) {
-      questions.push(
-        formatQuestion(
-            `mcq:roster:${team.name}:${correctName}`,
-            `Lequel de ces joueurs fait partie de l'équipe ${team.name} ?`,
-            correctName,
-            distractors
-        )
-      );
-  }
-
-  return questions;
+  return easyQuestion(
+    `easy:country:${name}`,
+    `De quel pays vient ${name} ?`,
+    country,
+    wrong,
+    { type: "country" }
+  );
 }
 
 async function main() {
   console.log("Fetching team ranking...");
   const ranking = await cachedJSON("teamRanking_latest", async () => {
-    try {
-        const res = await HLTV.getTeamRanking();
-        return res;
-    } catch (e) {
-        console.error("HLTV fetch failed", e);
-        return [];
-    }
+    await sleep(DELAY_MS);
+    return HLTV.getTeamRanking();
   });
 
   const top = ranking.slice(0, TOP_TEAMS);
   console.log(`Top teams loaded: ${top.length}`);
-  
-  allTeamNames = top.map(t => t.team.name);
 
-  // Pre-fetch all teams to build player pool for distractors
+  // Les structures de getTeamRanking varient: parfois t.team.name/id
+  const rankingTeams = top.map(t => {
+    const team = t.team || t; // selon la lib
+    return { id: team.id, name: team.name };
+  }).filter(t => t.id && t.name);
+
+  const allTeamNames = rankingTeams.map(t => t.name);
+
+  // Fetch teams + rosters
   const teamDataList = [];
-  
-  for (let i = 0; i < top.length; i++) {
-    const t = top[i];
-    const teamId = t.team.id;
-    const teamName = t.team.name;
-    
-    console.log(`[${i + 1}/${top.length}] Fetching Team: ${teamName} (${teamId})`);
-    
+  const playerPool = []; // { id, name, country?, teamName? }
+  const playerSeen = new Set();
+
+  for (let i = 0; i < rankingTeams.length; i++) {
+    const { id: teamId, name: teamName } = rankingTeams[i];
+    console.log(`[${i + 1}/${rankingTeams.length}] Fetch team ${teamName} (${teamId})`);
+
     const team = await cachedJSON(`team_${teamId}`, async () => {
-        await sleep(DELAY_MS);
-        try {
-            return await HLTV.getTeam({ id: teamId });
-        } catch (e) {
-            console.error(`Failed to fetch team ${teamId}`, e);
-            return null;
-        }
+      await sleep(DELAY_MS);
+      return HLTV.getTeam({ id: teamId });
     });
 
-    if (team) {
-        teamDataList.push(team);
-        const roster = team.players || team.roster || [];
-        roster.forEach(p => {
-             const name = playerName(p);
-             if (name) allPlayerNames.push(name);
-        });
-    }
-  }
+    if (!team) continue;
+    teamDataList.push(team);
 
-  const allQuestions = [];
-  const seen = new Set();
-
-  for (const team of teamDataList) {
     const roster = team.players || team.roster || [];
-    if (!Array.isArray(roster) || roster.length === 0) continue;
-
-    // Roster questions
-    for (const qst of generateRosterMCQ(team, roster)) {
-       if (!seen.has(qst.id)) {
-           seen.add(qst.id);
-           allQuestions.push(qst);
-       }
-    }
-
-    // Player questions
     for (const p of roster) {
-        const qs = generateForPlayer(p, team);
-        for (const qst of qs) {
-            if (!seen.has(qst.id)) {
-                seen.add(qst.id);
-                allQuestions.push(qst);
-            }
-        }
+      const n = playerName(p);
+      const pid = p?.id;
+      if (!n) continue;
+      if (!playerSeen.has(n)) {
+        playerSeen.add(n);
+        playerPool.push({ id: pid, name: n, country: safeCountry(p), teamName });
+      }
     }
   }
 
-  const shuffled = shuffle(allQuestions);
+  const globalPlayerNames = shuffle(playerPool.map(p => p.name));
+  const matesIndex = buildTeammatesIndex(teamDataList);
+
+  console.log(`Player pool (unique): ${playerPool.length}`);
+
+  // Pré-fetch player details (limited)
+  const detailedPlayers = [];
+  const detailCandidates = shuffle(playerPool.filter(p => p.id)); // besoin de l’id HLTV
+
+  for (let i = 0; i < Math.min(PLAYER_DETAIL_LIMIT, detailCandidates.length); i++) {
+    const p = detailCandidates[i];
+    console.log(`[player ${i + 1}/${Math.min(PLAYER_DETAIL_LIMIT, detailCandidates.length)}] getPlayer ${p.name} (${p.id})`);
+
+    const details = await cachedJSON(`player_${p.id}`, async () => {
+      await sleep(DELAY_MS);
+      return HLTV.getPlayer({ id: p.id });
+    });
+
+    if (details) detailedPlayers.push(details);
+  }
+
+  console.log(`Detailed players loaded: ${detailedPlayers.length}`);
+
+  // Generate questions
+  const seen = new Set();
+  const allQuestions = [];
+
+  function pushQ(q) {
+    if (!q) return;
+    if (seen.has(q.id)) return;
+    seen.add(q.id);
+    allQuestions.push(q);
+  }
+
+  // HARD: career + teammates + mix
+  while (allQuestions.length < QUESTIONS_TARGET) {
+    const roll = Math.random();
+    const hard = Math.random() < HARD_WEIGHT;
+
+    if (hard && detailedPlayers.length) {
+      const d = detailedPlayers[Math.floor(Math.random() * detailedPlayers.length)];
+
+      if (roll < 0.45) pushQ(genWhoAmI_Career(d, globalPlayerNames));
+      else if (roll < 0.75) {
+        const name = normalize(d?.name || d?.nickname);
+        pushQ(genWhoAmI_Teammates(name, matesIndex, globalPlayerNames));
+      } else pushQ(genWhoAmI_Mix(d, matesIndex, globalPlayerNames));
+
+    } else {
+      // EASY filler (si tu veux quand même un peu de easy)
+      const p = playerPool[Math.floor(Math.random() * playerPool.length)];
+      pushQ(genEasy_Country(p, allTeamNames));
+    }
+
+    // safety break si plus rien de nouveau
+    if (seen.size > 200000) break;
+    if (allQuestions.length >= QUESTIONS_TARGET) break;
+  }
+
   const outJson = path.join(OUT_DIR, "questions_hltv.json");
+  await fse.writeFile(outJson, JSON.stringify(shuffle(allQuestions), null, 2), "utf-8");
 
-  await fse.writeFile(outJson, JSON.stringify(shuffled, null, 2), "utf-8");
-
-  console.log(`✅ Generated: ${shuffled.length} questions`);
+  console.log(`✅ Generated: ${allQuestions.length} questions`);
   console.log(`➡️ ${outJson}`);
+  console.log(`ℹ️ Player details cached in ${CACHE_DIR}/player_*.json`);
 }
 
 main().catch((e) => {
