@@ -201,7 +201,7 @@ export default function Admin({ serverUrl, onBack }) {
 
                             {type === 'progressive_clue' && (
                                 <div style={{ marginBottom: '1rem' }}>
-                                    <label className="cs-label">INDICES (Ordre: Début -> 15s -> 10s -> 5s)</label>
+                                    <label className="cs-label">INDICES (Ordre: Début &rarr; 15s &rarr; 10s &rarr; 5s)</label>
                                     {clues.map((c, i) => (
                                         <div key={i} style={{ marginBottom: '5px' }}>
                                             <input 
