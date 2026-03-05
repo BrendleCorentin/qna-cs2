@@ -91,11 +91,22 @@ app.post("/admin/sync-liquipedia", (req, res) => {
   }
 
   exec(`node "${generateScript}"`, { cwd: path.dirname(generateScript) }, async (error, stdout, stderr) => {
+      let generationFailed = false;
       if (error) {
-          console.error(`exec error: ${error}`);
-          return res.status(500).json({ error: "Generation failed", details: stderr + "\n" + stdout });
+          console.warn(`[Generation] Script reported error (likely blocked): ${error.message}`);
+          console.warn(`[Generation] Stdout: ${stdout}`);
+          generationFailed = true;
+      } else {
+          console.log(`[Generation] ${stdout}`);
       }
-      console.log(`[Generation] ${stdout}`);
+
+      // Check if we have a valid file to import
+      const generatedFile = path.resolve(__dirname, "./config/questions_generated.json");
+      if (!fs.existsSync(generatedFile)) {
+           if (generationFailed) {
+               return res.status(500).json({ error: "Generation failed and no backup file found.", details: stderr + "\n" + stdout });
+           }
+      }
 
       try {
           // 1.5 Clear old questions before importing new ones to avoid stale HLTV data
@@ -110,13 +121,13 @@ app.post("/admin/sync-liquipedia", (req, res) => {
               }
               console.log(`[Import] ${stdout2}`);
               
-              // 3. Update question list and return
-              try {
-                const questions = await getAllQuestions();
-                res.json({ success: true, count: questions.length, log: stdout2 });
-              } catch(e) {
-                res.status(500).json({ error: e.message });
-              }
+              const questions = await getAllQuestions();
+              res.json({ 
+                  success: true, 
+                  count: questions.length, 
+                  log: stdout2,
+                  warning: generationFailed ? "Generation blocked (using backup file)" : null
+              });
           });
       } catch (dbErr) {
           console.error("DB Clear error:", dbErr);

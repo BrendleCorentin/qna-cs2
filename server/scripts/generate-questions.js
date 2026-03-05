@@ -163,6 +163,16 @@ async function generate() {
 
   console.log(`Generated ${questions.length} questions.`);
 
+  // Only write if we actually generated questions to avoid wiping the DB if scraper fails/is blocked
+  if (questions.length === 0) {
+      console.warn("WARNING: No questions generated. This likely means the Liquipedia scraper was blocked or failed.");
+      console.warn("Aborting save to preserve existing questions file.");
+      process.exit(1); 
+  }
+
+  // Also check if we have significantly fewer questions than expected (e.g. < 50)
+  // But maybe for small tests we don't block. Let's just block 0.
+
   fs.writeFileSync(OUT_FILE, JSON.stringify(questions, null, 2));
   console.log(`Saved to ${OUT_FILE}`);
 }
