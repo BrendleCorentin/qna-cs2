@@ -1,0 +1,693 @@
+{
+  "id": 13286,
+  "name": "FUT",
+  "logo": "https://img-cdn.hltv.org/teamlogo/Os71GAOy8KDuQFc0M8HE6O.png?ixlib=java-2.1.0&w=50&s=86f2bded6bcb7c690a42a62250ed69e7",
+  "instagram": "https://www.instagram.com/futesportsgg",
+  "country": {
+    "name": "Europe",
+    "code": "EU"
+  },
+  "rank": 11,
+  "players": [
+    {
+      "name": "cmtry",
+      "id": 22674,
+      "timeOnTeam": "7 months",
+      "mapsPlayed": 172,
+      "type": "Starter"
+    },
+    {
+      "name": "dem0n",
+      "id": 20584,
+      "timeOnTeam": "7 months",
+      "mapsPlayed": 172,
+      "type": "Starter"
+    },
+    {
+      "name": "dziugss",
+      "id": 23553,
+      "timeOnTeam": "7 months",
+      "mapsPlayed": 171,
+      "type": "Starter"
+    },
+    {
+      "name": "Krabeni",
+      "id": 22203,
+      "timeOnTeam": "7 months",
+      "mapsPlayed": 172,
+      "type": "Starter"
+    },
+    {
+      "name": "lauNX",
+      "id": 20761,
+      "timeOnTeam": "6 months",
+      "mapsPlayed": 152,
+      "type": "Starter"
+    },
+    {
+      "id": 14202,
+      "name": "coolio",
+      "timeOnTeam": "7 months",
+      "mapsPlayed": 172,
+      "type": "Coach"
+    }
+  ],
+  "rankingDevelopment": [
+    210,
+    93,
+    118,
+    120,
+    116,
+    115,
+    115,
+    117,
+    120,
+    122,
+    127,
+    132,
+    141,
+    161,
+    163,
+    212,
+    140,
+    93,
+    77,
+    79,
+    75,
+    71,
+    58,
+    50,
+    46,
+    38,
+    46,
+    44,
+    45,
+    47,
+    42,
+    42,
+    41,
+    42,
+    40,
+    40,
+    39,
+    49,
+    46,
+    79,
+    66,
+    50,
+    38,
+    36,
+    37,
+    37,
+    37,
+    36,
+    35,
+    36,
+    40,
+    44,
+    48,
+    47,
+    36,
+    39,
+    47,
+    41,
+    43,
+    43,
+    41,
+    42,
+    42,
+    41,
+    36,
+    35,
+    39,
+    40,
+    39,
+    41,
+    41,
+    44,
+    46,
+    49,
+    28,
+    27,
+    28,
+    30,
+    31,
+    27,
+    24,
+    25,
+    26,
+    27,
+    27,
+    27,
+    27,
+    23,
+    22,
+    15,
+    14,
+    14,
+    13,
+    13
+  ],
+  "news": [
+    {
+      "name": "Astralis ease past 3DMAX into EPL 23 Stage 2 ",
+      "link": "/news/43993/astralis-ease-past-3dmax-into-epl-23-stage-2"
+    },
+    {
+      "name": "FUT move past Astralis to make EPL S23 Stage 2 ",
+      "link": "/news/43986/fut-move-past-astralis-to-make-epl-s23-stage-2"
+    },
+    {
+      "name": "Liquid join NIP in the 0-2 pool following day two of EPL S23 ",
+      "link": "/news/43983/liquid-join-nip-in-the-0-2-pool-following-day-two-of-epl-s23"
+    },
+    {
+      "name": "MIBR replace paiN at PGL Bucharest ",
+      "link": "/news/43979/mibr-replace-pain-at-pgl-bucharest"
+    },
+    {
+      "name": "Senzu debuts for Passion UA; Liquid, NIP, and 3DMAX suffer losses on day one of EPL S23 ",
+      "link": "/news/43976/senzu-debuts-for-passion-ua-liquid-nip-and-3dmax-suffer-losses-on-day-one-of-epl-s23"
+    },
+    {
+      "name": "Freed from the shackles of an academy, FUT have broken through ",
+      "link": "/news/43974/freed-from-the-shackles-of-an-academy-fut-have-broken-through"
+    },
+    {
+      "name": "ESL Pro League teams, format, schedule, prizes, fantasy ",
+      "link": "/news/43963/esl-pro-league-teams-format-schedule-prizes-fantasy"
+    },
+    {
+      "name": "Media: 3DMAX to swap bodyy for misutaaa, NBK- to join as assistant coach ",
+      "link": "/news/43946/media-3dmax-to-swap-bodyy-for-misutaaa-nbk-to-join-as-assistant-coach"
+    },
+    {
+      "name": "Jame: \"I don't make big expectations; I live in a reality where we make mistakes that you cannot win with\" ",
+      "link": "/news/43911/jame-i-dont-make-big-expectations-i-live-in-a-reality-where-we-make-mistakes-that-you-cannot-win-with"
+    },
+    {
+      "name": "PARIVISION edge past FUT to secure playoff spot in Cluj-Napoca ",
+      "link": "/news/43909/parivision-edge-past-fut-to-secure-playoff-spot-in-cluj-napoca"
+    },
+    {
+      "name": "Aurora make Cluj playoffs after 2-10 comeback vs Astralis ",
+      "link": "/news/43906/aurora-make-cluj-playoffs-after-2-10-comeback-vs-astralis"
+    },
+    {
+      "name": "Matchups set for final group stage games in Cluj ",
+      "link": "/news/43905/matchups-set-for-final-group-stage-games-in-cluj"
+    },
+    {
+      "name": "FURIA get revenge on PARIVISION to advance to Cluj-Napoca playoffs ",
+      "link": "/news/43904/furia-get-revenge-on-parivision-to-advance-to-cluj-napoca-playoffs"
+    },
+    {
+      "name": "Brollan: \"FUT play very in your face and it caught us off-guard in some situations\" ",
+      "link": "/news/43898/brollan-fut-play-very-in-your-face-and-it-caught-us-off-guard-in-some-situations"
+    },
+    {
+      "name": "MOUZ through to playoffs in Cluj as FUT bungle large leads ",
+      "link": "/news/43897/mouz-through-to-playoffs-in-cluj-as-fut-bungle-large-leads"
+    },
+    {
+      "name": "PGL Cluj-Napoca round four matchups set ",
+      "link": "/news/43895/pgl-cluj-napoca-round-four-matchups-set"
+    },
+    {
+      "name": "Only three top 10 teams accept invites to PGL Bucharest ",
+      "link": "/news/43891/only-three-top-10-teams-accept-invites-to-pgl-bucharest"
+    },
+    {
+      "name": "3DMAX out of Cluj after 0-6 run: \"It sucks, we cannot play properly, we are losing our feeling\" ",
+      "link": "/news/43889/3dmax-out-of-cluj-after-0-6-run-it-sucks-we-cannot-play-properly-we-are-losing-our-feeling"
+    },
+    {
+      "name": "Matchups set for first elimination games at Cluj ",
+      "link": "/news/43884/matchups-set-for-first-elimination-games-at-cluj"
+    },
+    {
+      "name": "Vitality and FURIA pick up wins to end Cluj-Napoca day two ",
+      "link": "/news/43885/vitality-and-furia-pick-up-wins-to-end-cluj-napoca-day-two"
+    },
+    {
+      "name": "MAJ3R: \"FUT shoot better than Spirit, Vitality or Falcons\" ",
+      "link": "/news/43882/maj3r-fut-shoot-better-than-spirit-vitality-or-falcons"
+    },
+    {
+      "name": "PGL Cluj-Napoca round two matchups set ",
+      "link": "/news/43874/pgl-cluj-napoca-round-two-matchups-set"
+    },
+    {
+      "name": "Tech issues and victories for the favorites headline PGL Cluj-Napoca day 1 ",
+      "link": "/news/43873/tech-issues-and-victories-for-the-favorites-headline-pgl-cluj-napoca-day-1"
+    },
+    {
+      "name": "FUT open PGL Cluj-Napoca with statement win over Aurora ",
+      "link": "/news/43869/fut-open-pgl-cluj-napoca-with-statement-win-over-aurora"
+    },
+    {
+      "name": "FUT Fans Come Here ft. Dempz ",
+      "link": "/news/43864/fut-fans-come-here-ft-dempz"
+    },
+    {
+      "name": "PGL Cluj-Napoca Group Stage Fantasy about to start ",
+      "link": "/news/43863/pgl-cluj-napoca-group-stage-fantasy-about-to-start"
+    },
+    {
+      "name": "Short: trochu joins FUT as assistant coach",
+      "link": "/news/43845/short-news-week-6#f18"
+    },
+    {
+      "name": "PGL Cluj-Napoca teams, format, schedule, prizes, talent, fantasy ",
+      "link": "/news/43861/pgl-cluj-napoca-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "IEM Atlanta team list set ",
+      "link": "/news/43860/iem-atlanta-team-list-set"
+    },
+    {
+      "name": "HLTV Prospects Season 2: February 2026 ",
+      "link": "/news/43857/hltv-prospects-season-2-february-2026"
+    },
+    {
+      "name": "The VRS winners and losers of IEM Krakow ",
+      "link": "/news/43855/the-vrs-winners-and-losers-of-iem-krakow"
+    },
+    {
+      "name": "Seven top 10 teams skip IEM Atlanta as invites are announced ",
+      "link": "/news/43851/seven-top-10-teams-skip-iem-atlanta-as-invites-are-announced"
+    },
+    {
+      "name": "Short: 3DMAX lose to unranked M1X KS squad in BLAST Open qualifier",
+      "link": "/news/43792/short-news-week-5#f20"
+    },
+    {
+      "name": "Vitality vs G2, MOUZ vs PARIVISION headline PGL Cluj-Napoca opening round ",
+      "link": "/news/43824/vitality-vs-g2-mouz-vs-parivision-headline-pgl-cluj-napoca-opening-round"
+    },
+    {
+      "name": "FalleN: \"Just because something was working before, it doesn't necessarily mean it's going to keep working\" ",
+      "link": "/news/43821/fallen-just-because-something-was-working-before-it-doesnt-necessarily-mean-its-going-to-keep-working"
+    },
+    {
+      "name": "HeavyGod on missing out on Top 20: \"Maybe it was a bit harmful because maybe I expected it\" ",
+      "link": "/news/43819/heavygod-on-missing-out-on-top-20-maybe-it-was-a-bit-harmful-because-maybe-i-expected-it"
+    },
+    {
+      "name": "IEM Krakow playoff bracket set ",
+      "link": "/news/43814/iem-krakow-playoff-bracket-set"
+    },
+    {
+      "name": "Official: Legacy sign arT ",
+      "link": "/news/43812/official-legacy-sign-art"
+    },
+    {
+      "name": "FUT replace Legacy at PGL Cluj-Napoca ",
+      "link": "/news/43808/fut-replace-legacy-at-pgl-cluj-napoca"
+    },
+    {
+      "name": "Astralis end FUT's run in Krakow ",
+      "link": "/news/43803/astralis-end-futs-run-in-krakow"
+    },
+    {
+      "name": "Official: Legacy bench lux, reported to sign arT* ",
+      "link": "/news/43796/official-legacy-bench-lux-reported-to-sign-art"
+    },
+    {
+      "name": "Vitality ease past 3DMAX to book arena spot in Krakow ",
+      "link": "/news/43793/vitality-ease-past-3dmax-to-book-arena-spot-in-krakow"
+    },
+    {
+      "name": "HooXi: \"I have a very different view on this lineup because now I can actually think long term\" ",
+      "link": "/news/43791/hooxi-i-have-a-very-different-view-on-this-lineup-because-now-i-can-actually-think-long-term"
+    },
+    {
+      "name": "Astralis send PARIVISION packing from Krakow ",
+      "link": "/news/43789/astralis-send-parivision-packing-from-krakow"
+    },
+    {
+      "name": "FURIA dodge last-place exit at IEM Krakow after comeback against The MongolZ ",
+      "link": "/news/43787/furia-dodge-last-place-exit-at-iem-krakow-after-comeback-against-the-mongolz"
+    },
+    {
+      "name": "G2 stave off FUT to reach Krakow playoffs ",
+      "link": "/news/43786/g2-stave-off-fut-to-reach-krakow-playoffs"
+    },
+    {
+      "name": "Media: Legacy bench lux ",
+      "link": "/news/43781/media-legacy-bench-lux"
+    },
+    {
+      "name": "3DMAX outclass FaZe to extend hot streak in Krakow ",
+      "link": "/news/43777/3dmax-outclass-faze-to-extend-hot-streak-in-krakow"
+    },
+    {
+      "name": "FUT stun FURIA in Krakow Stage 2 opener ",
+      "link": "/news/43774/fut-stun-furia-in-krakow-stage-2-opener"
+    },
+    {
+      "name": "G2 open IEM Krakow group stage with 2-0 win against The MongolZ ",
+      "link": "/news/43771/g2-open-iem-krakow-group-stage-with-2-0-win-against-the-mongolz"
+    },
+    {
+      "name": "IEM Krakow Stage 2 Fantasy team list is complete ",
+      "link": "/news/43768/iem-krakow-stage-2-fantasy-team-list-is-complete"
+    },
+    {
+      "name": "Vitality vs BC.Game, Falcons vs Aurora headline Krakow Stage 2's opening round ",
+      "link": "/news/43767/vitality-vs-bcgame-falcons-vs-aurora-headline-krakow-stage-2s-opening-round"
+    },
+    {
+      "name": "FUT crush Liquid to progress in Krakow ",
+      "link": "/news/43766/fut-crush-liquid-to-progress-in-krakow"
+    },
+    {
+      "name": "Krabeni on transfer offers: \"We all knew what we are capable of together, so in the end, everyone declined everything\" ",
+      "link": "/news/43753/krabeni-on-transfer-offers-we-all-knew-what-we-are-capable-of-together-so-in-the-end-everyone-declined-everything"
+    },
+    {
+      "name": "Matchups set for IEM Krakow Stage 1 day three ",
+      "link": "/news/43751/matchups-set-for-iem-krakow-stage-1-day-three"
+    },
+    {
+      "name": "FUT send Legacy home from IEM Krakow ",
+      "link": "/news/43750/fut-send-legacy-home-from-iem-krakow"
+    },
+    {
+      "name": "IEM Krakow Stage 1 day two matchups set ",
+      "link": "/news/43743/iem-krakow-stage-1-day-two-matchups-set"
+    },
+    {
+      "name": "Liquid cruise past NIP in Krakow; 3DMAX beat FUT ",
+      "link": "/news/43741/liquid-cruise-past-nip-in-krakow-3dmax-beat-fut"
+    },
+    {
+      "name": "Krakow Stage 1 Fantasy goes live with s1mple for $195k ",
+      "link": "/news/43728/krakow-stage-1-fantasy-goes-live-with-s1mple-for-195k"
+    },
+    {
+      "name": "How did the Bold Predictions for 2025 fare? ",
+      "link": "/news/43726/how-did-the-bold-predictions-for-2025-fare"
+    },
+    {
+      "name": "IEM Krakow teams, format, schedule, prizes, talent, fantasy ",
+      "link": "/news/43720/iem-krakow-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "PARIVISION stun FURIA to secure Bounty grand finals berth ",
+      "link": "/news/43711/parivision-stun-furia-to-secure-bounty-grand-finals-berth"
+    },
+    {
+      "name": "HOTU, Gentle Mates, and RED Canids complete IEM Rio team list ",
+      "link": "/news/43706/hotu-gentle-mates-and-red-canids-complete-iem-rio-team-list"
+    },
+    {
+      "name": "molodoy: \"I want more [trophies] this year, but you don't need to overthink; CS is the dream\" ",
+      "link": "/news/43698/molodoy-i-want-more-trophies-this-year-but-you-dont-need-to-overthink-cs-is-the-dream"
+    },
+    {
+      "name": "molodoy stars again to push FURIA past HEROIC at Bounty Finals ",
+      "link": "/news/43697/molodoy-stars-again-to-push-furia-past-heroic-at-bounty-finals"
+    },
+    {
+      "name": "BLAST Bounty Finals quarter-final matchups set ",
+      "link": "/news/43688/blast-bounty-finals-quarter-final-matchups-set"
+    },
+    {
+      "name": "Short: New-look BC.Game fall 0-2 to Ursa in IEM Rio Closed Qualifier upper bracket",
+      "link": "/news/43667/short-news-week-3#f9"
+    },
+    {
+      "name": "BIG Academy announce revamped lineup ",
+      "link": "/news/43672/big-academy-announce-revamped-lineup"
+    },
+    {
+      "name": "BLAST Bounty S1 Finals team list complete ",
+      "link": "/news/43662/blast-bounty-s1-finals-team-list-complete"
+    },
+    {
+      "name": "Masterful molodoy helps FURIA limp past FUT to secure last Bounty Finals spot ",
+      "link": "/news/43665/masterful-molodoy-helps-furia-limp-past-fut-to-secure-last-bounty-finals-spot"
+    },
+    {
+      "name": "Spirit secure Bounty Finals spot over Inner Circle ",
+      "link": "/news/43660/spirit-secure-bounty-finals-spot-over-inner-circle"
+    },
+    {
+      "name": "BLAST Bounty Stage 2 matchups determined ",
+      "link": "/news/43651/blast-bounty-stage-2-matchups-determined"
+    },
+    {
+      "name": "ESL announce IEM Rio invites ",
+      "link": "/news/43638/esl-announce-iem-rio-invites"
+    },
+    {
+      "name": "Vitality and Falcons decline invites as ESL Pro League Season 23 invites announced ",
+      "link": "/news/43635/vitality-and-falcons-decline-invites-as-esl-pro-league-season-23-invites-announced"
+    },
+    {
+      "name": "We were promised an off-season storm. Instead, it was but a breeze ",
+      "link": "/news/43622/we-were-promised-an-off-season-storm-instead-it-was-but-a-breeze"
+    },
+    {
+      "name": "BLAST Bounty teams, format, schedule, talent, prizes, fantasy ",
+      "link": "/news/43619/blast-bounty-teams-format-schedule-talent-prizes-fantasy"
+    },
+    {
+      "name": "ESL confirm invites for IEM Krakow ",
+      "link": "/news/43582/esl-confirm-invites-for-iem-krakow"
+    },
+    {
+      "name": "Top 20 players of 2025: frozen (8) ",
+      "link": "/news/43558/top-20-players-of-2025-frozen-8"
+    },
+    {
+      "name": "ECSTATIC sign Buzz and nicoodoz ",
+      "link": "/news/43550/ecstatic-sign-buzz-and-nicoodoz"
+    },
+    {
+      "name": "Top 20 players of 2025: Twistzz (11) ",
+      "link": "/news/43533/top-20-players-of-2025-twistzz-11"
+    },
+    {
+      "name": "AM sign pxsl ",
+      "link": "/news/43525/am-sign-pxsl"
+    },
+    {
+      "name": "ECSTATIC to play BLAST Bounty 2026 Season 1 in place of Imperial ",
+      "link": "/news/43500/ecstatic-to-play-blast-bounty-2026-season-1-in-place-of-imperial"
+    },
+    {
+      "name": "Mousquetaires disband ",
+      "link": "/news/43477/mousquetaires-disband"
+    },
+    {
+      "name": "BLAST Bounty 2026 S1 team list announced as several big names decline invites ",
+      "link": "/news/43473/blast-bounty-2026-s1-team-list-announced-as-several-big-names-decline-invites"
+    },
+    {
+      "name": "FUT enter top 20 on VRS after Galaxy Battle Phase 5 victory ",
+      "link": "/news/43415/fut-enter-top-20-on-vrs-after-galaxy-battle-phase-5-victory"
+    },
+    {
+      "name": "ECSTATIC place entire roster on transfer list ",
+      "link": "/news/43364/ecstatic-place-entire-roster-on-transfer-list"
+    },
+    {
+      "name": "Monte win DreamHack Knockout Stockholm; qualify for ESL Pro League S23 ",
+      "link": "/news/43325/monte-win-dreamhack-knockout-stockholm-qualify-for-esl-pro-league-s23"
+    },
+    {
+      "name": "Official: FL4MUS joins OG ",
+      "link": "/news/43294/official-fl4mus-joins-og"
+    },
+    {
+      "name": "FUT claim maiden LAN title at DraculaN Season 3 over ECSTATIC ",
+      "link": "/news/43249/fut-claim-maiden-lan-title-at-draculan-season-3-over-ecstatic"
+    },
+    {
+      "name": "ECSTATIC trounce Passion UA as DraculaN day 3 draws to a close ",
+      "link": "/news/43246/ecstatic-trounce-passion-ua-as-draculan-day-3-draws-to-a-close"
+    },
+    {
+      "name": "DraculaN Season 3 reaches playoffs ",
+      "link": "/news/43238/draculan-season-3-reaches-playoffs"
+    },
+    {
+      "name": "HLTV Prospect Report #1 update: molodoy jumps to first ",
+      "link": "/news/43180/hltv-prospect-report-1-update-molodoy-jumps-to-first"
+    },
+    {
+      "name": "Nemiga beat Venom for CCT S3 Europe S9 title ",
+      "link": "/news/43099/nemiga-beat-venom-for-cct-s3-europe-s9-title"
+    },
+    {
+      "name": "Short: Team list for DraculaN Season 3 announced",
+      "link": "/news/42987/short-news-week-43#f12"
+    },
+    {
+      "name": "The EVPs and All-Stars of CS Asia Championships and Thunderpick World Championship ",
+      "link": "/news/43007/the-evps-and-all-stars-of-cs-asia-championships-and-thunderpick-world-championship"
+    },
+    {
+      "name": "gr1ks top-frags as BIG beat BC.Game for berth at Skyesports Chennai ",
+      "link": "/news/42999/gr1ks-top-frags-as-big-beat-bcgame-for-berth-at-skyesports-chennai"
+    },
+    {
+      "name": "The best highlights from CS Asia Championships playoffs ",
+      "link": "/news/42997/the-best-highlights-from-cs-asia-championships-playoffs"
+    },
+    {
+      "name": "latto: \"I know I am going forward in the steps of my career\" ",
+      "link": "/news/42982/latto-i-know-i-am-going-forward-in-the-steps-of-my-career"
+    },
+    {
+      "name": "lux: \"We need to pressure ourselves to be better, but we don't need to be hard on our teammates\" ",
+      "link": "/news/42967/lux-we-need-to-pressure-ourselves-to-be-better-but-we-dont-need-to-be-hard-on-our-teammates"
+    },
+    {
+      "name": "Legacy advance to CAC semi-final over FUT ",
+      "link": "/news/42965/legacy-advance-to-cac-semi-final-over-fut"
+    },
+    {
+      "name": "Krabeni: \"I think we deserve this LAN arena\" ",
+      "link": "/news/42962/krabeni-i-think-we-deserve-this-lan-arena"
+    },
+    {
+      "name": "Short: Twistzz: \"Four days of practice with jcobbb [...] it's not a surprise that the maps are really messy\"",
+      "link": "/news/42941/short-news-week-42#f10"
+    },
+    {
+      "name": "FaZe eliminated as CAC reaches playoffs ",
+      "link": "/news/42960/faze-eliminated-as-cac-reaches-playoffs"
+    },
+    {
+      "name": "HEROIC and fnatic move into CAC playoffs ",
+      "link": "/news/42953/heroic-and-fnatic-move-into-cac-playoffs"
+    },
+    {
+      "name": "yxngstxr: \"We're trying to wing it and play as good as possible\" ",
+      "link": "/news/42954/yxngstxr-were-trying-to-wing-it-and-play-as-good-as-possible"
+    },
+    {
+      "name": "lauNX on comeback: \"It has to do with the hunger we all have because we are kids\" ",
+      "link": "/news/42946/launx-on-comeback-it-has-to-do-with-the-hunger-we-all-have-because-we-are-kids"
+    },
+    {
+      "name": "FaZe suffer opening loss to FUT at CAC ",
+      "link": "/news/42945/faze-suffer-opening-loss-to-fut-at-cac"
+    },
+    {
+      "name": "Most imbalanced Fantasy of the season is live with TWC 2025 ",
+      "link": "/news/42942/most-imbalanced-fantasy-of-the-season-is-live-with-twc-2025"
+    },
+    {
+      "name": "CS Asia Championships teams, format, schedule, talent, prizes, fantasy ",
+      "link": "/news/42938/cs-asia-championships-teams-format-schedule-talent-prizes-fantasy"
+    },
+    {
+      "name": "FUT win Exort Proving Grounds S4 ",
+      "link": "/news/42760/fut-win-exort-proving-grounds-s4"
+    },
+    {
+      "name": "Nivera to stand in for Maka for start of EPL S22 ",
+      "link": "/news/42758/nivera-to-stand-in-for-maka-for-start-of-epl-s22"
+    },
+    {
+      "name": "ESC win CCT S3 S6 to mark 13 series wins in a row ",
+      "link": "/news/42738/esc-win-cct-s3-s6-to-mark-13-series-wins-in-a-row"
+    },
+    {
+      "name": "Fluxo to attend CAC 2025 as Imperial withdraw ",
+      "link": "/news/42716/fluxo-to-attend-cac-2025-as-imperial-withdraw"
+    },
+    {
+      "name": "Short: FUT bid farewell to misutaaa ",
+      "link": "/news/42679/short-news-week-38#f14"
+    },
+    {
+      "name": "The Huns round out CS Asia Championships 2025 team list ",
+      "link": "/news/42692/the-huns-round-out-cs-asia-championships-2025-team-list"
+    },
+    {
+      "name": "Liquid, NIP, fnatic among teams to compete at Birch Cup 2025 LAN in Poland ",
+      "link": "/news/42650/liquid-nip-fnatic-among-teams-to-compete-at-birch-cup-2025-lan-in-poland"
+    },
+    {
+      "name": "Short: Betclic Clash Summer team list set",
+      "link": "/news/42629/short-news-week-37#f2"
+    },
+    {
+      "name": "HEROIC bench academy roster ahead of rebuild to \"create direct pipeline\" to main team ",
+      "link": "/news/42611/heroic-bench-academy-roster-ahead-of-rebuild-to-create-direct-pipeline-to-main-team"
+    },
+    {
+      "name": "Virtus.pro promote tO0RO from VP.Prodigy",
+      "link": "/news/42582/virtuspro-promote-to0ro-from-vpprodigy"
+    },
+    {
+      "name": "Short: Nexus to trial fnl from HEROIC Academy",
+      "link": "/news/42534/short-news-week-35#f23"
+    },
+    {
+      "name": "Gentle Mates enter CS with Iberian Soul roster",
+      "link": "/news/42535/gentle-mates-enter-cs-with-iberian-soul-roster"
+    },
+    {
+      "name": "FUT add lauNX; bench misutaaa",
+      "link": "/news/42516/fut-add-launx-bench-misutaaa"
+    },
+    {
+      "name": "ESL Challenger League S50 Cup 2 invites revealed",
+      "link": "/news/42475/esl-challenger-league-s50-cup-2-invites-revealed"
+    },
+    {
+      "name": "Imperial qualify for CS Asia Championships 2025",
+      "link": "/news/42471/imperial-qualify-for-cs-asia-championships-2025"
+    },
+    {
+      "name": "Iberian Soul, 9INE, OG, and PARIVISION qualify for StarLadder StarSeries Fall",
+      "link": "/news/42470/iberian-soul-9ine-og-and-parivision-qualify-for-starladder-starseries-fall"
+    },
+    {
+      "name": "FUT, HEROIC, GamerLegion, and fnatic qualify for CS Asia Championships",
+      "link": "/news/42426/fut-heroic-gamerlegion-and-fnatic-qualify-for-cs-asia-championships"
+    },
+    {
+      "name": "Short: NAVI open applications for new Junior roster",
+      "link": "/news/42424/short-news-week-33#f3"
+    },
+    {
+      "name": "StarLadder reveal invites for StarSeries Budapest 2025 Europe Qualifier",
+      "link": "/news/42415/starladder-reveal-invites-for-starseries-budapest-2025-europe-qualifier"
+    },
+    {
+      "name": "Short: Invites announced for CCT Season 3 Europe Series 5",
+      "link": "/news/42387/short-news-week-32#f21"
+    },
+    {
+      "name": "FaZe roll over BetBoom to close day one of BLAST Bounty S2",
+      "link": "/news/42392/faze-roll-over-betboom-to-close-day-one-of-blast-bounty-s2"
+    },
+    {
+      "name": "BLAST Bounty Season 2 teams, format, schedule, prizes, talent, fantasy",
+      "link": "/news/42386/blast-bounty-season-2-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "Short: ex-FUT core stick together as Mousquetaires",
+      "link": "/news/42324/short-news-week-31#f37"
+    },
+    {
+      "name": "FUT sign ex-NAVI Junior roster",
+      "link": "/news/42370/fut-sign-ex-navi-junior-roster"
+    },
+    {
+      "name": "Short: ScreaM eyes return to competitive CS",
+      "link": "/news/41787/short-news-week-22#f4"
+    },
+    {
+      "name": "FUT enter Counter-Strike with roster headlined by JACKZ and Nivera",
+      "link": "/news/41790/fut-enter-counter-strike-with-roster-headlined-by-jackz-and-nivera"
+    }
+  ]
+}

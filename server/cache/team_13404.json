@@ -1,0 +1,654 @@
+{
+  "id": 13404,
+  "name": "Gentle Mates",
+  "logo": "https://img-cdn.hltv.org/teamlogo/4vM_jGA-gAmOO3D19rxR1F.png?ixlib=java-2.1.0&w=50&s=e84a0026333c0d681a146ae08e1d318f",
+  "instagram": "https://www.instagram.com/gentlemates",
+  "country": {
+    "name": "Spain",
+    "code": "ES"
+  },
+  "rank": 16,
+  "players": [
+    {
+      "name": "alex",
+      "id": 8371,
+      "timeOnTeam": "6 months",
+      "mapsPlayed": 127,
+      "type": "Starter"
+    },
+    {
+      "name": "dav1g",
+      "id": 19509,
+      "timeOnTeam": "6 months",
+      "mapsPlayed": 127,
+      "type": "Starter"
+    },
+    {
+      "name": "MartinezSa",
+      "id": 21239,
+      "timeOnTeam": "6 months",
+      "mapsPlayed": 127,
+      "type": "Starter"
+    },
+    {
+      "name": "mopoz",
+      "id": 9254,
+      "timeOnTeam": "6 months",
+      "mapsPlayed": 127,
+      "type": "Starter"
+    },
+    {
+      "name": "sausol",
+      "id": 18749,
+      "timeOnTeam": "6 months",
+      "mapsPlayed": 127,
+      "type": "Starter"
+    },
+    {
+      "id": 17193,
+      "name": "deLonge",
+      "timeOnTeam": "6 months",
+      "mapsPlayed": 127,
+      "type": "Coach"
+    }
+  ],
+  "rankingDevelopment": [
+    66,
+    66,
+    66,
+    47,
+    50,
+    45,
+    42,
+    24,
+    14,
+    16,
+    15,
+    17,
+    17,
+    17,
+    17,
+    18,
+    19,
+    20,
+    20,
+    19,
+    19,
+    19,
+    19,
+    21,
+    21,
+    23,
+    27,
+    26,
+    31,
+    31,
+    34,
+    23,
+    18,
+    18,
+    12,
+    12,
+    12,
+    12,
+    12,
+    13,
+    18,
+    18,
+    18,
+    17,
+    18,
+    18,
+    14,
+    13,
+    7,
+    7,
+    7,
+    6,
+    6,
+    6,
+    9,
+    7,
+    7,
+    5,
+    11,
+    13,
+    15,
+    23,
+    23,
+    24,
+    25,
+    26,
+    25,
+    25,
+    24,
+    23,
+    29,
+    29,
+    30,
+    28,
+    29,
+    28,
+    28,
+    30,
+    34,
+    31,
+    30,
+    25,
+    24,
+    24,
+    23,
+    22,
+    23,
+    24,
+    25,
+    25,
+    25,
+    25,
+    28,
+    29,
+    28,
+    30,
+    31,
+    29,
+    28,
+    27,
+    28,
+    35,
+    36,
+    43,
+    46,
+    46,
+    71,
+    27,
+    26,
+    27,
+    27,
+    14,
+    16,
+    20,
+    19,
+    19,
+    21,
+    18,
+    19,
+    20,
+    96,
+    80,
+    69,
+    70,
+    69,
+    68,
+    76,
+    70,
+    80,
+    74,
+    81,
+    80,
+    106,
+    91,
+    66,
+    76,
+    69,
+    76,
+    60,
+    60,
+    57,
+    60,
+    73,
+    66,
+    76,
+    63,
+    80,
+    64,
+    64,
+    61,
+    49,
+    47,
+    45,
+    45,
+    45,
+    38,
+    36,
+    38,
+    33,
+    33,
+    32,
+    32,
+    34,
+    26,
+    28,
+    17,
+    17,
+    17,
+    18,
+    18,
+    18,
+    18,
+    18,
+    29,
+    30,
+    27,
+    26,
+    26,
+    25,
+    25,
+    22,
+    25,
+    26,
+    27,
+    24,
+    22,
+    20
+  ],
+  "news": [
+    {
+      "name": "G2 among teams invited to Stake Ranked ",
+      "link": "/news/43984/g2-among-teams-invited-to-stake-ranked"
+    },
+    {
+      "name": "n0rb3r7: \"I saw good potential in the team and decided to stay\" ",
+      "link": "/news/43945/n0rb3r7-i-saw-good-potential-in-the-team-and-decided-to-stay"
+    },
+    {
+      "name": "HOTU win Roman Imperium Cup V ",
+      "link": "/news/43944/hotu-win-roman-imperium-cup-v"
+    },
+    {
+      "name": "HOTU claim Roman Imperium Cup V trophy over Gentle Mates",
+      "link": "/news/43915/live-updates-from-roman-imperium-cup-v#f55"
+    },
+    {
+      "name": "HOTU smash fnatic to set up rematch vs Gentle Mates",
+      "link": "/news/43915/live-updates-from-roman-imperium-cup-v#f50"
+    },
+    {
+      "name": "The final day at Roman Imperium V kicks off with the semi-finals",
+      "link": "/news/43915/live-updates-from-roman-imperium-cup-v#f46"
+    },
+    {
+      "name": "Boombl4: \"We're trying to figure out our game as a team\" ",
+      "link": "/news/43935/boombl4-were-trying-to-figure-out-our-game-as-a-team"
+    },
+    {
+      "name": "T.c talks try's signing, moving on from Grim and hallzerk, and Senzu's \"little bit rough English\" ",
+      "link": "/news/43932/tc-talks-trys-signing-moving-on-from-grim-and-hallzerk-and-senzus-little-bit-rough-english"
+    },
+    {
+      "name": "100T eliminate NIP as Roman Imperium Cup V reaches playoffs ",
+      "link": "/news/43930/100t-eliminate-nip-as-roman-imperium-cup-v-reaches-playoffs"
+    },
+    {
+      "name": "100 Thieves to make LAN debut today",
+      "link": "/news/43915/live-updates-from-roman-imperium-cup-v#f16"
+    },
+    {
+      "name": "pita: \"A quick U-turn; it can change so fast in this game\"",
+      "link": "/news/43915/live-updates-from-roman-imperium-cup-v#f9"
+    },
+    {
+      "name": "alex: \"We've only had two days off; that's why I think we are performing this well, but I can feel the team is a little bit tired\" ",
+      "link": "/news/43920/alex-weve-only-had-two-days-off-thats-why-i-think-we-are-performing-this-well-but-i-can-feel-the-team-is-a-little-bit-tired"
+    },
+    {
+      "name": "alex: \"It would be amazing to qualify for the Major; that goal is making us work ever harder\"",
+      "link": "/news/43915/live-updates-from-roman-imperium-cup-v#f7"
+    },
+    {
+      "name": "Gentle Mates win IstanbuLAN over HOTU ",
+      "link": "/news/43875/gentle-mates-win-istanbulan-over-hotu"
+    },
+    {
+      "name": "100 Thieves to make LAN debut vs NIP at Roman Imperium Cup V ",
+      "link": "/news/43822/100-thieves-to-make-lan-debut-vs-nip-at-roman-imperium-cup-v"
+    },
+    {
+      "name": "TYLOO and NIP qualify for BLAST Open Rotterdam ",
+      "link": "/news/43840/tyloo-and-nip-qualify-for-blast-open-rotterdam"
+    },
+    {
+      "name": "HOTU, Gentle Mates, and RED Canids complete IEM Rio team list ",
+      "link": "/news/43706/hotu-gentle-mates-and-red-canids-complete-iem-rio-team-list"
+    },
+    {
+      "name": "IEM Rio Closed Qualifier bracket set ",
+      "link": "/news/43670/iem-rio-closed-qualifier-bracket-set"
+    },
+    {
+      "name": "Short: 100 Thieves to make LAN debut next month",
+      "link": "/news/43667/short-news-week-3#f1"
+    },
+    {
+      "name": "Liquid defeat Gentle Mates to qualify for Bounty Finals ",
+      "link": "/news/43654/liquid-defeat-gentle-mates-to-qualify-for-bounty-finals"
+    },
+    {
+      "name": "ESL announce IEM Rio invites ",
+      "link": "/news/43638/esl-announce-iem-rio-invites"
+    },
+    {
+      "name": "BLAST Bounty teams, format, schedule, talent, prizes, fantasy ",
+      "link": "/news/43619/blast-bounty-teams-format-schedule-talent-prizes-fantasy"
+    },
+    {
+      "name": "M80 win fl0m Mythical LAN with flawless run ",
+      "link": "/news/43618/m80-win-fl0m-mythical-lan-with-flawless-run"
+    },
+    {
+      "name": "Top 20 players of 2025: flameZ (7) ",
+      "link": "/news/43573/top-20-players-of-2025-flamez-7"
+    },
+    {
+      "name": "SAW unveil new squad with EXSAD quartet ",
+      "link": "/news/43571/saw-unveil-new-squad-with-exsad-quartet"
+    },
+    {
+      "name": "Top 20 players of 2025: Spinx (10) ",
+      "link": "/news/43547/top-20-players-of-2025-spinx-10"
+    },
+    {
+      "name": "Top 20 players of 2025: mezii (12) ",
+      "link": "/news/43534/top-20-players-of-2025-mezii-12"
+    },
+    {
+      "name": "Top 20 players of 2025: torzsi (17) ",
+      "link": "/news/43509/top-20-players-of-2025-torzsi-17"
+    },
+    {
+      "name": "ECSTATIC to play BLAST Bounty 2026 Season 1 in place of Imperial ",
+      "link": "/news/43500/ecstatic-to-play-blast-bounty-2026-season-1-in-place-of-imperial"
+    },
+    {
+      "name": "NIP win Roman Imperium Cup III ",
+      "link": "/news/43489/nip-win-roman-imperium-cup-iii"
+    },
+    {
+      "name": "BLAST Bounty 2026 S1 team list announced as several big names decline invites ",
+      "link": "/news/43473/blast-bounty-2026-s1-team-list-announced-as-several-big-names-decline-invites"
+    },
+    {
+      "name": "Short: Lynn Vision win Perfect World CS Challenge Series 2",
+      "link": "/news/43162/short-news-week-46#f21"
+    },
+    {
+      "name": "The EVPs and All-Stars of PGL Masters Bucharest ",
+      "link": "/news/43135/the-evps-and-all-stars-of-pgl-masters-bucharest"
+    },
+    {
+      "name": "XTQZZZ: \"We also have a tournament next week and I don't want to start like this again\" ",
+      "link": "/news/43123/xtqzzz-we-also-have-a-tournament-next-week-and-i-dont-want-to-start-like-this-again"
+    },
+    {
+      "name": "alex: \"Those victories [over Vitality, G2] don't mean anything if you don't find consistency\" ",
+      "link": "/news/43060/alex-those-victories-over-vitality-g2-dont-mean-anything-if-you-dont-find-consistency"
+    },
+    {
+      "name": "PR shines as GamerLegion secure playoffs at PGL Masters Bucharest over M8s ",
+      "link": "/news/43059/pr-shines-as-gamerlegion-secure-playoffs-at-pgl-masters-bucharest-over-m8s"
+    },
+    {
+      "name": "snow: \"I'm very confident going into the playoffs\" ",
+      "link": "/news/43048/snow-im-very-confident-going-into-the-playoffs"
+    },
+    {
+      "name": "ArtFr0st: \"We could've gone really deep into the tournament, but bad vibes affected us too much\" ",
+      "link": "/news/43057/artfr0st-we-couldve-gone-really-deep-into-the-tournament-but-bad-vibes-affected-us-too-much"
+    },
+    {
+      "name": "Final Swiss stage matchups set at PGL Masters ",
+      "link": "/news/43058/final-swiss-stage-matchups-set-at-pgl-masters"
+    },
+    {
+      "name": "Gentle Mates eliminate BetBoom from PGL Masters Bucharest in three-map thriller ",
+      "link": "/news/43053/gentle-mates-eliminate-betboom-from-pgl-masters-bucharest-in-three-map-thriller"
+    },
+    {
+      "name": "Snappi on PGL Masters Bucharest elimination: \"It's a good reality check for the Major\" ",
+      "link": "/news/43043/snappi-on-pgl-masters-bucharest-elimination-its-a-good-reality-check-for-the-major"
+    },
+    {
+      "name": "2-1 and 1-2 matchups set at PGL Masters ",
+      "link": "/news/43044/2-1-and-1-2-matchups-set-at-pgl-masters"
+    },
+    {
+      "name": "Gentle Mates eliminate NIP from Bucharest ",
+      "link": "/news/43039/gentle-mates-eliminate-nip-from-bucharest"
+    },
+    {
+      "name": "paiN seal PGL Masters playoff berth with 2-0 win over B8 ",
+      "link": "/news/43038/pain-seal-pgl-masters-playoff-berth-with-2-0-win-over-b8"
+    },
+    {
+      "name": "PGL Masters round three matchups revealed ",
+      "link": "/news/43034/pgl-masters-round-three-matchups-revealed"
+    },
+    {
+      "name": "saadzin: \"I just want to win, I don’t want to have the best stats in the game\" ",
+      "link": "/news/43028/saadzin-i-just-want-to-win-i-dont-want-to-have-the-best-stats-in-the-game"
+    },
+    {
+      "name": "Aurora-Liquid headlines PGL Masters day two ",
+      "link": "/news/43023/aurora-liquid-headlines-pgl-masters-day-two"
+    },
+    {
+      "name": "Astralis and fnatic among teams sent to 0-1 pool after PGL Masters Bucharest day one ",
+      "link": "/news/43024/astralis-and-fnatic-among-teams-sent-to-0-1-pool-after-pgl-masters-bucharest-day-one"
+    },
+    {
+      "name": "Groups and Playoffs Fantasy game live for PGL Bucharest ",
+      "link": "/news/43017/groups-and-playoffs-fantasy-game-live-for-pgl-bucharest"
+    },
+    {
+      "name": "The good and the bad of the VRS race ",
+      "link": "/news/43011/the-good-and-the-bad-of-the-vrs-race"
+    },
+    {
+      "name": "PGL Masters Bucharest teams, format, schedule, talent, prizes, fantasy ",
+      "link": "/news/43009/pgl-masters-bucharest-teams-format-schedule-talent-prizes-fantasy"
+    },
+    {
+      "name": "IEM Chengdu groups and opening matches revealed ",
+      "link": "/news/43005/iem-chengdu-groups-and-opening-matches-revealed"
+    },
+    {
+      "name": "PGL Masters Bucharest opening matches set ",
+      "link": "/news/42988/pgl-masters-bucharest-opening-matches-set"
+    },
+    {
+      "name": "FaZe lock in last EPL playoffs spot over Aurora ",
+      "link": "/news/42893/faze-lock-in-last-epl-playoffs-spot-over-aurora"
+    },
+    {
+      "name": "Short: MartinezSa apologizes for remark made in MongolZ match",
+      "link": "/news/42866/short-news-week-41#f8"
+    },
+    {
+      "name": "Vitality come back from 2-9 down against G2 to secure EPL playoffs ",
+      "link": "/news/42883/vitality-come-back-from-2-9-down-against-g2-to-secure-epl-playoffs"
+    },
+    {
+      "name": "The MongolZ send M8s home from EPL ",
+      "link": "/news/42882/the-mongolz-send-m8s-home-from-epl"
+    },
+    {
+      "name": "MOUZ sail into EPL playoffs over 3DMAX ",
+      "link": "/news/42881/mouz-sail-into-epl-playoffs-over-3dmax"
+    },
+    {
+      "name": "G2-Vitality headlines EPL day 4 ",
+      "link": "/news/42873/g2-vitality-headlines-epl-day-4"
+    },
+    {
+      "name": "The MongolZ beat GL to stay alive at EPL ",
+      "link": "/news/42871/the-mongolz-beat-gl-to-stay-alive-at-epl"
+    },
+    {
+      "name": "apEX: \"Some Vitality fans say it's been a disaster for three months; I think they've been eating too well\" ",
+      "link": "/news/42862/apex-some-vitality-fans-say-its-been-a-disaster-for-three-months-i-think-theyve-been-eating-too-well"
+    },
+    {
+      "name": "EPL Season 22 round three matches set ",
+      "link": "/news/42861/epl-season-22-round-three-matches-set"
+    },
+    {
+      "name": "cairne: \"I was just tilted so hard [...] I won't break any mouse again\" ",
+      "link": "/news/42856/cairne-i-was-just-tilted-so-hard-i-wont-break-any-mouse-again"
+    },
+    {
+      "name": "mopoz on Vitality-M8s rivalry: \"Maybe today we showed who's the best baguette\" ",
+      "link": "/news/42851/mopoz-on-vitality-m8s-rivalry-maybe-today-we-showed-whos-the-best-baguette"
+    },
+    {
+      "name": "Matchups set for round two of EPL Stage 2 ",
+      "link": "/news/42852/matchups-set-for-round-two-of-epl-stage-2"
+    },
+    {
+      "name": "Gentle Mates upset Vitality in EPL S22 Stage 2 ",
+      "link": "/news/42849/gentle-mates-upset-vitality-in-epl-s22-stage-2"
+    },
+    {
+      "name": "tN1R is top Fantasy pick in debut with Spirit in ESL Pro League Stage 2 ",
+      "link": "/news/42836/tn1r-is-top-fantasy-pick-in-debut-with-spirit-in-esl-pro-league-stage-2"
+    },
+    {
+      "name": "Astralis eliminate Legacy from EPL S22 to advance to Stage 2 ",
+      "link": "/news/42832/astralis-eliminate-legacy-from-epl-s22-to-advance-to-stage-2"
+    },
+    {
+      "name": "G2 advance to EPL S22 Stage 2 over ENCE ",
+      "link": "/news/42831/g2-advance-to-epl-s22-stage-2-over-ence"
+    },
+    {
+      "name": "Short: M8s release behind the scenes video of team's beginnings",
+      "link": "/news/42804/short-news-week-40#f13"
+    },
+    {
+      "name": "Gentle Mates move past Legacy to qualify for EPL S22 Stage 2 ",
+      "link": "/news/42827/gentle-mates-move-past-legacy-to-qualify-for-epl-s22-stage-2"
+    },
+    {
+      "name": "ESL Pro League Stage 1 round 4 matches set ",
+      "link": "/news/42821/esl-pro-league-stage-1-round-4-matches-set"
+    },
+    {
+      "name": "Inner Circle edge past M8s to qualify for Stage 2 ",
+      "link": "/news/42819/inner-circle-edge-past-m8s-to-qualify-for-stage-2"
+    },
+    {
+      "name": "B8 beat G2 at EPL S22 to move closer to Budapest Major berth ",
+      "link": "/news/42818/b8-beat-g2-at-epl-s22-to-move-closer-to-budapest-major-berth"
+    },
+    {
+      "name": "EPL Stage 1 round 3 matchups set as G2 fumble to Gentle Mates ",
+      "link": "/news/42813/epl-stage-1-round-3-matchups-set-as-g2-fumble-to-gentle-mates"
+    },
+    {
+      "name": "Majority of top 10 to skip PGL Masters Bucharest despite date adjustment ",
+      "link": "/news/42806/majority-of-top-10-to-skip-pgl-masters-bucharest-despite-date-adjustment"
+    },
+    {
+      "name": "Jame on Major race: \"It has been too tough a year for expectations, I’m not going to celebrate early\" ",
+      "link": "/news/42801/jame-on-major-race-it-has-been-too-tough-a-year-for-expectations-im-not-going-to-celebrate-early"
+    },
+    {
+      "name": "EPL Season 22 Stage 1 day two matches set ",
+      "link": "/news/42800/epl-season-22-stage-1-day-two-matches-set"
+    },
+    {
+      "name": "9INE beat ex-Inner Circle to secure first LAN trophy at Birch Cup ",
+      "link": "/news/42802/9ine-beat-ex-inner-circle-to-secure-first-lan-trophy-at-birch-cup"
+    },
+    {
+      "name": "PARIVISION claim Majestic LanDaLan 3 title ",
+      "link": "/news/42799/parivision-claim-majestic-landalan-3-title"
+    },
+    {
+      "name": "innocent: \"We played really off in this tournament\" ",
+      "link": "/news/42794/innocent-we-played-really-off-in-this-tournament"
+    },
+    {
+      "name": "Liquid vs 500 headlines Birch Cup quarter-finals ",
+      "link": "/news/42793/liquid-vs-500-headlines-birch-cup-quarter-finals"
+    },
+    {
+      "name": "Replacements explained for EPL Stage 1 Fantasy game ",
+      "link": "/news/42790/replacements-explained-for-epl-stage-1-fantasy-game"
+    },
+    {
+      "name": "Liquid through to Birch Cup playoffs as ENCE pull out of event to play EPL ",
+      "link": "/news/42789/liquid-through-to-birch-cup-playoffs-as-ence-pull-out-of-event-to-play-epl"
+    },
+    {
+      "name": "Virtus.pro replaced by ENCE at EPL after being turned away at border ",
+      "link": "/news/42788/virtuspro-replaced-by-ence-at-epl-after-being-turned-away-at-border"
+    },
+    {
+      "name": "Gentle Mates withdraw from Birch Cup ahead of EPL appearance ",
+      "link": "/news/42786/gentle-mates-withdraw-from-birch-cup-ahead-of-epl-appearance"
+    },
+    {
+      "name": "Gentle Mates replace Lynn Vision at EPL* ",
+      "link": "/news/42781/gentle-mates-replace-lynn-vision-at-epl"
+    },
+    {
+      "name": "Wildcard among teams to suffer elimination on Birch Cup day one ",
+      "link": "/news/42779/wildcard-among-teams-to-suffer-elimination-on-birch-cup-day-one"
+    },
+    {
+      "name": "Jame on his future: \"I could switch to rifling at any moment — it would be painful\" ",
+      "link": "/news/42735/jame-on-his-future-i-could-switch-to-rifling-at-any-moment-it-would-be-painful"
+    },
+    {
+      "name": "NAVI reach StarSeries Fall final over NIP as day three wraps up ",
+      "link": "/news/42733/navi-reach-starseries-fall-final-over-nip-as-day-three-wraps-up"
+    },
+    {
+      "name": "JT: \"It feels like we have been improving really fast, at least in practice\" ",
+      "link": "/news/42732/jt-it-feels-like-we-have-been-improving-really-fast-at-least-in-practice"
+    },
+    {
+      "name": "Kvem: \"I had the choice to not play and be on the transfer list, but no point sitting on the bench\" ",
+      "link": "/news/42722/kvem-i-had-the-choice-to-not-play-and-be-on-the-transfer-list-but-no-point-sitting-on-the-bench"
+    },
+    {
+      "name": "alex: \"We are not focusing on the ranking, we are focusing game by game\" ",
+      "link": "/news/42720/alex-we-are-not-focusing-on-the-ranking-we-are-focusing-game-by-game"
+    },
+    {
+      "name": "NAVI and NIP set for upper bracket final clash as StarSeries Fall day two concludes ",
+      "link": "/news/42727/navi-and-nip-set-for-upper-bracket-final-clash-as-starseries-fall-day-two-concludes"
+    },
+    {
+      "name": "NAVI beat 9INE 2-1 to close StarSeries Fall day one ",
+      "link": "/news/42713/navi-beat-9ine-2-1-to-close-starseries-fall-day-one"
+    },
+    {
+      "name": "Short: SAW win Portuguese LAN over Gentle Mates",
+      "link": "/news/42629/short-news-week-37#f33"
+    },
+    {
+      "name": "Liquid, NIP, fnatic among teams to compete at Birch Cup 2025 LAN in Poland ",
+      "link": "/news/42650/liquid-nip-fnatic-among-teams-to-compete-at-birch-cup-2025-lan-in-poland"
+    },
+    {
+      "name": "stadodo headlines new Rebels roster ",
+      "link": "/news/42646/stadodo-headlines-new-rebels-roster"
+    },
+    {
+      "name": "G2 go for cheap in FPG 2 groups Fantasy ",
+      "link": "/news/42645/g2-go-for-cheap-in-fpg-2-groups-fantasy"
+    },
+    {
+      "name": "fnatic win DraculaN Season 1",
+      "link": "/news/42571/fnatic-win-draculan-season-1"
+    },
+    {
+      "name": "fnatic reach grand final as DraculaN day 2 ends",
+      "link": "/news/42565/fnatic-reach-grand-final-as-draculan-day-2-ends"
+    },
+    {
+      "name": "NIP and Passion UA face elimination after DraculaN day 1",
+      "link": "/news/42559/nip-and-passion-ua-face-elimination-after-draculan-day-1"
+    }
+  ]
+}

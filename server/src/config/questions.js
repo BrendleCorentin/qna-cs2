@@ -1,4 +1,11 @@
-export const QUESTIONS = [
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const manualQuestions = [
   {
     id: "cs1",
     question: "Quel est le prix de l'AWP dans CS2 ?",
@@ -30,3 +37,17 @@ export const QUESTIONS = [
     answerIndex: 2,
   },
 ];
+
+let generatedQuestions = [];
+try {
+  const filePath = path.join(__dirname, "questions_hltv.json");
+  if (fs.existsSync(filePath)) {
+    const data = fs.readFileSync(filePath, "utf-8");
+    generatedQuestions = JSON.parse(data);
+    console.log(`[Config] Loaded ${generatedQuestions.length} generated questions.`);
+  }
+} catch (e) {
+  console.error("Failed to load generated questions:", e);
+}
+
+export const QUESTIONS = [...manualQuestions, ...generatedQuestions];

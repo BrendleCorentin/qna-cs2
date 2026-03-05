@@ -1,0 +1,1608 @@
+[
+  {
+    "id": "team:iM:Natus Vincere",
+    "question": "iM joue dans quelle équipe ?",
+    "choices": [
+      "PARIVISION",
+      "Natus Vincere",
+      "Falcons",
+      "GamerLegion"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:Techno:The MongolZ",
+    "question": "Techno joue dans quelle équipe ?",
+    "choices": [
+      "B8",
+      "Falcons",
+      "FaZe",
+      "The MongolZ"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:XTQZZZ:Vitality",
+    "question": "XTQZZZ joue dans quelle équipe ?",
+    "choices": [
+      "Gentle Mates",
+      "Aurora",
+      "The MongolZ",
+      "Vitality"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "mcq:roster:Vitality:apEX",
+    "question": "Lequel de ces joueurs fait partie de l'équipe Vitality ?",
+    "choices": [
+      "apEX",
+      "ultimate",
+      "xertioN",
+      "wasiNk"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:HeavyGod:G2",
+    "question": "HeavyGod joue dans quelle équipe ?",
+    "choices": [
+      "3DMAX",
+      "Vitality",
+      "G2",
+      "FURIA"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:MAJ3R:Aurora",
+    "question": "MAJ3R joue dans quelle équipe ?",
+    "choices": [
+      "Spirit",
+      "FUT",
+      "MOUZ",
+      "Aurora"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:yuurih:FURIA",
+    "question": "yuurih joue dans quelle équipe ?",
+    "choices": [
+      "FURIA",
+      "MOUZ",
+      "Vitality",
+      "B8"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:sycrone:MOUZ",
+    "question": "sycrone joue dans quelle équipe ?",
+    "choices": [
+      "G2",
+      "MOUZ",
+      "Astralis",
+      "FURIA"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:kyxsan:Falcons",
+    "question": "kyxsan joue dans quelle équipe ?",
+    "choices": [
+      "Vitality",
+      "Falcons",
+      "MOUZ",
+      "FURIA"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "mcq:roster:Aurora:Fabre",
+    "question": "Lequel de ces joueurs fait partie de l'équipe Aurora ?",
+    "choices": [
+      "Spinx",
+      "hypex",
+      "jabbi",
+      "Fabre"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "mcq:roster:FaZe:Twistzz",
+    "question": "Lequel de ces joueurs fait partie de l'équipe FaZe ?",
+    "choices": [
+      "Twistzz",
+      "biguzera",
+      "HooXi",
+      "alex"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:MATYS:G2",
+    "question": "MATYS joue dans quelle équipe ?",
+    "choices": [
+      "G2",
+      "FURIA",
+      "Falcons",
+      "paiN"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:molodoy:FURIA",
+    "question": "molodoy joue dans quelle équipe ?",
+    "choices": [
+      "FURIA",
+      "Spirit",
+      "Aurora",
+      "Falcons"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:soulfly:Aurora",
+    "question": "soulfly joue dans quelle équipe ?",
+    "choices": [
+      "Aurora",
+      "MOUZ",
+      "paiN",
+      "Liquid"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:Wicadia:Aurora",
+    "question": "Wicadia joue dans quelle équipe ?",
+    "choices": [
+      "Natus Vincere",
+      "PARIVISION",
+      "Aurora",
+      "FaZe"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:Alkaren:HEROIC",
+    "question": "Alkaren joue dans quelle équipe ?",
+    "choices": [
+      "Vitality",
+      "Astralis",
+      "FURIA",
+      "HEROIC"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:Jimpphat:MOUZ",
+    "question": "Jimpphat joue dans quelle équipe ?",
+    "choices": [
+      "MOUZ",
+      "Vitality",
+      "B8",
+      "3DMAX"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:torzsi:MOUZ",
+    "question": "torzsi joue dans quelle équipe ?",
+    "choices": [
+      "Aurora",
+      "Gentle Mates",
+      "The MongolZ",
+      "MOUZ"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:Maka:3DMAX",
+    "question": "Maka joue dans quelle équipe ?",
+    "choices": [
+      "The MongolZ",
+      "B8",
+      "MOUZ",
+      "3DMAX"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:Twistzz:FaZe",
+    "question": "Twistzz joue dans quelle équipe ?",
+    "choices": [
+      "FaZe",
+      "Liquid",
+      "paiN",
+      "Aurora"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:B1ad3:Natus Vincere",
+    "question": "B1ad3 joue dans quelle équipe ?",
+    "choices": [
+      "Natus Vincere",
+      "Falcons",
+      "FUT",
+      "The MongolZ"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:ryu:Astralis",
+    "question": "ryu joue dans quelle équipe ?",
+    "choices": [
+      "Astralis",
+      "PARIVISION",
+      "MOUZ",
+      "FaZe"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:huNter-:G2",
+    "question": "huNter- joue dans quelle équipe ?",
+    "choices": [
+      "3DMAX",
+      "Astralis",
+      "Natus Vincere",
+      "G2"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:Fabre:Aurora",
+    "question": "Fabre joue dans quelle équipe ?",
+    "choices": [
+      "Aurora",
+      "FUT",
+      "FaZe",
+      "The MongolZ"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:TeSeS:Falcons",
+    "question": "TeSeS joue dans quelle équipe ?",
+    "choices": [
+      "Falcons",
+      "HEROIC",
+      "PARIVISION",
+      "Gentle Mates"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:maaRaa:The MongolZ",
+    "question": "maaRaa joue dans quelle équipe ?",
+    "choices": [
+      "paiN",
+      "Spirit",
+      "PARIVISION",
+      "The MongolZ"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:hally:Spirit",
+    "question": "hally joue dans quelle équipe ?",
+    "choices": [
+      "MOUZ",
+      "3DMAX",
+      "The MongolZ",
+      "Spirit"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:kyousuke:Falcons",
+    "question": "kyousuke joue dans quelle équipe ?",
+    "choices": [
+      "Falcons",
+      "Vitality",
+      "FURIA",
+      "Aurora"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:wasiNk:3DMAX",
+    "question": "wasiNk joue dans quelle équipe ?",
+    "choices": [
+      "MOUZ",
+      "PARIVISION",
+      "Natus Vincere",
+      "3DMAX"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:jabbi:Astralis",
+    "question": "jabbi joue dans quelle équipe ?",
+    "choices": [
+      "MOUZ",
+      "FaZe",
+      "Natus Vincere",
+      "Astralis"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:BELCHONOKK:PARIVISION",
+    "question": "BELCHONOKK joue dans quelle équipe ?",
+    "choices": [
+      "PARIVISION",
+      "Aurora",
+      "Gentle Mates",
+      "3DMAX"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:dem0n:FUT",
+    "question": "dem0n joue dans quelle équipe ?",
+    "choices": [
+      "FUT",
+      "Vitality",
+      "GamerLegion",
+      "PARIVISION"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:chopper:Spirit",
+    "question": "chopper joue dans quelle équipe ?",
+    "choices": [
+      "3DMAX",
+      "Vitality",
+      "Spirit",
+      "The MongolZ"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:broky:FaZe",
+    "question": "broky joue dans quelle équipe ?",
+    "choices": [
+      "FaZe",
+      "Gentle Mates",
+      "paiN",
+      "G2"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "mcq:roster:FURIA:yuurih",
+    "question": "Lequel de ces joueurs fait partie de l'équipe FURIA ?",
+    "choices": [
+      "piriajr",
+      "susp",
+      "yuurih",
+      "PR"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:EliGE:Liquid",
+    "question": "EliGE joue dans quelle équipe ?",
+    "choices": [
+      "Natus Vincere",
+      "Liquid",
+      "Falcons",
+      "FaZe"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:maddened:B8",
+    "question": "maddened joue dans quelle équipe ?",
+    "choices": [
+      "FaZe",
+      "FURIA",
+      "Vitality",
+      "B8"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:xertioN:MOUZ",
+    "question": "xertioN joue dans quelle équipe ?",
+    "choices": [
+      "MOUZ",
+      "Spirit",
+      "Aurora",
+      "Astralis"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:vsm:paiN",
+    "question": "vsm joue dans quelle équipe ?",
+    "choices": [
+      "3DMAX",
+      "The MongolZ",
+      "Vitality",
+      "paiN"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:apEX:Vitality",
+    "question": "apEX joue dans quelle équipe ?",
+    "choices": [
+      "Natus Vincere",
+      "MOUZ",
+      "3DMAX",
+      "Vitality"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:SunPayus:G2",
+    "question": "SunPayus joue dans quelle équipe ?",
+    "choices": [
+      "G2",
+      "The MongolZ",
+      "Liquid",
+      "GamerLegion"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "mcq:roster:Astralis:HooXi",
+    "question": "Lequel de ces joueurs fait partie de l'équipe Astralis ?",
+    "choices": [
+      "dziugss",
+      "HooXi",
+      "karrigan",
+      "w0nderful"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:w0nderful:Natus Vincere",
+    "question": "w0nderful joue dans quelle équipe ?",
+    "choices": [
+      "Natus Vincere",
+      "Gentle Mates",
+      "paiN",
+      "FURIA"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "mcq:roster:FUT:cmtry",
+    "question": "Lequel de ces joueurs fait partie de l'équipe FUT ?",
+    "choices": [
+      "cmtry",
+      "headtr1ck",
+      "PR",
+      "rikz"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:sh1ro:Spirit",
+    "question": "sh1ro joue dans quelle équipe ?",
+    "choices": [
+      "Astralis",
+      "Spirit",
+      "The MongolZ",
+      "Vitality"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:tN1R:Spirit",
+    "question": "tN1R joue dans quelle équipe ?",
+    "choices": [
+      "Spirit",
+      "3DMAX",
+      "Falcons",
+      "B8"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:sausol:Gentle Mates",
+    "question": "sausol joue dans quelle équipe ?",
+    "choices": [
+      "HEROIC",
+      "Natus Vincere",
+      "Falcons",
+      "Gentle Mates"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:Krabeni:FUT",
+    "question": "Krabeni joue dans quelle équipe ?",
+    "choices": [
+      "FUT",
+      "B8",
+      "Liquid",
+      "Vitality"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "mcq:roster:B8:s1zzi",
+    "question": "Lequel de ces joueurs fait partie de l'équipe B8 ?",
+    "choices": [
+      "Staehr",
+      "ropz",
+      "iM",
+      "s1zzi"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:woxic:Aurora",
+    "question": "woxic joue dans quelle équipe ?",
+    "choices": [
+      "paiN",
+      "Natus Vincere",
+      "Liquid",
+      "Aurora"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:rikz:paiN",
+    "question": "rikz joue dans quelle équipe ?",
+    "choices": [
+      "Vitality",
+      "paiN",
+      "G2",
+      "FURIA"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:jcobbb:FaZe",
+    "question": "jcobbb joue dans quelle équipe ?",
+    "choices": [
+      "MOUZ",
+      "Astralis",
+      "HEROIC",
+      "FaZe"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:jL:Natus Vincere",
+    "question": "jL joue dans quelle équipe ?",
+    "choices": [
+      "Natus Vincere",
+      "Aurora",
+      "Vitality",
+      "FURIA"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:frozen:FaZe",
+    "question": "frozen joue dans quelle équipe ?",
+    "choices": [
+      "FaZe",
+      "MOUZ",
+      "Gentle Mates",
+      "G2"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:coolio:FUT",
+    "question": "coolio joue dans quelle équipe ?",
+    "choices": [
+      "FUT",
+      "Falcons",
+      "Liquid",
+      "FURIA"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:zweih:PARIVISION",
+    "question": "zweih joue dans quelle équipe ?",
+    "choices": [
+      "FaZe",
+      "Vitality",
+      "MOUZ",
+      "PARIVISION"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:nota:PARIVISION",
+    "question": "nota joue dans quelle équipe ?",
+    "choices": [
+      "HEROIC",
+      "The MongolZ",
+      "GamerLegion",
+      "PARIVISION"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:ropz:Vitality",
+    "question": "ropz joue dans quelle équipe ?",
+    "choices": [
+      "Liquid",
+      "B8",
+      "Vitality",
+      "Natus Vincere"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:ultimate:Liquid",
+    "question": "ultimate joue dans quelle équipe ?",
+    "choices": [
+      "Liquid",
+      "MOUZ",
+      "Natus Vincere",
+      "GamerLegion"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:zont1x:Spirit",
+    "question": "zont1x joue dans quelle équipe ?",
+    "choices": [
+      "GamerLegion",
+      "Spirit",
+      "Astralis",
+      "The MongolZ"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:Lucky:3DMAX",
+    "question": "Lucky joue dans quelle équipe ?",
+    "choices": [
+      "FURIA",
+      "3DMAX",
+      "Vitality",
+      "The MongolZ"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:bLitz:The MongolZ",
+    "question": "bLitz joue dans quelle équipe ?",
+    "choices": [
+      "GamerLegion",
+      "Natus Vincere",
+      "Spirit",
+      "The MongolZ"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:Graviti:3DMAX",
+    "question": "Graviti joue dans quelle équipe ?",
+    "choices": [
+      "GamerLegion",
+      "Spirit",
+      "HEROIC",
+      "3DMAX"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:Tauson:GamerLegion",
+    "question": "Tauson joue dans quelle équipe ?",
+    "choices": [
+      "GamerLegion",
+      "MOUZ",
+      "Falcons",
+      "Liquid"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "mcq:roster:Spirit:sh1ro",
+    "question": "Lequel de ces joueurs fait partie de l'équipe Spirit ?",
+    "choices": [
+      "sh1ro",
+      "Tauson",
+      "deLonge",
+      "coolio"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:zonic:Falcons",
+    "question": "zonic joue dans quelle équipe ?",
+    "choices": [
+      "paiN",
+      "The MongolZ",
+      "3DMAX",
+      "Falcons"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:Brollan:MOUZ",
+    "question": "Brollan joue dans quelle équipe ?",
+    "choices": [
+      "Natus Vincere",
+      "Spirit",
+      "MOUZ",
+      "Vitality"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "mcq:roster:MOUZ:Brollan",
+    "question": "Lequel de ces joueurs fait partie de l'équipe MOUZ ?",
+    "choices": [
+      "FalleN",
+      "Brollan",
+      "sausol",
+      "jL"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:m0NESY:Falcons",
+    "question": "m0NESY joue dans quelle équipe ?",
+    "choices": [
+      "FURIA",
+      "Aurora",
+      "B8",
+      "Falcons"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:flashie:Liquid",
+    "question": "flashie joue dans quelle équipe ?",
+    "choices": [
+      "paiN",
+      "FURIA",
+      "Liquid",
+      "HEROIC"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:mopoz:Gentle Mates",
+    "question": "mopoz joue dans quelle équipe ?",
+    "choices": [
+      "Gentle Mates",
+      "Falcons",
+      "Astralis",
+      "Aurora"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:YEKINDAR:FURIA",
+    "question": "YEKINDAR joue dans quelle équipe ?",
+    "choices": [
+      "FURIA",
+      "The MongolZ",
+      "Spirit",
+      "G2"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:alex:Gentle Mates",
+    "question": "alex joue dans quelle équipe ?",
+    "choices": [
+      "Falcons",
+      "GamerLegion",
+      "Gentle Mates",
+      "Aurora"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:bodyy:3DMAX",
+    "question": "bodyy joue dans quelle équipe ?",
+    "choices": [
+      "Astralis",
+      "3DMAX",
+      "Liquid",
+      "paiN"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:malbsMd:G2",
+    "question": "malbsMd joue dans quelle équipe ?",
+    "choices": [
+      "paiN",
+      "Natus Vincere",
+      "The MongolZ",
+      "G2"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:ZywOo:Vitality",
+    "question": "ZywOo joue dans quelle équipe ?",
+    "choices": [
+      "Vitality",
+      "Falcons",
+      "Aurora",
+      "FURIA"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:sidde:FURIA",
+    "question": "sidde joue dans quelle équipe ?",
+    "choices": [
+      "Spirit",
+      "B8",
+      "The MongolZ",
+      "FURIA"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:FalleN:FURIA",
+    "question": "FalleN joue dans quelle équipe ?",
+    "choices": [
+      "FURIA",
+      "PARIVISION",
+      "The MongolZ",
+      "Spirit"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:lauNX:FUT",
+    "question": "lauNX joue dans quelle équipe ?",
+    "choices": [
+      "FUT",
+      "paiN",
+      "Aurora",
+      "Astralis"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:b1t:Natus Vincere",
+    "question": "b1t joue dans quelle équipe ?",
+    "choices": [
+      "The MongolZ",
+      "FaZe",
+      "paiN",
+      "Natus Vincere"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:flameZ:Vitality",
+    "question": "flameZ joue dans quelle équipe ?",
+    "choices": [
+      "Vitality",
+      "FURIA",
+      "Falcons",
+      "paiN"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:NertZ:Liquid",
+    "question": "NertZ joue dans quelle équipe ?",
+    "choices": [
+      "FaZe",
+      "Liquid",
+      "The MongolZ",
+      "Spirit"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:yxngstxr:HEROIC",
+    "question": "yxngstxr joue dans quelle équipe ?",
+    "choices": [
+      "FURIA",
+      "Vitality",
+      "FaZe",
+      "HEROIC"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:susp:HEROIC",
+    "question": "susp joue dans quelle équipe ?",
+    "choices": [
+      "HEROIC",
+      "FaZe",
+      "paiN",
+      "Astralis"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:s1zzi:B8",
+    "question": "s1zzi joue dans quelle équipe ?",
+    "choices": [
+      "G2",
+      "Astralis",
+      "B8",
+      "3DMAX"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:Aleksib:Natus Vincere",
+    "question": "Aleksib joue dans quelle équipe ?",
+    "choices": [
+      "Natus Vincere",
+      "Vitality",
+      "G2",
+      "FURIA"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:mezii:Vitality",
+    "question": "mezii joue dans quelle équipe ?",
+    "choices": [
+      "PARIVISION",
+      "FURIA",
+      "GamerLegion",
+      "Vitality"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:910:The MongolZ",
+    "question": "910 joue dans quelle équipe ?",
+    "choices": [
+      "FURIA",
+      "The MongolZ",
+      "B8",
+      "Vitality"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:XANTARES:Aurora",
+    "question": "XANTARES joue dans quelle équipe ?",
+    "choices": [
+      "MOUZ",
+      "Aurora",
+      "The MongolZ",
+      "GamerLegion"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:magixx:Spirit",
+    "question": "magixx joue dans quelle équipe ?",
+    "choices": [
+      "Spirit",
+      "Astralis",
+      "Vitality",
+      "B8"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:nqz:paiN",
+    "question": "nqz joue dans quelle équipe ?",
+    "choices": [
+      "The MongolZ",
+      "paiN",
+      "Liquid",
+      "Falcons"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:piriajr:paiN",
+    "question": "piriajr joue dans quelle équipe ?",
+    "choices": [
+      "Falcons",
+      "FURIA",
+      "paiN",
+      "GamerLegion"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:phzy:Astralis",
+    "question": "phzy joue dans quelle équipe ?",
+    "choices": [
+      "Astralis",
+      "3DMAX",
+      "GamerLegion",
+      "Vitality"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:Spinx:MOUZ",
+    "question": "Spinx joue dans quelle équipe ?",
+    "choices": [
+      "MOUZ",
+      "FaZe",
+      "Aurora",
+      "Natus Vincere"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:dav1g:Gentle Mates",
+    "question": "dav1g joue dans quelle équipe ?",
+    "choices": [
+      "PARIVISION",
+      "Gentle Mates",
+      "paiN",
+      "GamerLegion"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:dastan:PARIVISION",
+    "question": "dastan joue dans quelle équipe ?",
+    "choices": [
+      "PARIVISION",
+      "3DMAX",
+      "Aurora",
+      "paiN"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:donk:Spirit",
+    "question": "donk joue dans quelle équipe ?",
+    "choices": [
+      "Spirit",
+      "Natus Vincere",
+      "Gentle Mates",
+      "FURIA"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:Snax:GamerLegion",
+    "question": "Snax joue dans quelle équipe ?",
+    "choices": [
+      "HEROIC",
+      "GamerLegion",
+      "FURIA",
+      "Vitality"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "mcq:roster:Falcons:TeSeS",
+    "question": "Lequel de ces joueurs fait partie de l'équipe Falcons ?",
+    "choices": [
+      "Graviti",
+      "biguzera",
+      "kensizor",
+      "TeSeS"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "mcq:roster:Natus Vincere:makazze",
+    "question": "Lequel de ces joueurs fait partie de l'équipe Natus Vincere ?",
+    "choices": [
+      "makazze",
+      "hypex",
+      "jcobbb",
+      "donk"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:Chr1zN:HEROIC",
+    "question": "Chr1zN joue dans quelle équipe ?",
+    "choices": [
+      "MOUZ",
+      "FUT",
+      "Vitality",
+      "HEROIC"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:makazze:Natus Vincere",
+    "question": "makazze joue dans quelle équipe ?",
+    "choices": [
+      "Spirit",
+      "paiN",
+      "Natus Vincere",
+      "MOUZ"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:snow:paiN",
+    "question": "snow joue dans quelle équipe ?",
+    "choices": [
+      "HEROIC",
+      "Liquid",
+      "Falcons",
+      "paiN"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:misutaaa:3DMAX",
+    "question": "misutaaa joue dans quelle équipe ?",
+    "choices": [
+      "Spirit",
+      "3DMAX",
+      "FUT",
+      "The MongolZ"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:TOBIZ:HEROIC",
+    "question": "TOBIZ joue dans quelle équipe ?",
+    "choices": [
+      "FaZe",
+      "FURIA",
+      "Falcons",
+      "HEROIC"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "mcq:roster:3DMAX:Lucky",
+    "question": "Lequel de ces joueurs fait partie de l'équipe 3DMAX ?",
+    "choices": [
+      "sidde",
+      "flashie",
+      "NiKo",
+      "Lucky"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:mzinho:The MongolZ",
+    "question": "mzinho joue dans quelle équipe ?",
+    "choices": [
+      "The MongolZ",
+      "PARIVISION",
+      "Vitality",
+      "Spirit"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:sAw:G2",
+    "question": "sAw joue dans quelle équipe ?",
+    "choices": [
+      "Vitality",
+      "Astralis",
+      "HEROIC",
+      "G2"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:NEO:FaZe",
+    "question": "NEO joue dans quelle équipe ?",
+    "choices": [
+      "FaZe",
+      "PARIVISION",
+      "The MongolZ",
+      "MOUZ"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:xiELO:PARIVISION",
+    "question": "xiELO joue dans quelle équipe ?",
+    "choices": [
+      "PARIVISION",
+      "Natus Vincere",
+      "Falcons",
+      "paiN"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:esenthial:B8",
+    "question": "esenthial joue dans quelle équipe ?",
+    "choices": [
+      "B8",
+      "FURIA",
+      "Natus Vincere",
+      "Vitality"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "mcq:roster:PARIVISION:nota",
+    "question": "Lequel de ces joueurs fait partie de l'équipe PARIVISION ?",
+    "choices": [
+      "nota",
+      "Lucky",
+      "zont1x",
+      "bLitz"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:siuhy:Liquid",
+    "question": "siuhy joue dans quelle équipe ?",
+    "choices": [
+      "Liquid",
+      "HEROIC",
+      "MOUZ",
+      "Falcons"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "mcq:roster:G2:malbsMd",
+    "question": "Lequel de ces joueurs fait partie de l'équipe G2 ?",
+    "choices": [
+      "malbsMd",
+      "piriajr",
+      "bLitz",
+      "cmtry"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:KSCERATO:FURIA",
+    "question": "KSCERATO joue dans quelle équipe ?",
+    "choices": [
+      "Liquid",
+      "FURIA",
+      "PARIVISION",
+      "MOUZ"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "mcq:roster:Gentle Mates:sausol",
+    "question": "Lequel de ces joueurs fait partie de l'équipe Gentle Mates ?",
+    "choices": [
+      "Tauson",
+      "SunPayus",
+      "sausol",
+      "mezii"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:npl:B8",
+    "question": "npl joue dans quelle équipe ?",
+    "choices": [
+      "FUT",
+      "B8",
+      "The MongolZ",
+      "PARIVISION"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:ruggah:Astralis",
+    "question": "ruggah joue dans quelle équipe ?",
+    "choices": [
+      "3DMAX",
+      "Astralis",
+      "Falcons",
+      "Vitality"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:NiKo:Falcons",
+    "question": "NiKo joue dans quelle équipe ?",
+    "choices": [
+      "Liquid",
+      "Falcons",
+      "FUT",
+      "PARIVISION"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:kensizor:B8",
+    "question": "kensizor joue dans quelle équipe ?",
+    "choices": [
+      "B8",
+      "Spirit",
+      "Vitality",
+      "FURIA"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "mcq:roster:The MongolZ:bLitz",
+    "question": "Lequel de ces joueurs fait partie de l'équipe The MongolZ ?",
+    "choices": [
+      "NiKo",
+      "donk",
+      "bLitz",
+      "broky"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:alex666:B8",
+    "question": "alex666 joue dans quelle équipe ?",
+    "choices": [
+      "Natus Vincere",
+      "GamerLegion",
+      "Aurora",
+      "B8"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:cobrazera:The MongolZ",
+    "question": "cobrazera joue dans quelle équipe ?",
+    "choices": [
+      "paiN",
+      "The MongolZ",
+      "GamerLegion",
+      "Natus Vincere"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:ash:GamerLegion",
+    "question": "ash joue dans quelle équipe ?",
+    "choices": [
+      "MOUZ",
+      "Spirit",
+      "GamerLegion",
+      "Aurora"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:REZ:GamerLegion",
+    "question": "REZ joue dans quelle équipe ?",
+    "choices": [
+      "PARIVISION",
+      "GamerLegion",
+      "FUT",
+      "B8"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:karrigan:FaZe",
+    "question": "karrigan joue dans quelle équipe ?",
+    "choices": [
+      "Gentle Mates",
+      "paiN",
+      "FaZe",
+      "Natus Vincere"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:biguzera:paiN",
+    "question": "biguzera joue dans quelle équipe ?",
+    "choices": [
+      "FUT",
+      "FURIA",
+      "MOUZ",
+      "paiN"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:Staehr:Astralis",
+    "question": "Staehr joue dans quelle équipe ?",
+    "choices": [
+      "Astralis",
+      "Natus Vincere",
+      "paiN",
+      "Spirit"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:HooXi:Astralis",
+    "question": "HooXi joue dans quelle équipe ?",
+    "choices": [
+      "Spirit",
+      "MOUZ",
+      "GamerLegion",
+      "Astralis"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:headtr1ck:B8",
+    "question": "headtr1ck joue dans quelle équipe ?",
+    "choices": [
+      "Spirit",
+      "B8",
+      "FURIA",
+      "Vitality"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:MartinezSa:Gentle Mates",
+    "question": "MartinezSa joue dans quelle équipe ?",
+    "choices": [
+      "Gentle Mates",
+      "Aurora",
+      "Astralis",
+      "FUT"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:xfl0ud:HEROIC",
+    "question": "xfl0ud joue dans quelle équipe ?",
+    "choices": [
+      "The MongolZ",
+      "MOUZ",
+      "PARIVISION",
+      "HEROIC"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:imd:GamerLegion",
+    "question": "imd joue dans quelle équipe ?",
+    "choices": [
+      "GamerLegion",
+      "FaZe",
+      "PARIVISION",
+      "Natus Vincere"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "mcq:roster:paiN:rikz",
+    "question": "Lequel de ces joueurs fait partie de l'équipe paiN ?",
+    "choices": [
+      "apEX",
+      "rikz",
+      "ZywOo",
+      "dziugss"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:deLonge:Gentle Mates",
+    "question": "deLonge joue dans quelle équipe ?",
+    "choices": [
+      "Astralis",
+      "Gentle Mates",
+      "Spirit",
+      "Vitality"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:Ex3rcice:3DMAX",
+    "question": "Ex3rcice joue dans quelle équipe ?",
+    "choices": [
+      "FUT",
+      "HEROIC",
+      "3DMAX",
+      "Gentle Mates"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "mcq:roster:GamerLegion:Snax",
+    "question": "Lequel de ces joueurs fait partie de l'équipe GamerLegion ?",
+    "choices": [
+      "Snax",
+      "jL",
+      "ZywOo",
+      "misutaaa"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "mcq:roster:Liquid:EliGE",
+    "question": "Lequel de ces joueurs fait partie de l'équipe Liquid ?",
+    "choices": [
+      "Staehr",
+      "headtr1ck",
+      "EliGE",
+      "mzinho"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "id": "team:hypex:GamerLegion",
+    "question": "hypex joue dans quelle équipe ?",
+    "choices": [
+      "GamerLegion",
+      "Vitality",
+      "Liquid",
+      "Falcons"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:cmtry:FUT",
+    "question": "cmtry joue dans quelle équipe ?",
+    "choices": [
+      "paiN",
+      "FURIA",
+      "Vitality",
+      "FUT"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "mcq:roster:HEROIC:yxngstxr",
+    "question": "Lequel de ces joueurs fait partie de l'équipe HEROIC ?",
+    "choices": [
+      "Spinx",
+      "yxngstxr",
+      "torzsi",
+      "lauNX"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "id": "team:NAF:Liquid",
+    "question": "NAF joue dans quelle équipe ?",
+    "choices": [
+      "Falcons",
+      "Astralis",
+      "Vitality",
+      "Liquid"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:nilo:HEROIC",
+    "question": "nilo joue dans quelle équipe ?",
+    "choices": [
+      "GamerLegion",
+      "Vitality",
+      "G2",
+      "HEROIC"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:PR:GamerLegion",
+    "question": "PR joue dans quelle équipe ?",
+    "choices": [
+      "GamerLegion",
+      "MOUZ",
+      "Natus Vincere",
+      "Vitality"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "id": "team:dziugss:FUT",
+    "question": "dziugss joue dans quelle équipe ?",
+    "choices": [
+      "Liquid",
+      "FURIA",
+      "Gentle Mates",
+      "FUT"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "id": "team:Jame:PARIVISION",
+    "question": "Jame joue dans quelle équipe ?",
+    "choices": [
+      "MOUZ",
+      "Natus Vincere",
+      "FURIA",
+      "PARIVISION"
+    ],
+    "answerIndex": 3
+  }
+]

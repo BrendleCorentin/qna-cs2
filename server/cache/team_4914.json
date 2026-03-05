@@ -1,0 +1,3125 @@
+{
+  "id": 4914,
+  "name": "3DMAX",
+  "logo": "https://img-cdn.hltv.org/teamlogo/QGPDS3Z2-aMXwCYVgA4RWH.png?ixlib=java-2.1.0&w=50&s=ec528d7e9d0f9b6b4bac227901fb1590",
+  "country": {
+    "name": "France",
+    "code": "FR"
+  },
+  "rank": 25,
+  "players": [
+    {
+      "name": "Ex3rcice",
+      "id": 19739,
+      "timeOnTeam": "2 years3 months",
+      "mapsPlayed": 569,
+      "type": "Starter"
+    },
+    {
+      "name": "Lucky",
+      "id": 13497,
+      "timeOnTeam": "2 years3 months",
+      "mapsPlayed": 568,
+      "type": "Starter"
+    },
+    {
+      "name": "Maka",
+      "id": 13138,
+      "timeOnTeam": "2 years3 months",
+      "mapsPlayed": 566,
+      "type": "Starter"
+    },
+    {
+      "name": "Graviti",
+      "id": 21969,
+      "timeOnTeam": "1 year11 months",
+      "mapsPlayed": 511,
+      "type": "Starter"
+    },
+    {
+      "name": "misutaaa",
+      "id": 14176,
+      "timeOnTeam": "9 days",
+      "mapsPlayed": 9,
+      "type": "Starter"
+    },
+    {
+      "name": "bodyy",
+      "id": 8374,
+      "timeOnTeam": "1 year",
+      "mapsPlayed": 216,
+      "type": "Benched"
+    },
+    {
+      "id": 18731,
+      "name": "wasiNk",
+      "timeOnTeam": "9 days",
+      "mapsPlayed": 9,
+      "type": "Coach"
+    }
+  ],
+  "rankingDevelopment": [
+    54,
+    48,
+    50,
+    55,
+    58,
+    52,
+    51,
+    51,
+    55,
+    60,
+    57,
+    45,
+    36,
+    38,
+    38,
+    41,
+    42,
+    36,
+    37,
+    33,
+    31,
+    30,
+    32,
+    34,
+    39,
+    38,
+    34,
+    37,
+    38,
+    42,
+    40,
+    41,
+    45,
+    43,
+    44,
+    31,
+    31,
+    28,
+    30,
+    29,
+    30,
+    28,
+    29,
+    28,
+    30,
+    29,
+    28,
+    28,
+    28,
+    27,
+    25,
+    38,
+    30,
+    31,
+    33,
+    40,
+    40,
+    43,
+    43,
+    40,
+    39,
+    42,
+    41,
+    30,
+    30,
+    24,
+    24,
+    27,
+    28,
+    27,
+    27,
+    27,
+    27,
+    27,
+    27,
+    29,
+    19,
+    18,
+    21,
+    21,
+    20,
+    19,
+    19,
+    21,
+    24,
+    23,
+    25,
+    24,
+    24,
+    21,
+    22,
+    19,
+    21,
+    16,
+    16,
+    18,
+    16,
+    16,
+    15,
+    15,
+    15,
+    17,
+    17,
+    15,
+    16,
+    16,
+    16,
+    16,
+    15,
+    14,
+    14,
+    14,
+    12,
+    11,
+    11,
+    13,
+    13,
+    13,
+    14,
+    12,
+    14,
+    16,
+    16,
+    15,
+    15,
+    15,
+    15,
+    14,
+    13,
+    14,
+    14,
+    14,
+    12,
+    10,
+    11,
+    11,
+    13,
+    11,
+    10,
+    10,
+    10,
+    10,
+    10,
+    11,
+    12,
+    12,
+    13,
+    13,
+    13,
+    13,
+    12,
+    12,
+    12,
+    12,
+    11,
+    12,
+    13,
+    13,
+    14,
+    14
+  ],
+  "news": [
+    {
+      "name": "Strike #9: Not so World Cuppy ",
+      "link": "/news/43994/strike-9-not-so-world-cuppy"
+    },
+    {
+      "name": "Astralis ease past 3DMAX into EPL 23 Stage 2 ",
+      "link": "/news/43993/astralis-ease-past-3dmax-into-epl-23-stage-2"
+    },
+    {
+      "name": "NIP scrape by NRG to avoid last-place exit from EPL S23 Stage 1 ",
+      "link": "/news/43990/nip-scrape-by-nrg-to-avoid-last-place-exit-from-epl-s23-stage-1"
+    },
+    {
+      "name": "Short: M80, 3DMAX, and FOKUS among Urban Riga Open 3 atendees",
+      "link": "/news/43978/short-news-week-9#f4"
+    },
+    {
+      "name": "MIBR replace paiN at PGL Bucharest ",
+      "link": "/news/43979/mibr-replace-pain-at-pgl-bucharest"
+    },
+    {
+      "name": "Senzu debuts for Passion UA; Liquid, NIP, and 3DMAX suffer losses on day one of EPL S23 ",
+      "link": "/news/43976/senzu-debuts-for-passion-ua-liquid-nip-and-3dmax-suffer-losses-on-day-one-of-epl-s23"
+    },
+    {
+      "name": "Freed from the shackles of an academy, FUT have broken through ",
+      "link": "/news/43974/freed-from-the-shackles-of-an-academy-fut-have-broken-through"
+    },
+    {
+      "name": "ESL Pro League teams, format, schedule, prizes, fantasy ",
+      "link": "/news/43963/esl-pro-league-teams-format-schedule-prizes-fantasy"
+    },
+    {
+      "name": "ESL announce opening matchups for Pro League Season 23 Stage 1 ",
+      "link": "/news/43958/esl-announce-opening-matchups-for-pro-league-season-23-stage-1"
+    },
+    {
+      "name": "Official: 3DMAX add wasiNk and NBK- to coaching staff, replace bodyy with misutaaa* ",
+      "link": "/news/43953/official-3dmax-add-wasink-and-nbk-to-coaching-staff-replace-bodyy-with-misutaaa"
+    },
+    {
+      "name": "Short: GenOne forfeit Draculan after 3DMAX links",
+      "link": "/news/43949/short-news-week-8#f2"
+    },
+    {
+      "name": "Media: 3DMAX to swap bodyy for misutaaa, NBK- to join as assistant coach ",
+      "link": "/news/43946/media-3dmax-to-swap-bodyy-for-misutaaa-nbk-to-join-as-assistant-coach"
+    },
+    {
+      "name": "TOBIZ: \"Hopefully, Alkaren will return, but we just have to get the best out of the situation\" ",
+      "link": "/news/43903/tobiz-hopefully-alkaren-will-return-but-we-just-have-to-get-the-best-out-of-the-situation"
+    },
+    {
+      "name": "PGL Cluj-Napoca round four matchups set ",
+      "link": "/news/43895/pgl-cluj-napoca-round-four-matchups-set"
+    },
+    {
+      "name": "Only three top 10 teams accept invites to PGL Bucharest ",
+      "link": "/news/43891/only-three-top-10-teams-accept-invites-to-pgl-bucharest"
+    },
+    {
+      "name": "3DMAX out of Cluj after 0-6 run: \"It sucks, we cannot play properly, we are losing our feeling\" ",
+      "link": "/news/43889/3dmax-out-of-cluj-after-0-6-run-it-sucks-we-cannot-play-properly-we-are-losing-our-feeling"
+    },
+    {
+      "name": "Matchups set for first elimination games at Cluj ",
+      "link": "/news/43884/matchups-set-for-first-elimination-games-at-cluj"
+    },
+    {
+      "name": "Vitality and FURIA pick up wins to end Cluj-Napoca day two ",
+      "link": "/news/43885/vitality-and-furia-pick-up-wins-to-end-cluj-napoca-day-two"
+    },
+    {
+      "name": "Staehr on ryu and phzy: \"I'm very surprised in a good way\" ",
+      "link": "/news/43878/staehr-on-ryu-and-phzy-im-very-surprised-in-a-good-way"
+    },
+    {
+      "name": "PGL Cluj-Napoca round two matchups set ",
+      "link": "/news/43874/pgl-cluj-napoca-round-two-matchups-set"
+    },
+    {
+      "name": "Tech issues and victories for the favorites headline PGL Cluj-Napoca day 1 ",
+      "link": "/news/43873/tech-issues-and-victories-for-the-favorites-headline-pgl-cluj-napoca-day-1"
+    },
+    {
+      "name": "NiKo: \"Every MVP I get, I always think nowadays that it might be my last one, so I really wanna enjoy it\" ",
+      "link": "/news/43872/niko-every-mvp-i-get-i-always-think-nowadays-that-it-might-be-my-last-one-so-i-really-wanna-enjoy-it"
+    },
+    {
+      "name": "PGL Cluj-Napoca Group Stage Fantasy about to start ",
+      "link": "/news/43863/pgl-cluj-napoca-group-stage-fantasy-about-to-start"
+    },
+    {
+      "name": "PGL Cluj-Napoca teams, format, schedule, prizes, talent, fantasy ",
+      "link": "/news/43861/pgl-cluj-napoca-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "ZywOo shines as Vitality take IEM Krakow title over FURIA ",
+      "link": "/news/43841/zywoo-shines-as-vitality-take-iem-krakow-title-over-furia"
+    },
+    {
+      "name": "Short: 3DMAX lose to unranked M1X KS squad in BLAST Open qualifier",
+      "link": "/news/43792/short-news-week-5#f20"
+    },
+    {
+      "name": "Vitality vs G2, MOUZ vs PARIVISION headline PGL Cluj-Napoca opening round ",
+      "link": "/news/43824/vitality-vs-g2-mouz-vs-parivision-headline-pgl-cluj-napoca-opening-round"
+    },
+    {
+      "name": "FUT replace Legacy at PGL Cluj-Napoca ",
+      "link": "/news/43808/fut-replace-legacy-at-pgl-cluj-napoca"
+    },
+    {
+      "name": "MOUZ eliminate FaZe from IEM Krakow ",
+      "link": "/news/43807/mouz-eliminate-faze-from-iem-krakow"
+    },
+    {
+      "name": "kyousuke dominates as Falcons oust 3DMAX ",
+      "link": "/news/43806/kyousuke-dominates-as-falcons-oust-3dmax"
+    },
+    {
+      "name": "Falcons cling to life in Krakow with win over NRG ",
+      "link": "/news/43798/falcons-cling-to-life-in-krakow-with-win-over-nrg"
+    },
+    {
+      "name": "BC.Game bow out of Krakow at the hands of FaZe ",
+      "link": "/news/43797/bcgame-bow-out-of-krakow-at-the-hands-of-faze"
+    },
+    {
+      "name": "Vitality ease past 3DMAX to book arena spot in Krakow ",
+      "link": "/news/43793/vitality-ease-past-3dmax-to-book-arena-spot-in-krakow"
+    },
+    {
+      "name": "G2 stave off FUT to reach Krakow playoffs ",
+      "link": "/news/43786/g2-stave-off-fut-to-reach-krakow-playoffs"
+    },
+    {
+      "name": "Short: Twistzz: \"Gaslighted into thinking it was an issue on my side but really it was tournament hardware\"",
+      "link": "/news/43719/short-news-week-4#f24"
+    },
+    {
+      "name": "bodyy: \"Last year, we played CS that was the identity of 3DMAX, but it's hard to consistently replicate\" ",
+      "link": "/news/43780/bodyy-last-year-we-played-cs-that-was-the-identity-of-3dmax-but-its-hard-to-consistently-replicate"
+    },
+    {
+      "name": "Vitality best BC.Game to wrap up first day of Krakow Stage 2 ",
+      "link": "/news/43778/vitality-best-bcgame-to-wrap-up-first-day-of-krakow-stage-2"
+    },
+    {
+      "name": "3DMAX outclass FaZe to extend hot streak in Krakow ",
+      "link": "/news/43777/3dmax-outclass-faze-to-extend-hot-streak-in-krakow"
+    },
+    {
+      "name": "IEM Krakow Stage 2 Fantasy team list is complete ",
+      "link": "/news/43768/iem-krakow-stage-2-fantasy-team-list-is-complete"
+    },
+    {
+      "name": "Vitality vs BC.Game, Falcons vs Aurora headline Krakow Stage 2's opening round ",
+      "link": "/news/43767/vitality-vs-bcgame-falcons-vs-aurora-headline-krakow-stage-2s-opening-round"
+    },
+    {
+      "name": "BC.Game see off NIP to enter Krakow Stage 2 ",
+      "link": "/news/43762/bcgame-see-off-nip-to-enter-krakow-stage-2"
+    },
+    {
+      "name": "3DMAX demolish BC.Game to advance to Krakow top-16 ",
+      "link": "/news/43747/3dmax-demolish-bcgame-to-advance-to-krakow-top-16"
+    },
+    {
+      "name": "IEM Krakow Stage 1 day two matchups set ",
+      "link": "/news/43743/iem-krakow-stage-1-day-two-matchups-set"
+    },
+    {
+      "name": "Liquid cruise past NIP in Krakow; 3DMAX beat FUT ",
+      "link": "/news/43741/liquid-cruise-past-nip-in-krakow-3dmax-beat-fut"
+    },
+    {
+      "name": "Krakow Stage 1 Fantasy goes live with s1mple for $195k ",
+      "link": "/news/43728/krakow-stage-1-fantasy-goes-live-with-s1mple-for-195k"
+    },
+    {
+      "name": "How did the Bold Predictions for 2025 fare? ",
+      "link": "/news/43726/how-did-the-bold-predictions-for-2025-fare"
+    },
+    {
+      "name": "IEM Krakow teams, format, schedule, prizes, talent, fantasy ",
+      "link": "/news/43720/iem-krakow-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "HOTU, Gentle Mates, and RED Canids complete IEM Rio team list ",
+      "link": "/news/43706/hotu-gentle-mates-and-red-canids-complete-iem-rio-team-list"
+    },
+    {
+      "name": "Inner Circle eliminate 3DMAX from BLAST Bounty ",
+      "link": "/news/43640/inner-circle-eliminate-3dmax-from-blast-bounty"
+    },
+    {
+      "name": "ESL announce IEM Rio invites ",
+      "link": "/news/43638/esl-announce-iem-rio-invites"
+    },
+    {
+      "name": "Vitality and Falcons decline invites as ESL Pro League Season 23 invites announced ",
+      "link": "/news/43635/vitality-and-falcons-decline-invites-as-esl-pro-league-season-23-invites-announced"
+    },
+    {
+      "name": "Nine of top ten teams to play at PGL Cluj-Napoca ",
+      "link": "/news/43626/nine-of-top-ten-teams-to-play-at-pgl-cluj-napoca"
+    },
+    {
+      "name": "BLAST Bounty teams, format, schedule, talent, prizes, fantasy ",
+      "link": "/news/43619/blast-bounty-teams-format-schedule-talent-prizes-fantasy"
+    },
+    {
+      "name": "Video: HLTV's Top 20 players of 2025 fragmovie ",
+      "link": "/news/43616/video-hltvs-top-20-players-of-2025-fragmovie"
+    },
+    {
+      "name": "NIP complete roster with cairne ",
+      "link": "/news/43597/nip-complete-roster-with-cairne"
+    },
+    {
+      "name": "Top 20 players of 2025: ropz (3) ",
+      "link": "/news/43608/top-20-players-of-2025-ropz-3"
+    },
+    {
+      "name": "HLTV reveals All-star Team of the Year ",
+      "link": "/news/43604/hltv-reveals-all-star-team-of-the-year"
+    },
+    {
+      "name": "ESL confirm invites for IEM Krakow ",
+      "link": "/news/43582/esl-confirm-invites-for-iem-krakow"
+    },
+    {
+      "name": "Top 20 players of 2025: flameZ (7) ",
+      "link": "/news/43573/top-20-players-of-2025-flamez-7"
+    },
+    {
+      "name": "Top 20 players of 2025: frozen (8) ",
+      "link": "/news/43558/top-20-players-of-2025-frozen-8"
+    },
+    {
+      "name": "Top 20 players of 2025: Spinx (10) ",
+      "link": "/news/43547/top-20-players-of-2025-spinx-10"
+    },
+    {
+      "name": "Top 20 players of 2025: Twistzz (11) ",
+      "link": "/news/43533/top-20-players-of-2025-twistzz-11"
+    },
+    {
+      "name": "Top 20 players of 2025: mezii (12) ",
+      "link": "/news/43534/top-20-players-of-2025-mezii-12"
+    },
+    {
+      "name": "Top 20 players of 2025: Senzu (13) ",
+      "link": "/news/43528/top-20-players-of-2025-senzu-13"
+    },
+    {
+      "name": "HLTV Awards: Finalists locked in by expert panel ",
+      "link": "/news/43516/hltv-awards-finalists-locked-in-by-expert-panel"
+    },
+    {
+      "name": "Top 20 players of 2025: torzsi (17) ",
+      "link": "/news/43509/top-20-players-of-2025-torzsi-17"
+    },
+    {
+      "name": "PARIVISION linked with zweih ",
+      "link": "/news/43507/parivision-linked-with-zweih"
+    },
+    {
+      "name": "Top 20 players of 2025: NiKo (18) ",
+      "link": "/news/43505/top-20-players-of-2025-niko-18"
+    },
+    {
+      "name": "Top 20 players of 2025: iM (19) ",
+      "link": "/news/43503/top-20-players-of-2025-im-19"
+    },
+    {
+      "name": "Top 20 players of 2025: b1t (20) ",
+      "link": "/news/43502/top-20-players-of-2025-b1t-20"
+    },
+    {
+      "name": "ECSTATIC to play BLAST Bounty 2026 Season 1 in place of Imperial ",
+      "link": "/news/43500/ecstatic-to-play-blast-bounty-2026-season-1-in-place-of-imperial"
+    },
+    {
+      "name": "HLTV Awards 2025 panel: Who votes and how it works ",
+      "link": "/news/43482/hltv-awards-2025-panel-who-votes-and-how-it-works"
+    },
+    {
+      "name": "BLAST Bounty 2026 S1 team list announced as several big names decline invites ",
+      "link": "/news/43473/blast-bounty-2026-s1-team-list-announced-as-several-big-names-decline-invites"
+    },
+    {
+      "name": "FaZe beat Passion UA to complete thrilling run from Stage 1 into playoffs ",
+      "link": "/news/43398/faze-beat-passion-ua-to-complete-thrilling-run-from-stage-1-into-playoffs"
+    },
+    {
+      "name": "NEO: \"The main thing for us is to play good CS and be a team as a unit\" ",
+      "link": "/news/43394/neo-the-main-thing-for-us-is-to-play-good-cs-and-be-a-team-as-a-unit"
+    },
+    {
+      "name": "FaZe send 3DMAX packing from Budapest ",
+      "link": "/news/43392/faze-send-3dmax-packing-from-budapest"
+    },
+    {
+      "name": "MOUZ-Falcons headlines round 4 matchups ",
+      "link": "/news/43384/mouz-falcons-headlines-round-4-matchups"
+    },
+    {
+      "name": "3DMAX end PARIVISION's run in Budapest ",
+      "link": "/news/43382/3dmax-end-parivisions-run-in-budapest"
+    },
+    {
+      "name": "Spirit vs. MOUZ headlines round 3 matchups ",
+      "link": "/news/43375/spirit-vs-mouz-headlines-round-3-matchups"
+    },
+    {
+      "name": "Vitality and Falcons convincing after opening losses; G2 and Spirit go 2-0 ",
+      "link": "/news/43372/vitality-and-falcons-convincing-after-opening-losses-g2-and-spirit-go-2-0"
+    },
+    {
+      "name": "frozen stars as FaZe take down Vitality; paiN defeat 3DMAX ",
+      "link": "/news/43370/frozen-stars-as-faze-take-down-vitality-pain-defeat-3dmax"
+    },
+    {
+      "name": "bodyy: \"We're close to [finding] the identity that we want to have on the server\" ",
+      "link": "/news/43358/bodyy-were-close-to-finding-the-identity-that-we-want-to-have-on-the-server"
+    },
+    {
+      "name": "Budapest Major Stage 3 Fantasy game is live with increased Season points ",
+      "link": "/news/43359/budapest-major-stage-3-fantasy-game-is-live-with-increased-season-points"
+    },
+    {
+      "name": "3DMAX outclass NIP to secure final Stage 3 spot ",
+      "link": "/news/43355/3dmax-outclass-nip-to-secure-final-stage-3-spot"
+    },
+    {
+      "name": "Final Budapest Major Stage 2 matchups set ",
+      "link": "/news/43347/final-budapest-major-stage-2-matchups-set"
+    },
+    {
+      "name": "B8 defeat 3DMAX to lock in Stage 3 spot ",
+      "link": "/news/43346/b8-defeat-3dmax-to-lock-in-stage-3-spot"
+    },
+    {
+      "name": "fnatic exit Major after collapse vs. Passion UA ",
+      "link": "/news/43337/fnatic-exit-major-after-collapse-vs-passion-ua"
+    },
+    {
+      "name": "PARIVISION upset Aurora as BO1s come to a close in Stage 2 ",
+      "link": "/news/43324/parivision-upset-aurora-as-bo1s-come-to-a-close-in-stage-2"
+    },
+    {
+      "name": "Budapest Major Stage 2 Round 3 matches set ",
+      "link": "/news/43322/budapest-major-stage-2-round-3-matches-set"
+    },
+    {
+      "name": "Aurora vs FaZe headlines Round 2 in Budapest ",
+      "link": "/news/43318/aurora-vs-faze-headlines-round-2-in-budapest"
+    },
+    {
+      "name": "Liquid fall to 0-1 as opening round of Budapest Major Stage 2 comes to an end ",
+      "link": "/news/43316/liquid-fall-to-0-1-as-opening-round-of-budapest-major-stage-2-comes-to-an-end"
+    },
+    {
+      "name": "Maka: \"We were in intense preparation online, and we put in the hours we had to\" ",
+      "link": "/news/43315/maka-we-were-in-intense-preparation-online-and-we-put-in-the-hours-we-had-to"
+    },
+    {
+      "name": "NIP and fnatic open Stage 2 with BO1 upsets ",
+      "link": "/news/43313/nip-and-fnatic-open-stage-2-with-bo1-upsets"
+    },
+    {
+      "name": "Visualized: Every team at StarLadder Budapest Major Stage 2 ",
+      "link": "/news/43296/visualized-every-team-at-starladder-budapest-major-stage-2"
+    },
+    {
+      "name": "Budapest Major Stage 2 Fantasy goes live with extra prizes ",
+      "link": "/news/43304/budapest-major-stage-2-fantasy-goes-live-with-extra-prizes"
+    },
+    {
+      "name": "Visualized: Every team at StarLadder Budapest Major Stage 1 ",
+      "link": "/news/43230/visualized-every-team-at-starladder-budapest-major-stage-1"
+    },
+    {
+      "name": "Ozstrik3r brings back against All authority ",
+      "link": "/news/43233/ozstrik3r-brings-back-against-all-authority"
+    },
+    {
+      "name": "Short: 3DMAX release CAC VLOG",
+      "link": "/news/43162/short-news-week-46#f20"
+    },
+    {
+      "name": "C4LLM3SU3 laughs about playing Vitality or MOUZ: \"I'm good to take the L because we don't think we're that good right now\" ",
+      "link": "/news/43113/c4llm3su3-laughs-about-playing-vitality-or-mouz-im-good-to-take-the-l-because-we-dont-think-were-that-good-right-now"
+    },
+    {
+      "name": "FURIA head to Chengdu playoffs, Lynn Vision eliminate 3DMAX ",
+      "link": "/news/43111/furia-head-to-chengdu-playoffs-lynn-vision-eliminate-3dmax"
+    },
+    {
+      "name": "malbsMd: \"We took a reset, we had a little bit of a burnout traveling and traveling with CS\" ",
+      "link": "/news/43105/malbsmd-we-took-a-reset-we-had-a-little-bit-of-a-burnout-traveling-and-traveling-with-cs"
+    },
+    {
+      "name": "Astralis beat NAVI to close IEM Chengdu day one ",
+      "link": "/news/43106/astralis-beat-navi-to-close-iem-chengdu-day-one"
+    },
+    {
+      "name": "controlez is a top 5 pick in IEM Chengdu Fantasy at $175k ",
+      "link": "/news/43096/controlez-is-a-top-5-pick-in-iem-chengdu-fantasy-at-175k"
+    },
+    {
+      "name": "IEM Chengdu 2025 teams, format, schedule, talent, prizes, fantasy ",
+      "link": "/news/43095/iem-chengdu-2025-teams-format-schedule-talent-prizes-fantasy"
+    },
+    {
+      "name": "alex666 on becoming IGL: \"The coach asked me and I said, 'there is no other option, so I can try'\" ",
+      "link": "/news/43074/alex666-on-becoming-igl-the-coach-asked-me-and-i-said-there-is-no-other-option-so-i-can-try"
+    },
+    {
+      "name": "device misses Astralis' elimination match in Bucharest due to medical emergency, ruggah to stand in ",
+      "link": "/news/43062/device-misses-astralis-elimination-match-in-bucharest-due-to-medical-emergency-ruggah-to-stand-in"
+    },
+    {
+      "name": "Final Swiss stage matchups set at PGL Masters ",
+      "link": "/news/43058/final-swiss-stage-matchups-set-at-pgl-masters"
+    },
+    {
+      "name": "B8 outlast Legacy to lock in Bucharest playoffs ",
+      "link": "/news/43054/b8-outlast-legacy-to-lock-in-bucharest-playoffs"
+    },
+    {
+      "name": "Lucky: \"We’re capable of having a high ceiling, but we just lack the consistency\" ",
+      "link": "/news/43051/lucky-were-capable-of-having-a-high-ceiling-but-we-just-lack-the-consistency"
+    },
+    {
+      "name": "Astralis eliminate 3DMAX from PGL Masters Bucharest ",
+      "link": "/news/43049/astralis-eliminate-3dmax-from-pgl-masters-bucharest"
+    },
+    {
+      "name": "2-1 and 1-2 matchups set at PGL Masters ",
+      "link": "/news/43044/2-1-and-1-2-matchups-set-at-pgl-masters"
+    },
+    {
+      "name": "MUTiRiS on beating GamerLegion: \"The team showed a lot of resilience\" ",
+      "link": "/news/43036/mutiris-on-beating-gamerlegion-the-team-showed-a-lot-of-resilience"
+    },
+    {
+      "name": "headtr1ck on alex666 as IGL: \"He's kind and able to find the right way to speak to each person\" ",
+      "link": "/news/43035/headtr1ck-on-alex666-as-igl-hes-kind-and-able-to-find-the-right-way-to-speak-to-each-person"
+    },
+    {
+      "name": "PGL Masters round three matchups revealed ",
+      "link": "/news/43034/pgl-masters-round-three-matchups-revealed"
+    },
+    {
+      "name": "B8 head to 2-0 pool over 3DMAX at end of PGL Masters day two ",
+      "link": "/news/43031/b8-head-to-2-0-pool-over-3dmax-at-end-of-pgl-masters-day-two"
+    },
+    {
+      "name": "Aurora-Liquid headlines PGL Masters day two ",
+      "link": "/news/43023/aurora-liquid-headlines-pgl-masters-day-two"
+    },
+    {
+      "name": "Astralis and fnatic among teams sent to 0-1 pool after PGL Masters Bucharest day one ",
+      "link": "/news/43024/astralis-and-fnatic-among-teams-sent-to-0-1-pool-after-pgl-masters-bucharest-day-one"
+    },
+    {
+      "name": "Groups and Playoffs Fantasy game live for PGL Bucharest ",
+      "link": "/news/43017/groups-and-playoffs-fantasy-game-live-for-pgl-bucharest"
+    },
+    {
+      "name": "PGL Masters Bucharest teams, format, schedule, talent, prizes, fantasy ",
+      "link": "/news/43009/pgl-masters-bucharest-teams-format-schedule-talent-prizes-fantasy"
+    },
+    {
+      "name": "The EVPs and All-Stars of CS Asia Championships and Thunderpick World Championship ",
+      "link": "/news/43007/the-evps-and-all-stars-of-cs-asia-championships-and-thunderpick-world-championship"
+    },
+    {
+      "name": "IEM Chengdu groups and opening matches revealed ",
+      "link": "/news/43005/iem-chengdu-groups-and-opening-matches-revealed"
+    },
+    {
+      "name": "The best highlights from CS Asia Championships playoffs ",
+      "link": "/news/42997/the-best-highlights-from-cs-asia-championships-playoffs"
+    },
+    {
+      "name": "FURIA reverse-sweep NAVI to win TWC 2025 ",
+      "link": "/news/42984/furia-reverse-sweep-navi-to-win-twc-2025"
+    },
+    {
+      "name": "latto: \"I know I am going forward in the steps of my career\" ",
+      "link": "/news/42982/latto-i-know-i-am-going-forward-in-the-steps-of-my-career"
+    },
+    {
+      "name": "latto earns career-first MVP at CAC 2025 ",
+      "link": "/news/42981/latto-earns-career-first-mvp-at-cac-2025"
+    },
+    {
+      "name": "Legacy claim first international trophy at CAC ",
+      "link": "/news/42980/legacy-claim-first-international-trophy-at-cac"
+    },
+    {
+      "name": "Liquid breeze past HEROIC in CAC third-place decider ",
+      "link": "/news/42979/liquid-breeze-past-heroic-in-cac-third-place-decider"
+    },
+    {
+      "name": "Legacy recover from Dust2 drubbing to qualify for CAC final over HEROIC ",
+      "link": "/news/42973/legacy-recover-from-dust2-drubbing-to-qualify-for-cac-final-over-heroic"
+    },
+    {
+      "name": "Graviti: \"I'm just happy to be the IGL also for my individual performance\" ",
+      "link": "/news/42972/graviti-im-just-happy-to-be-the-igl-also-for-my-individual-performance"
+    },
+    {
+      "name": "3DMAX secure CAC final spot over Liquid ",
+      "link": "/news/42971/3dmax-secure-cac-final-spot-over-liquid"
+    },
+    {
+      "name": "lux: \"We need to pressure ourselves to be better, but we don't need to be hard on our teammates\" ",
+      "link": "/news/42967/lux-we-need-to-pressure-ourselves-to-be-better-but-we-dont-need-to-be-hard-on-our-teammates"
+    },
+    {
+      "name": "3DMAX head to CAC semis over fnatic ",
+      "link": "/news/42964/3dmax-head-to-cac-semis-over-fnatic"
+    },
+    {
+      "name": "Lucky: \"I think we're the favorite here, so hopefully we can live up to it\" ",
+      "link": "/news/42961/lucky-i-think-were-the-favorite-here-so-hopefully-we-can-live-up-to-it"
+    },
+    {
+      "name": "FaZe eliminated as CAC reaches playoffs ",
+      "link": "/news/42960/faze-eliminated-as-cac-reaches-playoffs"
+    },
+    {
+      "name": "MIBR and LVG eliminated at close of CAC day two ",
+      "link": "/news/42955/mibr-and-lvg-eliminated-at-close-of-cac-day-two"
+    },
+    {
+      "name": "dumau: \"When you get on the server, sh*t starts going on in your mind, and then you fight against it with courage and faith\" ",
+      "link": "/news/42950/dumau-when-you-get-on-the-server-sht-starts-going-on-in-your-mind-and-then-you-fight-against-it-with-courage-and-faith"
+    },
+    {
+      "name": "Legacy claim breakthrough playoff berth at CAC ",
+      "link": "/news/42949/legacy-claim-breakthrough-playoff-berth-at-cac"
+    },
+    {
+      "name": "Liquid cruise into CAC playoffs ahead of MIBR ",
+      "link": "/news/42948/liquid-cruise-into-cac-playoffs-ahead-of-mibr"
+    },
+    {
+      "name": "CAC offers a lifeline for a TYLOO running out of chances ",
+      "link": "/news/42933/cac-offers-a-lifeline-for-a-tyloo-running-out-of-chances"
+    },
+    {
+      "name": "Most imbalanced Fantasy of the season is live with TWC 2025 ",
+      "link": "/news/42942/most-imbalanced-fantasy-of-the-season-is-live-with-twc-2025"
+    },
+    {
+      "name": "CS Asia Championships teams, format, schedule, talent, prizes, fantasy ",
+      "link": "/news/42938/cs-asia-championships-teams-format-schedule-talent-prizes-fantasy"
+    },
+    {
+      "name": "PR: \"We can even win this tournament\" ",
+      "link": "/news/42920/pr-we-can-even-win-this-tournament"
+    },
+    {
+      "name": "NiKo: \"A bit frustrated how we played, but happy that we won\" ",
+      "link": "/news/42907/niko-a-bit-frustrated-how-we-played-but-happy-that-we-won"
+    },
+    {
+      "name": "Falcons battle past 3DMAX into EPL semis ",
+      "link": "/news/42902/falcons-battle-past-3dmax-into-epl-semis"
+    },
+    {
+      "name": "Falcons, Spirit top the charts for EPL playoffs Fantasy game ",
+      "link": "/news/42899/falcons-spirit-top-the-charts-for-epl-playoffs-fantasy-game"
+    },
+    {
+      "name": "ESL Pro League S22 playoff bracket set ",
+      "link": "/news/42894/esl-pro-league-s22-playoff-bracket-set"
+    },
+    {
+      "name": "FaZe lock in last EPL playoffs spot over Aurora ",
+      "link": "/news/42893/faze-lock-in-last-epl-playoffs-spot-over-aurora"
+    },
+    {
+      "name": "bodyy: \"We're moving forward into being ourselves more in those pressure games\" ",
+      "link": "/news/42892/bodyy-were-moving-forward-into-being-ourselves-more-in-those-pressure-games"
+    },
+    {
+      "name": "3DMAX eliminate G2 to qualify for EPL playoffs ",
+      "link": "/news/42891/3dmax-eliminate-g2-to-qualify-for-epl-playoffs"
+    },
+    {
+      "name": "Lack of practice bites The MongolZ after early EPL elimination at the hands of NAVI ",
+      "link": "/news/42889/lack-of-practice-bites-the-mongolz-after-early-epl-elimination-at-the-hands-of-navi"
+    },
+    {
+      "name": "Twistzz on if he was always going to replace rain: \"People may have thought otherwise (laughs), but yeah. In the early talks, it was like that\" ",
+      "link": "/news/42888/twistzz-on-if-he-was-always-going-to-replace-rain-people-may-have-thought-otherwise-laughs-but-yeah-in-the-early-talks-it-was-like-that"
+    },
+    {
+      "name": "2-2 matchups set for Pro League Season 22 ",
+      "link": "/news/42886/2-2-matchups-set-for-pro-league-season-22"
+    },
+    {
+      "name": "FaZe end Inner Circle's EPL run ",
+      "link": "/news/42885/faze-end-inner-circles-epl-run"
+    },
+    {
+      "name": "Aleksib: \"We improved on the Falcons game, but it's not like we're filled with confidence now\" ",
+      "link": "/news/42880/aleksib-we-improved-on-the-falcons-game-but-its-not-like-were-filled-with-confidence-now"
+    },
+    {
+      "name": "MOUZ sail into EPL playoffs over 3DMAX ",
+      "link": "/news/42881/mouz-sail-into-epl-playoffs-over-3dmax"
+    },
+    {
+      "name": "Maka: \"Graviti is able to see what I wasn't able to, I was not using players in the best positions\" ",
+      "link": "/news/42872/maka-graviti-is-able-to-see-what-i-wasnt-able-to-i-was-not-using-players-in-the-best-positions"
+    },
+    {
+      "name": "G2-Vitality headlines EPL day 4 ",
+      "link": "/news/42873/g2-vitality-headlines-epl-day-4"
+    },
+    {
+      "name": "Valve release Major-deciding ranking update ",
+      "link": "/news/42868/valve-release-major-deciding-ranking-update"
+    },
+    {
+      "name": "Astralis eliminated from Pro League with a whimper after lopsided defeat to FaZe ",
+      "link": "/news/42867/astralis-eliminated-from-pro-league-with-a-whimper-after-lopsided-defeat-to-faze"
+    },
+    {
+      "name": "3DMAX head to 2-1 bracket over NAVI ",
+      "link": "/news/42865/3dmax-head-to-2-1-bracket-over-navi"
+    },
+    {
+      "name": "Major invites set as VRS deadline looms ",
+      "link": "/news/42863/major-invites-set-as-vrs-deadline-looms"
+    },
+    {
+      "name": "EPL Season 22 round three matches set ",
+      "link": "/news/42861/epl-season-22-round-three-matches-set"
+    },
+    {
+      "name": "3DMAX send FaZe to elimination zone after rain return ",
+      "link": "/news/42860/3dmax-send-faze-to-elimination-zone-after-rain-return"
+    },
+    {
+      "name": "cairne: \"I was just tilted so hard [...] I won't break any mouse again\" ",
+      "link": "/news/42856/cairne-i-was-just-tilted-so-hard-i-wont-break-any-mouse-again"
+    },
+    {
+      "name": "Matchups set for round two of EPL Stage 2 ",
+      "link": "/news/42852/matchups-set-for-round-two-of-epl-stage-2"
+    },
+    {
+      "name": "tN1R is top Fantasy pick in debut with Spirit in ESL Pro League Stage 2 ",
+      "link": "/news/42836/tn1r-is-top-fantasy-pick-in-debut-with-spirit-in-esl-pro-league-stage-2"
+    },
+    {
+      "name": "G2 advance to EPL S22 Stage 2 over ENCE ",
+      "link": "/news/42831/g2-advance-to-epl-s22-stage-2-over-ence"
+    },
+    {
+      "name": "3DMAX beat ENCE to make EPL S22 Stage 2 ",
+      "link": "/news/42826/3dmax-beat-ence-to-make-epl-s22-stage-2"
+    },
+    {
+      "name": "ESL Pro League Stage 1 round 4 matches set ",
+      "link": "/news/42821/esl-pro-league-stage-1-round-4-matches-set"
+    },
+    {
+      "name": "Liquid withdraw from Fragadelphia Blocktober* ",
+      "link": "/news/42811/liquid-withdraw-from-fragadelphia-blocktober"
+    },
+    {
+      "name": "Majority of top 10 to skip PGL Masters Bucharest despite date adjustment ",
+      "link": "/news/42806/majority-of-top-10-to-skip-pgl-masters-bucharest-despite-date-adjustment"
+    },
+    {
+      "name": "EPL Season 22 Stage 1 day two matches set ",
+      "link": "/news/42800/epl-season-22-stage-1-day-two-matches-set"
+    },
+    {
+      "name": "New Inner Circle squad debuts with 3DMAX win ",
+      "link": "/news/42797/new-inner-circle-squad-debuts-with-3dmax-win"
+    },
+    {
+      "name": "Replacements explained for EPL Stage 1 Fantasy game ",
+      "link": "/news/42790/replacements-explained-for-epl-stage-1-fantasy-game"
+    },
+    {
+      "name": "Nivera to stand in for Maka for start of EPL S22 ",
+      "link": "/news/42758/nivera-to-stand-in-for-maka-for-start-of-epl-s22"
+    },
+    {
+      "name": "GenOne announce most ambitious roster to date with NBK-, Djoko and misutaaa ",
+      "link": "/news/42753/genone-announce-most-ambitious-roster-to-date-with-nbk-djoko-and-misutaaa"
+    },
+    {
+      "name": "Aleksib: \"After having a nice debut with makazze in Cologne, we put our thoughts way above what we actually were\" ",
+      "link": "/news/42739/aleksib-after-having-a-nice-debut-with-makazze-in-cologne-we-put-our-thoughts-way-above-what-we-actually-were"
+    },
+    {
+      "name": "NAVI claim StarSeries Fall title over NIP ",
+      "link": "/news/42737/navi-claim-starseries-fall-title-over-nip"
+    },
+    {
+      "name": "Fluxo to attend CAC 2025 as Imperial withdraw ",
+      "link": "/news/42716/fluxo-to-attend-cac-2025-as-imperial-withdraw"
+    },
+    {
+      "name": "Liquid-FaZe thriller headlines final FISSURE Playground 2 group stage matchups ",
+      "link": "/news/42700/liquid-faze-thriller-headlines-final-fissure-playground-2-group-stage-matchups"
+    },
+    {
+      "name": "The Huns round out CS Asia Championships 2025 team list ",
+      "link": "/news/42692/the-huns-round-out-cs-asia-championships-2025-team-list"
+    },
+    {
+      "name": "VP eliminate 3DMAX from FPG 2 ",
+      "link": "/news/42691/vp-eliminate-3dmax-from-fpg-2"
+    },
+    {
+      "name": "Falcons sweep FaZe to complete flawless group stage run at FPG2 ",
+      "link": "/news/42682/falcons-sweep-faze-to-complete-flawless-group-stage-run-at-fpg2"
+    },
+    {
+      "name": "frozen: \"It's been a messy year; we're just trying to get back to the top\" ",
+      "link": "/news/42669/frozen-its-been-a-messy-year-were-just-trying-to-get-back-to-the-top"
+    },
+    {
+      "name": "rain and jcobbb shine ahead of Twistzz's arrival as FaZe go 2-0 ",
+      "link": "/news/42668/rain-and-jcobbb-shine-ahead-of-twistzzs-arrival-as-faze-go-2-0"
+    },
+    {
+      "name": "Round two matches set at FISSURE Playground ",
+      "link": "/news/42663/round-two-matches-set-at-fissure-playground"
+    },
+    {
+      "name": "Graviti: \"We have the capacity to beat all the teams here, but the event is very stacked\" ",
+      "link": "/news/42652/graviti-we-have-the-capacity-to-beat-all-the-teams-here-but-the-event-is-very-stacked"
+    },
+    {
+      "name": "3DMAX upset The MongolZ at FISSURE Playground ",
+      "link": "/news/42651/3dmax-upset-the-mongolz-at-fissure-playground"
+    },
+    {
+      "name": "G2 go for cheap in FPG 2 groups Fantasy ",
+      "link": "/news/42645/g2-go-for-cheap-in-fpg-2-groups-fantasy"
+    },
+    {
+      "name": "FISSURE Playground 2 teams, format, schedule, talent, prizes, fantasy ",
+      "link": "/news/42633/fissure-playground-2-teams-format-schedule-talent-prizes-fantasy"
+    },
+    {
+      "name": "IEM Chengdu to feature crowd during all stages ",
+      "link": "/news/42631/iem-chengdu-to-feature-crowd-during-all-stages"
+    },
+    {
+      "name": "Opening matchups revealed for FISSURE Playground 2 ",
+      "link": "/news/42624/opening-matchups-revealed-for-fissure-playground-2"
+    },
+    {
+      "name": "Valve release September ranking update",
+      "link": "/news/42586/valve-release-september-ranking-update"
+    },
+    {
+      "name": "acoR signs with ECSTATIC",
+      "link": "/news/42579/acor-signs-with-ecstatic"
+    },
+    {
+      "name": "3DMAX beat TYLOO for PW CS Challenge S1 title",
+      "link": "/news/42569/3dmax-beat-tyloo-for-pw-cs-challenge-s1-title"
+    },
+    {
+      "name": "Rare Atom part ways with Trash",
+      "link": "/news/42549/rare-atom-part-ways-with-trash"
+    },
+    {
+      "name": "Short: 3DMAX release Austin Major behind the scenes video",
+      "link": "/news/42534/short-news-week-35#f13"
+    },
+    {
+      "name": "The EVPs and All-Stars of Esports World Cup 2025 ",
+      "link": "/news/42538/the-evps-and-all-stars-of-esports-world-cup-2025"
+    },
+    {
+      "name": "IEM Chengdu team list announced",
+      "link": "/news/42540/iem-chengdu-team-list-announced"
+    },
+    {
+      "name": "The MongolZ sweep Aurora to claim EWC 2025",
+      "link": "/news/42531/the-mongolz-sweep-aurora-to-claim-ewc-2025"
+    },
+    {
+      "name": "Lucky on IGL change: \"It's going to give Maka more freedom to play at his full potential\"",
+      "link": "/news/42508/lucky-on-igl-change-its-going-to-give-maka-more-freedom-to-play-at-his-full-potential"
+    },
+    {
+      "name": "The MongolZ march on to EWC semis over 3DMAX",
+      "link": "/news/42506/the-mongolz-march-on-to-ewc-semis-over-3dmax"
+    },
+    {
+      "name": "Aleksib: \"It feels so gut-wrenching to be in this situation in the middle of the season\"",
+      "link": "/news/42493/aleksib-it-feels-so-gut-wrenching-to-be-in-this-situation-in-the-middle-of-the-season"
+    },
+    {
+      "name": "3DMAX end NAVI's EWC title defense in Graviti's IGL debut",
+      "link": "/news/42489/3dmax-end-navis-ewc-title-defense-in-gravitis-igl-debut"
+    },
+    {
+      "name": "FISSURE Playground 2 team list complete",
+      "link": "/news/42477/fissure-playground-2-team-list-complete"
+    },
+    {
+      "name": "EWC Fantasy goes live while s1mple goes for $210k in a partner Exort game",
+      "link": "/news/42476/ewc-fantasy-goes-live-while-s1mple-goes-for-210k-in-a-partner-exort-game"
+    },
+    {
+      "name": "Esports World Cup 2025 teams, format, schedule, prizes, talent, fantasy",
+      "link": "/news/42473/esports-world-cup-2025-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "Imperial qualify for CS Asia Championships 2025",
+      "link": "/news/42471/imperial-qualify-for-cs-asia-championships-2025"
+    },
+    {
+      "name": "The MongolZ among six teams announced for FISSURE Playground 2",
+      "link": "/news/42451/the-mongolz-among-six-teams-announced-for-fissure-playground-2"
+    },
+    {
+      "name": "FUT, HEROIC, GamerLegion, and fnatic qualify for CS Asia Championships",
+      "link": "/news/42426/fut-heroic-gamerlegion-and-fnatic-qualify-for-cs-asia-championships"
+    },
+    {
+      "name": "MIBR invited to CAC 2025 as Perfect World updates slot allocation again",
+      "link": "/news/42423/mibr-invited-to-cac-2025-as-perfect-world-updates-slot-allocation-again"
+    },
+    {
+      "name": "Best photos from IEM Cologne 2025",
+      "link": "/news/42389/best-photos-from-iem-cologne-2025"
+    },
+    {
+      "name": "ZywOo: \"It's hard to play like this in the semi-final of IEM Cologne\"",
+      "link": "/news/42378/zywoo-its-hard-to-play-like-this-in-the-semi-final-of-iem-cologne"
+    },
+    {
+      "name": "Perfect World announce CAC 2025 invites in violation of TOR rulebook",
+      "link": "/news/42365/perfect-world-announce-cac-2025-invites-in-violation-of-tor-rulebook"
+    },
+    {
+      "name": "What we have learned so far about this season's rejigged rosters",
+      "link": "/news/42355/what-we-have-learned-so-far-about-this-seasons-rejigged-rosters"
+    },
+    {
+      "name": "G2 send 3DMAX home from Cologne",
+      "link": "/news/42335/g2-send-3dmax-home-from-cologne"
+    },
+    {
+      "name": "ash: \"It feels like we're losing off the server in these key situations\"",
+      "link": "/news/42322/ash-it-feels-like-were-losing-off-the-server-in-these-key-situations"
+    },
+    {
+      "name": "Vitality into Cologne playoffs, set up Major final rematch against The MongolZ",
+      "link": "/news/42320/vitality-into-cologne-playoffs-set-up-major-final-rematch-against-the-mongolz"
+    },
+    {
+      "name": "3DMAX send GamerLegion packing after Dust2 marathon",
+      "link": "/news/42321/3dmax-send-gamerlegion-packing-after-dust2-marathon"
+    },
+    {
+      "name": "The MongolZ defeat Falcons to make LANXESS for the first time",
+      "link": "/news/42318/the-mongolz-defeat-falcons-to-make-lanxess-for-the-first-time"
+    },
+    {
+      "name": "The MongolZ beat 3DMAX to set up Falcons clash",
+      "link": "/news/42310/the-mongolz-beat-3dmax-to-set-up-falcons-clash"
+    },
+    {
+      "name": "kyousuke's golden card features in now-complete Cologne Stage 2 Fantasy",
+      "link": "/news/42300/kyousukes-golden-card-features-in-now-complete-cologne-stage-2-fantasy"
+    },
+    {
+      "name": "3DMAX burst TYLOO's bubble to make Cologne Stage 2",
+      "link": "/news/42297/3dmax-burst-tyloos-bubble-to-make-cologne-stage-2"
+    },
+    {
+      "name": "Stat Check: How zweih's firepower can transform Spirit",
+      "link": "/news/42249/stat-check-how-zweihs-firepower-can-transform-spirit"
+    },
+    {
+      "name": "jks to face Liquid on Day 3 in Cologne",
+      "link": "/news/42287/jks-to-face-liquid-on-day-3-in-cologne"
+    },
+    {
+      "name": "Snappi: \"xKacpersky reminds me a lot of when I got NertZ in ENCE\"",
+      "link": "/news/42286/snappi-xkacpersky-reminds-me-a-lot-of-when-i-got-nertz-in-ence"
+    },
+    {
+      "name": "NIP head to Stage 2 over 3DMAX",
+      "link": "/news/42282/nip-head-to-stage-2-over-3dmax"
+    },
+    {
+      "name": "Impressive xKacpersky debut gives NIP win over HEROIC in Cologne",
+      "link": "/news/42272/impressive-xkacpersky-debut-gives-nip-win-over-heroic-in-cologne"
+    },
+    {
+      "name": "3DMAX breeze past MIBR in Cologne",
+      "link": "/news/42268/3dmax-breeze-past-mibr-in-cologne"
+    },
+    {
+      "name": "$10,000 Fantasy Season returns with IEM Cologne Stage 1",
+      "link": "/news/42258/10000-fantasy-season-returns-with-iem-cologne-stage-1"
+    },
+    {
+      "name": "IEM Cologne teams, format, schedule, prizes, talent, fantasy",
+      "link": "/news/42254/iem-cologne-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "Legacy complete ESL Pro League S22 team list",
+      "link": "/news/42240/legacy-complete-esl-pro-league-s22-team-list"
+    },
+    {
+      "name": "Jee return inspires TYLOO win over SAW in FISSURE Playground semis",
+      "link": "/news/42235/jee-return-inspires-tyloo-win-over-saw-in-fissure-playground-semis"
+    },
+    {
+      "name": "BLAST announces Open London teams",
+      "link": "/news/42230/blast-announces-open-london-teams"
+    },
+    {
+      "name": "Jee to play FISSURE Playground semi-finals",
+      "link": "/news/42223/jee-to-play-fissure-playground-semi-finals"
+    },
+    {
+      "name": "TYLOO blast past 3DMAX into FPG semi-finals",
+      "link": "/news/42222/tyloo-blast-past-3dmax-into-fpg-semi-finals"
+    },
+    {
+      "name": "FISSURE Playground 1 playoffs set",
+      "link": "/news/42220/fissure-playground-1-playoffs-set"
+    },
+    {
+      "name": "Falcons skip BLAST Bounty as team list revealed",
+      "link": "/news/42215/falcons-skip-blast-bounty-as-team-list-revealed"
+    },
+    {
+      "name": "C4LLM3SU3: \"We became more confident after the Major\"",
+      "link": "/news/42213/c4llm3su3-we-became-more-confident-after-the-major"
+    },
+    {
+      "name": "biguzera: \"We have to focus and be more professional\"",
+      "link": "/news/42212/biguzera-we-have-to-focus-and-be-more-professional"
+    },
+    {
+      "name": "3DMAX eliminate paiN to get revenge for Austin",
+      "link": "/news/42211/3dmax-eliminate-pain-to-get-revenge-for-austin"
+    },
+    {
+      "name": "z4kr 1v5s paiN as Lynn Vision secure FPG playoffs",
+      "link": "/news/42204/z4kr-1v5s-pain-as-lynn-vision-secure-fpg-playoffs"
+    },
+    {
+      "name": "Wildcard and Rare Atom bow out of FISSURE",
+      "link": "/news/42202/wildcard-and-rare-atom-bow-out-of-fissure"
+    },
+    {
+      "name": "M80 and HOTU secure ESL Pro League spots",
+      "link": "/news/42190/m80-and-hotu-secure-esl-pro-league-spots"
+    },
+    {
+      "name": "FISSURE Playground 1 teams, format, schedule, prizes, talent, fantasy",
+      "link": "/news/42168/fissure-playground-1-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "YouKnow takes over as 3DMAX coach",
+      "link": "/news/42162/youknow-takes-over-as-3dmax-coach"
+    },
+    {
+      "name": "ESL Pro League Season 22 invites announced*",
+      "link": "/news/42132/esl-pro-league-season-22-invites-announced"
+    },
+    {
+      "name": "BetBoom bench zorte, acquire ArtFr0st on loan for FISSURE Playground 1",
+      "link": "/news/42130/betboom-bench-zorte-acquire-artfr0st-on-loan-for-fissure-playground-1"
+    },
+    {
+      "name": "Groups and schedule announced for FISSURE Playground 1",
+      "link": "/news/42117/groups-and-schedule-announced-for-fissure-playground-1"
+    },
+    {
+      "name": "FURIA the only top 10 team to attend FISSURE Playground 1 as invites are announced",
+      "link": "/news/42061/furia-the-only-top-10-team-to-attend-fissure-playground-1-as-invites-are-announced"
+    },
+    {
+      "name": "Vitality best The MongolZ to win the Austin Major",
+      "link": "/news/42036/vitality-best-the-mongolz-to-win-the-austin-major"
+    },
+    {
+      "name": "wasiNk steps down as 3DMAX coach: \"We simply weren't fully aligned anymore\"",
+      "link": "/news/42026/wasink-steps-down-as-3dmax-coach-we-simply-werent-fully-aligned-anymore"
+    },
+    {
+      "name": "Short: Djoko announces free agency",
+      "link": "/news/41989/short-news-week-25#f20"
+    },
+    {
+      "name": "The Austin Major story so far",
+      "link": "/news/41998/the-austin-major-story-so-far"
+    },
+    {
+      "name": "NAVI push past G2 to reach Major playoffs",
+      "link": "/news/41974/navi-push-past-g2-to-reach-major-playoffs"
+    },
+    {
+      "name": "ElIGE: \"The aura of the team is incredible, everyone is going crazy. This Major has been so fun\"",
+      "link": "/news/41973/elige-the-aura-of-the-team-is-incredible-everyone-is-going-crazy-this-major-has-been-so-fun"
+    },
+    {
+      "name": "s1mple powers FaZe into Major playoffs over The MongolZ",
+      "link": "/news/41971/s1mple-powers-faze-into-major-playoffs-over-the-mongolz"
+    },
+    {
+      "name": "Maka: \"We should have improved between [Majors], and I don't think we improved a lot\"",
+      "link": "/news/41970/maka-we-should-have-improved-between-majors-and-i-dont-think-we-improved-a-lot"
+    },
+    {
+      "name": "paiN eliminate 3DMAX from Austin Major",
+      "link": "/news/41967/pain-eliminate-3dmax-from-austin-major"
+    },
+    {
+      "name": "Aurora-MOUZ elimination bout headlines Day 3",
+      "link": "/news/41963/aurora-mouz-elimination-bout-headlines-day-3"
+    },
+    {
+      "name": "paiN oust Nemiga from Austin Major",
+      "link": "/news/41962/pain-oust-nemiga-from-austin-major"
+    },
+    {
+      "name": "FaZe and Vitality one win away from Austin playoffs",
+      "link": "/news/41955/faze-and-vitality-one-win-away-from-austin-playoffs"
+    },
+    {
+      "name": "huNter-: \"It's a crazy feeling that six months ago we were favorites to win Shanghai, now we're not even close\"",
+      "link": "/news/41953/hunter-its-a-crazy-feeling-that-six-months-ago-we-were-favorites-to-win-shanghai-now-were-not-even-close"
+    },
+    {
+      "name": "MOUZ-Liquid to clash for survival on day two of Austin Major Stage 3",
+      "link": "/news/41950/mouz-liquid-to-clash-for-survival-on-day-two-of-austin-major-stage-3"
+    },
+    {
+      "name": "Visualized: Every team at BLAST.tv Austin Major Stage 3",
+      "link": "/news/41937/visualized-every-team-at-blasttv-austin-major-stage-3"
+    },
+    {
+      "name": "s1mple goes for $202k in high-stakes Austin Stage 3 fantasy game",
+      "link": "/news/41926/s1mple-goes-for-202k-in-high-stakes-austin-stage-3-fantasy-game"
+    },
+    {
+      "name": "First matchups set for Stage 3 of Austin Major",
+      "link": "/news/41925/first-matchups-set-for-stage-3-of-austin-major"
+    },
+    {
+      "name": "FaZe lock in final Stage 3 spot over MIBR",
+      "link": "/news/41924/faze-lock-in-final-stage-3-spot-over-mibr"
+    },
+    {
+      "name": "Maka: \"Watching the Falcons game put me in a little bit of stress\"",
+      "link": "/news/41914/maka-watching-the-falcons-game-put-me-in-a-little-bit-of-stress"
+    },
+    {
+      "name": "Final round of Austin Major Stage 2 set",
+      "link": "/news/41913/final-round-of-austin-major-stage-2-set"
+    },
+    {
+      "name": "3DMAX take revenge on FaZe to qualify for Stage 3 in Austin",
+      "link": "/news/41912/3dmax-take-revenge-on-faze-to-qualify-for-stage-3-in-austin"
+    },
+    {
+      "name": "Austin Major Stage 2 round four matchups set",
+      "link": "/news/41900/austin-major-stage-2-round-four-matchups-set"
+    },
+    {
+      "name": "MIBR send BetBoom packing from Austin",
+      "link": "/news/41899/mibr-send-betboom-packing-from-austin"
+    },
+    {
+      "name": "lux jokes: \"Stage 1 was too difficult, Stage 2 was easy\"",
+      "link": "/news/41897/lux-jokes-stage-1-was-too-difficult-stage-2-was-easy"
+    },
+    {
+      "name": "B8 snatch HEROIC upset as 1-1 pool concludes",
+      "link": "/news/41893/b8-snatch-heroic-upset-as-1-1-pool-concludes"
+    },
+    {
+      "name": "Austin Major Stage 2 round three matches set",
+      "link": "/news/41892/austin-major-stage-2-round-three-matches-set"
+    },
+    {
+      "name": "Legacy on verge of Stage 3 berth after win over 3DMAX",
+      "link": "/news/41887/legacy-on-verge-of-stage-3-berth-after-win-over-3dmax"
+    },
+    {
+      "name": "Falcons prices sky high for Austin Major Stage 2 Fantasy",
+      "link": "/news/41882/falcons-prices-sky-high-for-austin-major-stage-2-fantasy"
+    },
+    {
+      "name": "HEROIC-FaZe grudge match headlines Austin Major Stage 2 opening round",
+      "link": "/news/41881/heroic-faze-grudge-match-headlines-austin-major-stage-2-opening-round"
+    },
+    {
+      "name": "Short: Falcons become most-watched team in ESL Pro Tour",
+      "link": "/news/41815/short-news-week-23#f17"
+    },
+    {
+      "name": "Esports World Cup team list finalized",
+      "link": "/news/41833/esports-world-cup-team-list-finalized"
+    },
+    {
+      "name": "ESL confirm IEM Cologne 2025 invites",
+      "link": "/news/41832/esl-confirm-iem-cologne-2025-invites"
+    },
+    {
+      "name": "Monte bid farewell to hAdji and leen",
+      "link": "/news/41816/monte-bid-farewell-to-hadji-and-leen"
+    },
+    {
+      "name": "BLAST Austin Major teams, format, schedule, prizes, talent, fantasy",
+      "link": "/news/41799/blast-austin-major-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "The VRS impact of IEM Dallas",
+      "link": "/news/41789/the-vrs-impact-of-iem-dallas"
+    },
+    {
+      "name": "acoR: \"I've had a few offers that I turned down\"",
+      "link": "/news/41754/acor-ive-had-a-few-offers-that-i-turned-down"
+    },
+    {
+      "name": "GamerLegion scrape past G2 to make quarters",
+      "link": "/news/41751/gamerlegion-scrape-past-g2-to-make-quarters"
+    },
+    {
+      "name": "G2 beat 3DMAX to stay alive in Dallas",
+      "link": "/news/41747/g2-beat-3dmax-to-stay-alive-in-dallas"
+    },
+    {
+      "name": "GamerLegion take revenge for Astana in elimination match against FURIA",
+      "link": "/news/41745/gamerlegion-take-revenge-for-astana-in-elimination-match-against-furia"
+    },
+    {
+      "name": "Short: lux: \"BESTIA have been fighting for a lot of years to go, and I know they deserve it\"",
+      "link": "/news/41720/short-news-week-21#f15"
+    },
+    {
+      "name": "The MongolZ smash G2 to reach playoffs; FURIA eliminate Lynn Vision",
+      "link": "/news/41738/the-mongolz-smash-g2-to-reach-playoffs-furia-eliminate-lynn-vision"
+    },
+    {
+      "name": "3DMAX inch past Legacy in Dallas",
+      "link": "/news/41731/3dmax-inch-past-legacy-in-dallas"
+    },
+    {
+      "name": "ztr: \"We believe that acoR is such a good player that we should keep our expectations\"",
+      "link": "/news/41725/ztr-we-believe-that-acor-is-such-a-good-player-that-we-should-keep-our-expectations"
+    },
+    {
+      "name": "IEM Dallas teams, format, schedule, prizes, talent, fantasy",
+      "link": "/news/41718/iem-dallas-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "s1mple goes for $200k and new booster set to debut in IEM Dallas groups fantasy",
+      "link": "/news/41717/s1mple-goes-for-200k-and-new-booster-set-to-debut-in-iem-dallas-groups-fantasy"
+    },
+    {
+      "name": "acoR to stand in for GamerLegion at IEM Dallas",
+      "link": "/news/41690/acor-to-stand-in-for-gamerlegion-at-iem-dallas"
+    },
+    {
+      "name": "Aurora show signs of ring rust in PGL Astana opening loss to BIG",
+      "link": "/news/41648/aurora-show-signs-of-ring-rust-in-pgl-astana-opening-loss-to-big"
+    },
+    {
+      "name": "ash interview: Newfound fame, \"commitment from both parties\" in GamerLegion and trophy ambitions",
+      "link": "/news/41635/ash-interview-newfound-fame-commitment-from-both-parties-in-gamerlegion-and-trophy-ambitions"
+    },
+    {
+      "name": "s1mple to make FaZe debut against Liquid at IEM Dallas",
+      "link": "/news/41630/s1mple-to-make-faze-debut-against-liquid-at-iem-dallas"
+    },
+    {
+      "name": "Stat Check: FURIA know that the only cure for betrayal is success",
+      "link": "/news/41532/stat-check-furia-know-that-the-only-cure-for-betrayal-is-success"
+    },
+    {
+      "name": "siuhy: \"I think we can all be proud of the result\"",
+      "link": "/news/41553/siuhy-i-think-we-can-all-be-proud-of-the-result"
+    },
+    {
+      "name": "GamerLegion recover from 11-4 down to make Melbourne playoffs over FaZe",
+      "link": "/news/41520/gamerlegion-recover-from-11-4-down-to-make-melbourne-playoffs-over-faze"
+    },
+    {
+      "name": "FaZe embarrass 3DMAX in elimination series",
+      "link": "/news/41514/faze-embarrass-3dmax-in-elimination-series"
+    },
+    {
+      "name": "paiN and BIG sent packing from IEM Melbourne",
+      "link": "/news/41500/pain-and-big-sent-packing-from-iem-melbourne"
+    },
+    {
+      "name": "ztr: \"We needed to show we don't let one online qualifier define how good we are\"",
+      "link": "/news/41490/ztr-we-needed-to-show-we-dont-let-one-online-qualifier-define-how-good-we-are"
+    },
+    {
+      "name": "m0NESY goes for $225k in fantasy on his Falcons debut",
+      "link": "/news/41485/m0nesy-goes-for-225k-in-fantasy-on-his-falcons-debut"
+    },
+    {
+      "name": "The EVPs and Best Five of PGL Bucharest",
+      "link": "/news/41464/the-evps-and-best-five-of-pgl-bucharest"
+    },
+    {
+      "name": "IEM Melbourne teams, schedule, format, prizes, fantasy",
+      "link": "/news/41476/iem-melbourne-teams-schedule-format-prizes-fantasy"
+    },
+    {
+      "name": "NRG and BESTIA finalize BLAST.tv Austin Major team list",
+      "link": "/news/41474/nrg-and-bestia-finalize-blasttv-austin-major-team-list"
+    },
+    {
+      "name": "Chinggis Warriors secure Austin Major spot",
+      "link": "/news/41470/chinggis-warriors-secure-austin-major-spot"
+    },
+    {
+      "name": "FlyQuest qualify for Austin Major after flawless MRQ run",
+      "link": "/news/41468/flyquest-qualify-for-austin-major-after-flawless-mrq-run"
+    },
+    {
+      "name": "FaZe take third at PGL Bucharest",
+      "link": "/news/41437/faze-take-third-at-pgl-bucharest"
+    },
+    {
+      "name": "Complexity replace Spirit at IEM Melbourne due to health issues *",
+      "link": "/news/41418/complexity-replace-spirit-at-iem-melbourne-due-to-health-issues"
+    },
+    {
+      "name": "IEM Melbourne groups and opening match-ups revealed",
+      "link": "/news/41422/iem-melbourne-groups-and-opening-match-ups-revealed"
+    },
+    {
+      "name": "Seven teams replaced at YaLLa Compass despite move to online",
+      "link": "/news/41416/seven-teams-replaced-at-yalla-compass-despite-move-to-online"
+    },
+    {
+      "name": "FaZe overpower 3DMAX to make Bucharest semis",
+      "link": "/news/41417/faze-overpower-3dmax-to-make-bucharest-semis"
+    },
+    {
+      "name": "Falcons to Bucharest semis over GamerLegion",
+      "link": "/news/41413/falcons-to-bucharest-semis-over-gamerlegion"
+    },
+    {
+      "name": "m0NESY takes top billing in PGL Bucharest playoffs fantasy game at $240k",
+      "link": "/news/41411/m0nesy-takes-top-billing-in-pgl-bucharest-playoffs-fantasy-game-at-240k"
+    },
+    {
+      "name": "PGL Bucharest playoff bracket set",
+      "link": "/news/41408/pgl-bucharest-playoff-bracket-set"
+    },
+    {
+      "name": "cadiaN: \"We're just very inconsistent in terms of being on the same page\"",
+      "link": "/news/41406/cadian-were-just-very-inconsistent-in-terms-of-being-on-the-same-page"
+    },
+    {
+      "name": "The MongolZ eliminate FURIA from PGL Bucharest",
+      "link": "/news/41403/the-mongolz-eliminate-furia-from-pgl-bucharest"
+    },
+    {
+      "name": "Aurora to Bucharest playoffs over Apogee",
+      "link": "/news/41401/aurora-to-bucharest-playoffs-over-apogee"
+    },
+    {
+      "name": "Astralis battle past Legacy in double OT",
+      "link": "/news/41396/astralis-battle-past-legacy-in-double-ot"
+    },
+    {
+      "name": "GamerLegion secure first playoffs of 2025",
+      "link": "/news/41398/gamerlegion-secure-first-playoffs-of-2025"
+    },
+    {
+      "name": "HEROIC, TYLOO set to attend MESA Nomadic Masters Spring",
+      "link": "/news/41395/heroic-tyloo-set-to-attend-mesa-nomadic-masters-spring"
+    },
+    {
+      "name": "EliGE to face Complexity on Bucharest day four",
+      "link": "/news/41394/elige-to-face-complexity-on-bucharest-day-four"
+    },
+    {
+      "name": "3DMAX beat Aurora to cap off 3-0 run to playoffs",
+      "link": "/news/41393/3dmax-beat-aurora-to-cap-off-3-0-run-to-playoffs"
+    },
+    {
+      "name": "Liquid go 0-6 in siuhy's debut to exit Bucharest in last place",
+      "link": "/news/41392/liquid-go-0-6-in-siuhys-debut-to-exit-bucharest-in-last-place"
+    },
+    {
+      "name": "Apogee continue surprise run in Astralis stomp",
+      "link": "/news/41385/apogee-continue-surprise-run-in-astralis-stomp"
+    },
+    {
+      "name": "device: \"Today is not the biggest bummer\"",
+      "link": "/news/41380/device-today-is-not-the-biggest-bummer"
+    },
+    {
+      "name": "Liquid vs The MongolZ elimination clash headlines PGL Bucharest day three",
+      "link": "/news/41383/liquid-vs-the-mongolz-elimination-clash-headlines-pgl-bucharest-day-three"
+    },
+    {
+      "name": "Valve release Major-deciding ranking update",
+      "link": "/news/41381/valve-release-major-deciding-ranking-update"
+    },
+    {
+      "name": "Complexity romp past FURIA to close out day two",
+      "link": "/news/41382/complexity-romp-past-furia-to-close-out-day-two"
+    },
+    {
+      "name": "Apogee defeat The MongolZ in dramatic upset",
+      "link": "/news/41378/apogee-defeat-the-mongolz-in-dramatic-upset"
+    },
+    {
+      "name": "Maka: \"When we heard MongolZ say it's easy to play against us, we took it personally\"",
+      "link": "/news/41364/maka-when-we-heard-mongolz-say-its-easy-to-play-against-us-we-took-it-personally"
+    },
+    {
+      "name": "PGL Bucharest round two matches set",
+      "link": "/news/41371/pgl-bucharest-round-two-matches-set"
+    },
+    {
+      "name": "3DMAX take down The MongolZ in Bucharest",
+      "link": "/news/41363/3dmax-take-down-the-mongolz-in-bucharest"
+    },
+    {
+      "name": "PGL Bucharest teams, format, schedule, prizes, talent, fantasy",
+      "link": "/news/41353/pgl-bucharest-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "SAW invited to IEM Melbourne as Eternal Fire withdraw from event",
+      "link": "/news/41341/saw-invited-to-iem-melbourne-as-eternal-fire-withdraw-from-event"
+    },
+    {
+      "name": "The MongolZ, Eternal Fire more popular than G2, FaZe in PGL Bucharest fantasy",
+      "link": "/news/41333/the-mongolz-eternal-fire-more-popular-than-g2-faze-in-pgl-bucharest-fantasy"
+    },
+    {
+      "name": "PGL announce opening matchups for Bucharest",
+      "link": "/news/41321/pgl-announce-opening-matchups-for-bucharest"
+    },
+    {
+      "name": "YaLLa Compass 2025 Qatar Closed Qualifier invites revealed",
+      "link": "/news/41302/yalla-compass-2025-qatar-closed-qualifier-invites-revealed"
+    },
+    {
+      "name": "3DMAX extend contracts with roster",
+      "link": "/news/41293/3dmax-extend-contracts-with-roster"
+    },
+    {
+      "name": "FaZe demolish Astralis to send them home from BLAST Lisbon",
+      "link": "/news/41252/faze-demolish-astralis-to-send-them-home-from-blast-lisbon"
+    },
+    {
+      "name": "FL4MUS: \"I accept the fact that I'm not stable yet, that I cannot say I'll play like this tomorrow\"",
+      "link": "/news/41244/fl4mus-i-accept-the-fact-that-im-not-stable-yet-that-i-cannot-say-ill-play-like-this-tomorrow"
+    },
+    {
+      "name": "Vitality continue reign of terror, send Astralis to Lisbon lower bracket after cadiaN disasterclass",
+      "link": "/news/41242/vitality-continue-reign-of-terror-send-astralis-to-lisbon-lower-bracket-after-cadian-disasterclass"
+    },
+    {
+      "name": "Twistzz: \"We're working towards the future and our results so far are showing that\"",
+      "link": "/news/41235/twistzz-were-working-towards-the-future-and-our-results-so-far-are-showing-that"
+    },
+    {
+      "name": "NBK-'s Mercenaires to attend Fragadelphia Vegas amidst search for organization",
+      "link": "/news/41232/nbk-s-mercenaires-to-attend-fragadelphia-vegas-amidst-search-for-organization"
+    },
+    {
+      "name": "Fight for BLAST.tv Austin Major invites tenses up with three weeks to go",
+      "link": "/news/41222/fight-for-blasttv-austin-major-invites-tenses-up-with-three-weeks-to-go"
+    },
+    {
+      "name": "YaLLa announce preliminary Qatar invites",
+      "link": "/news/41203/yalla-announce-preliminary-qatar-invites"
+    },
+    {
+      "name": "Legacy finalize PGL Bucharest list following unbeaten qualifier run",
+      "link": "/news/41194/legacy-finalize-pgl-bucharest-list-following-unbeaten-qualifier-run"
+    },
+    {
+      "name": "Apogee complete underdog run to qualify for PGL Bucharest over OG",
+      "link": "/news/41193/apogee-complete-underdog-run-to-qualify-for-pgl-bucharest-over-og"
+    },
+    {
+      "name": "NertZ: \"When we have the small details and communication, we will be at the Spirit and Vitality level\"",
+      "link": "/news/41186/nertz-when-we-have-the-small-details-and-communication-we-will-be-at-the-spirit-and-vitality-level"
+    },
+    {
+      "name": "EF make fourth playoffs of 2025 over Falcons",
+      "link": "/news/41178/ef-make-fourth-playoffs-of-2025-over-falcons"
+    },
+    {
+      "name": "bodyy: \"I had a big grind after fnatic to find my love for the game again\"",
+      "link": "/news/41177/bodyy-i-had-a-big-grind-after-fnatic-to-find-my-love-for-the-game-again"
+    },
+    {
+      "name": "Liquid make EPL playoffs over 3DMAX",
+      "link": "/news/41176/liquid-make-epl-playoffs-over-3dmax"
+    },
+    {
+      "name": "Complexity qualify for PGL Bucharest",
+      "link": "/news/41173/complexity-qualify-for-pgl-bucharest"
+    },
+    {
+      "name": "Final EPL S21 Stage 2 matchups set",
+      "link": "/news/41172/final-epl-s21-stage-2-matchups-set"
+    },
+    {
+      "name": "NiKo hauls Falcons past FURIA in EPL elimination match",
+      "link": "/news/41171/niko-hauls-falcons-past-furia-in-epl-elimination-match"
+    },
+    {
+      "name": "Eternal Fire end paiN's Pro League campaign",
+      "link": "/news/41168/eternal-fire-end-pains-pro-league-campaign"
+    },
+    {
+      "name": "MOUZ breeze past Liquid to make EPL playoffs",
+      "link": "/news/41165/mouz-breeze-past-liquid-to-make-epl-playoffs"
+    },
+    {
+      "name": "The MongolZ trounce 3DMAX to qualify for EPL S21 playoffs",
+      "link": "/news/41162/the-mongolz-trounce-3dmax-to-qualify-for-epl-s21-playoffs"
+    },
+    {
+      "name": "NAVI-G2 headlines EPL Stage 2 Round 4",
+      "link": "/news/41159/navi-g2-headlines-epl-stage-2-round-4"
+    },
+    {
+      "name": "Eternal Fire and Falcons sent to elimination pool, TYLOO out after EPL Stage 2 day three",
+      "link": "/news/41158/eternal-fire-and-falcons-sent-to-elimination-pool-tyloo-out-after-epl-stage-2-day-three"
+    },
+    {
+      "name": "apEX brings the heat as Vitality beat Spinx and MOUZ to reach EPL playoffs",
+      "link": "/news/41156/apex-brings-the-heat-as-vitality-beat-spinx-and-mouz-to-reach-epl-playoffs"
+    },
+    {
+      "name": "Jee: \"It's really painful to lose in such a fashion\"",
+      "link": "/news/41154/jee-its-really-painful-to-lose-in-such-a-fashion"
+    },
+    {
+      "name": "Rare Atom qualify for PGL Bucharest after Asian Masters lower bracket run",
+      "link": "/news/41153/rare-atom-qualify-for-pgl-bucharest-after-asian-masters-lower-bracket-run"
+    },
+    {
+      "name": "Top four VRS-ranked teams lock horns for playoffs in EPL Stage 2 Round 3",
+      "link": "/news/41151/top-four-vrs-ranked-teams-lock-horns-for-playoffs-in-epl-stage-2-round-3"
+    },
+    {
+      "name": "MOUZ and Liquid wins wrap up day two of EPL Stage 2",
+      "link": "/news/41150/mouz-and-liquid-wins-wrap-up-day-two-of-epl-stage-2"
+    },
+    {
+      "name": "Round 2 matchups set at ESL Pro League Stage 2",
+      "link": "/news/41147/round-2-matchups-set-at-esl-pro-league-stage-2"
+    },
+    {
+      "name": "Falcons beat Liquid to end day one of EPL Stage 2",
+      "link": "/news/41146/falcons-beat-liquid-to-end-day-one-of-epl-stage-2"
+    },
+    {
+      "name": "3DMAX best Eternal Fire 2-0 to kick off EPL Stage 2",
+      "link": "/news/41143/3dmax-best-eternal-fire-2-0-to-kick-off-epl-stage-2"
+    },
+    {
+      "name": "ESL Pro League Stage 2 Fantasy goes live",
+      "link": "/news/41136/esl-pro-league-stage-2-fantasy-goes-live"
+    },
+    {
+      "name": "ESL Pro League 21 Stage 2 first-round matches set",
+      "link": "/news/41133/esl-pro-league-21-stage-2-first-round-matches-set"
+    },
+    {
+      "name": "FURIA capitalize on M80's mistakes to seal final EPL S21 Stage 2 berth",
+      "link": "/news/41129/furia-capitalize-on-m80s-mistakes-to-seal-final-epl-s21-stage-2-berth"
+    },
+    {
+      "name": "TYLOO edge past FlyQuest to qualify for ESL Pro League Stage 2",
+      "link": "/news/41127/tyloo-edge-past-flyquest-to-qualify-for-esl-pro-league-stage-2"
+    },
+    {
+      "name": "3DMAX cruise past M80 into EPL Stage 2",
+      "link": "/news/41121/3dmax-cruise-past-m80-into-epl-stage-2"
+    },
+    {
+      "name": "Nemiga eliminate HEROIC from ESL Pro League",
+      "link": "/news/41118/nemiga-eliminate-heroic-from-esl-pro-league"
+    },
+    {
+      "name": "MIBR beat TYLOO to qualify for EPL Stage 2",
+      "link": "/news/41117/mibr-beat-tyloo-to-qualify-for-epl-stage-2"
+    },
+    {
+      "name": "Valve releases invite-deciding March VRS update",
+      "link": "/news/41114/valve-releases-invite-deciding-march-vrs-update"
+    },
+    {
+      "name": "Round 4 matchups set at ESL Pro League Stage 1",
+      "link": "/news/41113/round-4-matchups-set-at-esl-pro-league-stage-1"
+    },
+    {
+      "name": "Team ranking: February 2025",
+      "link": "/news/41111/team-ranking-february-2025"
+    },
+    {
+      "name": "GamerLegion scrape past TYLOO to secure EPL Stage 2 spot",
+      "link": "/news/41109/gamerlegion-scrape-past-tyloo-to-secure-epl-stage-2-spot"
+    },
+    {
+      "name": "G2, Liquid, FURIA among PGL Bucharest invites",
+      "link": "/news/41105/g2-liquid-furia-among-pgl-bucharest-invites"
+    },
+    {
+      "name": "Round 3 matchups set at ESL Pro League Stage 1",
+      "link": "/news/41104/round-3-matchups-set-at-esl-pro-league-stage-1"
+    },
+    {
+      "name": "SAW go 2-0 at FURIA's expense",
+      "link": "/news/41103/saw-go-2-0-at-furias-expense"
+    },
+    {
+      "name": "JamYoung leads the way as TYLOO upset Eternal Fire in EPL 21 Stage 1",
+      "link": "/news/41102/jamyoung-leads-the-way-as-tyloo-upset-eternal-fire-in-epl-21-stage-1"
+    },
+    {
+      "name": "Matches set for day two of EPL S21",
+      "link": "/news/41100/matches-set-for-day-two-of-epl-s21"
+    },
+    {
+      "name": "Day one of EPL S21 draws to a close",
+      "link": "/news/41099/day-one-of-epl-s21-draws-to-a-close"
+    },
+    {
+      "name": "TYLOO best 3DMAX on Big Event return",
+      "link": "/news/41097/tyloo-best-3dmax-on-big-event-return"
+    },
+    {
+      "name": "ESL Pro League Season 21 teams, format, schedule, prizes, fantasy, talent",
+      "link": "/news/41085/esl-pro-league-season-21-teams-format-schedule-prizes-fantasy-talent"
+    },
+    {
+      "name": "Short: Ozstrik3r joins 3DMAX as General Manager",
+      "link": "/news/41072/short-news-week-9#f6"
+    },
+    {
+      "name": "HEROIC smash Astralis for final Dallas spot",
+      "link": "/news/41048/heroic-smash-astralis-for-final-dallas-spot"
+    },
+    {
+      "name": "brnz4n returns to MIBR's starting lineup",
+      "link": "/news/41045/brnz4n-returns-to-mibrs-starting-lineup"
+    },
+    {
+      "name": "PGL Cluj-Napoca playoff bracket set",
+      "link": "/news/41039/pgl-cluj-napoca-playoff-bracket-set"
+    },
+    {
+      "name": "MOUZ move into playoffs over VP",
+      "link": "/news/41038/mouz-move-into-playoffs-over-vp"
+    },
+    {
+      "name": "roman: \"I didn't think about the future yet; I got the news when I came to Romania\"",
+      "link": "/news/41037/roman-i-didnt-think-about-the-future-yet-i-got-the-news-when-i-came-to-romania"
+    },
+    {
+      "name": "SAW complete fairytale run to BT Arena in roman and Shr's final event with the team",
+      "link": "/news/41034/saw-complete-fairytale-run-to-bt-arena-in-roman-and-shrs-final-event-with-the-team"
+    },
+    {
+      "name": "Final PGL Cluj-Napoca group stage matchups set",
+      "link": "/news/41032/final-pgl-cluj-napoca-group-stage-matchups-set"
+    },
+    {
+      "name": "Complexity's dire 2025 continues after 11-3 collapse leads to elimination by SAW",
+      "link": "/news/41028/complexitys-dire-2025-continues-after-11-3-collapse-leads-to-elimination-by-saw"
+    },
+    {
+      "name": "Eternal Fire punch ticket to Cluj-Napoca playoffs",
+      "link": "/news/41025/eternal-fire-punch-ticket-to-cluj-napoca-playoffs"
+    },
+    {
+      "name": "PGL Cluj-Napoca round four matchups set",
+      "link": "/news/41019/pgl-cluj-napoca-round-four-matchups-set"
+    },
+    {
+      "name": "FaZe through to PGL Cluj-Napoca playoffs with 3-0 record",
+      "link": "/news/41016/faze-through-to-pgl-cluj-napoca-playoffs-with-3-0-record"
+    },
+    {
+      "name": "Falcons' first LAN win, new MOUZ's firepower and more from PGL day 1",
+      "link": "/news/40997/falcons-first-lan-win-new-mouzs-firepower-and-more-from-pgl-day-1"
+    },
+    {
+      "name": "bodyy: \"I wouldn't say I didn't enjoy my time in fnatic, but it made me realize how good it is here\"",
+      "link": "/news/40995/bodyy-i-wouldnt-say-i-didnt-enjoy-my-time-in-fnatic-but-it-made-me-realize-how-good-it-is-here"
+    },
+    {
+      "name": "IEM Melbourne invites announced",
+      "link": "/news/40991/iem-melbourne-invites-announced"
+    },
+    {
+      "name": "First Swiss group stage Fantasy game of the year set to start with PGL Cluj-Napoca",
+      "link": "/news/40986/first-swiss-group-stage-fantasy-game-of-the-year-set-to-start-with-pgl-cluj-napoca"
+    },
+    {
+      "name": "NRG and Legacy qualify for IEM Dallas",
+      "link": "/news/40983/nrg-and-legacy-qualify-for-iem-dallas"
+    },
+    {
+      "name": "Lynn Vision qualify for IEM Dallas",
+      "link": "/news/40980/lynn-vision-qualify-for-iem-dallas"
+    },
+    {
+      "name": "PGL Cluj-Napoca 2025 teams, format, schedule, prizes, talent, fantasy",
+      "link": "/news/40977/pgl-cluj-napoca-2025-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "Falcons, GamerLegion among teams to qualify for IEM Dallas",
+      "link": "/news/40970/falcons-gamerlegion-among-teams-to-qualify-for-iem-dallas"
+    },
+    {
+      "name": "3DMAX confirm bodyy addition",
+      "link": "/news/40962/3dmax-confirm-bodyy-addition"
+    },
+    {
+      "name": "IEM Dallas qualifiers reach closed stage",
+      "link": "/news/40956/iem-dallas-qualifiers-reach-closed-stage"
+    },
+    {
+      "name": "3DMAX remove Djoko",
+      "link": "/news/40950/3dmax-remove-djoko"
+    },
+    {
+      "name": "Short: ESL announce IEM Dallas closed qualifier teams",
+      "link": "/news/40906/short-news-week-6#f23"
+    },
+    {
+      "name": "Imperial fe to step in as FURIA withdraw from PGL Cluj-Napoca",
+      "link": "/news/40922/imperial-fe-to-step-in-as-furia-withdraw-from-pgl-cluj-napoca"
+    },
+    {
+      "name": "Team ranking: January 2025",
+      "link": "/news/40918/team-ranking-january-2025"
+    },
+    {
+      "name": "Eternal Fire survive 3DMAX comebacks to scrape into lower bracket final",
+      "link": "/news/40919/eternal-fire-survive-3dmax-comebacks-to-scrape-into-lower-bracket-final"
+    },
+    {
+      "name": "Valve releases crucial February VRS update",
+      "link": "/news/40917/valve-releases-crucial-february-vrs-update"
+    },
+    {
+      "name": "FaZe left heartbroken on Dust2 again as Vitality secure Spodek",
+      "link": "/news/40902/faze-left-heartbroken-on-dust2-again-as-vitality-secure-spodek"
+    },
+    {
+      "name": "3DMAX's stellar T sides eliminate BIG from Katowice",
+      "link": "/news/40904/3dmaxs-stellar-t-sides-eliminate-big-from-katowice"
+    },
+    {
+      "name": "FaZe defeat BIG for first LAN win with EliGE",
+      "link": "/news/40898/faze-defeat-big-for-first-lan-win-with-elige"
+    },
+    {
+      "name": "IEM Katowice Stage 2 Fantasy is live with complete team list",
+      "link": "/news/40891/iem-katowice-stage-2-fantasy-is-live-with-complete-team-list"
+    },
+    {
+      "name": "IEM Katowice groups set",
+      "link": "/news/40892/iem-katowice-groups-set"
+    },
+    {
+      "name": "VP dismantle MIBR to make Katowice Stage 2",
+      "link": "/news/40887/vp-dismantle-mibr-to-make-katowice-stage-2"
+    },
+    {
+      "name": "3DMAX beat MIBR to reach IEM Katowice Stage 2",
+      "link": "/news/40874/3dmax-beat-mibr-to-reach-iem-katowice-stage-2"
+    },
+    {
+      "name": "Virtus.pro outclass SAW in Katowice",
+      "link": "/news/40871/virtuspro-outclass-saw-in-katowice"
+    },
+    {
+      "name": "MIBR rally after tech issues to beat Astralis",
+      "link": "/news/40864/mibr-rally-after-tech-issues-to-beat-astralis"
+    },
+    {
+      "name": "IEM Katowice Fantasy kicks off with Play-in game",
+      "link": "/news/40854/iem-katowice-fantasy-kicks-off-with-play-in-game"
+    },
+    {
+      "name": "PGL Cluj-Napoca teams announced",
+      "link": "/news/40853/pgl-cluj-napoca-teams-announced"
+    },
+    {
+      "name": "IEM Katowice 2025 teams, format, schedule, prizes, talent, fantasy",
+      "link": "/news/40849/iem-katowice-2025-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "sAw: \"I think SunPayus will feel the joy again with this team\"",
+      "link": "/news/40811/saw-i-think-sunpayus-will-feel-the-joy-again-with-this-team"
+    },
+    {
+      "name": "HEROIC issue update on nilo as Maden steps in for Bounty Finals",
+      "link": "/news/40803/heroic-issue-update-on-nilo-as-maden-steps-in-for-bounty-finals"
+    },
+    {
+      "name": "New HEROIC qualify for Bounty Finals over Liquid; tN1R sidelined by visa issues",
+      "link": "/news/40787/new-heroic-qualify-for-bounty-finals-over-liquid-tn1r-sidelined-by-visa-issues"
+    },
+    {
+      "name": "IEM Katowice Stage 1 opening matchups set",
+      "link": "/news/40780/iem-katowice-stage-1-opening-matchups-set"
+    },
+    {
+      "name": "Short: Karmine Corp CEO comments on CS entrance",
+      "link": "/news/40754/short-news-week-3#f23"
+    },
+    {
+      "name": "A Brazilian curse broken, the first Train, and more from BLAST Bounty day one",
+      "link": "/news/40766/a-brazilian-curse-broken-the-first-train-and-more-from-blast-bounty-day-one"
+    },
+    {
+      "name": "Top 10 teams of 2024",
+      "link": "/news/40750/top-10-teams-of-2024"
+    },
+    {
+      "name": "FaZe skip ESL Pro League 21 as invites revealed",
+      "link": "/news/40758/faze-skip-esl-pro-league-21-as-invites-revealed"
+    },
+    {
+      "name": "BLAST Bounty 2025 Season 1 teams, format, schedule, prizes, talent, fantasy",
+      "link": "/news/40755/blast-bounty-2025-season-1-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "Top 20 players of 2024: m0NESY (2)",
+      "link": "/news/40746/top-20-players-of-2024-m0nesy-2"
+    },
+    {
+      "name": "BLAST Bounty opening matchups set",
+      "link": "/news/40738/blast-bounty-opening-matchups-set"
+    },
+    {
+      "name": "Top 20 players of 2024: NiKo (4)",
+      "link": "/news/40720/top-20-players-of-2024-niko-4"
+    },
+    {
+      "name": "BLAST Bounty schedule and final invites revealed",
+      "link": "/news/40730/blast-bounty-schedule-and-final-invites-revealed"
+    },
+    {
+      "name": "IEM Katowice 2025 invites announced",
+      "link": "/news/40715/iem-katowice-2025-invites-announced"
+    },
+    {
+      "name": "Valve release first ranking update of 2025",
+      "link": "/news/40694/valve-release-first-ranking-update-of-2025"
+    },
+    {
+      "name": "Top 20 players of 2024: malbsMd (12)",
+      "link": "/news/40656/top-20-players-of-2024-malbsmd-12"
+    },
+    {
+      "name": "Top 20 players of 2024: xertioN (14)",
+      "link": "/news/40643/top-20-players-of-2024-xertion-14"
+    },
+    {
+      "name": "Top 20 players of 2024: XANTARES (15)",
+      "link": "/news/40641/top-20-players-of-2024-xantares-15"
+    },
+    {
+      "name": "Top 20 players of 2024: Jimpphat (17)",
+      "link": "/news/40619/top-20-players-of-2024-jimpphat-17"
+    },
+    {
+      "name": "HLTV Awards 2024 panel: Who votes and how it works",
+      "link": "/news/40590/hltv-awards-2024-panel-who-votes-and-how-it-works"
+    },
+    {
+      "name": "BLAST Bounty Season 1 invites announced",
+      "link": "/news/40596/blast-bounty-season-1-invites-announced"
+    },
+    {
+      "name": "snow: \"To be honest, for my first Major, I felt very comfortable\"",
+      "link": "/news/40526/snow-to-be-honest-for-my-first-major-i-felt-very-comfortable"
+    },
+    {
+      "name": "xertioN on path to playoffs: \"We never really got tested like this in a Major before\"",
+      "link": "/news/40516/xertion-on-path-to-playoffs-we-never-really-got-tested-like-this-in-a-major-before"
+    },
+    {
+      "name": "MOUZ dominate MIBR to reach Shanghai Major playoffs",
+      "link": "/news/40515/mouz-dominate-mibr-to-reach-shanghai-major-playoffs"
+    },
+    {
+      "name": "Maka: \"A lot of frustration; on stage I didn't manage to [wear both hats], IGL and AWP\"",
+      "link": "/news/40505/maka-a-lot-of-frustration-on-stage-i-didnt-manage-to-wear-both-hats-igl-and-awp"
+    },
+    {
+      "name": "HEROIC take on NAVI on final day of Elimination Stage",
+      "link": "/news/40511/heroic-take-on-navi-on-final-day-of-elimination-stage"
+    },
+    {
+      "name": "MOUZ see off 3DMAX in Shanghai",
+      "link": "/news/40504/mouz-see-off-3dmax-in-shanghai"
+    },
+    {
+      "name": "G2 eviscerate FaZe to reach Shanghai Major playoffs",
+      "link": "/news/40503/g2-eviscerate-faze-to-reach-shanghai-major-playoffs"
+    },
+    {
+      "name": "G2 vs FaZe, Spirit vs HEROIC headline Elimination Stage day 3",
+      "link": "/news/40497/g2-vs-faze-spirit-vs-heroic-headline-elimination-stage-day-3"
+    },
+    {
+      "name": "paiN eliminate BIG from Shanghai Major",
+      "link": "/news/40496/pain-eliminate-big-from-shanghai-major"
+    },
+    {
+      "name": "Vitality qualify for playoffs in Shanghai",
+      "link": "/news/40492/vitality-qualify-for-playoffs-in-shanghai"
+    },
+    {
+      "name": "G2 and FaZe go 2-1, MOUZ and 3DMAX face elimination",
+      "link": "/news/40490/g2-and-faze-go-2-1-mouz-and-3dmax-face-elimination"
+    },
+    {
+      "name": "Shanghai Elimination Stage day 2 matchups set",
+      "link": "/news/40485/shanghai-elimination-stage-day-2-matchups-set"
+    },
+    {
+      "name": "HEROIC overcome FaZe for 2-0; paiN sent to 0-2",
+      "link": "/news/40484/heroic-overcome-faze-for-2-0-pain-sent-to-0-2"
+    },
+    {
+      "name": "HEROIC, MIBR secure victories as Elimination Stage round 1 ends",
+      "link": "/news/40478/heroic-mibr-secure-victories-as-elimination-stage-round-1-ends"
+    },
+    {
+      "name": "Points boost for Shanghai Major’s Elimination Stage fantasy",
+      "link": "/news/40471/points-boost-for-shanghai-majors-elimination-stage-fantasy"
+    },
+    {
+      "name": "Perfect World Shanghai Major Elimination Stage opening round set",
+      "link": "/news/40466/perfect-world-shanghai-major-elimination-stage-opening-round-set"
+    },
+    {
+      "name": "Team ranking: November 2024",
+      "link": "/news/40459/team-ranking-november-2024"
+    },
+    {
+      "name": "Visualized: All 24 teams at the Shanghai Major",
+      "link": "/news/40410/visualized-all-24-teams-at-the-shanghai-major"
+    },
+    {
+      "name": "Meet Perfect World Shanghai's Major rookies",
+      "link": "/news/40411/meet-perfect-world-shanghais-major-rookies"
+    },
+    {
+      "name": "Perfect World Shanghai Major teams, format, schedule, talent, prizes, fantasy",
+      "link": "/news/40405/perfect-world-shanghai-major-teams-format-schedule-talent-prizes-fantasy"
+    },
+    {
+      "name": "Valve releases Major seeding ranking update",
+      "link": "/news/40395/valve-releases-major-seeding-ranking-update"
+    },
+    {
+      "name": "Perfect World Shanghai Major team list set",
+      "link": "/news/40388/perfect-world-shanghai-major-team-list-set"
+    },
+    {
+      "name": "malbsMd: \"I saw players I thought I was better than getting a sticker, it was frustrating that it was taking me so long\"",
+      "link": "/news/40378/malbsmd-i-saw-players-i-thought-i-was-better-than-getting-a-sticker-it-was-frustrating-that-it-was-taking-me-so-long"
+    },
+    {
+      "name": "valde: \"Being a leader outside of the server is the most challenging part of being an IGL\"",
+      "link": "/news/40355/valde-being-a-leader-outside-of-the-server-is-the-most-challenging-part-of-being-an-igl"
+    },
+    {
+      "name": "Maka: \"I'm so happy, I could have switched to the international scene or even VALORANT\"",
+      "link": "/news/40360/maka-im-so-happy-i-could-have-switched-to-the-international-scene-or-even-valorant"
+    },
+    {
+      "name": "Shanghai Major Elimination stage invites to be decided by VRS update; fourth-place deciders cancelled",
+      "link": "/news/40361/shanghai-major-elimination-stage-invites-to-be-decided-by-vrs-update-fourth-place-deciders-cancelled"
+    },
+    {
+      "name": "3DMAX beat G2 after photo finish to secure Shanghai Major spot*",
+      "link": "/news/40356/3dmax-beat-g2-after-photo-finish-to-secure-shanghai-major-spot"
+    },
+    {
+      "name": "TSM eliminate PARIVISION from Europe RMR B",
+      "link": "/news/40352/tsm-eliminate-parivision-from-europe-rmr-b"
+    },
+    {
+      "name": "Eternal Fire facing elimination after loss to Sashi",
+      "link": "/news/40351/eternal-fire-facing-elimination-after-loss-to-sashi"
+    },
+    {
+      "name": "Lucky: \"It feels like we're just climbing and we're not stopping yet\"",
+      "link": "/news/40347/lucky-it-feels-like-were-just-climbing-and-were-not-stopping-yet"
+    },
+    {
+      "name": "Shanghai Major EU RMR B day 2 match-ups set",
+      "link": "/news/40348/shanghai-major-eu-rmr-b-day-2-match-ups-set"
+    },
+    {
+      "name": "Astralis down to 0-1 pool as RMR round 1 reaches end",
+      "link": "/news/40340/astralis-down-to-0-1-pool-as-rmr-round-1-reaches-end"
+    },
+    {
+      "name": "Europe RMR A and B fantasy games live with challenging prices",
+      "link": "/news/40289/europe-rmr-a-and-b-fantasy-games-live-with-challenging-prices"
+    },
+    {
+      "name": "Perfect World Shanghai Major 2024 Europe RMR teams, format, schedule, prizes, talent, fantasy",
+      "link": "/news/40284/perfect-world-shanghai-major-2024-europe-rmr-teams-format-schedule-prizes-talent-fantasy"
+    },
+    {
+      "name": "The MongolZ win Thunderpick World Championship over HEROIC",
+      "link": "/news/40192/the-mongolz-win-thunderpick-world-championship-over-heroic"
+    },
+    {
+      "name": "The MongolZ outclass 3DMAX to reach Thunderpick World Championship final",
+      "link": "/news/40185/the-mongolz-outclass-3dmax-to-reach-thunderpick-world-championship-final"
+    },
+    {
+      "name": "Four teams qualify for Thunderpick World Championship LAN Finals",
+      "link": "/news/40140/four-teams-qualify-for-thunderpick-world-championship-lan-finals"
+    },
+    {
+      "name": "OG bench Nexius",
+      "link": "/news/40112/og-bench-nexius"
+    },
+    {
+      "name": "3DMAX beat OG to progress in Thunderpick",
+      "link": "/news/40110/3dmax-beat-og-to-progress-in-thunderpick"
+    },
+    {
+      "name": "VP cast Falcons out of Thunderpick Championship",
+      "link": "/news/40109/vp-cast-falcons-out-of-thunderpick-championship"
+    },
+    {
+      "name": "Short: s1mple and electroNic set for first post-NAVI clash",
+      "link": "/news/40105/short-news-week-43#f7"
+    },
+    {
+      "name": "Falcons lose to 3DMAX in s1mple's return",
+      "link": "/news/40107/falcons-lose-to-3dmax-in-s1mples-return"
+    },
+    {
+      "name": "Short: s1mple to make second debut for Falcons",
+      "link": "/news/40105/short-news-week-43#f1"
+    },
+    {
+      "name": "Xant3r: \"We couldn’t really rejoice because we were very tired\"",
+      "link": "/news/40100/xant3r-we-couldnt-really-rejoice-because-we-were-very-tired"
+    },
+    {
+      "name": "Nemiga, UNPAID to clash in RES Champions final",
+      "link": "/news/40097/nemiga-unpaid-to-clash-in-res-champions-final"
+    },
+    {
+      "name": "Short: Nemiga qualify for EPL S21",
+      "link": "/news/40055/short-news-week-42#f28"
+    },
+    {
+      "name": "Short: SAW out of ESL Challenger League",
+      "link": "/news/40055/short-news-week-42#f24"
+    },
+    {
+      "name": "Thunderpick Championship team list finalized",
+      "link": "/news/40077/thunderpick-championship-team-list-finalized"
+    },
+    {
+      "name": "Valve releases final ranking update before Shanghai Major RMRs",
+      "link": "/news/40066/valve-releases-final-ranking-update-before-shanghai-major-rmrs"
+    },
+    {
+      "name": "Spirit Academy win CCT Season 2 Europe Series 14",
+      "link": "/news/40050/spirit-academy-win-cct-season-2-europe-series-14"
+    },
+    {
+      "name": "PW Shanghai Major RMR rosters revealed",
+      "link": "/news/40041/pw-shanghai-major-rmr-rosters-revealed"
+    },
+    {
+      "name": "Short: Media: 3DMAX roster in talks with teams ",
+      "link": "/news/39966/short-news-week-40#f14"
+    },
+    {
+      "name": "Short: SAW qualify for ESL Challenger Katowice",
+      "link": "/news/39904/short-news-week-39#f33"
+    },
+    {
+      "name": "Short: B8 qualify for ECL Katowice",
+      "link": "/news/39904/short-news-week-39#f29"
+    },
+    {
+      "name": "Short: BetBoom win CCT EU Series 12 without nafany",
+      "link": "/news/39904/short-news-week-39#f28"
+    },
+    {
+      "name": "Short: ECL Katowice American quals start today",
+      "link": "/news/39904/short-news-week-39#f26"
+    },
+    {
+      "name": "Short: YaLLa Compass Summer reaches playoffs",
+      "link": "/news/39853/short-news-week-38#f39"
+    },
+    {
+      "name": "Spirit move past FURIA in EPL playoffs",
+      "link": "/news/39860/spirit-move-past-furia-in-epl-playoffs"
+    },
+    {
+      "name": "3DMAX core free to leave club before RMR",
+      "link": "/news/39851/3dmax-core-free-to-leave-club-before-rmr"
+    },
+    {
+      "name": "Fantasy padding fiesta continues with EPL groups C and D",
+      "link": "/news/39816/fantasy-padding-fiesta-continues-with-epl-groups-c-and-d"
+    },
+    {
+      "name": "G2 move past MIBR to reach EPL quarters",
+      "link": "/news/39814/g2-move-past-mibr-to-reach-epl-quarters"
+    },
+    {
+      "name": "The MongolZ eliminate 3DMAX to make Pro League playoffs",
+      "link": "/news/39812/the-mongolz-eliminate-3dmax-to-make-pro-league-playoffs"
+    },
+    {
+      "name": "NIP, Wildcard eliminated from EPL",
+      "link": "/news/39811/nip-wildcard-eliminated-from-epl"
+    },
+    {
+      "name": "9z, FlyQuest sent packing from Malta",
+      "link": "/news/39808/9z-flyquest-sent-packing-from-malta"
+    },
+    {
+      "name": "Spirit secure playoffs; KOI, Lynn Vision eliminated",
+      "link": "/news/39806/spirit-secure-playoffs-koi-lynn-vision-eliminated"
+    },
+    {
+      "name": "The MongolZ, 9z drop down to Last Chance Stage",
+      "link": "/news/39803/the-mongolz-9z-drop-down-to-last-chance-stage"
+    },
+    {
+      "name": "NIP, HEROIC banished to Last Chance Stage at EPL",
+      "link": "/news/39800/nip-heroic-banished-to-last-chance-stage-at-epl"
+    },
+    {
+      "name": "MIBR stun Spirit to secure playoffs spot in Malta",
+      "link": "/news/39799/mibr-stun-spirit-to-secure-playoffs-spot-in-malta"
+    },
+    {
+      "name": "ESL Pro League Season 20 teams, format, schedule, talent, prizes, fantasy",
+      "link": "/news/39776/esl-pro-league-season-20-teams-format-schedule-talent-prizes-fantasy"
+    },
+    {
+      "name": "New Fantasy booster starts with EPL Groups A and B",
+      "link": "/news/39764/new-fantasy-booster-starts-with-epl-groups-a-and-b"
+    },
+    {
+      "name": "Perfect World Shanghai Major RMR team list finalized",
+      "link": "/news/39756/perfect-world-shanghai-major-rmr-team-list-finalized"
+    },
+    {
+      "name": "HEROIC smash Falcons to qualify for IEM Rio",
+      "link": "/news/39732/heroic-smash-falcons-to-qualify-for-iem-rio"
+    },
+    {
+      "name": "Eternal Fire qualify for IEM Rio",
+      "link": "/news/39723/eternal-fire-qualify-for-iem-rio"
+    },
+    {
+      "name": "ESL reveals Pro League S20 opening matchups",
+      "link": "/news/39719/esl-reveals-pro-league-s20-opening-matchups"
+    },
+    {
+      "name": "Short: C9 eliminated from IEM Rio EU qualifier",
+      "link": "/news/39706/short-news-week-35#f10"
+    },
+    {
+      "name": "Short: EF to meet Falcons for IEM Rio spot",
+      "link": "/news/39706/short-news-week-35#f7"
+    },
+    {
+      "name": "Short: HEROIC, fnatic knocked down to lower bracket of Rio closed qualifier",
+      "link": "/news/39706/short-news-week-35#f6"
+    },
+    {
+      "name": "OG, KOI, and BLEED miss out as EU RMR qualifiers reach end",
+      "link": "/news/39688/og-koi-and-bleed-miss-out-as-eu-rmr-qualifiers-reach-end"
+    },
+    {
+      "name": "Shanghai Major qualifier super-week set to start",
+      "link": "/news/39663/shanghai-major-qualifier-super-week-set-to-start"
+    },
+    {
+      "name": "TheMongolz invited to Elisa Masters Espoo",
+      "link": "/news/39661/themongolz-invited-to-elisa-masters-espoo"
+    },
+    {
+      "name": "C9, B8 secure last Rio EU closed qualifier spots",
+      "link": "/news/39657/c9-b8-secure-last-rio-eu-closed-qualifier-spots"
+    },
+    {
+      "name": "fnatic, OG advance to IEM Rio EU closed qualifier",
+      "link": "/news/39629/fnatic-og-advance-to-iem-rio-eu-closed-qualifier"
+    },
+    {
+      "name": "paiN eliminate 9z from IEM Cologne",
+      "link": "/news/39593/pain-eliminate-9z-from-iem-cologne"
+    },
+    {
+      "name": "Techno: \"A really big achievement for us\"",
+      "link": "/news/39583/techno-a-really-big-achievement-for-us"
+    },
+    {
+      "name": "FURIA qualify for Cologne groups, HEROIC out",
+      "link": "/news/39568/furia-qualify-for-cologne-groups-heroic-out"
+    },
+    {
+      "name": "9z defeat regional rivals MIBR to qualify for IEM Cologne group stage",
+      "link": "/news/39566/9z-defeat-regional-rivals-mibr-to-qualify-for-iem-cologne-group-stage"
+    },
+    {
+      "name": "Perfect World announce RMR and qualifier invites",
+      "link": "/news/39564/perfect-world-announce-rmr-and-qualifier-invites"
+    },
+    {
+      "name": "HEROIC eliminate 3DMAX upon degster's return",
+      "link": "/news/39559/heroic-eliminate-3dmax-upon-degsters-return"
+    },
+    {
+      "name": "Liquid beat FURIA to make Cologne group stage",
+      "link": "/news/39558/liquid-beat-furia-to-make-cologne-group-stage"
+    },
+    {
+      "name": "degster lands in Cologne",
+      "link": "/news/39552/degster-lands-in-cologne"
+    },
+    {
+      "name": "MIBR send struggling HEROIC to the lower bracket",
+      "link": "/news/39544/mibr-send-struggling-heroic-to-the-lower-bracket"
+    },
+    {
+      "name": "Final Valve Ranking update issued ahead of Shanghai Major RMR & qualifier invites",
+      "link": "/news/39540/final-valve-ranking-update-issued-ahead-of-shanghai-major-rmr-qualifier-invites"
+    },
+    {
+      "name": "Six key talking points ahead of IEM Cologne",
+      "link": "/news/39533/six-key-talking-points-ahead-of-iem-cologne"
+    },
+    {
+      "name": "3DMAX replacing BetBoom spices up IEM Cologne Play-in Fantasy",
+      "link": "/news/39535/3dmax-replacing-betboom-spices-up-iem-cologne-play-in-fantasy"
+    },
+    {
+      "name": "Team ranking: July 2024",
+      "link": "/news/39528/team-ranking-july-2024"
+    },
+    {
+      "name": "3DMAX to replace BetBoom at IEM Cologne",
+      "link": "/news/39530/3dmax-to-replace-betboom-at-iem-cologne"
+    },
+    {
+      "name": "9 Pandas qualify for BetBoom Dacha Belgrade Play-In",
+      "link": "/news/39525/9-pandas-qualify-for-betboom-dacha-belgrade-play-in"
+    },
+    {
+      "name": "Short: Invites to IEM Rio closed qualifers revealed",
+      "link": "/news/39472/short-news-week-31#f13"
+    },
+    {
+      "name": "SINNERS confirm majky and MoriiSko additions",
+      "link": "/news/39474/sinners-confirm-majky-and-moriisko-additions"
+    },
+    {
+      "name": "3DMAX trounce The MongolZ to win Skyesports Championship",
+      "link": "/news/39465/3dmax-trounce-the-mongolz-to-win-skyesports-championship"
+    },
+    {
+      "name": "Short: 3DMAX battle past Aurora to set up grand final with The Mongolz",
+      "link": "/news/39437/short-news-week-30#f39"
+    },
+    {
+      "name": "Short: The MongolZ coast past Eternal Fire in India",
+      "link": "/news/39437/short-news-week-30#f36"
+    },
+    {
+      "name": "Short: Cloud9, 3DMAX, AMKAL, BLEED feature in BB Dacha qualifier group of death",
+      "link": "/news/39437/short-news-week-30#f35"
+    },
+    {
+      "name": "The MongolZ and 3DMAX march on in Mumbai",
+      "link": "/news/39461/the-mongolz-and-3dmax-march-on-in-mumbai"
+    },
+    {
+      "name": "Aurora and Eternal Fire top groups at Skyesports Championship",
+      "link": "/news/39458/aurora-and-eternal-fire-top-groups-at-skyesports-championship"
+    },
+    {
+      "name": "Playoff race wide open after smooth day two at Skyesports Championship",
+      "link": "/news/39451/playoff-race-wide-open-after-smooth-day-two-at-skyesports-championship"
+    },
+    {
+      "name": "Skyesports Championship groups and schedule",
+      "link": "/news/39383/skyesports-championship-groups-and-schedule"
+    },
+    {
+      "name": "BLEED, PARIVISION and DMS invited to Skyesports Championship; FURIA withdraw",
+      "link": "/news/39373/bleed-parivision-and-dms-invited-to-skyesports-championship-furia-withdraw"
+    },
+    {
+      "name": "AMKAL invited to Skyesports Championship",
+      "link": "/news/39350/amkal-invited-to-skyesports-championship"
+    },
+    {
+      "name": "ENCE invited to Skyesports Championship",
+      "link": "/news/39341/ence-invited-to-skyesports-championship"
+    },
+    {
+      "name": "Skyesports increase prize pool and team count for Mumbai Championship",
+      "link": "/news/39336/skyesports-increase-prize-pool-and-team-count-for-mumbai-championship"
+    },
+    {
+      "name": "Thomas interview: 5W scam, ITB lessons and his future",
+      "link": "/news/39320/thomas-interview-5w-scam-itb-lessons-and-his-future"
+    },
+    {
+      "name": "ESL Pro League Season 20 groups announced",
+      "link": "/news/39307/esl-pro-league-season-20-groups-announced"
+    },
+    {
+      "name": "Spirit, The MongolZ among final teams invited to ESL Pro League Season 20",
+      "link": "/news/39285/spirit-the-mongolz-among-final-teams-invited-to-esl-pro-league-season-20"
+    },
+    {
+      "name": "5W lineup sever ties with organization: \"They scammed us\"",
+      "link": "/news/39280/5w-lineup-sever-ties-with-organization-they-scammed-us"
+    },
+    {
+      "name": "B8 tally third event win with CCT S2 EU Series 5",
+      "link": "/news/39271/b8-tally-third-event-win-with-cct-s2-eu-series-5"
+    },
+    {
+      "name": "3DMAX qualify for Skyesports Championship",
+      "link": "/news/39262/3dmax-qualify-for-skyesports-championship"
+    },
+    {
+      "name": "Short: ENCE sign Fisic0 as an analyst",
+      "link": "/news/39200/short-news-week-24#f26"
+    },
+    {
+      "name": "Short: 3DMAX part ways with analyst",
+      "link": "/news/39200/short-news-week-24#f17"
+    },
+    {
+      "name": "3DMAX clinch ESL Pro League Season 20 spot",
+      "link": "/news/39220/3dmax-clinch-esl-pro-league-season-20-spot"
+    },
+    {
+      "name": "Short: EPL 20 EU Closed Qualifier semis underway",
+      "link": "/news/39200/short-news-week-24#f13"
+    },
+    {
+      "name": "Sangal complete heroic lower bracket run to qualify for EPL S20",
+      "link": "/news/39191/sangal-complete-heroic-lower-bracket-run-to-qualify-for-epl-s20"
+    },
+    {
+      "name": "Into the Breach begin rebuild with smooya",
+      "link": "/news/39189/into-the-breach-begin-rebuild-with-smooya"
+    },
+    {
+      "name": "KOI qualify for ESL Pro League Season 20",
+      "link": "/news/39171/koi-qualify-for-esl-pro-league-season-20"
+    },
+    {
+      "name": "Season’s penultimate Fantasy game underway with YaLLa Compass",
+      "link": "/news/39154/seasons-penultimate-fantasy-game-underway-with-yalla-compass"
+    },
+    {
+      "name": "Short: Playoff teams for CCT Europe #4 set",
+      "link": "/news/39073/short-news-week-22#f15"
+    },
+    {
+      "name": "Sangal steal RES title from Zero Tenacity",
+      "link": "/news/39053/sangal-steal-res-title-from-zero-tenacity"
+    },
+    {
+      "name": "hAdji joins Monte as a stand-in",
+      "link": "/news/38972/short-news-week-20#f16"
+    },
+    {
+      "name": "BB Dacha fantasy, three partner games kick off",
+      "link": "/news/38979/bb-dacha-fantasy-three-partner-games-kick-off"
+    },
+    {
+      "name": "G2 move past 3DMAX to set up MOUZ clash in Malta",
+      "link": "/news/38940/g2-move-past-3dmax-to-set-up-mouz-clash-in-malta"
+    },
+    {
+      "name": "Vintage NiKo powers G2 past BIG in EPL playoffs",
+      "link": "/news/38930/vintage-niko-powers-g2-past-big-in-epl-playoffs"
+    },
+    {
+      "name": "EPL S19 playoffs fantasy padding explained",
+      "link": "/news/38926/epl-s19-playoffs-fantasy-padding-explained"
+    },
+    {
+      "name": "Team ranking: April 2024",
+      "link": "/news/38925/team-ranking-april-2024"
+    },
+    {
+      "name": "Sashi complete 32-map campaign to qualify for YaLLa Compass 2024",
+      "link": "/news/38900/sashi-complete-32-map-campaign-to-qualify-for-yalla-compass-2024"
+    },
+    {
+      "name": "3DMAX finalize Graviti and Wasink additions",
+      "link": "/news/38882/3dmax-finalize-graviti-and-wasink-additions"
+    },
+    {
+      "name": "jL's golden card among most picked as EPL Groups C and D fantasy goes live",
+      "link": "/news/38867/jls-golden-card-among-most-picked-as-epl-groups-c-and-d-fantasy-goes-live"
+    },
+    {
+      "name": "Eternal Fire, fnatic, TYLOO eliminated at EPL",
+      "link": "/news/38864/eternal-fire-fnatic-tyloo-eliminated-at-epl"
+    },
+    {
+      "name": "Astralis advance to EPL playoffs, FaZe to face Virtus.pro in lower bracket",
+      "link": "/news/38840/astralis-advance-to-epl-playoffs-faze-to-face-virtuspro-in-lower-bracket"
+    },
+    {
+      "name": "3DMAX beat fnatic to reach EPL S19 playoffs",
+      "link": "/news/38839/3dmax-beat-fnatic-to-reach-epl-s19-playoffs"
+    },
+    {
+      "name": "FaZe-Astralis set for Chengdu rematch after day one of EPL S19",
+      "link": "/news/38832/faze-astralis-set-for-chengdu-rematch-after-day-one-of-epl-s19"
+    },
+    {
+      "name": "fnatic spoil electroNic's VP debut in Malta",
+      "link": "/news/38830/fnatic-spoil-electronics-vp-debut-in-malta"
+    },
+    {
+      "name": "ESL Pro League Season 19 teams, format, schedule, talent, prizes, fantasy",
+      "link": "/news/38816/esl-pro-league-season-19-teams-format-schedule-talent-prizes-fantasy"
+    },
+    {
+      "name": "OG promote Lambert to head coach",
+      "link": "/news/38803/og-promote-lambert-to-head-coach"
+    },
+    {
+      "name": "EPL Groups A & B go live in a single fantasy game",
+      "link": "/news/38799/epl-groups-a-b-go-live-in-a-single-fantasy-game"
+    },
+    {
+      "name": "ESL Pro League S19 schedule & groups bracket set",
+      "link": "/news/38789/esl-pro-league-s19-schedule-groups-bracket-set"
+    },
+    {
+      "name": "Young Ninjas sign xKacpersky",
+      "link": "/news/38761/young-ninjas-sign-xkacpersky"
+    },
+    {
+      "name": "CSGOEmpire announces $50,000 online tournament",
+      "link": "/news/38624/csgoempire-announces-50000-online-tournament"
+    },
+    {
+      "name": "What to know about the PGL Major Opening Stage fantasy game",
+      "link": "/news/38498/what-to-know-about-the-pgl-major-opening-stage-fantasy-game"
+    },
+    {
+      "name": "hAdji steps down from 3DMAX",
+      "link": "/news/38485/hadji-steps-down-from-3dmax"
+    },
+    {
+      "name": "glowiing in his 30s: Who is 9 Pandas' star rifler?",
+      "link": "/news/38469/glowiing-in-his-30s-who-is-9-pandas-star-rifler"
+    },
+    {
+      "name": "Skyesports Masters EU closed qualifier invites revealed",
+      "link": "/news/38444/skyesports-masters-eu-closed-qualifier-invites-revealed"
+    },
+    {
+      "name": "fnatic claim RES Series 1 title over BLEED",
+      "link": "/news/38438/fnatic-claim-res-series-1-title-over-bleed"
+    },
+    {
+      "name": "Into the Breach bench duo after RMR elimination",
+      "link": "/news/38305/into-the-breach-bench-duo-after-rmr-elimination"
+    },
+    {
+      "name": "Juve open to offers after ITB fail to reach Major",
+      "link": "/news/38258/juve-open-to-offers-after-itb-fail-to-reach-major"
+    },
+    {
+      "name": "Round 5 matchups set at Europe RMR A",
+      "link": "/news/38243/round-5-matchups-set-at-europe-rmr-a"
+    },
+    {
+      "name": "9 Pandas oust 3DMAX from Europe RMR",
+      "link": "/news/38240/9-pandas-oust-3dmax-from-europe-rmr"
+    },
+    {
+      "name": "mopoz on rebuilding: \"If I'm here, you can believe [in us]\"",
+      "link": "/news/38238/mopoz-on-rebuilding-if-im-here-you-can-believe-in-us"
+    },
+    {
+      "name": "3DMAX knock Into the Breach out of Europe RMR",
+      "link": "/news/38227/3dmax-knock-into-the-breach-out-of-europe-rmr"
+    },
+    {
+      "name": "FaZe-G2, NAVI-VP headline Europe RMR A day two",
+      "link": "/news/38215/faze-g2-navi-vp-headline-europe-rmr-a-day-two"
+    },
+    {
+      "name": "FaZe beat Falcons to go 2-0; KOI tally first win",
+      "link": "/news/38212/faze-beat-falcons-to-go-2-0-koi-tally-first-win"
+    },
+    {
+      "name": "EU RMR A round 1 ends with Falcons and fnatic securing wins",
+      "link": "/news/38208/eu-rmr-a-round-1-ends-with-falcons-and-fnatic-securing-wins"
+    },
+    {
+      "name": "Europe RMR A fantasy open; poll on donk’s price for RMR B",
+      "link": "/news/38192/europe-rmr-a-fantasy-open-poll-on-donks-price-for-rmr-b"
+    },
+    {
+      "name": "PGL Major Copenhagen Europe RMR A teams, format, schedule, prizes, talent",
+      "link": "/news/38191/pgl-major-copenhagen-europe-rmr-a-teams-format-schedule-prizes-talent"
+    },
+    {
+      "name": "Metizport qualify for BLAST Premier Spring Showdown",
+      "link": "/news/38189/metizport-qualify-for-blast-premier-spring-showdown"
+    },
+    {
+      "name": "FURIA eliminated from BLAST Showdown qualifier",
+      "link": "/news/38179/furia-eliminated-from-blast-showdown-qualifier"
+    },
+    {
+      "name": "donk Fantasy picks crater as price spikes ahead of IEM Katowice playoffs",
+      "link": "/news/38160/donk-fantasy-picks-crater-as-price-spikes-ahead-of-iem-katowice-playoffs"
+    },
+    {
+      "name": "PGL CS2 Europe RMR A opening round schedule revealed",
+      "link": "/news/38155/pgl-cs2-europe-rmr-a-opening-round-schedule-revealed"
+    },
+    {
+      "name": "Bad News Kangaroos clinch final EPL S19 spot",
+      "link": "/news/38057/bad-news-kangaroos-clinch-final-epl-s19-spot"
+    },
+    {
+      "name": "PERA qualify for ESL Pro League Season 19 over Guild Eagles",
+      "link": "/news/38053/pera-qualify-for-esl-pro-league-season-19-over-guild-eagles"
+    },
+    {
+      "name": "Imperial, Sharks qualify for ESL Pro League",
+      "link": "/news/38045/imperial-sharks-qualify-for-esl-pro-league"
+    },
+    {
+      "name": "PGL unveils EU RMRs team distribution",
+      "link": "/news/38014/pgl-unveils-eu-rmrs-team-distribution"
+    },
+    {
+      "name": "EU RMR team list set as Preasy, 3DMAX clinch final slots",
+      "link": "/news/38010/eu-rmr-team-list-set-as-preasy-3dmax-clinch-final-slots"
+    },
+    {
+      "name": "Five EU RMR spots remain as closed qualifiers reach end",
+      "link": "/news/37999/five-eu-rmr-spots-remain-as-closed-qualifiers-reach-end"
+    },
+    {
+      "name": "BIG, FORZE among teams eliminated with 1-3 record from European RMR closed qualifier",
+      "link": "/news/37995/big-forze-among-teams-eliminated-with-1-3-record-from-european-rmr-closed-qualifier"
+    },
+    {
+      "name": "PGL Copenhagen EU Closed Qualifiers team list finalized*",
+      "link": "/news/37971/pgl-copenhagen-eu-closed-qualifiers-team-list-finalized"
+    },
+    {
+      "name": "ESL Pro League Season 19 groups announced",
+      "link": "/news/37972/esl-pro-league-season-19-groups-announced"
+    },
+    {
+      "name": "32 teams set to compete in EU RMR closed qualifiers",
+      "link": "/news/37958/live-updates-from-pgl-major-copenhagen-eu-rmr-qualifier-4#f32"
+    },
+    {
+      "name": "Only four closed qualifier spots remain up for grabs",
+      "link": "/news/37958/live-updates-from-pgl-major-copenhagen-eu-rmr-qualifier-4#f2"
+    },
+    {
+      "name": "Only eight spots in the closed qualifiers are up for grabs",
+      "link": "/news/37942/live-updates-from-pgl-major-copenhagen-eu-rmr-qualifier-3#f4"
+    },
+    {
+      "name": "Falcons, Cloud9 among EPL S19 invites",
+      "link": "/news/37934/falcons-cloud9-among-epl-s19-invites"
+    },
+    {
+      "name": "Only 12 spots in the EU closed qualifiers are up for grabs",
+      "link": "/news/37912/live-updates-from-pgl-major-copenhagen-eu-rmr-qualifier-1#f47"
+    },
+    {
+      "name": "PGL confirm invites for PGL CS2 Major Copenhagen closed qualifiers",
+      "link": "/news/37862/pgl-confirm-invites-for-pgl-cs2-major-copenhagen-closed-qualifiers"
+    },
+    {
+      "name": "Initial invites for PGL CS2 Major Copenhagen closed qualifiers revealed",
+      "link": "/news/37818/initial-invites-for-pgl-cs2-major-copenhagen-closed-qualifiers-revealed"
+    },
+    {
+      "name": "SINNERS part ways with KWERTZZ",
+      "link": "/news/37764/sinners-part-ways-with-kwertzz"
+    },
+    {
+      "name": "M80, BOSS secure ESL Pro League Season 19 spots",
+      "link": "/news/37732/m80-boss-secure-esl-pro-league-season-19-spots"
+    },
+    {
+      "name": "3DMAX and FORZE qualify for ESL Pro League Season 19",
+      "link": "/news/37731/3dmax-and-forze-qualify-for-esl-pro-league-season-19"
+    },
+    {
+      "name": "TYLOO and TheMongolz qualify for ESL Pro League 19",
+      "link": "/news/37729/tyloo-and-themongolz-qualify-for-esl-pro-league-19"
+    },
+    {
+      "name": "Monte win ESL Challenger Jönköping undefeated",
+      "link": "/news/37608/monte-win-esl-challenger-jnkping-undefeated"
+    },
+    {
+      "name": "Monte, MIBR top groups at ESL Challenger Jönköping",
+      "link": "/news/37594/monte-mibr-top-groups-at-esl-challenger-jnkping"
+    },
+    {
+      "name": "3DMAX return to Counter-Strike with Looking4Org roster",
+      "link": "/news/37558/3dmax-return-to-counter-strike-with-looking4org-roster"
+    },
+    {
+      "name": "Flashback: The rise and fall of French Counter-Strike",
+      "link": "/news/36197/flashback-the-rise-and-fall-of-french-counter-strike"
+    },
+    {
+      "name": "HEET confirm JACKZ addition",
+      "link": "/news/34371/heet-confirm-jackz-addition"
+    },
+    {
+      "name": "JACKZ departs G2",
+      "link": "/news/34372/jackz-departs-g2"
+    },
+    {
+      "name": "Sprout announce raalz departure",
+      "link": "/news/34321/sprout-announce-raalz-departure"
+    },
+    {
+      "name": "raalz completes Sprout lineup: \"I still have a damn lot to give\"",
+      "link": "/news/32156/raalz-completes-sprout-lineup-i-still-have-a-damn-lot-to-give"
+    },
+    {
+      "name": "Rejin suspended from mousesports as he confesses to coaching bug use*",
+      "link": "/news/30249/rejin-suspended-from-mousesports-as-he-confesses-to-coaching-bug-use"
+    },
+    {
+      "name": "hREDS add xartE",
+      "link": "/news/30063/hreds-add-xarte"
+    },
+    {
+      "name": "Call me by my nickname - How Nivera is stepping out of ScreaM's shadow",
+      "link": "/news/29645/call-me-by-my-nickname-how-nivera-is-stepping-out-of-screams-shadow"
+    },
+    {
+      "name": "Heretics change two",
+      "link": "/news/28765/heretics-change-two"
+    },
+    {
+      "name": "floppy's path to the Pro League Finals: a journey three years in the making",
+      "link": "/news/28532/floppys-path-to-the-pro-league-finals-a-journey-three-years-in-the-making"
+    },
+    {
+      "name": "Heretics sign Lucky; JiNKZ moved to bench",
+      "link": "/news/28100/heretics-sign-lucky-jinkz-moved-to-bench"
+    },
+    {
+      "name": "Heretics sign FrenchFrogs roster",
+      "link": "/news/27311/heretics-sign-frenchfrogs-roster"
+    },
+    {
+      "name": "Syman sign Keoz on full-time basis*",
+      "link": "/news/26325/syman-sign-keoz-on-full-time-basis"
+    },
+    {
+      "name": "3DMAX lose CS:GO team",
+      "link": "/news/26279/3dmax-lose-csgo-team"
+    },
+    {
+      "name": "Sprout qualify for Charleroi Esports",
+      "link": "/news/26285/sprout-qualify-for-charleroi-esports"
+    },
+    {
+      "name": "WESG World Finals: Five players to watch",
+      "link": "/news/26260/wesg-world-finals-five-players-to-watch"
+    },
+    {
+      "name": "3DMAX add LOGAN as stand-in",
+      "link": "/news/26233/3dmax-add-logan-as-stand-in"
+    },
+    {
+      "name": "United Masters League Finals teams decided",
+      "link": "/news/26179/united-masters-league-finals-teams-decided"
+    },
+    {
+      "name": "G2 announce Ex6TenZ departure",
+      "link": "/news/26132/g2-announce-ex6tenz-departure"
+    },
+    {
+      "name": "LOOT.BET HotShot Series S2 announced with $20,000 prize pool",
+      "link": "/news/26084/lootbet-hotshot-series-s2-announced-with-20000-prize-pool"
+    },
+    {
+      "name": "IEM Katowice preview: Returning Challengers",
+      "link": "/news/26041/iem-katowice-preview-returning-challengers"
+    },
+    {
+      "name": "BIG qualify for IEM Sydney",
+      "link": "/news/26029/big-qualify-for-iem-sydney"
+    },
+    {
+      "name": "North pull out of IEM Sydney closed qualifier",
+      "link": "/news/26015/north-pull-out-of-iem-sydney-closed-qualifier"
+    },
+    {
+      "name": "NoxFire League Season 2 announced with LAN Finals, $70,000 prize pool",
+      "link": "/news/26013/noxfire-league-season-2-announced-with-lan-finals-70000-prize-pool"
+    },
+    {
+      "name": "3DMAX & OpTic round out IEM Sydney EU closed qualifier",
+      "link": "/news/25988/3dmax-optic-round-out-iem-sydney-eu-closed-qualifier"
+    },
+    {
+      "name": "LOOT.BET HotShot Series S1 groups determined",
+      "link": "/news/25962/lootbet-hotshot-series-s1-groups-determined"
+    },
+    {
+      "name": "Top 20 players of 2018: GuardiaN (11)",
+      "link": "/news/25796/top-20-players-of-2018-guardian-11"
+    },
+    {
+      "name": "Team Ranking: December 2018",
+      "link": "/news/25778/team-ranking-december-2018"
+    },
+    {
+      "name": "Top 20 players of 2018: oskar (14)",
+      "link": "/news/25777/top-20-players-of-2018-oskar-14"
+    },
+    {
+      "name": "LOOT.BET HotShot Series S1 with $20,000 prize pool",
+      "link": "/news/25775/lootbet-hotshot-series-s1-with-20000-prize-pool"
+    },
+    {
+      "name": "The headlines of 2018: An end-of-season recap",
+      "link": "/news/25686/the-headlines-of-2018-an-end-of-season-recap"
+    },
+    {
+      "name": "JaCkz: \"I felt really good in G2 straight away; we are all equal in the game\"",
+      "link": "/news/25636/jackz-i-felt-really-good-in-g2-straight-away-we-are-all-equal-in-the-game"
+    },
+    {
+      "name": "TaZ: \"It meant the world to me, beating a team that did not believe in me\"",
+      "link": "/news/25616/taz-it-meant-the-world-to-me-beating-a-team-that-did-not-believe-in-me"
+    },
+    {
+      "name": "Davidp: \"It's going to be hard to play with two new players\"",
+      "link": "/news/25610/davidp-its-going-to-be-hard-to-play-with-two-new-players"
+    },
+    {
+      "name": "3DMAX defeat Kinguin to win ESEA MDL Global Challenge",
+      "link": "/news/25605/3dmax-defeat-kinguin-to-win-esea-mdl-global-challenge"
+    },
+    {
+      "name": "ESEA MDL Global Challenge reaches playoffs, Virtus.pro eliminated",
+      "link": "/news/25594/esea-mdl-global-challenge-reaches-playoffs-virtuspro-eliminated"
+    },
+    {
+      "name": "Rogue, Kinguin earn final spots in ESL Pro League Season 9",
+      "link": "/news/25583/rogue-kinguin-earn-final-spots-in-esl-pro-league-season-9"
+    },
+    {
+      "name": "3DMAX book ESL Pro League S9 spot",
+      "link": "/news/25565/3dmax-book-esl-pro-league-s9-spot"
+    },
+    {
+      "name": "StarSeries S7 EU & NA qualifiers announced",
+      "link": "/news/25527/starseries-s7-eu-na-qualifiers-announced"
+    },
+    {
+      "name": "ESL Pro League Europe expands to 16 teams; fnatic and NiP retain slots",
+      "link": "/news/25514/esl-pro-league-europe-expands-to-16-teams-fnatic-and-nip-retain-slots"
+    },
+    {
+      "name": "Wild to miss ESEA Global Challenge LAN due to visa issues",
+      "link": "/news/25512/wild-to-miss-esea-global-challenge-lan-due-to-visa-issues"
+    },
+    {
+      "name": "JaCkz and Lucky join G2; SmithZz and Ex6TenZ benched",
+      "link": "/news/25470/jackz-and-lucky-join-g2-smithzz-and-ex6tenz-benched"
+    },
+    {
+      "name": "LDLC and Vitality round out Europe Minor Closed Qualifier team list",
+      "link": "/news/25465/ldlc-and-vitality-round-out-europe-minor-closed-qualifier-team-list"
+    },
+    {
+      "name": "Final EU Minor open qualifier reaches end",
+      "link": "/news/25456/final-eu-minor-open-qualifier-reaches-end"
+    },
+    {
+      "name": "Rivalry.gg Rising Stars announced with $15,000 prize pool",
+      "link": "/news/25425/rivalrygg-rising-stars-announced-with-15000-prize-pool"
+    },
+    {
+      "name": "United Masters League set to start",
+      "link": "/news/25411/united-masters-league-set-to-start"
+    },
+    {
+      "name": "ESEA S29 Global Challenge & EPL Relegation details announced",
+      "link": "/news/25405/esea-s29-global-challenge-epl-relegation-details-announced"
+    },
+    {
+      "name": "Kinguin defeat Epsilon 2-1; qualify for EPL Relegation and Global Challenge LAN",
+      "link": "/news/25379/kinguin-defeat-epsilon-2-1-qualify-for-epl-relegation-and-global-challenge-lan"
+    },
+    {
+      "name": "United Masters League announced with $150,000 prize pool",
+      "link": "/news/25375/united-masters-league-announced-with-150000-prize-pool"
+    },
+    {
+      "name": "3DMAX and Virtus.pro to ESEA MDL Grand Finals and Global Challenge LAN",
+      "link": "/news/25371/3dmax-and-virtuspro-to-esea-mdl-grand-finals-and-global-challenge-lan"
+    },
+    {
+      "name": "hAdji and ScreaM added to 3DMAX's ESL roster",
+      "link": "/news/25366/hadji-and-scream-added-to-3dmaxs-esl-roster"
+    },
+    {
+      "name": "Figuring out the French: HLTV Confirmed episode 11 recap",
+      "link": "/news/25359/figuring-out-the-french-hltv-confirmed-episode-11-recap"
+    },
+    {
+      "name": "Ex6TenZ, SmithZz to be replaced in G2 - Report",
+      "link": "/news/25344/ex6tenz-smithzz-to-be-replaced-in-g2-report"
+    },
+    {
+      "name": "EU Minor open qualifier #3 reaches end",
+      "link": "/news/25332/eu-minor-open-qualifier-3-reaches-end"
+    },
+    {
+      "name": "Sprout, Fragsters advance to Europe Minor closed qualifier",
+      "link": "/news/25168/sprout-fragsters-advance-to-europe-minor-closed-qualifier"
+    },
+    {
+      "name": "LeftOut trio reunite for Europe Minor qualifier",
+      "link": "/news/25144/leftout-trio-reunite-for-europe-minor-qualifier"
+    },
+    {
+      "name": "Grand Hotshots ~$17,000 tournament announced",
+      "link": "/news/25112/grand-hotshots-17000-tournament-announced"
+    },
+    {
+      "name": "Official: Vitality unveil team",
+      "link": "/news/25028/official-vitality-unveil-team"
+    },
+    {
+      "name": "ZywOo leaves aAa",
+      "link": "/news/25007/zywoo-leaves-aaa"
+    },
+    {
+      "name": "Rumoured Vitality line-up to play in IEM Chicago Qualifier",
+      "link": "/news/24959/rumoured-vitality-line-up-to-play-in-iem-chicago-qualifier"
+    },
+    {
+      "name": "ESL One New York key storylines",
+      "link": "/news/24878/esl-one-new-york-key-storylines"
+    },
+    {
+      "name": "maLeK joins G2 as coach for ESL One New York",
+      "link": "/news/24875/malek-joins-g2-as-coach-for-esl-one-new-york"
+    },
+    {
+      "name": "ESEA MDL Season 29 EU & NA set to kick off",
+      "link": "/news/24827/esea-mdl-season-29-eu-na-set-to-kick-off"
+    },
+    {
+      "name": "G2, Gambit invited to GG.BET Shuffle final stage",
+      "link": "/news/24736/g2-gambit-invited-to-ggbet-shuffle-final-stage"
+    },
+    {
+      "name": "GG.BET Shuffle with IEM Chicago spot, $10,000 prize pool on offer",
+      "link": "/news/24659/ggbet-shuffle-with-iem-chicago-spot-10000-prize-pool-on-offer"
+    },
+    {
+      "name": "ENCE qualify for EPICENTER Wild Card Qualifier",
+      "link": "/news/24638/ence-qualify-for-epicenter-wild-card-qualifier"
+    },
+    {
+      "name": "Three GG.BET Summer tournaments revealed",
+      "link": "/news/24469/three-ggbet-summer-tournaments-revealed"
+    },
+    {
+      "name": "Player stock shift: July",
+      "link": "/news/24415/player-stock-shift-july"
+    },
+    {
+      "name": "ENCE secure playoff spot in London over 3DMAX",
+      "link": "/news/24321/ence-secure-playoff-spot-in-london-over-3dmax"
+    },
+    {
+      "name": "3DMAX knock out LeftOut at Europe Minor",
+      "link": "/news/24318/3dmax-knock-out-leftout-at-europe-minor"
+    },
+    {
+      "name": "Snappi: \"I think we have the best team at the tournament if we play up to our level\"",
+      "link": "/news/24314/snappi-i-think-we-have-the-best-team-at-the-tournament-if-we-play-up-to-our-level"
+    },
+    {
+      "name": "OpTic breeze past 3DMAX in Europe Minor opener",
+      "link": "/news/24312/optic-breeze-past-3dmax-in-europe-minor-opener"
+    },
+    {
+      "name": "Europe Minor preview",
+      "link": "/news/24285/europe-minor-preview"
+    },
+    {
+      "name": "Davidp: \"We feel ready to compete; the team worked with great efficiency\"",
+      "link": "/news/24296/davidp-we-feel-ready-to-compete-the-team-worked-with-great-efficiency"
+    },
+    {
+      "name": "Europe Minor viewer's guide",
+      "link": "/news/24294/europe-minor-viewers-guide"
+    },
+    {
+      "name": "StarSeries i-League S6 Europe Qualifier details revealed",
+      "link": "/news/24298/starseries-i-league-s6-europe-qualifier-details-revealed"
+    },
+    {
+      "name": "Road to the FACEIT Major: the Minors",
+      "link": "/news/24168/road-to-the-faceit-major-the-minors"
+    },
+    {
+      "name": "Groups for London Minors revealed",
+      "link": "/news/24149/groups-for-london-minors-revealed"
+    },
+    {
+      "name": "JaCkz joins 3DMAX",
+      "link": "/news/24133/jackz-joins-3dmax"
+    },
+    {
+      "name": "Sprout, LeftOut, 3DMAX round out Europe Minor team list",
+      "link": "/news/24114/sprout-leftout-3dmax-round-out-europe-minor-team-list"
+    },
+    {
+      "name": "3DMAX replace tomorrow in EU Minor Closed Qualifier",
+      "link": "/news/24091/3dmax-replace-tomorrow-in-eu-minor-closed-qualifier"
+    },
+    {
+      "name": "HellRaisers, OpTic qualify for DreamHack Masters Stockholm",
+      "link": "/news/24086/hellraisers-optic-qualify-for-dreamhack-masters-stockholm"
+    },
+    {
+      "name": "3DMAX sign NOBO roster",
+      "link": "/news/24083/3dmax-sign-nobo-roster"
+    }
+  ]
+}
