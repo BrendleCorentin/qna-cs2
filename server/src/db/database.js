@@ -275,6 +275,11 @@ export function logMatchResult(matchData) {
 function seedQuestions() {
     console.log("[DB] Adding missing seed questions...");
     db.run("DELETE FROM questions_v2 WHERE type = 'text' AND UPPER(question) LIKE 'QUI SUIS-JE ?%'");
+    db.run(`
+      DELETE FROM questions_v2
+      WHERE type = 'mcq'
+        AND category IN ('lineup_completion', 'transfer_history', 'match_history', 'tournament_path')
+    `);
     // Retire l'ancienne série ultra-difficile centrée sur l'actualité 2026.
     // Le filtre est volontairement ciblé pour ne pas toucher aux autres questions.
     db.run(`
@@ -289,14 +294,15 @@ function seedQuestions() {
     `);
 
     QUESTIONS_DB_SEED.forEach(q => {
-            const type = q.type || 'mcq';
+            const openAnswerCategories = ['lineup_completion', 'transfer_history', 'match_history', 'tournament_path'];
+            const type = openAnswerCategories.includes(q.category) ? 'text' : (q.type || 'mcq');
             const category = q.category || (q.question.toUpperCase().startsWith('QUI SUIS-JE') ? 'who_am_i' : type === 'mcq' ? 'qcm' : type === 'progressive_clue' ? 'progressive' : 'open');
             let choices = null;
             if (q.choices) choices = JSON.stringify(q.choices);
             else if (q.clues && type === 'progressive_clue') choices = JSON.stringify(q.clues);
 
-            const idx = q.answerIndex !== undefined ? q.answerIndex : null;
-            const ans = q.answer || null;
+            const idx = type === 'mcq' && q.answerIndex !== undefined ? q.answerIndex : null;
+            const ans = q.answer || (openAnswerCategories.includes(q.category) ? q.choices?.[q.answerIndex] : null);
             stmt.run(type, category, q.question, choices, idx, ans, q.question);
     });
 
@@ -317,14 +323,15 @@ export function forceSeedQuestions() {
     const total = QUESTIONS_DB_SEED.length;
 
     QUESTIONS_DB_SEED.forEach((q) => {
-      const type = q.type || "mcq";
+      const openAnswerCategories = ['lineup_completion', 'transfer_history', 'match_history', 'tournament_path'];
+      const type = openAnswerCategories.includes(q.category) ? 'text' : (q.type || "mcq");
       const category = q.category || (q.question.toUpperCase().startsWith('QUI SUIS-JE') ? 'who_am_i' : type === 'mcq' ? 'qcm' : type === 'progressive_clue' ? 'progressive' : 'open');
       let choices = null;
       if (q.choices) choices = JSON.stringify(q.choices);
       else if (q.clues && type === 'progressive_clue') choices = JSON.stringify(q.clues);
 
-      const idx = q.answerIndex !== undefined ? q.answerIndex : null;
-      const ans = q.answer || null;
+      const idx = type === 'mcq' && q.answerIndex !== undefined ? q.answerIndex : null;
+      const ans = q.answer || (openAnswerCategories.includes(q.category) ? q.choices?.[q.answerIndex] : null);
       
       stmt.run([type, category, q.question, choices, idx, ans, q.question], (err) => {
         if (err) console.error("Error inserting seed question:", err.message);

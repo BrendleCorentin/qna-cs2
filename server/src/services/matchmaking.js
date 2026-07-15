@@ -41,6 +41,27 @@ function getLevenshteinDistance(a, b) {
   return matrix[b.length][a.length];
 }
 
+function normalizeTextAnswer(value) {
+  const normalized = String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+  const aliases = {
+    natusvincere: "navi",
+    ninjasinpyjamas: "nip",
+    teamvitality: "vitality",
+    teamldlc: "ldlc",
+  };
+  return aliases[normalized] || normalized;
+}
+
+function isTextAnswerCorrect(submitted, expected) {
+  const normalizedSubmitted = normalizeTextAnswer(submitted);
+  const normalizedExpected = normalizeTextAnswer(expected);
+  return normalizedSubmitted.length > 0 && getLevenshteinDistance(normalizedSubmitted, normalizedExpected) <= 1;
+}
+
 let waitingSocketId = null;
 const matches = new Map();
 const QUESTION_DURATION = 10000;
@@ -122,7 +143,7 @@ function startNextQuestion(io, match) {
   }
 
   // Dynamic duration based on question type
-  const duration = question.category === 'who_am_i' ? 30000 : question.type === 'progressive_clue' ? 20000 : 10000;
+  const duration = question.category === 'who_am_i' ? 30000 : question.type === 'progressive_clue' ? 20000 : question.type === 'text' ? 15000 : 10000;
   const deadline = Date.now() + duration;
   match.questionStartedAt = Date.now();
   match.questionDeadline = deadline;
@@ -404,7 +425,7 @@ export function attachMatchmaking(io) {
         const expected = (currentQ.answer || "").trim().toLowerCase();
         if (!submitted) return;
 
-        const correct = getLevenshteinDistance(submitted, expected) <= 1;
+        const correct = isTextAnswerCorrect(submitted, expected);
         attempts.push(answer);
         match.answers[socket.id][questionId] = attempts;
 
@@ -450,8 +471,7 @@ export function attachMatchmaking(io) {
         if (currentQ.type === 'text' || currentQ.type === 'progressive_clue') {
             const submitted = (typeof existingAns === 'string' ? existingAns : "").trim().toLowerCase();
             const expected = (currentQ.answer || "").trim().toLowerCase();
-            const dist = getLevenshteinDistance(submitted, expected);
-            wasCorrect = dist <= 1; // Allow 1 typo
+            wasCorrect = isTextAnswerCorrect(submitted, expected);
         } else {
              wasCorrect = existingAns === currentQ.answerIndex;
         }
@@ -474,8 +494,7 @@ export function attachMatchmaking(io) {
           const submitted = (typeof answer === 'string' ? answer : "").trim().toLowerCase();
           const expected = (q.answer || "").trim().toLowerCase();
           
-          const dist = getLevenshteinDistance(submitted, expected);
-          correct = dist <= 1; // Allow 1 typo
+          correct = isTextAnswerCorrect(submitted, expected);
           match.answers[socket.id][questionId] = answer;
       } else {
           // Default to MCQ
