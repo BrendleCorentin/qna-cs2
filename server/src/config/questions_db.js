@@ -42,6 +42,66 @@ export const QUESTIONS_DB_SEED = [
     clues: ["Je suis estonien.", "J'ai joué pour MOUZ.", "J'ai ensuite rejoint FaZe.", "J'ai gagné un Major avec une équipe internationale."],
     answer: "ropz"
   },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 8",
+    clues: ["Je suis brésilien.", "Je suis à la fois AWPer et in-game leader.", "J'ai remporté deux Majors avec le noyau Luminosity/SK.", "On me surnomme souvent le Professeur."],
+    answer: "FalleN"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 9",
+    clues: ["Je suis danois.", "Mon arme principale est l'AWP.", "J'ai fait partie de la grande époque d'Astralis.", "J'ai remporté quatre Majors avec dupreeh et Xyp9x."],
+    answer: "device"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 10",
+    clues: ["Je suis français.", "Je suis principalement in-game leader.", "J'ai joué avec ZywOo pendant de nombreuses saisons.", "Mon pseudo est aussi le nom d'une légende grecque."],
+    answer: "apEX"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 11",
+    clues: ["Je suis brésilien.", "Je suis connu comme rifler et lurker.", "Une action célèbre de moi combine un saut et un double kill à l'AWP sur Mirage.", "J'ai été numéro 1 mondial HLTV en 2016 et 2017."],
+    answer: "coldzera"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 12",
+    clues: ["Je suis suédois.", "J'ai joué pour fnatic puis FaZe.", "Une position d'Overpass porte officieusement mon nom.", "J'ai été numéro 1 mondial HLTV en 2015."],
+    answer: "olofmeister"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 13",
+    clues: ["Je suis français.", "Je suis un AWPer gaucher emblématique.", "J'ai représenté Titan, EnVyUs et G2.", "J'ai remporté le Major de Cluj-Napoca avec EnVyUs."],
+    answer: "kennyS"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 14",
+    clues: ["Je suis suédois.", "J'ai popularisé le rôle de lurker au plus haut niveau.", "J'ai participé à la série de 87 cartes remportées par NIP.", "Mon pseudo mélange des majuscules, des minuscules et des underscores."],
+    answer: "GeT_RiGhT"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 15",
+    clues: ["Je suis belge.", "Je suis célèbre pour mon excellente précision au premier tir.", "J'ai joué pour VeryGames, Titan et G2.", "Mon surnom est la Headshot Machine."],
+    answer: "ScreaM"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 16",
+    clues: ["Je suis turc.", "Je suis un rifler réputé pour mon aim.", "J'ai joué pour Space Soldiers puis BIG.", "Un style de peek très explosif porte mon pseudo."],
+    answer: "XANTARES"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 17",
+    clues: ["Je suis danois.", "Je suis un in-game leader ayant dirigé plusieurs équipes internationales.", "J'ai représenté MOUZ, TSM et FaZe.", "J'ai remporté mon premier Major comme capitaine avec FaZe."],
+    answer: "karrigan"
+  },
 
   // --- CATÉGORIE : ESPOST & RECORDS (MCQ) ---
   {
