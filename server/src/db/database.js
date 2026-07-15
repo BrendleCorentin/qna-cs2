@@ -62,6 +62,7 @@ function initDB() {
       CREATE TABLE IF NOT EXISTS questions_v2 (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         type TEXT DEFAULT 'mcq',
+        category TEXT DEFAULT 'qcm',
         question TEXT NOT NULL,
         choices TEXT,
         answerIndex INTEGER,
@@ -70,6 +71,29 @@ function initDB() {
     `, (err) => {
         if (err) console.error("Erreur table questions_v2:", err.message);
         else seedQuestions();
+    });
+
+    db.all("PRAGMA table_info(questions_v2)", [], (err, columns) => {
+      if (err) return console.error("Erreur lecture structure questions_v2:", err.message);
+      const classifyExistingQuestions = () => db.run(`
+        UPDATE questions_v2
+        SET category = CASE
+          WHEN UPPER(question) LIKE 'QUI SUIS-JE%' THEN 'who_am_i'
+          WHEN type = 'mcq' THEN 'qcm'
+          WHEN type = 'progressive_clue' THEN 'progressive'
+          ELSE 'open'
+        END
+        WHERE category IS NULL OR category = ''
+      `);
+
+      if (!columns.some((column) => column.name === "category")) {
+        db.run("ALTER TABLE questions_v2 ADD COLUMN category TEXT", (alterErr) => {
+          if (alterErr) console.error("Erreur ajout category:", alterErr.message);
+          else classifyExistingQuestions();
+        });
+      } else {
+        classifyExistingQuestions();
+      }
     });
 
     // Optionnel: Créer un index sur match_id
@@ -247,20 +271,21 @@ export function logMatchResult(matchData) {
 function seedQuestions() {
     console.log("[DB] Adding missing seed questions...");
     const stmt = db.prepare(`
-        INSERT INTO questions_v2 (type, question, choices, answerIndex, answer)
-        SELECT ?, ?, ?, ?, ?
+        INSERT INTO questions_v2 (type, category, question, choices, answerIndex, answer)
+        SELECT ?, ?, ?, ?, ?, ?
         WHERE NOT EXISTS (SELECT 1 FROM questions_v2 WHERE question = ?)
     `);
 
     QUESTIONS_DB_SEED.forEach(q => {
             const type = q.type || 'mcq';
+            const category = q.category || (q.question.toUpperCase().startsWith('QUI SUIS-JE') ? 'who_am_i' : type === 'mcq' ? 'qcm' : type === 'progressive_clue' ? 'progressive' : 'open');
             let choices = null;
             if (q.choices) choices = JSON.stringify(q.choices);
             else if (q.clues && type === 'progressive_clue') choices = JSON.stringify(q.clues);
 
             const idx = q.answerIndex !== undefined ? q.answerIndex : null;
             const ans = q.answer || null;
-            stmt.run(type, q.question, choices, idx, ans, q.question);
+            stmt.run(type, category, q.question, choices, idx, ans, q.question);
     });
 
     stmt.finalize();
@@ -271,8 +296,8 @@ export function forceSeedQuestions() {
   return new Promise((resolve, reject) => {
     console.log("[DB] Force seeding questions...");
     const stmt = db.prepare(`
-      INSERT INTO questions_v2 (type, question, choices, answerIndex, answer)
-      SELECT ?, ?, ?, ?, ?
+      INSERT INTO questions_v2 (type, category, question, choices, answerIndex, answer)
+      SELECT ?, ?, ?, ?, ?, ?
       WHERE NOT EXISTS (SELECT 1 FROM questions_v2 WHERE question = ?)
     `);
 
@@ -281,6 +306,7 @@ export function forceSeedQuestions() {
 
     QUESTIONS_DB_SEED.forEach((q) => {
       const type = q.type || "mcq";
+      const category = q.category || (q.question.toUpperCase().startsWith('QUI SUIS-JE') ? 'who_am_i' : type === 'mcq' ? 'qcm' : type === 'progressive_clue' ? 'progressive' : 'open');
       let choices = null;
       if (q.choices) choices = JSON.stringify(q.choices);
       else if (q.clues && type === 'progressive_clue') choices = JSON.stringify(q.clues);
@@ -288,7 +314,7 @@ export function forceSeedQuestions() {
       const idx = q.answerIndex !== undefined ? q.answerIndex : null;
       const ans = q.answer || null;
       
-      stmt.run([type, q.question, choices, idx, ans, q.question], (err) => {
+      stmt.run([type, category, q.question, choices, idx, ans, q.question], (err) => {
         if (err) console.error("Error inserting seed question:", err.message);
         completed++;
         if (completed === total) {
@@ -345,6 +371,7 @@ export function getAllQuestions() {
 export function addQuestion(q) {
   return new Promise((resolve, reject) => {
     const type = q.type || "mcq";
+    const category = q.category || (type === "mcq" ? "qcm" : type === "progressive_clue" ? "progressive" : "open");
     // Store clues in choices column if type is progressive_clue
     let choicesStr = null;
     if (q.choices) choicesStr = JSON.stringify(q.choices);
@@ -354,8 +381,8 @@ export function addQuestion(q) {
     const ans = q.answer || null;
 
     db.run(
-      "INSERT INTO questions_v2 (type, question, choices, answerIndex, answer) VALUES (?, ?, ?, ?, ?)",
-      [type, q.question, choicesStr, idx, ans],
+      "INSERT INTO questions_v2 (type, category, question, choices, answerIndex, answer) VALUES (?, ?, ?, ?, ?, ?)",
+      [type, category, q.question, choicesStr, idx, ans],
       function (err) {
         if (err) reject(err);
         else resolve({ id: this.lastID, ...q });

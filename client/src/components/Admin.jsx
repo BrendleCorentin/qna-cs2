@@ -15,6 +15,22 @@ export default function Admin({ serverUrl, onBack }) {
   // --- MATCHES STATE ---
   const [matches, setMatches] = useState([]);
 
+  const categoryLabels = {
+    qcm: "QCM",
+    who_am_i: "QUI SUIS-JE ?",
+    progressive: "INDICES PROGRESSIFS",
+    open: "RÉPONSE LIBRE",
+  };
+
+  const questionGroups = questions.reduce((groups, question) => {
+    const category = question.category || (question.question?.toUpperCase().startsWith("QUI SUIS-JE") ? "who_am_i" : question.type === "mcq" ? "qcm" : question.type === "progressive_clue" ? "progressive" : "open");
+    if (!groups[category]) groups[category] = [];
+    groups[category].push(question);
+    return groups;
+  }, {});
+
+  const orderedCategories = ["qcm", "who_am_i", "progressive", "open", ...Object.keys(questionGroups).filter((category) => !categoryLabels[category])];
+
   useEffect(() => {
     if (activeTab === "questions") fetchQuestions();
     if (activeTab === "users") fetchUsers();
@@ -125,14 +141,28 @@ export default function Admin({ serverUrl, onBack }) {
                         </h3>
                     </div>
                     
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        {questions.length === 0 && <p style={{ color: "var(--cs-text-muted)" }}>Aucune question trouvée.</p>}
-                        {questions.map(q => (
-                            <div key={q.id} style={{ background: '#1e1e24', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderRadius: '4px' }}>
-                                <span><b>{q.question}</b> <small style={{ color: "var(--cs-accent)" }}>({q.type})</small></span>
-                                <button className="cs-btn cs-btn-t text-red" onClick={() => handleDeleteQuestion(q.id)}>SUPPRIMER</button>
-                            </div>
-                        ))}
+                    {questions.length === 0 && <p style={{ color: "var(--cs-text-muted)" }}>Aucune question trouvée.</p>}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+                        {orderedCategories.map((category) => {
+                            const categoryQuestions = questionGroups[category] || [];
+                            if (categoryQuestions.length === 0) return null;
+                            return (
+                                <section key={category}>
+                                    <h4 style={{ color: 'var(--cs-accent)', margin: '0 0 10px', display: 'flex', justifyContent: 'space-between' }}>
+                                        <span>{categoryLabels[category] || category.toUpperCase()}</span>
+                                        <span className="cs-tag">{categoryQuestions.length}</span>
+                                    </h4>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                        {categoryQuestions.map(q => (
+                                            <div key={q.id} style={{ background: '#1e1e24', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', borderRadius: '4px' }}>
+                                                <span style={{ whiteSpace: 'pre-line' }}><b>{q.question}</b> <small style={{ color: "var(--cs-text-muted)" }}>({q.type})</small></span>
+                                                <button className="cs-btn cs-btn-t text-red" onClick={() => handleDeleteQuestion(q.id)}>SUPPRIMER</button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+                            );
+                        })}
                     </div>
                 </div>
             )}
