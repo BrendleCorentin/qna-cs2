@@ -7,12 +7,6 @@ export default function Admin({ serverUrl, onBack }) {
 
   // --- QUESTIONS STATE ---
   const [questions, setQuestions] = useState([]);
-  const [type, setType] = useState("mcq");
-  const [questionText, setQuestionText] = useState("");
-  const [choices, setChoices] = useState(["", "", "", ""]);
-  const [clues, setClues] = useState(["", "", "", ""]); // New state for clues
-  const [answerIndex, setAnswerIndex] = useState(0);
-  const [textAnswer, setTextAnswer] = useState("");
 
   // --- USERS STATE ---
   const [users, setUsers] = useState([]);
@@ -62,56 +56,6 @@ export default function Admin({ serverUrl, onBack }) {
       await fetch(`${serverUrl}/admin/questions/${id}`, { method: "DELETE" });
       setQuestions(questions.filter((q) => q.id !== id));
     } catch (err) { alert(err.message); }
-  };
-
-  const handleSubmitQuestion = async (e) => {
-    e.preventDefault();
-    const payload = { type, question: questionText };
-    if (type === "mcq") {
-      payload.choices = choices;
-      payload.answerIndex = parseInt(answerIndex);
-    } else if (type === "progressive_clue") {
-      payload.clues = clues;
-      payload.answer = textAnswer;
-    } else {
-      payload.answer = textAnswer;
-    }
-
-    try {
-      const res = await fetch(`${serverUrl}/admin/questions`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (res.ok) {
-        const newQ = await res.json();
-        setQuestions([newQ, ...questions]);
-        setQuestionText("");
-        setChoices(["", "", "", ""]);
-        setClues(["", "", "", ""]);
-        setTextAnswer("");
-        alert("Question ajoutée !");
-      }
-    } catch (err) { alert(err.message); }
-  };
-
-  const handleSyncLiquipedia = async () => {
-    if (!confirm("Cette opération va récupérer les dernières infos rosters depuis Liquipedia puis générer de nouvelles questions. Cela peut prendre 30-60 secondes. Continuer ?")) return;
-    setLoading(true);
-    try {
-        const res = await fetch(`${serverUrl}/admin/sync-liquipedia`, { method: "POST" });
-        const data = await res.json();
-        if (data.success) {
-            alert(`Succès ! ${data.count} questions disponibles.`);
-            fetchQuestions(); // Refresh list
-        } else {
-            alert("Erreur: " + JSON.stringify(data.error));
-        }
-    } catch (err) {
-        alert("Erreur réseau: " + err.message);
-    } finally {
-        setLoading(false);
-    }
   };
 
   const handleDeleteUser = async (id) => {
@@ -174,65 +118,6 @@ export default function Admin({ serverUrl, onBack }) {
         <div className="cs-admin-content">
             {activeTab === 'questions' && (
                 <div>
-                    {/* IMPORT LIQUIPEDIA */}
-                    <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "flex-end" }}>
-                        <button className="cs-btn cs-btn-blue" onClick={handleSyncLiquipedia} disabled={loading}>
-                            {loading ? "GÉNÉRATION..." : "🔄 SYNC LIQUIPEDIA"}
-                        </button>
-                    </div>
-
-                    {/* Formulaire existant simplifié pour la lisibilité */}
-                    <div style={{ background: "rgba(0,0,0,0.3)", padding: "1.5rem", borderRadius: "4px", marginBottom: "2rem", border: "1px solid var(--cs-border)" }}>
-                        <h3 style={{ marginTop: 0, color: "var(--cs-accent)" }}>AJOUTER UNE QUESTION</h3>
-                        <form onSubmit={handleSubmitQuestion}>
-                            <div className="cs-input-group">
-                                <label className="cs-label">ÉNONCÉ</label>
-                                <input className="cs-input" value={questionText} onChange={(e) => setQuestionText(e.target.value)} required />
-                            </div>
-                            {/* ... (Supposons que le formulaire reste similaire, pour simplifier l'exemple ici, je garde l'essentiel) */}
-                             <div className="cs-input-group">
-                                <label className="cs-label">TYPE</label>
-                                <select className="cs-input" value={type} onChange={(e) => setType(e.target.value)}>
-                                    <option value="mcq">QCM</option>
-                                    <option value="text">Texte</option>
-                                    <option value="progressive_clue">Indices Progressifs (20s)</option>
-                                </select>
-                            </div>
-
-                            {type === 'progressive_clue' && (
-                                <div style={{ marginBottom: '1rem' }}>
-                                    <label className="cs-label">INDICES (Ordre: Début &rarr; 15s &rarr; 10s &rarr; 5s)</label>
-                                    {clues.map((c, i) => (
-                                        <div key={i} style={{ marginBottom: '5px' }}>
-                                            <input 
-                                                className="cs-input" 
-                                                value={c} 
-                                                onChange={(e) => {
-                                                    const n = [...clues]; n[i] = e.target.value; setClues(n);
-                                                }} 
-                                                placeholder={`Indice ${i+1} (${i === 0 ? 'Immédiat' : (4-i)*5 + 's restants'})`} 
-                                            />
-                                        </div>
-                                    ))}
-                                     <input className="cs-input" value={textAnswer} onChange={(e) => setTextAnswer(e.target.value)} placeholder="Réponse attendue" style={{ marginTop: '10px' }} />
-                                </div>
-                            )}
-
-                            {type === 'mcq' && choices.map((c, i) => (
-                                <div key={i} style={{ display: 'flex', gap: '10px', marginBottom: '5px' }}>
-                                    <input type="radio" checked={answerIndex === i} onChange={() => setAnswerIndex(i)} />
-                                    <input className="cs-input" value={c} onChange={(e) => {
-                                        const n = [...choices]; n[i] = e.target.value; setChoices(n);
-                                    }} placeholder={`Choix ${i+1}`} />
-                                </div>
-                            ))}
-                             {type === 'text' && (
-                                <input className="cs-input" value={textAnswer} onChange={(e) => setTextAnswer(e.target.value)} placeholder="Réponse" />
-                            )}
-                            <button type="submit" className="cs-btn cs-btn-primary" style={{ marginTop: '10px' }}>AJOUTER</button>
-                        </form>
-                    </div>
-
                     {/* Liste Questions */}
                     <div>
                         <h3 style={{ borderBottom: '1px solid var(--cs-border)', paddingBottom: '0.5rem', marginBottom: '1rem', color: "var(--cs-text-main)" }}>
@@ -241,7 +126,7 @@ export default function Admin({ serverUrl, onBack }) {
                     </div>
                     
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        {questions.length === 0 && <p style={{ color: "var(--cs-text-muted)" }}>Aucune question trouvée. Utilisez le bouton SYNC ou ajoutez-en une.</p>}
+                        {questions.length === 0 && <p style={{ color: "var(--cs-text-muted)" }}>Aucune question trouvée.</p>}
                         {questions.map(q => (
                             <div key={q.id} style={{ background: '#1e1e24', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderRadius: '4px' }}>
                                 <span><b>{q.question}</b> <small style={{ color: "var(--cs-accent)" }}>({q.type})</small></span>
