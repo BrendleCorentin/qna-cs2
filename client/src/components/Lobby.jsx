@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Plus de vidéo, on revient à un design épuré mais stylé
-export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLeaderboard, onAdmin }) {
+export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLeaderboard, onAdmin, onTournament }) {
   const [isRegistering, setIsRegistering] = useState(false);
   const [topPlayers, setTopPlayers] = useState([]);
   const [loadingLeaderboard, setLoadingLeaderboard] = useState(true);
@@ -101,6 +101,13 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
                     <h3 className="cs-panel-title">JOUER</h3>
                     
                     <div className="cs-gamemodes">
+                        <button className="cs-gamemode-card primary" onClick={onTournament}>
+                            <div className="mode-icon">🏆</div>
+                            <div className="mode-info">
+                                <span className="mode-title">TOURNOI 1v1</span>
+                                <span className="mode-desc">Créez ou rejoignez un bracket par code. Aucun impact ELO.</span>
+                            </div>
+                        </button>
                         <button className="cs-gamemode-card primary" onClick={() => onPlay(false)}>
                             <div className="mode-icon">⚔️</div>
                             <div className="mode-info">

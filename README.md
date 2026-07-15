@@ -10,6 +10,16 @@ Un jeu de questions-réponses en 1v1 sur le thème de Counter-Strike 2, avec sys
 - **Thème graphique CS2**
 - **Historique des matchs** (base de données SQLite)
 
+### Tournois streamer
+
+- Élimination directe pour 4, 8, 16 ou 32 joueurs
+- Création et inscription par code à 6 caractères
+- Bracket et progression automatiques
+- Revanche automatique en cas d'égalité
+- Scores en direct pour les spectateurs et overlays de stream
+- Aucun changement d'ELO
+- État conservé lors d'un redémarrage serveur
+
 ## Installation (Local & VPS)
 
 ### Prérequis
@@ -72,5 +82,4 @@ Si vous avez fait des modifications (comme changer l'IP), faites ceci sur le VPS
 2. Copiez la config de `nginx.conf`
 3. Activez le site: `ln -s /etc/nginx/sites-available/qna.conf /etc/nginx/sites-enabled/`
 4. Recharger Nginx: `nginx -t && systemctl reload nginx`
-
 

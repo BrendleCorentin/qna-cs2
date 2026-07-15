@@ -2,6 +2,7 @@ import { makeId } from "../utils/id.js";
 // QUESTIONS import removed, we use DB now
 import { logMatchResult, registerUser, loginUser, getUserByUsername, updateUserElo, getLeaderboard, getRandomQuestions } from "../db/database.js";
 import { calculateElo } from "../utils/elo.js";
+import { attachTournamentHandlers, reportTournamentResult, replayTournamentDraw } from "./tournaments.js";
 
 // Levenshtein distance helper for fuzzy matching
 function getLevenshteinDistance(a, b) {
@@ -44,6 +45,43 @@ let waitingSocketId = null;
 const matches = new Map();
 const QUESTION_DURATION = 10000;
 
+async function createPvpMatch(io, a, b, metadata = {}) {
+  const socketA = io.sockets.sockets.get(a);
+  const socketB = io.sockets.sockets.get(b);
+  if (!socketA || !socketB) throw new Error("Un joueur n'est plus connecté");
+
+  const matchId = makeId(10);
+  socketA.join(matchId);
+  socketB.join(matchId);
+  const questions = await getRandomQuestions(5);
+  const match = {
+    matchId,
+    players: [a, b],
+    nicknames: { [a]: socketA.data.nickname, [b]: socketB.data.nickname },
+    elos: { [a]: socketA.data.elo || 1000, [b]: socketB.data.elo || 1000 },
+    isRanked: metadata.tournamentCode ? false : Boolean(socketA.data.user && socketB.data.user),
+    tournamentCode: metadata.tournamentCode || null,
+    tournamentMatchId: metadata.tournamentMatchId || null,
+    startedAt: Date.now(), ended: false, currentQuestionIndex: -1, timer: null,
+    answers: { [a]: {}, [b]: {} }, scores: { [a]: 0, [b]: 0 }, questions,
+  };
+  matches.set(matchId, match);
+  const clientQuestions = questions.map(({ id, question, choices, type, clues }) => ({ id, question, choices, type, clues }));
+  for (const [self, opponent] of [[a, b], [b, a]]) {
+    io.to(self).emit("matchFound", {
+      matchId,
+      you: { id: self, nickname: match.nicknames[self], elo: match.elos[self] },
+      opponent: { id: opponent, nickname: match.nicknames[opponent], elo: match.elos[opponent] },
+      questions: clientQuestions,
+      startedAt: match.startedAt,
+      tournamentCode: match.tournamentCode,
+      tournamentMatchId: match.tournamentMatchId,
+    });
+  }
+  setTimeout(() => startNextQuestion(io, match), 1000);
+  return matchId;
+}
+
 function startNextQuestion(io, match) {
   if (match.timer) clearTimeout(match.timer);
   if (match.ended) return;
@@ -62,6 +100,19 @@ function startNextQuestion(io, match) {
   }
 
   const question = match.questions[match.currentQuestionIndex];
+
+  if (match.tournamentCode) {
+    const [a, b] = match.players;
+    io.to(`tournament:${match.tournamentCode}`).emit("tournamentMatchProgress", {
+      matchId: match.matchId,
+      bracketMatchId: match.tournamentMatchId,
+      player1: match.nicknames[a], player2: match.nicknames[b],
+      score1: match.scores[a], score2: match.scores[b],
+      question: match.currentQuestionIndex + 1,
+      totalQuestions: match.questions.length,
+      status: "playing",
+    });
+  }
   
   // Safety check: ensure question exists
   if (!question) {
@@ -91,6 +142,8 @@ function startNextQuestion(io, match) {
 
 export function attachMatchmaking(io) {
   io.on("connection", (socket) => {
+    const launchTournamentMatch = (a, b, metadata) => createPvpMatch(io, a, b, metadata);
+    attachTournamentHandlers(io, socket, launchTournamentMatch);
     // Auth listeners
     socket.on("register", async ({ username, password }, cb) => {
         try {
@@ -368,6 +421,16 @@ export function attachMatchmaking(io) {
 
       if (correct) {
         match.scores[socket.id] += 1;
+        if (match.tournamentCode) {
+          const [a, b] = match.players;
+          io.to(`tournament:${match.tournamentCode}`).emit("tournamentMatchProgress", {
+            matchId: match.matchId, bracketMatchId: match.tournamentMatchId,
+            player1: match.nicknames[a], player2: match.nicknames[b],
+            score1: match.scores[a], score2: match.scores[b],
+            question: match.currentQuestionIndex + 1, totalQuestions: match.questions.length,
+            status: "playing",
+          });
+        }
         
         // If correct answer, move to next question with a small delay
         setTimeout(() => {
@@ -429,6 +492,14 @@ export function attachMatchmaking(io) {
             });
 
             if(opp) io.to(opp).emit("matchEnd", { result: "win", reason: "opponent_left" });
+            if (match.tournamentCode && opp) {
+              reportTournamentResult(
+                io,
+                match.matchId,
+                n2,
+                (playerA, playerB, metadata) => createPvpMatch(io, playerA, playerB, metadata)
+              ).catch(console.error);
+            }
       }
 
       // If solo, just end it 
@@ -493,6 +564,14 @@ export function attachMatchmaking(io) {
         }
 
         io.to(opp).emit("matchEnd", { result: "win", reason: "opponent_disconnected" });
+        if (match.tournamentCode && opp) {
+          reportTournamentResult(
+            io,
+            match.matchId,
+            n2,
+            (playerA, playerB, metadata) => createPvpMatch(io, playerA, playerB, metadata)
+          ).catch(console.error);
+        }
         matches.delete(mid);
       }
     });
@@ -590,12 +669,30 @@ function endMatch(io, match) {
     reason: "normal"
   });
 
+  if (match.tournamentCode) {
+    const launchTournamentMatch = (playerA, playerB, metadata) => createPvpMatch(io, playerA, playerB, metadata);
+    if (winnerName === "draw") {
+      replayTournamentDraw(io, match.matchId, launchTournamentMatch).catch(console.error);
+    } else {
+      reportTournamentResult(io, match.matchId, winnerName, launchTournamentMatch).catch(console.error);
+    }
+  }
+
+  if (match.tournamentCode) {
+    io.to(`tournament:${match.tournamentCode}`).emit("tournamentMatchProgress", {
+      matchId: match.matchId, bracketMatchId: match.tournamentMatchId,
+      player1: match.nicknames[a], player2: match.nicknames[b], score1: sa, score2: sb,
+      question: match.questions.length, totalQuestions: match.questions.length, status: "finished",
+    });
+  }
+
   io.to(a).emit("matchEnd", { 
       result: resultA, 
       yourScore: sa, 
       oppScore: sb,
       elo: newEloA,
-      eloChange: eloChangeA
+      eloChange: eloChangeA,
+      tournamentCode: match.tournamentCode,
   });
   
   io.to(b).emit("matchEnd", { 
@@ -603,6 +700,7 @@ function endMatch(io, match) {
       yourScore: sb, 
       oppScore: sa,
       elo: newEloB,
-      eloChange: eloChangeB
+      eloChange: eloChangeB,
+      tournamentCode: match.tournamentCode,
   });
 }

@@ -7,6 +7,7 @@ import Match from "./components/Match.jsx";
 import Result from "./components/Result.jsx";
 import Leaderboard from "./components/Leaderboard.jsx";
 import Admin from "./components/Admin.jsx";
+import Tournament from "./components/Tournament.jsx";
 
 // CONFIGURATION POUR NGINX REVERSE PROXY
 // Utilisation du domaine sécurisé pour éviter les erreurs "Mixed Content"
@@ -28,6 +29,7 @@ export default function App() {
   const [opponentAnswered, setOpponentAnswered] = useState({}); // questionId -> true
   const [deadline, setDeadline] = useState(null); // timestamp for next question
   const [endInfo, setEndInfo] = useState(null);
+  const [activeTournamentCode, setActiveTournamentCode] = useState("");
   
   // Emotes system
   const [activeEmote, setActiveEmote] = useState(null); // { senderId, message, id }
@@ -48,6 +50,7 @@ export default function App() {
         matchId: msg.matchId,
         opponent: msg.opponent,
         questions: msg.questions,
+        tournamentCode: msg.tournamentCode || null,
       });
       setQIndex(0);
       setMyScore(0);
@@ -167,11 +170,15 @@ export default function App() {
     setMatch(null);
     setEndInfo(null);
     setActiveEmote(null);
-    setPhase("lobby");
+    setPhase(endInfo?.tournamentCode || activeTournamentCode ? "tournament" : "lobby");
   }
 
   if (phase === "admin") {
     return <Admin serverUrl={SERVER_URL} onBack={() => setPhase("lobby")} />;
+  }
+
+  if (phase === "tournament") {
+    return <Tournament socket={socketRef.current} user={user} initialCode={activeTournamentCode} onActiveCode={setActiveTournamentCode} onBack={() => setPhase("lobby")} />;
   }
 
   if (phase === "lobby") {
@@ -185,6 +192,7 @@ export default function App() {
         onPlay={joinQueue}
         onLeaderboard={() => setPhase("leaderboard")}
         onAdmin={() => setPhase("admin")}
+        onTournament={() => setPhase("tournament")}
       />
     );
   }
