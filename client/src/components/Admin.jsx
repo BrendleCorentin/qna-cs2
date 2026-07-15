@@ -22,6 +22,11 @@ export default function Admin({ serverUrl, onBack }) {
     who_am_i: "QUI SUIS-JE ?",
     progressive: "INDICES PROGRESSIFS",
     open: "RÉPONSE LIBRE",
+    lineup_completion: "COMPLÈTE LA LINE-UP",
+    transfer_history: "TRANSFERTS & ANCIENNES ÉQUIPES",
+    match_history: "RETROUVE LE MATCH / LE SCORE",
+    date_challenge: "À QUELLE DATE ?",
+    tournament_path: "PARCOURS DE TOURNOI",
   };
 
   const questionGroups = questions.reduce((groups, question) => {
@@ -31,7 +36,7 @@ export default function Admin({ serverUrl, onBack }) {
     return groups;
   }, {});
 
-  const orderedCategories = ["qcm", "who_am_i", "progressive", "open", ...Object.keys(questionGroups).filter((category) => !categoryLabels[category])];
+  const orderedCategories = ["lineup_completion", "transfer_history", "match_history", "date_challenge", "tournament_path", "qcm", "who_am_i", "progressive", "open", ...Object.keys(questionGroups).filter((category) => !categoryLabels[category])];
 
   const sortQuestions = (items) => [...items].sort((a, b) => {
     if (questionSort === "oldest") return Number(a.id) - Number(b.id);

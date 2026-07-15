@@ -201,5 +201,111 @@ export const QUESTIONS_DB_SEED = [
     question: "Quel terme désigne le fait de tuer un ennemi à travers une fumigène sans le voir ?",
     choices: ["Wallbang", "Spam", "Kobe", "Ninja"],
     answerIndex: 1, // Spamming the smoke effectively
+  },
+
+  // Sources HLTV vérifiées le 15 juillet 2026 :
+  // https://www.hltv.org/news/45058/official-saw-unveil-new-roster
+  // https://www.hltv.org/news/45055/9ine-finalize-roster-with-b1elany
+  // https://www.hltv.org/news/45097/official-bcg-complete-roster-with-mzinho
+  // https://www.hltv.org/news/44709/fluxo-confirm-dav1deus-and-ltz-signings
+  // https://www.hltv.org/news/44998/rostermania-tracker-summer-2026
+  // https://www.hltv.org/results
+
+  // --- COMPLÈTE LA LINE-UP (rosters annoncés en juillet 2026) ---
+  {
+    type: "mcq", category: "lineup_completion",
+    question: "Complète la line-up SAW annoncée le 3 juillet 2026 : MUTiRiS, story, ewjerkz, krazy et ____.",
+    choices: ["NOPEEj", "arrozdoce", "stadodo", "roman"], answerIndex: 0,
+  },
+  {
+    type: "mcq", category: "lineup_completion",
+    question: "Complète la line-up 9INE finalisée le 3 juillet 2026 : raalz, kraghen, flayy, rim3 et ____.",
+    choices: ["cej0t", "b1elany", "bnox", "St0m4k"], answerIndex: 1,
+  },
+  {
+    type: "mcq", category: "lineup_completion",
+    question: "Complète la line-up BC.Game annoncée le 9 juillet 2026 : s1mple, electroNic, Senzu, Magisk et ____.",
+    choices: ["910", "mzinho", "Techno", "cobrazera"], answerIndex: 1,
+  },
+  {
+    type: "mcq", category: "lineup_completion",
+    question: "Complète la line-up Fluxo annoncée le 25 mai 2026 : zevy, Lucaozy, exit, dav1deuS et ____.",
+    choices: ["Ltz", "kye", "mlhzin", "remix"], answerIndex: 0,
+  },
+  {
+    type: "mcq", category: "lineup_completion",
+    question: "Quel duo a rejoint Fluxo pour compléter son cinq en mai 2026 ?",
+    choices: ["dav1deuS et Ltz", "kye et mlhzin", "Lucaozy et decenty", "remix et ALLE"], answerIndex: 0,
+  },
+  {
+    type: "mcq", category: "lineup_completion",
+    question: "Dans la line-up SAW de juillet 2026, quel joueur arrivait de Rebels ?",
+    choices: ["story", "krazy", "NOPEEj", "MUTiRiS"], answerIndex: 2,
+  },
+
+  // --- TRANSFERTS & ANCIENNES ÉQUIPES ---
+  {
+    type: "mcq", category: "transfer_history",
+    question: "De quelle équipe mzinho venait-il avant de compléter BC.Game en juillet 2026 ?",
+    choices: ["The Huns", "The MongolZ", "ATOX", "IHC"], answerIndex: 1,
+  },
+  {
+    type: "mcq", category: "transfer_history",
+    question: "De quelle organisation provenait le prêt de Senzu, rendu permanent par BC.Game en juin 2026 ?",
+    choices: ["The MongolZ", "Falcons", "NAVI", "Aurora"], answerIndex: 0,
+  },
+  {
+    type: "mcq", category: "transfer_history",
+    question: "Dans quelle équipe b1elany jouait-il avant de signer chez 9INE en juillet 2026 ?",
+    choices: ["KOLESIE", "Inner Circle", "Betclic", "Monte"], answerIndex: 0,
+  },
+  {
+    type: "mcq", category: "transfer_history",
+    question: "Quel joueur a rejoint CYBERSHOKE en prêt depuis HEROIC le 9 juillet 2026 ?",
+    choices: ["Alkaren", "yxngstxr", "xfl0ud", "Brollan"], answerIndex: 0,
+  },
+
+  // --- RETROUVE LE MATCH / LE SCORE ---
+  {
+    type: "mcq", category: "match_history",
+    question: "Quel score a conclu la finale BO5 entre 9z et PARIVISION au XSE Pro League Guangzhou 2026 ?",
+    choices: ["3-0 pour 9z", "3-1 pour 9z", "3-2 pour PARIVISION", "3-0 pour PARIVISION"], answerIndex: 0,
+  },
+  {
+    type: "mcq", category: "match_history",
+    question: "Quelle équipe a battu FaZe 2-1 au XSE Pro League Guangzhou le 11 juillet 2026 ?",
+    choices: ["Alliance", "PARIVISION", "9z", "BIG"], answerIndex: 1,
+  },
+  {
+    type: "mcq", category: "match_history",
+    question: "Quelle équipe a éliminé Virtus.pro 2-0 au RES Showdown 4 Europe le 11 juillet 2026 ?",
+    choices: ["Inner Circle", "magic", "Monte", "Tricksters"], answerIndex: 0,
+  },
+  {
+    type: "mcq", category: "match_history",
+    question: "Au RES Showdown 4 South America du 12 juillet 2026, qui a battu paiN 2-0 ?",
+    choices: ["BESTIA", "Imperial", "Sharks", "Keyd Stars"], answerIndex: 2,
+  },
+  {
+    type: "mcq", category: "match_history",
+    question: "Quel score Lynn Vision a-t-elle infligé à TYLOO le 12 juillet 2026 ?",
+    choices: ["2-0", "2-1", "3-1", "1-0"], answerIndex: 1,
+  },
+
+  // --- DATES & PARCOURS DE TOURNOI ---
+  {
+    type: "mcq", category: "date_challenge",
+    question: "À quelle date BC.Game a-t-elle officiellement annoncé mzinho comme dernier joueur de sa line-up 2026 ?",
+    choices: ["23 juin 2026", "3 juillet 2026", "9 juillet 2026", "12 juillet 2026"], answerIndex: 2,
+  },
+  {
+    type: "mcq", category: "tournament_path",
+    question: "Lors du Super DraculaN précédant sa signature chez 9INE, quelle équipe b1elany a-t-il battue comme stand-in ?",
+    choices: ["Sashi", "GamerLegion", "Inner Circle", "Acend"], answerIndex: 1,
+  },
+  {
+    type: "mcq", category: "tournament_path",
+    question: "Contre quelle équipe la nouvelle line-up Fluxo devait-elle débuter au Circuit X Base Recife 2026 ?",
+    choices: ["BlackBelt", "UNO MILLE", "RED Canids", "BESTIA"], answerIndex: 0,
   }
 ];
