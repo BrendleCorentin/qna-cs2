@@ -188,34 +188,36 @@ export function logMatchResult(matchData) {
 }
 
 function seedQuestions() {
-    db.get("SELECT COUNT(*) as count FROM questions_v2", [], (err, row) => {
-        if (err || row.count > 0) return;
-        
-        console.log("[DB] Seeding questions_v2...");
-        const stmt = db.prepare("INSERT INTO questions_v2 (type, question, choices, answerIndex, answer) VALUES (?, ?, ?, ?, ?)");
-        
-        QUESTIONS_DB_SEED.forEach(q => {
+    console.log("[DB] Adding missing seed questions...");
+    const stmt = db.prepare(`
+        INSERT INTO questions_v2 (type, question, choices, answerIndex, answer)
+        SELECT ?, ?, ?, ?, ?
+        WHERE NOT EXISTS (SELECT 1 FROM questions_v2 WHERE question = ?)
+    `);
+
+    QUESTIONS_DB_SEED.forEach(q => {
             const type = q.type || 'mcq';
             let choices = null;
             if (q.choices) choices = JSON.stringify(q.choices);
             else if (q.clues && type === 'progressive_clue') choices = JSON.stringify(q.clues);
-            
+
             const idx = q.answerIndex !== undefined ? q.answerIndex : null;
             const ans = q.answer || null;
-            stmt.run(type, q.question, choices, idx, ans);
-        });
-        
-        stmt.finalize();
-        console.log(`[DB] Seeded ${QUESTIONS_DB_SEED.length} questions.`);
+            stmt.run(type, q.question, choices, idx, ans, q.question);
     });
+
+    stmt.finalize();
+    console.log(`[DB] Checked ${QUESTIONS_DB_SEED.length} seed questions.`);
 }
     
 export function forceSeedQuestions() {
   return new Promise((resolve, reject) => {
     console.log("[DB] Force seeding questions...");
-    const stmt = db.prepare(
-      "INSERT INTO questions_v2 (type, question, choices, answerIndex, answer) VALUES (?, ?, ?, ?, ?)"
-    );
+    const stmt = db.prepare(`
+      INSERT INTO questions_v2 (type, question, choices, answerIndex, answer)
+      SELECT ?, ?, ?, ?, ?
+      WHERE NOT EXISTS (SELECT 1 FROM questions_v2 WHERE question = ?)
+    `);
 
     let completed = 0;
     const total = QUESTIONS_DB_SEED.length;
@@ -229,7 +231,7 @@ export function forceSeedQuestions() {
       const idx = q.answerIndex !== undefined ? q.answerIndex : null;
       const ans = q.answer || null;
       
-      stmt.run([type, q.question, choices, idx, ans], (err) => {
+      stmt.run([type, q.question, choices, idx, ans, q.question], (err) => {
         if (err) console.error("Error inserting seed question:", err.message);
         completed++;
         if (completed === total) {

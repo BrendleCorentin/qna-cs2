@@ -74,6 +74,103 @@ export const QUESTIONS_DB_SEED = [
     answerIndex: 2,
   },
 
+  // --- CATÉGORIE : HLTV 2024 & MAJORS CS2 ---
+  // Sources vérifiées le 15 juillet 2026 :
+  // https://www.hltv.org/players/top20/2024
+  // https://www.hltv.org/news/38667/jl-claims-pgl-major-copenhagen-mvp-award
+  // https://www.hltv.org/news/40566/donk-becomes-youngest-and-highest-rated-major-mvp-in-shanghai
+  // https://www.hltv.org/news/36341/zywoo-claims-blasttv-paris-major-mvp-medal
+  {
+    type: "mcq",
+    question: "Quel joueur a été classé numéro 1 mondial par HLTV en 2024 ?",
+    choices: ["ZywOo", "m0NESY", "donk", "NiKo"],
+    answerIndex: 2,
+  },
+  {
+    type: "mcq",
+    question: "Quel joueur a terminé deuxième du classement HLTV Top 20 en 2024 ?",
+    choices: ["m0NESY", "ZywOo", "sh1ro", "jL"],
+    answerIndex: 0,
+  },
+  {
+    type: "mcq",
+    question: "À quelle place ZywOo a-t-il terminé dans le classement HLTV Top 20 de 2024 ?",
+    choices: ["1re", "2e", "3e", "4e"],
+    answerIndex: 2,
+  },
+  {
+    type: "mcq",
+    question: "Quel joueur a terminé quatrième du classement HLTV Top 20 en 2024 ?",
+    choices: ["NiKo", "jL", "sh1ro", "flameZ"],
+    answerIndex: 0,
+  },
+  {
+    type: "mcq",
+    question: "Quel joueur lituanien a terminé cinquième du classement HLTV Top 20 en 2024 ?",
+    choices: ["broky", "jL", "b1t", "frozen"],
+    answerIndex: 1,
+  },
+  {
+    type: "mcq",
+    question: "Quel joueur a été élu MVP HLTV du PGL Major Copenhagen 2024 ?",
+    choices: ["Aleksib", "m0NESY", "jL", "b1t"],
+    answerIndex: 2,
+  },
+  {
+    type: "mcq",
+    question: "Quelle équipe a remporté le PGL Major Copenhagen 2024 ?",
+    choices: ["FaZe", "Natus Vincere", "Team Spirit", "G2"],
+    answerIndex: 1,
+  },
+  {
+    type: "mcq",
+    question: "Quel joueur a été élu MVP HLTV du Perfect World Shanghai Major 2024 ?",
+    choices: ["sh1ro", "ropz", "donk", "ZywOo"],
+    answerIndex: 2,
+  },
+  {
+    type: "mcq",
+    question: "Quelle équipe a remporté le Perfect World Shanghai Major 2024 ?",
+    choices: ["FaZe", "Vitality", "Natus Vincere", "Team Spirit"],
+    answerIndex: 3,
+  },
+  {
+    type: "mcq",
+    question: "Quelle équipe Team Spirit a-t-elle battue en finale du Major de Shanghai 2024 ?",
+    choices: ["FaZe", "G2", "Vitality", "The MongolZ"],
+    answerIndex: 0,
+  },
+  {
+    type: "mcq",
+    question: "À quel âge donk est-il devenu le plus jeune champion et MVP d'un Major selon HLTV ?",
+    choices: ["16 ans", "17 ans", "18 ans", "19 ans"],
+    answerIndex: 1,
+  },
+  {
+    type: "mcq",
+    question: "Quel rating HLTV donk a-t-il obtenu lors de sa campagne MVP au Major de Shanghai 2024 ?",
+    choices: ["1.29", "1.39", "1.49", "1.59"],
+    answerIndex: 2,
+  },
+  {
+    type: "mcq",
+    question: "Quel joueur détenait avant donk le record du plus jeune MVP de Major ?",
+    choices: ["device", "Kjaerbye", "s1mple", "olofmeister"],
+    answerIndex: 1,
+  },
+  {
+    type: "mcq",
+    question: "Quel joueur a été élu MVP HLTV du BLAST.tv Paris Major 2023 ?",
+    choices: ["Spinx", "apEX", "ZywOo", "iM"],
+    answerIndex: 2,
+  },
+  {
+    type: "mcq",
+    question: "Quel rating HLTV ZywOo a-t-il affiché au BLAST.tv Paris Major 2023 ?",
+    choices: ["1.19", "1.29", "1.39", "1.49"],
+    answerIndex: 2,
+  },
+
   // --- CATÉGORIE : MECANIQUES & MAPS (MCQ) ---
   {
     type: "mcq",
