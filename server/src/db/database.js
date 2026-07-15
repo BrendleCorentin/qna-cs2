@@ -112,6 +112,7 @@ function initDB() {
         password_hash TEXT,
         elo INTEGER DEFAULT 1000,
         avatar_seed TEXT,
+        favorite_team TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `, (err) => {
@@ -123,6 +124,9 @@ function initDB() {
       if (err) return console.error("Erreur lecture structure users:", err.message);
       if (!columns.some((column) => column.name === "avatar_seed")) {
         db.run("ALTER TABLE users ADD COLUMN avatar_seed TEXT");
+      }
+      if (!columns.some((column) => column.name === "favorite_team")) {
+        db.run("ALTER TABLE users ADD COLUMN favorite_team TEXT");
       }
     });
 
@@ -187,7 +191,7 @@ export async function registerUser(username, password) {
                 // 'this.lastID' should work with function(err) but let's be safe and just return username
                 const id = this ? this.lastID : 0; 
                 console.log(`[DB] User inserted with ID ${id}`);
-                resolve({ id, username, elo: 1000, avatarSeed: username });
+                resolve({ id, username, elo: 1000, avatarSeed: username, favoriteTeam: "" });
             }
         });
     });
@@ -209,7 +213,7 @@ export async function loginUser(username, password) {
     }
 
     console.log(`[DB] Login successful for ${username}`);
-    return { id: user.id, username: user.username, elo: user.elo, avatarSeed: user.avatar_seed || user.username };
+    return { id: user.id, username: user.username, elo: user.elo, avatarSeed: user.avatar_seed || user.username, favoriteTeam: user.favorite_team || "" };
 }
 
 const hashSessionToken = (token) => crypto.createHash('sha256').update(token).digest('hex');
@@ -233,7 +237,8 @@ export function getUserBySession(token) {
     if (!token || typeof token !== 'string') return Promise.resolve(null);
     return new Promise((resolve, reject) => {
         db.get(`
-            SELECT users.id, users.username, users.elo, COALESCE(users.avatar_seed, users.username) AS avatarSeed
+            SELECT users.id, users.username, users.elo, COALESCE(users.avatar_seed, users.username) AS avatarSeed,
+                   COALESCE(users.favorite_team, '') AS favoriteTeam
             FROM sessions
             JOIN users ON users.id = sessions.user_id
             WHERE sessions.token_hash = ? AND sessions.expires_at > datetime('now')
@@ -254,18 +259,20 @@ export function deleteUserSession(token) {
     });
 }
 
-export function updateUserProfile(userId, username, avatarSeed) {
+export function updateUserProfile(userId, username, avatarSeed, favoriteTeam) {
     const cleanUsername = String(username || "").trim();
     const cleanAvatarSeed = String(avatarSeed || cleanUsername).trim().slice(0, 40);
+    const allowedTeams = ['', 'Vitality', 'NAVI', 'G2', 'Spirit', 'FURIA', 'FaZe', 'Liquid', 'MOUZ', 'Astralis', 'Falcons', 'The MongolZ', 'NIP'];
+    const cleanFavoriteTeam = allowedTeams.includes(favoriteTeam) ? favoriteTeam : '';
     if (!/^[a-zA-Z0-9_-]{3,20}$/.test(cleanUsername)) {
         return Promise.reject(new Error("Le pseudo doit contenir 3 à 20 caractères : lettres, chiffres, _ ou -"));
     }
     return new Promise((resolve, reject) => {
-        db.run("UPDATE users SET username = ?, avatar_seed = ? WHERE id = ?", [cleanUsername, cleanAvatarSeed, userId], function(err) {
+        db.run("UPDATE users SET username = ?, avatar_seed = ?, favorite_team = ? WHERE id = ?", [cleanUsername, cleanAvatarSeed, cleanFavoriteTeam, userId], function(err) {
             if (err?.code === "SQLITE_CONSTRAINT") reject(new Error("Ce pseudo est déjà utilisé"));
             else if (err) reject(err);
             else if (!this.changes) reject(new Error("Utilisateur introuvable"));
-            else db.get("SELECT id, username, elo, COALESCE(avatar_seed, username) AS avatarSeed FROM users WHERE id = ?", [userId], (getErr, row) => getErr ? reject(getErr) : resolve(row));
+            else db.get("SELECT id, username, elo, COALESCE(avatar_seed, username) AS avatarSeed, COALESCE(favorite_team, '') AS favoriteTeam FROM users WHERE id = ?", [userId], (getErr, row) => getErr ? reject(getErr) : resolve(row));
         });
     });
 }
@@ -311,6 +318,7 @@ export function getFriendOverview(userId) {
     return new Promise((resolve, reject) => {
         db.all(`
           SELECT u.id, u.username, COALESCE(u.avatar_seed, u.username) AS avatarSeed,
+                 COALESCE(u.favorite_team, '') AS favoriteTeam,
                  f.status, f.requested_by AS requestedBy
           FROM friendships f
           JOIN users u ON u.id = CASE WHEN f.user1_id = ? THEN f.user2_id ELSE f.user1_id END
@@ -340,7 +348,7 @@ export function updateUserEloById(id, newElo) {
 
 export function getLeaderboard(limit = 50) {
     return new Promise((resolve, reject) => {
-        db.all("SELECT username, elo FROM users ORDER BY elo DESC LIMIT ?", [limit], (err, rows) => {
+        db.all("SELECT username, elo, COALESCE(avatar_seed, username) AS avatarSeed, COALESCE(favorite_team, '') AS favoriteTeam FROM users ORDER BY elo DESC LIMIT ?", [limit], (err, rows) => {
             if (err) reject(err);
             else resolve(rows);
         });

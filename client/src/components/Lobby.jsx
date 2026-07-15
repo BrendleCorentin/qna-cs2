@@ -1,6 +1,22 @@
 // src/components/Lobby.jsx
 import React, { useState, useEffect } from 'react';
 
+const TEAM_STYLES = {
+  Vitality: ["VIT", "#f6b800", "#171717"], NAVI: ["NAVI", "#ffdf00", "#111111"],
+  G2: ["G2", "#e62929", "#111111"], Spirit: ["TS", "#69d2e7", "#17222d"],
+  FURIA: ["FUR", "#f5f5f5", "#151515"], FaZe: ["FAZE", "#e43b3b", "#243b70"],
+  Liquid: ["TL", "#3f7bc3", "#f5f5f5"], MOUZ: ["MOUZ", "#d71920", "#151515"],
+  Astralis: ["AST", "#d51f2b", "#301117"], Falcons: ["FLC", "#178c58", "#d7b56d"],
+  "The MongolZ": ["MGL", "#e52b32", "#171717"], NIP: ["NIP", "#d7a83d", "#342716"]
+};
+const FAVORITE_TEAMS = Object.keys(TEAM_STYLES);
+
+function TeamAvatar({ username, avatarSeed, favoriteTeam, className = "" }) {
+  const team = TEAM_STYLES[favoriteTeam];
+  if (team) return <div className={`cs-team-avatar ${className}`} style={{ "--team-primary": team[1], "--team-secondary": team[2] }} title={`Équipe favorite : ${favoriteTeam}`}><span>{team[0]}</span></div>;
+  return <img src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(avatarSeed || username)}&backgroundColor=b6e3f4`} alt="Avatar" className={className} />;
+}
+
 // Plus de vidéo, on revient à un design épuré mais stylé
 export default function Lobby({ socket, user, setUser, setNickname, onLogout, onPlay, onLeaderboard, onAdmin, onTournament }) {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -17,6 +33,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
   const [modal, setModal] = useState(null);
   const [profileUsername, setProfileUsername] = useState("");
   const [profileAvatar, setProfileAvatar] = useState("");
+  const [profileTeam, setProfileTeam] = useState("");
   const [settings, setSettings] = useState(() => {
     try { return JSON.parse(localStorage.getItem("counterQuizSettings")) || { reducedMotion: false, compactLobby: false }; }
     catch { return { reducedMotion: false, compactLobby: false }; }
@@ -55,12 +72,13 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
   const openProfile = () => {
     setProfileUsername(user.username);
     setProfileAvatar(user.avatarSeed || user.username);
+    setProfileTeam(user.favoriteTeam || "");
     setSocialMessage("");
     setModal("profile");
   };
 
   const saveProfile = () => {
-    socket.emit("updateProfile", { username: profileUsername, avatarSeed: profileAvatar }, (response) => {
+    socket.emit("updateProfile", { username: profileUsername, avatarSeed: profileAvatar, favoriteTeam: profileTeam }, (response) => {
       if (!response?.success) return setSocialMessage(response?.error || "Modification impossible");
       setUser(response.user);
       setNickname(response.user.username);
@@ -77,9 +95,6 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
 
   // --- NOUVEAU DESIGN DU LOBBY CONNECTÉ ---
   if (user) {
-    // Génération d'un avatar basé sur le pseudo (seed)
-    const avatarUrl = `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(user.avatarSeed || user.username)}&backgroundColor=b6e3f4`;
-
     return (
         <div className="cs-lobby-container">
             {/* Header / Top Bar */}
@@ -88,7 +103,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
                     COUNTER <span className="text-accent">QUIZ</span>
                 </div>
                 <div className="cs-user-pill">
-                    <img src={avatarUrl} alt="Avatar" className="cs-avatar-sm" />
+                    <TeamAvatar {...user} className="cs-avatar-sm" />
                     <span>{user.username}</span>
                     <span className="cs-elo-badge">{user.elo} ELO</span>
                     <button 
@@ -122,7 +137,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
                 <div className="cs-panel cs-profile-panel">
                     <div className="cs-profile-header">
                         <div className="cs-avatar-lg-wrapper">
-                            <img src={avatarUrl} alt="Profile" className="cs-avatar-lg" />
+                            <TeamAvatar {...user} className="cs-avatar-lg" />
                             <div className="cs-online-status"></div>
                         </div>
                         <h2>{user.username}</h2>
@@ -197,11 +212,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
                                              <tr key={i} className={p.username === user.username ? 'highlight' : ''}>
                                                  <td className="rank">{i + 1}</td>
                                                  <td className="name">
-                                                     <img 
-                                                       src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${p.username}&backgroundColor=b6e3f4`} 
-                                                       className="cs-avatar-mini" 
-                                                       alt="" 
-                                                     />
+                                                     <TeamAvatar {...p} className="cs-avatar-mini" />
                                                      {p.username}
                                                  </td>
                                                  <td className="elo">{p.elo}</td>
@@ -237,7 +248,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
                       {friends.length === 0 && <p className="cs-empty-text">Aucun ami pour le moment.</p>}
                       {friends.map((friend) => (
                         <div className="cs-friend-row" key={friend.id}>
-                          <img src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(friend.avatarSeed || friend.username)}&backgroundColor=b6e3f4`} alt="" />
+                          <TeamAvatar {...friend} />
                           <div><strong>{friend.username}</strong><small>{friend.status === 'accepted' ? (friend.online ? 'En ligne' : 'Hors ligne') : friend.requestedBy === friend.id ? 'Demande reçue' : 'Demande envoyée'}</small></div>
                           {friend.status === 'pending' && friend.requestedBy === friend.id
                             ? <button className="cs-btn-small" onClick={() => friendAction("acceptFriendRequest", { userId: friend.id })}>ACCEPTER</button>
@@ -253,11 +264,16 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
                   <button className="cs-modal-close" onClick={() => setModal(null)}>×</button>
                   {modal === "profile" ? <>
                     <h2>MODIFIER LE PROFIL</h2>
-                    <img className="cs-profile-preview" src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(profileAvatar || profileUsername)}&backgroundColor=b6e3f4`} alt="Aperçu" />
+                    <TeamAvatar username={profileUsername} avatarSeed={profileAvatar} favoriteTeam={profileTeam} className="cs-profile-preview" />
                     <label className="cs-label">PSEUDO</label>
                     <input className="cs-input" value={profileUsername} onChange={(e) => setProfileUsername(e.target.value)} maxLength={20} />
                     <label className="cs-label">STYLE D'AVATAR</label>
                     <input className="cs-input" value={profileAvatar} onChange={(e) => setProfileAvatar(e.target.value)} maxLength={40} placeholder="Ex: sniper, dragon..." />
+                    <label className="cs-label">ÉQUIPE CS FAVORITE</label>
+                    <select className="cs-input cs-team-select" value={profileTeam} onChange={(e) => setProfileTeam(e.target.value)}>
+                      <option value="">Aucune — garder mon avatar</option>
+                      {FAVORITE_TEAMS.map((team) => <option key={team} value={team}>{team}</option>)}
+                    </select>
                     {socialMessage && <p className="cs-social-message">{socialMessage}</p>}
                     <button className="cs-btn cs-btn-primary" onClick={saveProfile}>ENREGISTRER</button>
                   </> : <>

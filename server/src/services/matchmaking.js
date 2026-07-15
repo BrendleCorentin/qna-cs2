@@ -175,7 +175,7 @@ export function attachMatchmaking(io) {
             socket.data.user = user;
             socket.data.nickname = user.username;
             socket.data.elo = user.elo;
-            cb({ success: true, user: { username: user.username, elo: user.elo, avatarSeed: user.avatarSeed } });
+            cb({ success: true, user: { username: user.username, elo: user.elo, avatarSeed: user.avatarSeed, favoriteTeam: user.favoriteTeam } });
         } catch (e) {
             cb({ success: false, error: "Impossible de restaurer la session" });
         }
@@ -213,7 +213,7 @@ export function attachMatchmaking(io) {
             socket.data.elo = user.elo;
             
             const token = await createUserSession(user.id);
-            cb({ success: true, token, user: { username: user.username, elo: user.elo, avatarSeed: user.avatarSeed } });
+            cb({ success: true, token, user: { username: user.username, elo: user.elo, avatarSeed: user.avatarSeed, favoriteTeam: user.favoriteTeam } });
         } catch (e) {
             cb({ success: false, error: e.message });
         }
@@ -272,10 +272,10 @@ export function attachMatchmaking(io) {
         } catch (e) { cb({ success: false, error: e.message }); }
     });
 
-    socket.on("updateProfile", async ({ username, avatarSeed } = {}, cb = () => {}) => {
+    socket.on("updateProfile", async ({ username, avatarSeed, favoriteTeam } = {}, cb = () => {}) => {
         if (!socket.data.user) return cb({ success: false, error: "Connexion requise" });
         try {
-            const updated = await updateUserProfile(socket.data.user.id, username, avatarSeed);
+            const updated = await updateUserProfile(socket.data.user.id, username, avatarSeed, favoriteTeam);
             socket.data.user = updated;
             socket.data.nickname = updated.username;
             cb({ success: true, user: updated });
