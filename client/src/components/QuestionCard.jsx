@@ -29,7 +29,8 @@ export default function QuestionCard({
 
   if (type === 'progressive_clue') {
       const isWhoAmI = category === 'who_am_i';
-      const thresholds = isWhoAmI ? [45, 30, 15, 5] : [25, 15, 10, 5];
+      // Qui suis-je : indice immédiat, puis un nouvel indice toutes les 5 secondes.
+      const thresholds = isWhoAmI ? [30, 25, 20, 15] : [25, 15, 10, 5];
       const revealedClues = thresholds.filter((threshold) => timeLeft <= threshold).length;
       const canSubmitForClue = !isWhoAmI || revealedClues > attemptsUsed;
       // Clues logic:

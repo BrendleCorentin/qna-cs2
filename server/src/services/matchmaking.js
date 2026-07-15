@@ -122,7 +122,7 @@ function startNextQuestion(io, match) {
   }
 
   // Dynamic duration based on question type
-  const duration = question.category === 'who_am_i' ? 45000 : question.type === 'progressive_clue' ? 20000 : 10000;
+  const duration = question.category === 'who_am_i' ? 30000 : question.type === 'progressive_clue' ? 20000 : 10000;
   const deadline = Date.now() + duration;
   match.questionStartedAt = Date.now();
   match.questionDeadline = deadline;
@@ -387,7 +387,7 @@ export function attachMatchmaking(io) {
           ? match.answers[socket.id][questionId]
           : [];
         const elapsed = Math.max(0, Date.now() - (match.questionStartedAt || Date.now()));
-        const revealedClues = elapsed >= 40000 ? 4 : elapsed >= 30000 ? 3 : elapsed >= 15000 ? 2 : 1;
+        const revealedClues = elapsed >= 15000 ? 4 : elapsed >= 10000 ? 3 : elapsed >= 5000 ? 2 : 1;
 
         if (attempts.length >= revealedClues) {
           socket.emit("answerAck", {
