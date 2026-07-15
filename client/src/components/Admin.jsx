@@ -7,6 +7,8 @@ export default function Admin({ serverUrl, onBack }) {
 
   // --- QUESTIONS STATE ---
   const [questions, setQuestions] = useState([]);
+  const [collapsedCategories, setCollapsedCategories] = useState({});
+  const [questionSort, setQuestionSort] = useState("newest");
 
   // --- USERS STATE ---
   const [users, setUsers] = useState([]);
@@ -30,6 +32,20 @@ export default function Admin({ serverUrl, onBack }) {
   }, {});
 
   const orderedCategories = ["qcm", "who_am_i", "progressive", "open", ...Object.keys(questionGroups).filter((category) => !categoryLabels[category])];
+
+  const sortQuestions = (items) => [...items].sort((a, b) => {
+    if (questionSort === "oldest") return Number(a.id) - Number(b.id);
+    if (questionSort === "alphabetical") return (a.question || "").localeCompare(b.question || "", "fr", { sensitivity: "base" });
+    return Number(b.id) - Number(a.id);
+  });
+
+  const toggleCategory = (category) => {
+    setCollapsedCategories((current) => ({ ...current, [category]: !current[category] }));
+  };
+
+  const setAllCategoriesCollapsed = (collapsed) => {
+    setCollapsedCategories(Object.fromEntries(orderedCategories.map((category) => [category, collapsed])));
+  };
 
   useEffect(() => {
     if (activeTab === "questions") fetchQuestions();
@@ -137,30 +153,45 @@ export default function Admin({ serverUrl, onBack }) {
                 <div>
                     {/* Liste Questions */}
                     <div>
-                        <h3 style={{ borderBottom: '1px solid var(--cs-border)', paddingBottom: '0.5rem', marginBottom: '1rem', color: "var(--cs-text-main)" }}>
-                            LISTE DES QUESTIONS ({questions.length})
-                        </h3>
+                        <div style={{ borderBottom: '1px solid var(--cs-border)', paddingBottom: '0.75rem', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                            <h3 style={{ margin: 0, color: "var(--cs-text-main)" }}>LISTE DES QUESTIONS ({questions.length})</h3>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                                <select className="cs-input" value={questionSort} onChange={(event) => setQuestionSort(event.target.value)} style={{ width: 'auto', padding: '8px 12px' }} aria-label="Trier les questions">
+                                    <option value="newest">Plus récentes</option>
+                                    <option value="oldest">Plus anciennes</option>
+                                    <option value="alphabetical">Ordre alphabétique</option>
+                                </select>
+                                <button className="cs-btn-small" onClick={() => setAllCategoriesCollapsed(true)}>TOUT REPLIER</button>
+                                <button className="cs-btn-small" onClick={() => setAllCategoriesCollapsed(false)}>TOUT DÉPLIER</button>
+                            </div>
+                        </div>
                     </div>
                     
                     {questions.length === 0 && <p style={{ color: "var(--cs-text-muted)" }}>Aucune question trouvée.</p>}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
                         {orderedCategories.map((category) => {
-                            const categoryQuestions = questionGroups[category] || [];
+                            const categoryQuestions = sortQuestions(questionGroups[category] || []);
                             if (categoryQuestions.length === 0) return null;
+                            const isCollapsed = Boolean(collapsedCategories[category]);
                             return (
                                 <section key={category}>
-                                    <h4 style={{ color: 'var(--cs-accent)', margin: '0 0 10px', display: 'flex', justifyContent: 'space-between' }}>
-                                        <span>{categoryLabels[category] || category.toUpperCase()}</span>
+                                    <button
+                                        type="button"
+                                        onClick={() => toggleCategory(category)}
+                                        aria-expanded={!isCollapsed}
+                                        style={{ width: '100%', padding: '10px 0', color: 'var(--cs-accent)', background: 'transparent', border: 0, borderBottom: '1px solid var(--cs-border)', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', font: 'inherit', fontWeight: 'bold', textAlign: 'left' }}
+                                    >
+                                        <span><span style={{ display: 'inline-block', width: '22px' }}>{isCollapsed ? '▶' : '▼'}</span>{categoryLabels[category] || category.toUpperCase()}</span>
                                         <span className="cs-tag">{categoryQuestions.length}</span>
-                                    </h4>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                    </button>
+                                    {!isCollapsed && <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
                                         {categoryQuestions.map(q => (
                                             <div key={q.id} style={{ background: '#1e1e24', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', borderRadius: '4px' }}>
                                                 <span style={{ whiteSpace: 'pre-line' }}><b>{q.question}</b> <small style={{ color: "var(--cs-text-muted)" }}>({q.type})</small></span>
                                                 <button className="cs-btn cs-btn-t text-red" onClick={() => handleDeleteQuestion(q.id)}>SUPPRIMER</button>
                                             </div>
                                         ))}
-                                    </div>
+                                    </div>}
                                 </section>
                             );
                         })}
