@@ -102,6 +102,66 @@ export const QUESTIONS_DB_SEED = [
     clues: ["Je suis danois.", "Je suis un in-game leader ayant dirigé plusieurs équipes internationales.", "J'ai représenté MOUZ, TSM et FaZe.", "J'ai remporté mon premier Major comme capitaine avec FaZe."],
     answer: "karrigan"
   },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 18",
+    clues: ["Je suis ukrainien.", "J'étais considéré comme l'un des meilleurs AWPers de Counter-Strike 1.6.", "J'ai remporté quatre grands tournois internationaux avec NAVI en 2010.", "Mon pseudo commence par le mot anglais signifiant marqueur."],
+    answer: "markeloff"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 19",
+    clues: ["Je suis russe.", "J'ai longtemps représenté Virtus.pro avant de rejoindre Gambit.", "J'ai remporté le Major de Cracovie avec une équipe de la région CIS.", "La communauté me surnomme parfois le X God."],
+    answer: "Dosia"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 20",
+    clues: ["Je suis kazakh.", "Je suis un rifler ayant joué pour plusieurs équipes CIS.", "J'ai remporté le PGL Major Kraków avec Gambit.", "J'ai été élu MVP de ce Major."],
+    answer: "AdreN"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 21",
+    clues: ["Je suis suédois.", "J'ai fait partie du légendaire cinq de NIP.", "Je suis particulièrement associé au bombsite B d'Inferno.", "Mon surnom est le King of Banana."],
+    answer: "friberg"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 22",
+    clues: ["Je suis français.", "Je suis un joueur de soutien ayant évolué dans plusieurs équipes internationales.", "J'ai joué pour LDLC, EnVyUs et FaZe.", "J'ai remporté deux Majors avec deux organisations françaises différentes."],
+    answer: "kioShiMa"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 23",
+    clues: ["Je suis finlandais.", "Je suis principalement AWPer.", "J'ai porté les couleurs de NIP, FaZe et ENCE.", "Un célèbre mème hésite entre me qualifier de bot ou de dieu."],
+    answer: "allu"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 24",
+    clues: ["Je suis russe.", "Je combine les rôles d'AWPer et d'in-game leader.", "Mon style très économique a donné naissance à une expression utilisée par les fans.", "J'ai remporté le Major de Rio avec Outsiders et obtenu le titre de MVP."],
+    answer: "Jame"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 25",
+    clues: ["Je suis kazakh.", "J'ai commencé ma carrière au plus haut niveau très jeune.", "J'ai joué dans les projets Gambit et Gambit Youngsters.", "J'ai remporté le Major de Cracovie aux côtés d'AdreN et Dosia."],
+    answer: "HObbit"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 26",
+    clues: ["Je suis suédois.", "Je suis connu pour mon sens du jeu et mes actions à travers les fumigènes.", "J'ai remporté trois Majors avec fnatic.", "La communauté m'a donné le surnom Señor VAC."],
+    answer: "flusha"
+  },
+  {
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 27",
+    clues: ["Je suis slovaque.", "Je suis un AWPer emblématique de la scène européenne.", "J'ai longtemps joué pour NAVI avant de rejoindre FaZe.", "Mon pseudo désigne une personne chargée de protéger quelqu'un."],
+    answer: "GuardiaN"
+  },
 
   // --- CATÉGORIE : ESPOST & RECORDS (MCQ) ---
   {
