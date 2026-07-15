@@ -274,6 +274,7 @@ export function logMatchResult(matchData) {
 
 function seedQuestions() {
     console.log("[DB] Adding missing seed questions...");
+    db.run("DELETE FROM questions_v2 WHERE type = 'text' AND UPPER(question) LIKE 'QUI SUIS-JE ?%'");
     // Retire l'ancienne série ultra-difficile centrée sur l'actualité 2026.
     // Le filtre est volontairement ciblé pour ne pas toucher aux autres questions.
     db.run(`

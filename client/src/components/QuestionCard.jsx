@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 export default function QuestionCard({
   type = 'mcq',
+  category,
   question,
   choices,
   clues,
   timeLeft,
   disabled,
   selectedIndex,
+  attemptsUsed = 0,
   onSelect,
 }) {
   const [textAnswer, setTextAnswer] = useState("");
@@ -21,11 +23,15 @@ export default function QuestionCard({
     e.preventDefault();
     if (textAnswer.trim()) {
       onSelect(textAnswer);
+      if (category === 'who_am_i') setTextAnswer("");
     }
   };
 
   if (type === 'progressive_clue') {
-      const thresholds = [25, 15, 10, 5];
+      const isWhoAmI = category === 'who_am_i';
+      const thresholds = isWhoAmI ? [45, 30, 15, 5] : [25, 15, 10, 5];
+      const revealedClues = thresholds.filter((threshold) => timeLeft <= threshold).length;
+      const canSubmitForClue = !isWhoAmI || revealedClues > attemptsUsed;
       // Clues logic:
       // Clue 1 (index 0): Show effectively immediately (when time <= 25, which is always true for 20s round)
       // Clue 2 (index 1): Show at 15s remaining
@@ -75,7 +81,7 @@ export default function QuestionCard({
                 className="cs-input"
                 value={textAnswer}
                 onChange={(e) => setTextAnswer(e.target.value)}
-                disabled={disabled}
+                disabled={disabled || !canSubmitForClue}
                 placeholder="Qui suis-je ?"
                 autoFocus
                 style={{ 
@@ -90,11 +96,16 @@ export default function QuestionCard({
             <button 
                 type="submit" 
                 className="cs-btn" 
-                disabled={disabled || !textAnswer.trim()}
+                disabled={disabled || !canSubmitForClue || !textAnswer.trim()}
                 style={{ padding: '1rem' }}
             >
                 VALIDER
             </button>
+             {isWhoAmI && !disabled && !canSubmitForClue && attemptsUsed < 4 && (
+                  <div style={{ marginTop: '0.5rem', color: 'var(--cs-text-muted)', fontSize: '0.9rem' }}>
+                      Proposition utilisée. Le champ se débloquera au prochain indice.
+                  </div>
+              )}
              {disabled && (
                   <div style={{ marginTop: '0.5rem', color: 'var(--cs-text-muted)', fontSize: '0.9rem' }}>
                       {selectedIndex ? `Votre réponse : ${selectedIndex}` : "Temps écoulé"}

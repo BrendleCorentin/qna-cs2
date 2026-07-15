@@ -1,38 +1,45 @@
 export const QUESTIONS_DB_SEED = [
   // --- CATÉGORIE : QUI SUIS-JE ? (Open Text) ---
   {
-    type: "text",
-    question: "QUI SUIS-JE ?\nJe suis Français. J'ai été élu Top 1 HLTV en 2019, 2020 et 2023. Je joue pour Vitality.",
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 1",
+    clues: ["Je suis un joueur français.", "Je suis principalement AWPer.", "J'ai été classé numéro 1 mondial par HLTV plusieurs fois.", "Je joue pour Vitality."],
     answer: "ZywOo"
   },
   {
-    type: "text",
-    question: "QUI SUIS-JE ?\nJe suis Ukrainien. J'ai gagné le Major Stockholm 2021. Je suis considéré comme le GOAT de CS:GO.",
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 2",
+    clues: ["Je suis un joueur ukrainien.", "Mon arme emblématique est l'AWP.", "J'ai remporté le Major Stockholm 2021.", "Mon pseudo commence par la lettre s."],
     answer: "s1mple"
   },
   {
-    type: "text",
-    question: "QUI SUIS-JE ?\nJe suis un jeune AWPer russe prodige. J'ai rejoint G2 Esports en 2022 après avoir brillé chez NAVI Junior.",
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 3",
+    clues: ["Je suis un jeune joueur russe.", "Je suis AWPer.", "J'ai joué pour NAVI Junior.", "J'ai rejoint G2 en 2022."],
     answer: "m0NESY"
   },
   {
-    type: "text",
-    question: "QUI SUIS-JE ?\nJe suis Canadien. J'ai joué pour Liquid et remporté l'Intel Grand Slam. Je suis connu pour mes headshots.",
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 4",
+    clues: ["Je suis canadien.", "Je suis surtout connu comme rifler.", "J'ai remporté l'Intel Grand Slam avec Liquid.", "Mon pseudo contient deux fois la lettre z."],
     answer: "Twistzz"
   },
   {
-    type: "text",
-    question: "QUI SUIS-JE ?\nJe suis Bosnien. Je suis une star du Deagle. Je suis le cousin de huNter-.",
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 5",
+    clues: ["Je suis bosnien.", "Je suis un rifler vedette.", "Je suis réputé avec le Deagle.", "Je suis le cousin de huNter-."],
     answer: "NiKo"
   },
   {
-    type: "text",
-    question: "QUI SUIS-JE ?\nJe suis le capitaine (IGL) d'Astralis durant leur ère dominante (4 Majors). Je suis Danois.",
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 6",
+    clues: ["Je suis danois.", "Je suis connu comme in-game leader.", "J'ai mené Astralis durant son ère dominante.", "J'ai remporté quatre Majors avec Astralis."],
     answer: "gla1ve"
   },
   {
-    type: "text",
-    question: "QUI SUIS-JE ?\nJe suis un joueur Estonien. J'ai joué pour MOUZ et FaZe. J'ai été le premier joueur à gagner un Major avec une équipe internationale (FaZe).",
+    type: "progressive_clue", category: "who_am_i",
+    question: "QUI SUIS-JE ? — JOUEUR 7",
+    clues: ["Je suis estonien.", "J'ai joué pour MOUZ.", "J'ai ensuite rejoint FaZe.", "J'ai gagné un Major avec une équipe internationale."],
     answer: "ropz"
   },
 

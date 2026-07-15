@@ -42,7 +42,8 @@ export default function Match({
   if (!q) return <div className="cs-container" style={{ justifyContent: 'center', textAlign: 'center' }}>Chargement du round...</div>;
 
   const my = answered[q.id];
-  const selectedIndex = my?.answer;
+  const isWhoAmI = q.category === 'who_am_i';
+  const selectedIndex = isWhoAmI ? undefined : my?.answer;
   const correct = my?.correct;
   const oppDid = !!opponentAnswered[q.id];
 
@@ -112,12 +113,14 @@ export default function Match({
       {/* Question */}
       <QuestionCard
         type={q.type || 'mcq'}
+        category={q.category}
         question={q.question}
         choices={q.choices}
         clues={q.clues}
         timeLeft={timeLeft}
-        disabled={selectedIndex !== undefined || timeLeft <= 0}
+        disabled={(isWhoAmI ? correct === true : selectedIndex !== undefined) || timeLeft <= 0}
         selectedIndex={selectedIndex}
+        attemptsUsed={my?.attemptsUsed ?? my?.attempts?.length ?? 0}
         onSelect={(ans) => onAnswer(q.id, ans)}
       />
 
@@ -125,7 +128,7 @@ export default function Match({
       <div style={{ marginTop: '1rem' }}>
           {/* Status Message */}
           <div style={{ minHeight: '30px', marginBottom: '1rem' }}>
-            {selectedIndex !== undefined && (
+            {(selectedIndex !== undefined || (isWhoAmI && (my?.attempts?.length || 0) > 0)) && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <span 
                       style={{ 
@@ -134,7 +137,7 @@ export default function Match({
                           textTransform: 'uppercase'
                       }}
                     >
-                    {correct === undefined ? "Validation en cours..." : correct ? "VICTOIRE DE MANCHE" : "ÉCHEC DE MANCHE"}
+                    {correct === undefined ? "Validation en cours..." : correct ? "VICTOIRE DE MANCHE" : isWhoAmI ? "MAUVAISE PROPOSITION — ATTENDEZ LE PROCHAIN INDICE" : "ÉCHEC DE MANCHE"}
                     </span>
                 </div>
             )}
@@ -218,5 +221,4 @@ export default function Match({
     </div>
   );
 }
-
 

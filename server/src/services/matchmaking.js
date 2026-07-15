@@ -66,7 +66,7 @@ async function createPvpMatch(io, a, b, metadata = {}) {
     answers: { [a]: {}, [b]: {} }, scores: { [a]: 0, [b]: 0 }, questions,
   };
   matches.set(matchId, match);
-  const clientQuestions = questions.map(({ id, question, choices, type, clues }) => ({ id, question, choices, type, clues }));
+  const clientQuestions = questions.map(({ id, question, choices, type, clues, category }) => ({ id, question, choices, type, clues, category }));
   for (const [self, opponent] of [[a, b], [b, a]]) {
     io.to(self).emit("matchFound", {
       matchId,
@@ -122,8 +122,10 @@ function startNextQuestion(io, match) {
   }
 
   // Dynamic duration based on question type
-  const duration = question.type === 'progressive_clue' ? 20000 : 10000;
+  const duration = question.category === 'who_am_i' ? 45000 : question.type === 'progressive_clue' ? 20000 : 10000;
   const deadline = Date.now() + duration;
+  match.questionStartedAt = Date.now();
+  match.questionDeadline = deadline;
 
   io.to(match.matchId).emit("nextQuestion", {
     index: match.currentQuestionIndex,
@@ -244,7 +246,7 @@ export function attachMatchmaking(io) {
 
         matches.set(matchId, match);
 
-        const clientQuestions = questions.map(({ id, question, choices, type }) => ({ id, question, choices, type }));
+        const clientQuestions = questions.map(({ id, question, choices, type, clues, category }) => ({ id, question, choices, type, clues, category }));
 
         socket.emit("matchFound", {
             matchId,
@@ -334,12 +336,13 @@ export function attachMatchmaking(io) {
       matches.set(matchId, match);
 
       // Prepare sanitized questions for client
-      const clientQuestions = questions.map(({ id, question, choices, type, clues }) => ({ 
+      const clientQuestions = questions.map(({ id, question, choices, type, clues, category }) => ({
           id, 
           question, 
           choices, 
           type,
-          clues // Include clues for progressive questions
+          clues, // Include clues for progressive questions
+          category
       }));
 
       io.to(a).emit("matchFound", {
@@ -375,6 +378,68 @@ export function attachMatchmaking(io) {
       if (!currentQ || String(currentQ.id) !== String(questionId)) {
           console.warn(`[Match ${matchId}] Invalid question ID. Expected ${currentQ?.id}, got ${questionId}`);
           return;
+      }
+
+      const isWhoAmI = currentQ.category === 'who_am_i';
+
+      if (isWhoAmI) {
+        const attempts = Array.isArray(match.answers[socket.id]?.[questionId])
+          ? match.answers[socket.id][questionId]
+          : [];
+        const elapsed = Math.max(0, Date.now() - (match.questionStartedAt || Date.now()));
+        const revealedClues = elapsed >= 40000 ? 4 : elapsed >= 30000 ? 3 : elapsed >= 15000 ? 2 : 1;
+
+        if (attempts.length >= revealedClues) {
+          socket.emit("answerAck", {
+            questionId,
+            correct: false,
+            canRetry: false,
+            attemptsUsed: attempts.length,
+            score: match.scores[socket.id],
+          });
+          return;
+        }
+
+        const submitted = (typeof answer === 'string' ? answer : "").trim().toLowerCase();
+        const expected = (currentQ.answer || "").trim().toLowerCase();
+        if (!submitted) return;
+
+        const correct = getLevenshteinDistance(submitted, expected) <= 1;
+        attempts.push(answer);
+        match.answers[socket.id][questionId] = attempts;
+
+        socket.emit("answerAck", {
+          questionId,
+          correct,
+          canRetry: !correct && attempts.length < 4,
+          attemptsUsed: attempts.length,
+          score: match.scores[socket.id] + (correct ? 1 : 0),
+        });
+
+        const opp = getOpponent(match, socket.id);
+        if (opp) io.to(opp).emit("opponentAnswered", { questionId });
+
+        if (correct) {
+          match.scores[socket.id] += 1;
+          if (match.tournamentCode) {
+            const [a, b] = match.players;
+            io.to(`tournament:${match.tournamentCode}`).emit("tournamentMatchProgress", {
+              matchId: match.matchId,
+              bracketMatchId: match.tournamentMatchId,
+              player1: match.nicknames[a],
+              player2: match.nicknames[b],
+              score1: match.scores[a],
+              score2: match.scores[b],
+              question: match.currentQuestionIndex + 1,
+              totalQuestions: match.questions.length,
+              status: "playing",
+            });
+          }
+          setTimeout(() => {
+            if (!match.ended && match.questions[match.currentQuestionIndex] === currentQ) startNextQuestion(io, match);
+          }, 1000);
+        }
+        return;
       }
 
       // prevent double answer

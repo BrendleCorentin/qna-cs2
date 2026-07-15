@@ -81,7 +81,12 @@ export default function App() {
       setMyScore(msg.score);
       setAnswered((prev) => ({
         ...prev,
-        [msg.questionId]: { ...(prev[msg.questionId] || {}), correct: msg.correct },
+        [msg.questionId]: {
+          ...(prev[msg.questionId] || {}),
+          correct: msg.correct,
+          canRetry: msg.canRetry,
+          attemptsUsed: msg.attemptsUsed,
+        },
       }));
     };
 
@@ -150,11 +155,15 @@ export default function App() {
 
   function answer(questionId, ans) {
     if (!match) return;
-    if (answered[questionId]?.answer !== undefined) return;
+    const currentQuestion = match.questions.find((question) => String(question.id) === String(questionId));
+    const isWhoAmI = currentQuestion?.category === "who_am_i";
+    if (!isWhoAmI && answered[questionId]?.answer !== undefined) return;
 
     setAnswered((prev) => ({
       ...prev,
-      [questionId]: { answer: ans },
+      [questionId]: isWhoAmI
+        ? { ...(prev[questionId] || {}), attempts: [...(prev[questionId]?.attempts || []), ans] }
+        : { answer: ans },
     }));
 
     socketRef.current?.emit("answer", {
