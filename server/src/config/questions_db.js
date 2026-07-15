@@ -203,109 +203,106 @@ export const QUESTIONS_DB_SEED = [
     answerIndex: 1, // Spamming the smoke effectively
   },
 
-  // Sources HLTV vérifiées le 15 juillet 2026 :
-  // https://www.hltv.org/news/45058/official-saw-unveil-new-roster
-  // https://www.hltv.org/news/45055/9ine-finalize-roster-with-b1elany
-  // https://www.hltv.org/news/45097/official-bcg-complete-roster-with-mzinho
-  // https://www.hltv.org/news/44709/fluxo-confirm-dav1deus-and-ltz-signings
-  // https://www.hltv.org/news/44998/rostermania-tracker-summer-2026
-  // https://www.hltv.org/results
+  // Sources HLTV historiques vérifiées le 15 juillet 2026 :
+  // https://www.hltv.org/news/22637/cloud9-beat-faze-to-win-eleague-major-boston
+  // https://www.hltv.org/news/24936/faceit-major-the-evps
+  // https://www.hltv.org/news/36340/vitality-romp-to-victory-on-home-soil-in-last-ever-csgo-major
 
   // --- COMPLÈTE LA LINE-UP (rosters annoncés en juillet 2026) ---
   {
     type: "mcq", category: "lineup_completion",
-    question: "Complète la line-up SAW annoncée le 3 juillet 2026 : MUTiRiS, story, ewjerkz, krazy et ____.",
-    choices: ["NOPEEj", "arrozdoce", "stadodo", "roman"], answerIndex: 0,
+    question: "Complète la line-up Astralis championne du FACEIT Major London 2018 : device, dupreeh, gla1ve, Magisk et ____.",
+    choices: ["Xyp9x", "k0nfig", "cadiaN", "valde"], answerIndex: 0,
   },
   {
     type: "mcq", category: "lineup_completion",
-    question: "Complète la line-up 9INE finalisée le 3 juillet 2026 : raalz, kraghen, flayy, rim3 et ____.",
-    choices: ["cej0t", "b1elany", "bnox", "St0m4k"], answerIndex: 1,
+    question: "Complète la line-up Cloud9 championne du Major Boston 2018 : Stewie2K, tarik, autimatic, RUSH et ____.",
+    choices: ["Skadoodle", "n0thing", "shroud", "flusha"], answerIndex: 0,
   },
   {
     type: "mcq", category: "lineup_completion",
-    question: "Complète la line-up BC.Game annoncée le 9 juillet 2026 : s1mple, electroNic, Senzu, Magisk et ____.",
-    choices: ["910", "mzinho", "Techno", "cobrazera"], answerIndex: 1,
+    question: "Complète la line-up NAVI championne du Major Stockholm 2021 : s1mple, electronic, Boombl4, b1t et ____.",
+    choices: ["Perfecto", "flamie", "jL", "npl"], answerIndex: 0,
   },
   {
     type: "mcq", category: "lineup_completion",
-    question: "Complète la line-up Fluxo annoncée le 25 mai 2026 : zevy, Lucaozy, exit, dav1deuS et ____.",
-    choices: ["Ltz", "kye", "mlhzin", "remix"], answerIndex: 0,
+    question: "Complète la line-up Luminosity championne du Major MLG Columbus 2016 : FalleN, fer, coldzera, TACO et ____.",
+    choices: ["fnx", "felps", "boltz", "steel"], answerIndex: 0,
   },
   {
     type: "mcq", category: "lineup_completion",
-    question: "Quel duo a rejoint Fluxo pour compléter son cinq en mai 2026 ?",
-    choices: ["dav1deuS et Ltz", "kye et mlhzin", "Lucaozy et decenty", "remix et ALLE"], answerIndex: 0,
+    question: "Complète la line-up Vitality championne du Major de Paris 2023 : apEX, ZywOo, Magisk, dupreeh et ____.",
+    choices: ["Spinx", "flameZ", "RpK", "misutaaa"], answerIndex: 0,
   },
   {
     type: "mcq", category: "lineup_completion",
-    question: "Dans la line-up SAW de juillet 2026, quel joueur arrivait de Rebels ?",
-    choices: ["story", "krazy", "NOPEEj", "MUTiRiS"], answerIndex: 2,
+    question: "Complète la line-up française LDLC championne à DreamHack Winter 2014 : Happy, shox, NBK-, kioShiMa et ____.",
+    choices: ["SmithZz", "kennyS", "apEX", "ScreaM"], answerIndex: 0,
   },
 
   // --- TRANSFERTS & ANCIENNES ÉQUIPES ---
   {
     type: "mcq", category: "transfer_history",
-    question: "De quelle équipe mzinho venait-il avant de compléter BC.Game en juillet 2026 ?",
-    choices: ["The Huns", "The MongolZ", "ATOX", "IHC"], answerIndex: 1,
+    question: "Dans quelle académie m0NESY jouait-il avant de rejoindre G2 ?",
+    choices: ["NAVI Junior", "Gambit Youngsters", "MOUZ NXT", "Spirit Academy"], answerIndex: 0,
   },
   {
     type: "mcq", category: "transfer_history",
-    question: "De quelle organisation provenait le prêt de Senzu, rendu permanent par BC.Game en juin 2026 ?",
-    choices: ["The MongolZ", "Falcons", "NAVI", "Aurora"], answerIndex: 0,
+    question: "Dans quelle équipe NiKo jouait-il juste avant de rejoindre G2 en 2020 ?",
+    choices: ["FaZe", "MOUZ", "HEROIC", "Complexity"], answerIndex: 0,
   },
   {
     type: "mcq", category: "transfer_history",
-    question: "Dans quelle équipe b1elany jouait-il avant de signer chez 9INE en juillet 2026 ?",
-    choices: ["KOLESIE", "Inner Circle", "Betclic", "Monte"], answerIndex: 0,
+    question: "Quelle organisation device a-t-il quittée avant de revenir chez Astralis en 2022 ?",
+    choices: ["Ninjas in Pyjamas", "North", "Complexity", "HEROIC"], answerIndex: 0,
   },
   {
     type: "mcq", category: "transfer_history",
-    question: "Quel joueur a rejoint CYBERSHOKE en prêt depuis HEROIC le 9 juillet 2026 ?",
-    choices: ["Alkaren", "yxngstxr", "xfl0ud", "Brollan"], answerIndex: 0,
+    question: "Quel joueur a quitté NAVI Junior pour devenir l'AWPer de G2 en 2022 ?",
+    choices: ["m0NESY", "w0nderful", "headtr1ck", "deko"], answerIndex: 0,
   },
 
   // --- RETROUVE LE MATCH / LE SCORE ---
   {
     type: "mcq", category: "match_history",
-    question: "Quel score a conclu la finale BO5 entre 9z et PARIVISION au XSE Pro League Guangzhou 2026 ?",
-    choices: ["3-0 pour 9z", "3-1 pour 9z", "3-2 pour PARIVISION", "3-0 pour PARIVISION"], answerIndex: 0,
+    question: "Quelle équipe Cloud9 a-t-elle battue en finale du Major Boston 2018 ?",
+    choices: ["FaZe", "SK", "G2", "NAVI"], answerIndex: 0,
   },
   {
     type: "mcq", category: "match_history",
-    question: "Quelle équipe a battu FaZe 2-1 au XSE Pro League Guangzhou le 11 juillet 2026 ?",
-    choices: ["Alliance", "PARIVISION", "9z", "BIG"], answerIndex: 1,
+    question: "Quelle équipe NAVI a-t-elle battue en finale du Major Stockholm 2021 ?",
+    choices: ["G2", "Vitality", "Gambit", "HEROIC"], answerIndex: 0,
   },
   {
     type: "mcq", category: "match_history",
-    question: "Quelle équipe a éliminé Virtus.pro 2-0 au RES Showdown 4 Europe le 11 juillet 2026 ?",
-    choices: ["Inner Circle", "magic", "Monte", "Tricksters"], answerIndex: 0,
+    question: "Quelle équipe Vitality a-t-elle battue en finale du dernier Major CS:GO à Paris ?",
+    choices: ["GamerLegion", "HEROIC", "Apeks", "Monte"], answerIndex: 0,
   },
   {
     type: "mcq", category: "match_history",
-    question: "Au RES Showdown 4 South America du 12 juillet 2026, qui a battu paiN 2-0 ?",
-    choices: ["BESTIA", "Imperial", "Sharks", "Keyd Stars"], answerIndex: 2,
+    question: "Quelle équipe ENCE a-t-elle affrontée en finale de l'IEM Katowice Major 2019 ?",
+    choices: ["Astralis", "NAVI", "Liquid", "MIBR"], answerIndex: 0,
   },
   {
     type: "mcq", category: "match_history",
-    question: "Quel score Lynn Vision a-t-elle infligé à TYLOO le 12 juillet 2026 ?",
-    choices: ["2-0", "2-1", "3-1", "1-0"], answerIndex: 1,
+    question: "Quelle équipe Astralis a-t-elle battue en finale du StarLadder Berlin Major 2019 ?",
+    choices: ["AVANGAR", "ENCE", "Liquid", "NRG"], answerIndex: 0,
   },
 
   // --- DATES & PARCOURS DE TOURNOI ---
   {
-    type: "mcq", category: "date_challenge",
-    question: "À quelle date BC.Game a-t-elle officiellement annoncé mzinho comme dernier joueur de sa line-up 2026 ?",
-    choices: ["23 juin 2026", "3 juillet 2026", "9 juillet 2026", "12 juillet 2026"], answerIndex: 2,
+    type: "mcq", category: "tournament_path",
+    question: "Quelle équipe a remporté le tout premier Major de Counter-Strike 2 ?",
+    choices: ["NAVI", "FaZe", "Vitality", "Spirit"], answerIndex: 0,
   },
   {
     type: "mcq", category: "tournament_path",
-    question: "Lors du Super DraculaN précédant sa signature chez 9INE, quelle équipe b1elany a-t-il battue comme stand-in ?",
-    choices: ["Sashi", "GamerLegion", "Inner Circle", "Acend"], answerIndex: 1,
+    question: "Quelle équipe a réalisé un parcours parfait sans perdre une seule carte au Major Stockholm 2021 ?",
+    choices: ["NAVI", "G2", "Gambit", "Vitality"], answerIndex: 0,
   },
   {
     type: "mcq", category: "tournament_path",
-    question: "Contre quelle équipe la nouvelle line-up Fluxo devait-elle débuter au Circuit X Base Recife 2026 ?",
-    choices: ["BlackBelt", "UNO MILLE", "RED Canids", "BESTIA"], answerIndex: 0,
+    question: "Quelle équipe française a remporté DreamHack Winter 2014 après l'affaire du boost d'Overpass ?",
+    choices: ["LDLC", "Titan", "VeryGames", "EnVyUs"], answerIndex: 0,
   }
 ];

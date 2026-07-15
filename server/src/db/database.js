@@ -274,6 +274,13 @@ export function logMatchResult(matchData) {
 
 function seedQuestions() {
     console.log("[DB] Adding missing seed questions...");
+    // Retire l'ancienne série ultra-difficile centrée sur l'actualité 2026.
+    // Le filtre est volontairement ciblé pour ne pas toucher aux autres questions.
+    db.run(`
+      DELETE FROM questions_v2
+      WHERE category IN ('lineup_completion', 'transfer_history', 'match_history', 'date_challenge', 'tournament_path')
+        AND (question LIKE '%2026%' OR question LIKE '%Super DraculaN%')
+    `);
     const stmt = db.prepare(`
         INSERT INTO questions_v2 (type, category, question, choices, answerIndex, answer)
         SELECT ?, ?, ?, ?, ?, ?
