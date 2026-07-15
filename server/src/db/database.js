@@ -70,21 +70,25 @@ function initDB() {
       )
     `, (err) => {
         if (err) console.error("Erreur table questions_v2:", err.message);
-        else seedQuestions();
+        else console.log("Table 'questions_v2' prête.");
     });
 
     db.all("PRAGMA table_info(questions_v2)", [], (err, columns) => {
       if (err) return console.error("Erreur lecture structure questions_v2:", err.message);
-      const classifyExistingQuestions = () => db.run(`
-        UPDATE questions_v2
-        SET category = CASE
-          WHEN UPPER(question) LIKE 'QUI SUIS-JE%' THEN 'who_am_i'
-          WHEN type = 'mcq' THEN 'qcm'
-          WHEN type = 'progressive_clue' THEN 'progressive'
-          ELSE 'open'
-        END
-        WHERE category IS NULL OR category = ''
-      `);
+      const classifyExistingQuestions = () => db.run(
+        `UPDATE questions_v2
+         SET category = CASE
+           WHEN UPPER(question) LIKE 'QUI SUIS-JE%' THEN 'who_am_i'
+           WHEN type = 'mcq' THEN 'qcm'
+           WHEN type = 'progressive_clue' THEN 'progressive'
+           ELSE 'open'
+         END
+         WHERE category IS NULL OR category = ''`,
+        (classifyErr) => {
+          if (classifyErr) console.error("Erreur classement questions:", classifyErr.message);
+          else seedQuestions();
+        }
+      );
 
       if (!columns.some((column) => column.name === "category")) {
         db.run("ALTER TABLE questions_v2 ADD COLUMN category TEXT", (alterErr) => {

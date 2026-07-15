@@ -43,7 +43,8 @@ export default function Admin({ serverUrl, onBack }) {
     try {
       const res = await fetch(`${serverUrl}/admin/questions`);
       const data = await res.json();
-      setQuestions(data);
+      if (!res.ok) throw new Error(data.error || "Impossible de charger les questions");
+      setQuestions(Array.isArray(data) ? data : []);
     } catch (err) { setError(err.message); } finally { setLoading(false); }
   };
 
