@@ -32,6 +32,148 @@ body {
   background-color: transparent;
 }
 
+/* ====== AUTHENTIFICATION ====== */
+.cs-auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  padding: 32px;
+}
+
+.cs-auth-card {
+  width: min(1040px, 100%);
+  min-height: 610px;
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  background: rgba(22, 25, 30, 0.97);
+  border: 1px solid var(--cs-border);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  position: relative;
+}
+
+.cs-auth-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  z-index: 2;
+  background: linear-gradient(90deg, var(--cs-accent), rgba(220, 163, 54, 0.1));
+}
+
+.cs-auth-intro {
+  padding: 64px 58px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(220, 163, 54, 0.16), transparent 38%),
+    linear-gradient(145deg, rgba(33, 37, 43, 0.98), rgba(17, 19, 23, 0.98));
+  border-right: 1px solid var(--cs-border);
+}
+
+.cs-auth-brand {
+  font-size: 1.15rem;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  margin-bottom: 54px;
+}
+
+.cs-auth-brand span,
+.cs-auth-eyebrow { color: var(--cs-accent); }
+
+.cs-auth-kicker,
+.cs-auth-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.cs-auth-intro h1 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  margin: 14px 0 22px;
+}
+
+.cs-auth-copy {
+  max-width: 500px;
+  color: var(--cs-text-muted);
+  line-height: 1.7;
+  margin: 0 0 42px;
+}
+
+.cs-auth-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.cs-auth-features div {
+  padding: 14px 12px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.cs-auth-features strong,
+.cs-auth-features span { display: block; }
+.cs-auth-features strong { color: var(--cs-accent); font-size: 0.85rem; }
+.cs-auth-features span { color: var(--cs-text-muted); font-size: 0.68rem; margin-top: 5px; }
+
+.cs-auth-form-panel {
+  padding: 58px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cs-auth-form-header h2 {
+  font-size: 1.75rem;
+  text-transform: none;
+  font-style: normal;
+  margin: 8px 0;
+}
+
+.cs-auth-form-header p {
+  color: var(--cs-text-muted);
+  margin: 0 0 28px;
+  font-size: 0.9rem;
+}
+
+.cs-auth-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 28px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cs-auth-form .cs-input-group { margin-bottom: 18px; }
+.cs-auth-form .cs-input { font-size: 1rem; padding: 0.9rem 1rem; }
+.cs-auth-form .cs-btn-primary { margin-top: 8px; padding: 1rem; }
+.cs-auth-status { margin-top: 28px; justify-content: center; opacity: 0.72; }
+
+@media (max-width: 820px) {
+  .cs-auth-page { padding: 16px; align-items: start; }
+  .cs-auth-card { grid-template-columns: 1fr; min-height: auto; }
+  .cs-auth-intro { padding: 38px 30px; border-right: 0; border-bottom: 1px solid var(--cs-border); }
+  .cs-auth-brand { margin-bottom: 28px; }
+  .cs-auth-copy { margin-bottom: 28px; }
+  .cs-auth-form-panel { padding: 38px 30px; }
+}
+
+@media (max-width: 520px) {
+  .cs-auth-page { padding: 0; }
+  .cs-auth-card { border-left: 0; border-right: 0; }
+  .cs-auth-intro, .cs-auth-form-panel { padding: 32px 22px; }
+  .cs-auth-features { grid-template-columns: 1fr; }
+  .cs-auth-intro h1 { font-size: 2rem; }
+}
+
 /* ====== NEW LOBBY DESIGN ====== */
 
 .cs-lobby-container {

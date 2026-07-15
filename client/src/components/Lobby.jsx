@@ -242,14 +242,28 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
   };
 
   return (
-    <div className="cs-container">
-      {/* Background simplifie */}
-      <div className="cs-card" style={{ maxWidth: '600px', margin: '0 auto', width: '100%', position: 'relative', background: 'rgba(28, 30, 36, 0.95)', border: '1px solid var(--cs-border)', padding: '40px' }}>
-        <h1 className="cs-hero-title" style={{ fontSize: '2.5rem', textAlign: 'center', borderLeft: 'none' }}>
-          COUNTER <span style={{ color: 'var(--cs-accent)' }}>QUIZ</span>
-        </h1>
+    <div className="cs-auth-page">
+      <div className="cs-auth-card">
+        <aside className="cs-auth-intro">
+            <div className="cs-auth-brand">COUNTER <span>QUIZ</span></div>
+            <p className="cs-auth-kicker">LE DUEL DE CULTURE COUNTER-STRIKE</p>
+            <h1>Teste tes connaissances.<br />Grimpe au classement.</h1>
+            <p className="cs-auth-copy">Affronte d'autres joueurs sur les Majors, les line-ups, les transferts et l'histoire de Counter-Strike.</p>
+            <div className="cs-auth-features">
+                <div><strong>1V1</strong><span>Matchs classés</span></div>
+                <div><strong>LIVE</strong><span>Tournois & brackets</span></div>
+                <div><strong>ELO</strong><span>Classement mondial</span></div>
+            </div>
+        </aside>
+
+        <section className="cs-auth-form-panel">
+        <div className="cs-auth-form-header">
+            <span className="cs-auth-eyebrow">ESPACE JOUEUR</span>
+            <h2>{isRegistering ? "Créer un compte" : "Bon retour parmi nous"}</h2>
+            <p>{isRegistering ? "Inscris-toi pour commencer à jouer." : "Connecte-toi pour accéder à tous les modes."}</p>
+        </div>
         
-        <div style={{ display: 'flex', gap: '0', marginBottom: '2rem', background: 'rgba(0,0,0,0.3)', padding: '5px', borderRadius: '8px' }}>
+        <div className="cs-auth-tabs">
             <button 
                 className="cs-btn"
                 style={{ 
@@ -286,7 +300,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
             </button>
         </div>
         
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="cs-auth-form">
             <div className="cs-input-group">
             <label className="cs-label">IDENTIFIANT</label>
             <input
@@ -326,31 +340,11 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
             </button>
         </form>
 
-        <div style={{ margin: '2rem 0', textAlign: 'center', borderTop: '1px solid var(--cs-border)', paddingTop: '1rem' }}>
-            <div className="cs-label" style={{marginBottom: '1rem'}}>OU JOUER EN INVITÉ</div>
-            <button 
-                className="cs-btn" 
-                onClick={() => { setNickname("Invité"); onPlay(); }}
-                style={{ width: '100%', fontSize: '0.9rem', padding: '0.8rem', marginBottom: '1rem' }}
-            >
-                PARTIE RAPIDE (NON CLASSÉ)
-            </button>
-            <button 
-                className="cs-btn" 
-                onClick={() => { setNickname("TrainingBot"); onPlay(true); }}
-                style={{ width: '100%', fontSize: '0.9rem', padding: '0.8rem', background: 'var(--cs-accent)', border: 'none' }}
-            >
-                MODE SOLO (ENTRAÎNEMENT)
-            </button>
-        </div>
-            
-        <div className="cs-hint" style={{ marginTop: '1rem', justifyContent: 'center' }}>
+        <div className="cs-hint cs-auth-status">
             <span className="cs-status-dot online"></span>
             <span>SERVEURS EN LIGNE</span>
         </div>
-      </div>
-      <div style={{ textAlign: 'center', marginTop: '1rem', opacity: 0.5, fontSize: '0.8rem', color: 'var(--cs-text-muted)' }}>
-        VERSION 2.4 • RANKED FIX
+        </section>
       </div>
     </div>
   );

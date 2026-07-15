@@ -230,7 +230,11 @@ export function attachMatchmaking(io) {
     });
 
     socket.on("startSolo", async ({ nickname }) => {
-        socket.data.nickname = nickname;
+        if (!socket.data.user) {
+            socket.emit("authRequired", { message: "Connexion requise pour jouer" });
+            return;
+        }
+        socket.data.nickname = socket.data.user.username;
         const matchId = makeId(10);
         socket.join(matchId);
 
@@ -283,18 +287,13 @@ export function attachMatchmaking(io) {
     });
 
     socket.on("joinQueue", async () => {
-      // Require login? For now let's say "Guest" if not logged in, but user asked for login system.
-      // If not logged in, create a guest profile or force login.
-      // Let's support guests too for backward compat, but ELO only for logged users.
-      
-      const isGuest = !socket.data.user;
-      const nickname = socket.data.nickname || `Guest-${makeId(4)}`;
-      socket.data.nickname = nickname;
-      
-      if (isGuest) {
-          // Default ELO for matchmaking logic if we had one, but we don't use it for matching yet
-          socket.data.elo = 1000; 
+      if (!socket.data.user) {
+          socket.emit("authRequired", { message: "Connexion requise pour jouer" });
+          return;
       }
+
+      const nickname = socket.data.user.username;
+      socket.data.nickname = nickname;
 
       if (!waitingSocketId) {
         socket.join(socket.id); // ensure joined own room? Not needed usually but ok
@@ -338,7 +337,7 @@ export function attachMatchmaking(io) {
           [a]: socketA?.data.elo || 1000,
           [b]: socketB?.data.elo || 1000,
         },
-        isRanked: socketA?.data.user && socketB?.data.user,
+        isRanked: true,
         startedAt: Date.now(),
         ended: false,
         currentQuestionIndex: -1,

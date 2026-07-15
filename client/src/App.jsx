@@ -119,6 +119,13 @@ export default function App() {
       setPhase("end");
     };
 
+    const onAuthRequired = () => {
+      setUser(null);
+      setNickname("");
+      setPhase("lobby");
+      localStorage.removeItem("counterQuizSession");
+    };
+
     s.on("queueStatus", onQueueStatus);
     s.on("matchFound", onMatchFound);
     s.on("answerAck", onAnswerAck);
@@ -127,6 +134,7 @@ export default function App() {
     s.on("nextQuestion", onNextQuestion);
     s.on("matchEnd", onMatchEnd);
     s.on("connect", restoreSession);
+    s.on("authRequired", onAuthRequired);
     if (s.connected) restoreSession();
 
     return () => {
@@ -138,6 +146,7 @@ export default function App() {
       s.off("nextQuestion", onNextQuestion);
       s.off("matchEnd", onMatchEnd);
       s.off("connect", restoreSession);
+      s.off("authRequired", onAuthRequired);
     };
   }, [socketRef]);
 
