@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 
 import { QUESTIONS_DB_SEED } from '../config/questions_db.js';
 
@@ -87,6 +88,20 @@ function initDB() {
         if (err) console.error("Erreur table users:", err.message);
         else console.log("Table 'users' prête.");
     });
+
+    db.run(`
+      CREATE TABLE IF NOT EXISTS sessions (
+        token_hash TEXT PRIMARY KEY,
+        user_id INTEGER NOT NULL,
+        expires_at DATETIME NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+      )
+    `, (err) => {
+        if (err) console.error("Erreur table sessions:", err.message);
+        else console.log("Table 'sessions' prête.");
+    });
+    db.run(`CREATE INDEX IF NOT EXISTS idx_sessions_user_id ON sessions(user_id)`);
   });
 }
 
@@ -145,6 +160,48 @@ export async function loginUser(username, password) {
 
     console.log(`[DB] Login successful for ${username}`);
     return { id: user.id, username: user.username, elo: user.elo };
+}
+
+const hashSessionToken = (token) => crypto.createHash('sha256').update(token).digest('hex');
+
+export function createUserSession(userId) {
+    const token = crypto.randomBytes(32).toString('hex');
+    const tokenHash = hashSessionToken(token);
+    const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+
+    return new Promise((resolve, reject) => {
+        db.run("DELETE FROM sessions WHERE expires_at <= datetime('now')");
+        db.run(
+            "INSERT INTO sessions (token_hash, user_id, expires_at) VALUES (?, ?, ?)",
+            [tokenHash, userId, expiresAt],
+            (err) => err ? reject(err) : resolve(token)
+        );
+    });
+}
+
+export function getUserBySession(token) {
+    if (!token || typeof token !== 'string') return Promise.resolve(null);
+    return new Promise((resolve, reject) => {
+        db.get(`
+            SELECT users.id, users.username, users.elo
+            FROM sessions
+            JOIN users ON users.id = sessions.user_id
+            WHERE sessions.token_hash = ? AND sessions.expires_at > datetime('now')
+        `, [hashSessionToken(token)], (err, row) => {
+            if (err) reject(err);
+            else resolve(row || null);
+        });
+    });
+}
+
+export function deleteUserSession(token) {
+    if (!token || typeof token !== 'string') return Promise.resolve();
+    return new Promise((resolve, reject) => {
+        db.run("DELETE FROM sessions WHERE token_hash = ?", [hashSessionToken(token)], (err) => {
+            if (err) reject(err);
+            else resolve();
+        });
+    });
 }
 
 export function updateUserElo(username, newElo) {

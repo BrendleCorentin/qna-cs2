@@ -1,6 +1,6 @@
 import { makeId } from "../utils/id.js";
 // QUESTIONS import removed, we use DB now
-import { logMatchResult, registerUser, loginUser, getUserByUsername, updateUserElo, getLeaderboard, getRandomQuestions } from "../db/database.js";
+import { logMatchResult, registerUser, loginUser, createUserSession, getUserBySession, deleteUserSession, getUserByUsername, updateUserElo, getLeaderboard, getRandomQuestions } from "../db/database.js";
 import { calculateElo } from "../utils/elo.js";
 import { attachTournamentHandlers, reportTournamentResult, replayTournamentDraw } from "./tournaments.js";
 
@@ -144,6 +144,32 @@ export function attachMatchmaking(io) {
   io.on("connection", (socket) => {
     const launchTournamentMatch = (a, b, metadata) => createPvpMatch(io, a, b, metadata);
     attachTournamentHandlers(io, socket, launchTournamentMatch);
+
+    const restoreSession = async (token, cb = () => {}) => {
+        try {
+            const user = await getUserBySession(token);
+            if (!user) return cb({ success: false, error: "Session expirée" });
+            socket.data.user = user;
+            socket.data.nickname = user.username;
+            socket.data.elo = user.elo;
+            cb({ success: true, user: { username: user.username, elo: user.elo } });
+        } catch (e) {
+            cb({ success: false, error: "Impossible de restaurer la session" });
+        }
+    };
+
+    socket.on("resumeSession", ({ token } = {}, cb) => restoreSession(token, cb));
+    socket.on("logout", async ({ token } = {}, cb = () => {}) => {
+        try {
+            await deleteUserSession(token);
+            socket.data.user = null;
+            socket.data.nickname = null;
+            socket.data.elo = null;
+            cb({ success: true });
+        } catch (e) {
+            cb({ success: false });
+        }
+    });
     // Auth listeners
     socket.on("register", async ({ username, password }, cb) => {
         try {
@@ -163,7 +189,8 @@ export function attachMatchmaking(io) {
             socket.data.nickname = user.username;
             socket.data.elo = user.elo;
             
-            cb({ success: true, user: { username: user.username, elo: user.elo } });
+            const token = await createUserSession(user.id);
+            cb({ success: true, token, user: { username: user.username, elo: user.elo } });
         } catch (e) {
             cb({ success: false, error: e.message });
         }

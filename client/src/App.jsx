@@ -38,6 +38,21 @@ export default function App() {
     const s = socketRef.current;
     if (!s) return;
 
+    const restoreSession = () => {
+      const token = localStorage.getItem("counterQuizSession");
+      if (!token) return;
+      s.emit("resumeSession", { token }, (response) => {
+        if (response?.success) {
+          setUser(response.user);
+          setNickname(response.user.username);
+        } else {
+          localStorage.removeItem("counterQuizSession");
+          setUser(null);
+          setNickname("");
+        }
+      });
+    };
+
     const onQueueStatus = (msg) => {
       setQueueStatus(msg.status);
       if (msg.status === "waiting") {
@@ -106,6 +121,8 @@ export default function App() {
     s.on("emoteReceived", onEmoteReceived);
     s.on("nextQuestion", onNextQuestion);
     s.on("matchEnd", onMatchEnd);
+    s.on("connect", restoreSession);
+    if (s.connected) restoreSession();
 
     return () => {
       s.off("queueStatus", onQueueStatus);
@@ -115,6 +132,7 @@ export default function App() {
       s.off("emoteReceived", onEmoteReceived);
       s.off("nextQuestion", onNextQuestion);
       s.off("matchEnd", onMatchEnd);
+      s.off("connect", restoreSession);
     };
   }, [socketRef]);
 
@@ -189,6 +207,13 @@ export default function App() {
         setUser={setUser}
         nickname={nickname}
         setNickname={setNickname}
+        onLogout={() => {
+          const token = localStorage.getItem("counterQuizSession");
+          if (token) socketRef.current?.emit("logout", { token });
+          localStorage.removeItem("counterQuizSession");
+          setUser(null);
+          setNickname("");
+        }}
         onPlay={joinQueue}
         onLeaderboard={() => setPhase("leaderboard")}
         onAdmin={() => setPhase("admin")}

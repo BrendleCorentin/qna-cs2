@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "deploy": "vite build && cp -r dist/* /var/www/qna/",
+    "deploy": "vite build && cp -r dist/* /var/www/counterquiz-site/",
     "preview": "vite preview"
   },
   "dependencies": {

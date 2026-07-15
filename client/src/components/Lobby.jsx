@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Plus de vidéo, on revient à un design épuré mais stylé
-export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLeaderboard, onAdmin, onTournament }) {
+export default function Lobby({ socket, user, setUser, setNickname, onLogout, onPlay, onLeaderboard, onAdmin, onTournament }) {
   const [isRegistering, setIsRegistering] = useState(false);
   const [topPlayers, setTopPlayers] = useState([]);
   const [loadingLeaderboard, setLoadingLeaderboard] = useState(true);
@@ -40,7 +40,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
                     <span className="cs-elo-badge">{user.elo} ELO</span>
                     <button 
                         className="cs-btn-disconnect" 
-                        onClick={() => { setUser(null); setNickname(""); }} 
+                        onClick={onLogout}
                         title="Déconnexion"
                         style={{
                             background: 'transparent',
@@ -231,6 +231,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onPlay, onLe
                   setErrorLocal("Compte créé ! Connectez-vous.");
               } else {
                   // Login success
+                  localStorage.setItem("counterQuizSession", res.token);
                   setUser(res.user);
                   setNickname(res.user.username);
               }
