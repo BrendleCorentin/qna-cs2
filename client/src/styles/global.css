@@ -174,6 +174,36 @@ body {
   .cs-auth-intro h1 { font-size: 2rem; }
 }
 
+/* ====== PROFIL, PARAMÈTRES & AMIS ====== */
+.cs-friend-add { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-bottom: 10px; }
+.cs-friend-add .cs-input { font-size: 0.78rem; padding: 8px 10px; border-left-width: 2px; }
+.cs-friends-list { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; margin-top: 12px; }
+.cs-empty-text, .cs-social-message { color: var(--cs-text-muted); font-size: 0.78rem; text-align: center; }
+.cs-social-message { color: var(--cs-accent); }
+.cs-friend-row { display: grid; grid-template-columns: 34px 1fr auto; gap: 9px; align-items: center; padding: 8px; background: rgba(0,0,0,.22); border: 1px solid rgba(255,255,255,.06); }
+.cs-friend-row img { width: 34px; height: 34px; border-radius: 50%; }
+.cs-friend-row strong, .cs-friend-row small { display: block; }
+.cs-friend-row strong { font-size: .82rem; }
+.cs-friend-row small { color: var(--cs-text-muted); font-size: .68rem; margin-top: 2px; }
+.cs-friend-remove { border: 0; background: transparent; color: #ff6b6b; cursor: pointer; font-size: 1.35rem; }
+
+.cs-modal-backdrop { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; background: rgba(5,6,8,.82); backdrop-filter: blur(7px); }
+.cs-modal { width: min(460px, 100%); box-sizing: border-box; position: relative; padding: 34px; background: #1c1f24; border: 1px solid var(--cs-border); border-top: 3px solid var(--cs-accent); box-shadow: 0 28px 70px rgba(0,0,0,.65); }
+.cs-modal h2 { margin-bottom: 24px; }
+.cs-modal .cs-input { font-size: 1rem; margin-bottom: 18px; }
+.cs-modal .cs-btn-primary { width: 100%; margin-top: 8px; }
+.cs-modal-close { position: absolute; top: 10px; right: 12px; border: 0; background: transparent; color: var(--cs-text-muted); cursor: pointer; font-size: 1.6rem; }
+.cs-profile-preview { display: block; width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 26px; border: 3px solid var(--cs-accent); background: #b6e3f4; }
+.cs-setting-row { display: flex; justify-content: space-between; gap: 20px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--cs-border); cursor: pointer; }
+.cs-setting-row strong, .cs-setting-row small { display: block; }
+.cs-setting-row small { margin-top: 5px; color: var(--cs-text-muted); font-size: .75rem; }
+.cs-setting-row input { width: 20px; height: 20px; accent-color: var(--cs-accent); }
+
+.cs-reduced-motion *, .cs-reduced-motion *::before, .cs-reduced-motion *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+.cs-compact-lobby .cs-lobby-container { padding: 10px; gap: 10px; }
+.cs-compact-lobby .cs-lobby-content { gap: 10px; }
+.cs-compact-lobby .cs-panel { padding: 14px; }
+
 /* ====== NEW LOBBY DESIGN ====== */
 
 .cs-lobby-container {

@@ -11,6 +11,16 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
   const [password, setPassword] = useState("");
   const [errorLocal, setErrorLocal] = useState("");
   const [loading, setLoading] = useState(false);
+  const [friends, setFriends] = useState([]);
+  const [friendName, setFriendName] = useState("");
+  const [socialMessage, setSocialMessage] = useState("");
+  const [modal, setModal] = useState(null);
+  const [profileUsername, setProfileUsername] = useState("");
+  const [profileAvatar, setProfileAvatar] = useState("");
+  const [settings, setSettings] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("counterQuizSettings")) || { reducedMotion: false, compactLobby: false }; }
+    catch { return { reducedMotion: false, compactLobby: false }; }
+  });
 
   // Fetch leaderboard when logged in
   useEffect(() => {
@@ -22,10 +32,53 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
     }
   }, [user, socket]);
 
+  useEffect(() => {
+    if (!user || !socket) return;
+    const refreshFriends = () => socket.emit("getFriends", (response) => {
+      if (response?.success) setFriends(response.friends || []);
+    });
+    refreshFriends();
+    socket.on("friendsUpdated", refreshFriends);
+    const interval = setInterval(refreshFriends, 15000);
+    return () => {
+      clearInterval(interval);
+      socket.off("friendsUpdated", refreshFriends);
+    };
+  }, [user, socket]);
+
+  useEffect(() => {
+    localStorage.setItem("counterQuizSettings", JSON.stringify(settings));
+    document.body.classList.toggle("cs-reduced-motion", settings.reducedMotion);
+    document.body.classList.toggle("cs-compact-lobby", settings.compactLobby);
+  }, [settings]);
+
+  const openProfile = () => {
+    setProfileUsername(user.username);
+    setProfileAvatar(user.avatarSeed || user.username);
+    setSocialMessage("");
+    setModal("profile");
+  };
+
+  const saveProfile = () => {
+    socket.emit("updateProfile", { username: profileUsername, avatarSeed: profileAvatar }, (response) => {
+      if (!response?.success) return setSocialMessage(response?.error || "Modification impossible");
+      setUser(response.user);
+      setNickname(response.user.username);
+      setSocialMessage("Profil mis à jour");
+      setTimeout(() => setModal(null), 600);
+    });
+  };
+
+  const refreshFriends = () => socket.emit("getFriends", (response) => response?.success && setFriends(response.friends || []));
+  const friendAction = (event, payload) => socket.emit(event, payload, (response) => {
+    setSocialMessage(response?.success ? "Action effectuée" : response?.error || "Erreur");
+    if (response?.success) { setFriendName(""); refreshFriends(); }
+  });
+
   // --- NOUVEAU DESIGN DU LOBBY CONNECTÉ ---
   if (user) {
     // Génération d'un avatar basé sur le pseudo (seed)
-    const avatarUrl = `https://api.dicebear.com/7.x/adventurer/svg?seed=${user.username}&backgroundColor=b6e3f4`;
+    const avatarUrl = `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(user.avatarSeed || user.username)}&backgroundColor=b6e3f4`;
 
     return (
         <div className="cs-lobby-container">
@@ -91,8 +144,8 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
                     </div>
 
                     <div className="cs-action-list">
-                         <button className="cs-btn-text">Modifier le profil</button>
-                         <button className="cs-btn-text">Paramètres</button>
+                         <button className="cs-btn-text" onClick={openProfile}>Modifier le profil</button>
+                         <button className="cs-btn-text" onClick={() => { setSocialMessage(""); setModal("settings"); }}>Paramètres</button>
                     </div>
                 </div>
 
@@ -173,15 +226,48 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
                     )}
                 </div>
 
-                {/* Section Amis (Placeholder pour futur) */}
                 <div className="cs-panel cs-friends-panel">
-                    <h3 className="cs-panel-title">AMIS <span className="cs-tag">0/20</span></h3>
-                    <div className="cs-friends-list-empty">
-                        <p>Aucun ami connecté.</p>
-                        <button className="cs-btn-small">+ Ajouter</button>
+                    <h3 className="cs-panel-title">AMIS <span className="cs-tag">{friends.filter(f => f.status === 'accepted').length}/20</span></h3>
+                    <div className="cs-friend-add">
+                        <input className="cs-input" value={friendName} onChange={(e) => setFriendName(e.target.value)} placeholder="Pseudo du joueur" />
+                        <button className="cs-btn-small" disabled={!friendName.trim()} onClick={() => friendAction("sendFriendRequest", { username: friendName })}>+ AJOUTER</button>
+                    </div>
+                    {socialMessage && <p className="cs-social-message">{socialMessage}</p>}
+                    <div className="cs-friends-list">
+                      {friends.length === 0 && <p className="cs-empty-text">Aucun ami pour le moment.</p>}
+                      {friends.map((friend) => (
+                        <div className="cs-friend-row" key={friend.id}>
+                          <img src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(friend.avatarSeed || friend.username)}&backgroundColor=b6e3f4`} alt="" />
+                          <div><strong>{friend.username}</strong><small>{friend.status === 'accepted' ? (friend.online ? 'En ligne' : 'Hors ligne') : friend.requestedBy === friend.id ? 'Demande reçue' : 'Demande envoyée'}</small></div>
+                          {friend.status === 'pending' && friend.requestedBy === friend.id
+                            ? <button className="cs-btn-small" onClick={() => friendAction("acceptFriendRequest", { userId: friend.id })}>ACCEPTER</button>
+                            : <button className="cs-friend-remove" onClick={() => friendAction("removeFriend", { userId: friend.id })} title="Supprimer">×</button>}
+                        </div>
+                      ))}
                     </div>
                 </div>
             </main>
+            {modal && (
+              <div className="cs-modal-backdrop" onMouseDown={() => setModal(null)}>
+                <div className="cs-modal" onMouseDown={(event) => event.stopPropagation()}>
+                  <button className="cs-modal-close" onClick={() => setModal(null)}>×</button>
+                  {modal === "profile" ? <>
+                    <h2>MODIFIER LE PROFIL</h2>
+                    <img className="cs-profile-preview" src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(profileAvatar || profileUsername)}&backgroundColor=b6e3f4`} alt="Aperçu" />
+                    <label className="cs-label">PSEUDO</label>
+                    <input className="cs-input" value={profileUsername} onChange={(e) => setProfileUsername(e.target.value)} maxLength={20} />
+                    <label className="cs-label">STYLE D'AVATAR</label>
+                    <input className="cs-input" value={profileAvatar} onChange={(e) => setProfileAvatar(e.target.value)} maxLength={40} placeholder="Ex: sniper, dragon..." />
+                    {socialMessage && <p className="cs-social-message">{socialMessage}</p>}
+                    <button className="cs-btn cs-btn-primary" onClick={saveProfile}>ENREGISTRER</button>
+                  </> : <>
+                    <h2>PARAMÈTRES</h2>
+                    <label className="cs-setting-row"><span><strong>Réduire les animations</strong><small>Interface plus calme et plus légère.</small></span><input type="checkbox" checked={settings.reducedMotion} onChange={(e) => setSettings({ ...settings, reducedMotion: e.target.checked })} /></label>
+                    <label className="cs-setting-row"><span><strong>Lobby compact</strong><small>Réduit les espacements de l'interface.</small></span><input type="checkbox" checked={settings.compactLobby} onChange={(e) => setSettings({ ...settings, compactLobby: e.target.checked })} /></label>
+                  </>}
+                </div>
+              </div>
+            )}
         </div>
       );
   }

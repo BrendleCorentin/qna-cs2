@@ -37,6 +37,7 @@ export const db = new sqlite3.Database(dbPath, (err) => {
 
 function initDB() {
   db.serialize(() => {
+    db.run("PRAGMA foreign_keys = ON");
     db.run(`
       CREATE TABLE IF NOT EXISTS matches (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -110,12 +111,33 @@ function initDB() {
         username TEXT UNIQUE,
         password_hash TEXT,
         elo INTEGER DEFAULT 1000,
+        avatar_seed TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `, (err) => {
         if (err) console.error("Erreur table users:", err.message);
         else console.log("Table 'users' prête.");
     });
+
+    db.all("PRAGMA table_info(users)", [], (err, columns) => {
+      if (err) return console.error("Erreur lecture structure users:", err.message);
+      if (!columns.some((column) => column.name === "avatar_seed")) {
+        db.run("ALTER TABLE users ADD COLUMN avatar_seed TEXT");
+      }
+    });
+
+    db.run(`
+      CREATE TABLE IF NOT EXISTS friendships (
+        user1_id INTEGER NOT NULL,
+        user2_id INTEGER NOT NULL,
+        requested_by INTEGER NOT NULL,
+        status TEXT NOT NULL DEFAULT 'pending',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (user1_id, user2_id),
+        FOREIGN KEY(user1_id) REFERENCES users(id) ON DELETE CASCADE,
+        FOREIGN KEY(user2_id) REFERENCES users(id) ON DELETE CASCADE
+      )
+    `);
 
     db.run(`
       CREATE TABLE IF NOT EXISTS sessions (
@@ -135,7 +157,7 @@ function initDB() {
 
 export function getUserByUsername(username) {
     return new Promise((resolve, reject) => {
-        db.get("SELECT * FROM users WHERE username = ?", [username], (err, row) => {
+        db.get("SELECT * FROM users WHERE username = ? COLLATE NOCASE", [username], (err, row) => {
             if (err) reject(err);
             else resolve(row);
         });
@@ -165,7 +187,7 @@ export async function registerUser(username, password) {
                 // 'this.lastID' should work with function(err) but let's be safe and just return username
                 const id = this ? this.lastID : 0; 
                 console.log(`[DB] User inserted with ID ${id}`);
-                resolve({ id, username, elo: 1000 });
+                resolve({ id, username, elo: 1000, avatarSeed: username });
             }
         });
     });
@@ -187,7 +209,7 @@ export async function loginUser(username, password) {
     }
 
     console.log(`[DB] Login successful for ${username}`);
-    return { id: user.id, username: user.username, elo: user.elo };
+    return { id: user.id, username: user.username, elo: user.elo, avatarSeed: user.avatar_seed || user.username };
 }
 
 const hashSessionToken = (token) => crypto.createHash('sha256').update(token).digest('hex');
@@ -211,7 +233,7 @@ export function getUserBySession(token) {
     if (!token || typeof token !== 'string') return Promise.resolve(null);
     return new Promise((resolve, reject) => {
         db.get(`
-            SELECT users.id, users.username, users.elo
+            SELECT users.id, users.username, users.elo, COALESCE(users.avatar_seed, users.username) AS avatarSeed
             FROM sessions
             JOIN users ON users.id = sessions.user_id
             WHERE sessions.token_hash = ? AND sessions.expires_at > datetime('now')
@@ -229,6 +251,72 @@ export function deleteUserSession(token) {
             if (err) reject(err);
             else resolve();
         });
+    });
+}
+
+export function updateUserProfile(userId, username, avatarSeed) {
+    const cleanUsername = String(username || "").trim();
+    const cleanAvatarSeed = String(avatarSeed || cleanUsername).trim().slice(0, 40);
+    if (!/^[a-zA-Z0-9_-]{3,20}$/.test(cleanUsername)) {
+        return Promise.reject(new Error("Le pseudo doit contenir 3 à 20 caractères : lettres, chiffres, _ ou -"));
+    }
+    return new Promise((resolve, reject) => {
+        db.run("UPDATE users SET username = ?, avatar_seed = ? WHERE id = ?", [cleanUsername, cleanAvatarSeed, userId], function(err) {
+            if (err?.code === "SQLITE_CONSTRAINT") reject(new Error("Ce pseudo est déjà utilisé"));
+            else if (err) reject(err);
+            else if (!this.changes) reject(new Error("Utilisateur introuvable"));
+            else db.get("SELECT id, username, elo, COALESCE(avatar_seed, username) AS avatarSeed FROM users WHERE id = ?", [userId], (getErr, row) => getErr ? reject(getErr) : resolve(row));
+        });
+    });
+}
+
+export function sendFriendRequest(userId, targetUsername) {
+    return new Promise((resolve, reject) => {
+        db.get("SELECT id FROM users WHERE username = ? COLLATE NOCASE", [String(targetUsername || "").trim()], (err, target) => {
+            if (err) return reject(err);
+            if (!target) return reject(new Error("Joueur introuvable"));
+            if (target.id === userId) return reject(new Error("Tu ne peux pas t'ajouter toi-même"));
+            const user1 = Math.min(userId, target.id);
+            const user2 = Math.max(userId, target.id);
+            db.run("INSERT INTO friendships (user1_id, user2_id, requested_by) VALUES (?, ?, ?)", [user1, user2, userId], (insertErr) => {
+                if (insertErr?.code === "SQLITE_CONSTRAINT") reject(new Error("Une relation ou demande existe déjà"));
+                else if (insertErr) reject(insertErr);
+                else resolve();
+            });
+        });
+    });
+}
+
+export function acceptFriendRequest(userId, requesterId) {
+    const user1 = Math.min(userId, requesterId);
+    const user2 = Math.max(userId, requesterId);
+    return new Promise((resolve, reject) => {
+        db.run("UPDATE friendships SET status = 'accepted' WHERE user1_id = ? AND user2_id = ? AND requested_by = ? AND status = 'pending'", [user1, user2, requesterId], function(err) {
+            if (err) reject(err);
+            else if (!this.changes) reject(new Error("Demande introuvable"));
+            else resolve();
+        });
+    });
+}
+
+export function removeFriendship(userId, otherUserId) {
+    const user1 = Math.min(userId, otherUserId);
+    const user2 = Math.max(userId, otherUserId);
+    return new Promise((resolve, reject) => {
+        db.run("DELETE FROM friendships WHERE user1_id = ? AND user2_id = ?", [user1, user2], (err) => err ? reject(err) : resolve());
+    });
+}
+
+export function getFriendOverview(userId) {
+    return new Promise((resolve, reject) => {
+        db.all(`
+          SELECT u.id, u.username, COALESCE(u.avatar_seed, u.username) AS avatarSeed,
+                 f.status, f.requested_by AS requestedBy
+          FROM friendships f
+          JOIN users u ON u.id = CASE WHEN f.user1_id = ? THEN f.user2_id ELSE f.user1_id END
+          WHERE f.user1_id = ? OR f.user2_id = ?
+          ORDER BY u.username COLLATE NOCASE
+        `, [userId, userId, userId], (err, rows) => err ? reject(err) : resolve(rows));
     });
 }
 
