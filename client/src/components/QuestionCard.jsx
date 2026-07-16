@@ -31,7 +31,10 @@ export default function QuestionCard({
       const isWhoAmI = category === 'who_am_i';
       // Qui suis-je : indice immédiat, puis un nouvel indice toutes les 5 secondes.
       const thresholds = isWhoAmI ? [30, 25, 20, 15] : [25, 15, 10, 5];
-      const revealedClues = thresholds.filter((threshold) => timeLeft <= threshold).length;
+      // Le chrono vaut brièvement 0 avant sa synchronisation avec le serveur.
+      // Sans cette garde, 0 valide tous les seuils et dévoile les quatre indices.
+      const timerStarted = Number.isFinite(timeLeft) && timeLeft > 0;
+      const revealedClues = timerStarted ? thresholds.filter((threshold) => timeLeft <= threshold).length : 0;
       const canSubmitForClue = !isWhoAmI || revealedClues > attemptsUsed;
       // Clues logic:
       // Clue 1 (index 0): Show effectively immediately (when time <= 25, which is always true for 20s round)
@@ -48,7 +51,7 @@ export default function QuestionCard({
                 const threshold = thresholds[i] !== undefined ? thresholds[i] : 0;
                 // If timeLeft is high (e.g. 21), nothing shown? No, max 20.
                 // At 20s: 20 <= 20 (Show 1). 20 <= 15 (False).
-                const isVisible = timeLeft <= threshold;
+                const isVisible = timerStarted && timeLeft <= threshold;
                 
                 return (
                     <div key={i} style={{
@@ -68,7 +71,7 @@ export default function QuestionCard({
                         <span>{isVisible ? clue : "Indice verrouillé..."}</span>
                         {!isVisible && (
                             <span style={{ fontSize: '0.8rem', color: 'var(--cs-text-muted)' }}>
-                                -{timeLeft - threshold}s
+                                {timerStarted ? `${Math.max(0, timeLeft - threshold)}s` : "Synchronisation..."}
                             </span>
                         )}
                     </div>
