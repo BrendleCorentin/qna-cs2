@@ -126,19 +126,32 @@ function initDB() {
 
     db.all("PRAGMA table_info(users)", [], (err, columns) => {
       if (err) return console.error("Erreur lecture structure users:", err.message);
-      if (!columns.some((column) => column.name === "avatar_seed")) {
-        db.run("ALTER TABLE users ADD COLUMN avatar_seed TEXT");
-      }
-      if (!columns.some((column) => column.name === "favorite_team")) {
-        db.run("ALTER TABLE users ADD COLUMN favorite_team TEXT");
-      }
-      if (!columns.some((column) => column.name === "best_streak")) {
-        db.run("ALTER TABLE users ADD COLUMN best_streak INTEGER DEFAULT 0");
-      }
-      if (!columns.some((column) => column.name === "auth_provider")) db.run("ALTER TABLE users ADD COLUMN auth_provider TEXT DEFAULT 'local'");
-      if (!columns.some((column) => column.name === "provider_id")) db.run("ALTER TABLE users ADD COLUMN provider_id TEXT");
-      if (!columns.some((column) => column.name === "email")) db.run("ALTER TABLE users ADD COLUMN email TEXT");
-      db.run("CREATE UNIQUE INDEX IF NOT EXISTS idx_users_provider ON users(auth_provider, provider_id) WHERE provider_id IS NOT NULL");
+      const migrations = [
+        ["avatar_seed", "ALTER TABLE users ADD COLUMN avatar_seed TEXT"],
+        ["favorite_team", "ALTER TABLE users ADD COLUMN favorite_team TEXT"],
+        ["best_streak", "ALTER TABLE users ADD COLUMN best_streak INTEGER DEFAULT 0"],
+        ["auth_provider", "ALTER TABLE users ADD COLUMN auth_provider TEXT DEFAULT 'local'"],
+        ["provider_id", "ALTER TABLE users ADD COLUMN provider_id TEXT"],
+        ["email", "ALTER TABLE users ADD COLUMN email TEXT"],
+      ].filter(([name]) => !columns.some((column) => column.name === name));
+
+      const runNextMigration = (index = 0) => {
+        if (index >= migrations.length) {
+          db.run(
+            "CREATE UNIQUE INDEX IF NOT EXISTS idx_users_provider ON users(auth_provider, provider_id) WHERE provider_id IS NOT NULL",
+            (indexErr) => {
+              if (indexErr) console.error("Erreur index OAuth:", indexErr.message);
+              else console.log("Colonnes OAuth prêtes.");
+            }
+          );
+          return;
+        }
+        db.run(migrations[index][1], (migrationErr) => {
+          if (migrationErr) console.error(`Erreur migration ${migrations[index][0]}:`, migrationErr.message);
+          runNextMigration(index + 1);
+        });
+      };
+      runNextMigration();
     });
 
     db.run("DROP TABLE IF EXISTS friendships");
