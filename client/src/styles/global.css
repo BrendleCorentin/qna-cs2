@@ -438,6 +438,14 @@ body {
 .cs-gamemode-card.primary:hover {
     box-shadow: 0 10px 30px rgba(220,163,54,0.2);
 }
+.cs-gamemode-card.streak {
+    border-color: rgba(255, 125, 35, .65);
+    background: linear-gradient(135deg, rgba(255, 112, 25, .14), rgba(34, 25, 22, .8));
+}
+.cs-gamemode-card.streak:hover {
+    border-color: #ff8a28;
+    box-shadow: 0 0 24px rgba(255, 112, 25, .18);
+}
 
 .mode-icon { font-size: 2rem; }
 .mode-title { display: block; font-weight: 800; font-size: 1.2rem; margin-bottom: 5px; font-style: italic; }

@@ -18,7 +18,7 @@ function TeamAvatar({ username, avatarSeed, favoriteTeam, className = "" }) {
 }
 
 // Plus de vidéo, on revient à un design épuré mais stylé
-export default function Lobby({ socket, user, setUser, setNickname, onLogout, onPlay, onLeaderboard, onAdmin, onTournament }) {
+export default function Lobby({ socket, user, setUser, setNickname, onLogout, onPlay, onLeaderboard, onAdmin, onTournament, onStreak }) {
   const [isRegistering, setIsRegistering] = useState(false);
   const [topPlayers, setTopPlayers] = useState([]);
   const [loadingLeaderboard, setLoadingLeaderboard] = useState(true);
@@ -191,6 +191,13 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
                                 <span className="mode-desc">Entraînez-vous contre un bot. Pas d'enjeu.</span>
                             </div>
                         </button>
+                        <button className="cs-gamemode-card streak" onClick={onStreak}>
+                            <div className="mode-icon">🔥</div>
+                            <div className="mode-info">
+                                <span className="mode-title">MODE SÉRIE</span>
+                                <span className="mode-desc">Une erreur et c'est terminé. Record actuel : {user.bestStreak || 0}.</span>
+                            </div>
+                        </button>
                     </div>
 
                     <div className="cs-social-area" style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
@@ -204,6 +211,7 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
                                          <tr>
                                              <th>#</th>
                                              <th>JOUEUR</th>
+                                             <th style={{ textAlign: 'right' }}>SÉRIE</th>
                                              <th style={{ textAlign: 'right' }}>ELO</th>
                                          </tr>
                                      </thead>
@@ -215,11 +223,12 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
                                                      <TeamAvatar {...p} className="cs-avatar-mini" />
                                                      {p.username}
                                                  </td>
+                                                 <td className="elo" style={{ color: '#ff8a28' }}>🔥 {p.bestStreak || 0}</td>
                                                  <td className="elo">{p.elo}</td>
                                              </tr>
                                          ))}
                                          {topPlayers.length === 0 && (
-                                             <tr><td colSpan="3" style={{ textAlign: 'center', padding: '20px' }}>Aucun classement</td></tr>
+                                             <tr><td colSpan="4" style={{ textAlign: 'center', padding: '20px' }}>Aucun classement</td></tr>
                                          )}
                                      </tbody>
                                  </table>

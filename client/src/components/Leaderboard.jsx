@@ -3,6 +3,8 @@ import { getFaceitLevel, getLevelColor } from '../utils/faceit';
 
 export default function Leaderboard({ socket, onBack }) {
     const [players, setPlayers] = useState([]);
+    const [streakPlayers, setStreakPlayers] = useState([]);
+    const [ranking, setRanking] = useState("elo");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -11,6 +13,7 @@ export default function Leaderboard({ socket, onBack }) {
             setPlayers(data);
             setLoading(false);
         });
+        socket.emit("getStreakLeaderboard", (data) => setStreakPlayers(data || []));
     }, [socket]);
 
     return (
@@ -19,6 +22,10 @@ export default function Leaderboard({ socket, onBack }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                     <h1 className="cs-hero-title" style={{ margin: 0, border: 'none' }}>CLASSEMENT</h1>
                     <button className="cs-btn cs-btn-outline" onClick={onBack}>RETOUR</button>
+                </div>
+                <div style={{ display: 'flex', gap: '.75rem', marginBottom: '1.5rem' }}>
+                    <button className={`cs-btn ${ranking === "elo" ? "cs-btn-primary" : "cs-btn-outline"}`} onClick={() => setRanking("elo")}>CLASSEMENT ELO</button>
+                    <button className={`cs-btn ${ranking === "streak" ? "cs-btn-primary" : "cs-btn-outline"}`} onClick={() => setRanking("streak")}>RECORDS 🔥</button>
                 </div>
 
                 {loading ? (
@@ -30,11 +37,12 @@ export default function Leaderboard({ socket, onBack }) {
                                 <th style={{ padding: '1rem', textAlign: 'center' }}>#</th>
                                 <th style={{ padding: '1rem', textAlign: 'left' }}>JOUEUR</th>
                                 <th style={{ padding: '1rem', textAlign: 'center' }}>NIVEAU</th>
+                                <th style={{ padding: '1rem', textAlign: 'center' }}>SÉRIE</th>
                                 <th style={{ padding: '1rem', textAlign: 'right' }}>ELO</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {players.map((p, i) => {
+                            {(ranking === "streak" ? streakPlayers : players).map((p, i) => {
                                 const level = getFaceitLevel(p.elo);
                                 const levelColor = getLevelColor(level);
                                 
@@ -61,15 +69,18 @@ export default function Leaderboard({ socket, onBack }) {
                                                 {level}
                                             </div>
                                         </td>
+                                        <td style={{ padding: '1rem', textAlign: 'center', color: '#ff8a28', fontWeight: 'bold' }}>
+                                            🔥 {p.bestStreak || 0}
+                                        </td>
                                         <td style={{ padding: '1rem', textAlign: 'right', fontFamily: 'monospace', fontSize: '1.2rem' }}>
                                             {p.elo}
                                         </td>
                                     </tr>
                                 )
                             })}
-                            {players.length === 0 && (
+                            {(ranking === "streak" ? streakPlayers : players).length === 0 && (
                                 <tr>
-                                    <td colSpan="4" style={{ padding: '2rem', textAlign: 'center', color: 'var(--cs-text-muted)' }}>
+                                    <td colSpan="5" style={{ padding: '2rem', textAlign: 'center', color: 'var(--cs-text-muted)' }}>
                                         Aucun joueur classé pour le moment.
                                     </td>
                                 </tr>

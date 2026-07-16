@@ -113,6 +113,7 @@ function initDB() {
         elo INTEGER DEFAULT 1000,
         avatar_seed TEXT,
         favorite_team TEXT,
+        best_streak INTEGER DEFAULT 0,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `, (err) => {
@@ -127,6 +128,9 @@ function initDB() {
       }
       if (!columns.some((column) => column.name === "favorite_team")) {
         db.run("ALTER TABLE users ADD COLUMN favorite_team TEXT");
+      }
+      if (!columns.some((column) => column.name === "best_streak")) {
+        db.run("ALTER TABLE users ADD COLUMN best_streak INTEGER DEFAULT 0");
       }
     });
 
@@ -191,7 +195,7 @@ export async function registerUser(username, password) {
                 // 'this.lastID' should work with function(err) but let's be safe and just return username
                 const id = this ? this.lastID : 0; 
                 console.log(`[DB] User inserted with ID ${id}`);
-                resolve({ id, username, elo: 1000, avatarSeed: username, favoriteTeam: "" });
+                resolve({ id, username, elo: 1000, avatarSeed: username, favoriteTeam: "", bestStreak: 0 });
             }
         });
     });
@@ -213,7 +217,7 @@ export async function loginUser(username, password) {
     }
 
     console.log(`[DB] Login successful for ${username}`);
-    return { id: user.id, username: user.username, elo: user.elo, avatarSeed: user.avatar_seed || user.username, favoriteTeam: user.favorite_team || "" };
+    return { id: user.id, username: user.username, elo: user.elo, avatarSeed: user.avatar_seed || user.username, favoriteTeam: user.favorite_team || "", bestStreak: user.best_streak || 0 };
 }
 
 const hashSessionToken = (token) => crypto.createHash('sha256').update(token).digest('hex');
@@ -238,7 +242,8 @@ export function getUserBySession(token) {
     return new Promise((resolve, reject) => {
         db.get(`
             SELECT users.id, users.username, users.elo, COALESCE(users.avatar_seed, users.username) AS avatarSeed,
-                   COALESCE(users.favorite_team, '') AS favoriteTeam
+                   COALESCE(users.favorite_team, '') AS favoriteTeam,
+                   COALESCE(users.best_streak, 0) AS bestStreak
             FROM sessions
             JOIN users ON users.id = sessions.user_id
             WHERE sessions.token_hash = ? AND sessions.expires_at > datetime('now')
@@ -272,7 +277,7 @@ export function updateUserProfile(userId, username, avatarSeed, favoriteTeam) {
             if (err?.code === "SQLITE_CONSTRAINT") reject(new Error("Ce pseudo est déjà utilisé"));
             else if (err) reject(err);
             else if (!this.changes) reject(new Error("Utilisateur introuvable"));
-            else db.get("SELECT id, username, elo, COALESCE(avatar_seed, username) AS avatarSeed, COALESCE(favorite_team, '') AS favoriteTeam FROM users WHERE id = ?", [userId], (getErr, row) => getErr ? reject(getErr) : resolve(row));
+            else db.get("SELECT id, username, elo, COALESCE(avatar_seed, username) AS avatarSeed, COALESCE(favorite_team, '') AS favoriteTeam, COALESCE(best_streak, 0) AS bestStreak FROM users WHERE id = ?", [userId], (getErr, row) => getErr ? reject(getErr) : resolve(row));
         });
     });
 }
@@ -348,10 +353,38 @@ export function updateUserEloById(id, newElo) {
 
 export function getLeaderboard(limit = 50) {
     return new Promise((resolve, reject) => {
-        db.all("SELECT username, elo, COALESCE(avatar_seed, username) AS avatarSeed, COALESCE(favorite_team, '') AS favoriteTeam FROM users ORDER BY elo DESC LIMIT ?", [limit], (err, rows) => {
+        db.all("SELECT username, elo, COALESCE(avatar_seed, username) AS avatarSeed, COALESCE(favorite_team, '') AS favoriteTeam, COALESCE(best_streak, 0) AS bestStreak FROM users ORDER BY elo DESC LIMIT ?", [limit], (err, rows) => {
             if (err) reject(err);
             else resolve(rows);
         });
+    });
+}
+
+export function getStreakLeaderboard(limit = 50) {
+    return new Promise((resolve, reject) => {
+        db.all(
+            "SELECT username, elo, COALESCE(avatar_seed, username) AS avatarSeed, COALESCE(favorite_team, '') AS favoriteTeam, COALESCE(best_streak, 0) AS bestStreak FROM users ORDER BY bestStreak DESC, username COLLATE NOCASE ASC LIMIT ?",
+            [limit],
+            (err, rows) => err ? reject(err) : resolve(rows)
+        );
+    });
+}
+
+export function saveBestStreak(userId, streak) {
+    const cleanStreak = Math.max(0, Number.parseInt(streak, 10) || 0);
+    return new Promise((resolve, reject) => {
+        db.run(
+            "UPDATE users SET best_streak = MAX(COALESCE(best_streak, 0), ?) WHERE id = ?",
+            [cleanStreak, userId],
+            function(err) {
+                if (err) return reject(err);
+                db.get(
+                    "SELECT COALESCE(best_streak, 0) AS bestStreak FROM users WHERE id = ?",
+                    [userId],
+                    (getErr, row) => getErr ? reject(getErr) : resolve(row?.bestStreak || 0)
+                );
+            }
+        );
     });
 }
 

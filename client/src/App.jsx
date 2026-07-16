@@ -66,6 +66,7 @@ export default function App() {
         opponent: msg.opponent,
         questions: msg.questions,
         tournamentCode: msg.tournamentCode || null,
+        isStreak: Boolean(msg.isStreak),
       });
       setQIndex(0);
       setMyScore(0);
@@ -116,6 +117,9 @@ export default function App() {
     const onMatchEnd = (msg) => {
       console.log("Match ended:", msg);
       setEndInfo(msg);
+      if (msg?.isStreak && Number.isFinite(msg.bestStreak)) {
+        setUser((current) => current ? { ...current, bestStreak: msg.bestStreak } : current);
+      }
       setPhase("end");
     };
 
@@ -160,6 +164,12 @@ export default function App() {
         s.emit("joinQueue", { nickname: nickname || "Player" });
         setPhase("queue");
     }
+  }
+
+  function startStreak() {
+    const s = socketRef.current;
+    if (!s) return;
+    s.emit("startStreak");
   }
 
   function answer(questionId, ans) {
@@ -236,6 +246,7 @@ export default function App() {
         onLeaderboard={() => setPhase("leaderboard")}
         onAdmin={() => setPhase("admin")}
         onTournament={() => setPhase("tournament")}
+        onStreak={startStreak}
       />
     );
   }
@@ -266,6 +277,7 @@ export default function App() {
         qIndex={qIndex || 0}
         deadline={deadline}
         currentDuration={match.currentDuration}
+        isStreak={match.isStreak}
         
         // Answers & Scores
         answered={answered}

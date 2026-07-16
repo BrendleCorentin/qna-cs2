@@ -7,6 +7,7 @@ export default function Match({
   qIndex,
   deadline,
   currentDuration, // NEW
+  isStreak = false,
   answered,
   opponentAnswered,
   myScore,
@@ -62,8 +63,8 @@ export default function Match({
         
         {/* Opponent Area */}
         <div style={{ position: 'relative' }}>
-           <div className="cs-label">ADVERSAIRE</div>
-           <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{opponentName}</div>
+           <div className="cs-label">{isStreak ? "MODE" : "ADVERSAIRE"}</div>
+           <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{isStreak ? "🔥 SÉRIE EN COURS" : opponentName}</div>
            
            {/* Opponent Emote Bubble */}
            {isOpponentEmote && (
@@ -82,7 +83,7 @@ export default function Match({
 
         {/* Timer Center */}
         <div style={{ textAlign: 'center' }}>
-            <div className="cs-label">MANCHE {qIndex + 1} / {questions.length}</div>
+            <div className="cs-label">{isStreak ? `QUESTION ${qIndex + 1}` : `MANCHE ${qIndex + 1} / ${questions.length}`}</div>
             <div style={{ fontSize: '3rem', fontWeight: 'bold', lineHeight: 1, color: timeLeft < 3 ? 'var(--cs-t-red)' : '#fff' }}>
                 {timeLeft}
             </div>
@@ -90,7 +91,7 @@ export default function Match({
 
         {/* My Score Area */}
         <div style={{ textAlign: 'right', position: 'relative' }}>
-           <div className="cs-label">MON SCORE</div>
+           <div className="cs-label">{isStreak ? "STREAK" : "MON SCORE"}</div>
            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--cs-ct-blue)' }}>{myScore}</div>
            
            {/* My Emote Bubble */}
@@ -137,7 +138,7 @@ export default function Match({
                           textTransform: 'uppercase'
                       }}
                     >
-                    {correct === undefined ? "Validation en cours..." : correct ? "VICTOIRE DE MANCHE" : isWhoAmI ? "MAUVAISE PROPOSITION — ATTENDEZ LE PROCHAIN INDICE" : "ÉCHEC DE MANCHE"}
+                    {correct === undefined ? "Validation en cours..." : correct ? "SÉRIE CONTINUÉE" : isStreak ? "SÉRIE TERMINÉE" : isWhoAmI ? "MAUVAISE PROPOSITION — ATTENDEZ LE PROCHAIN INDICE" : "ÉCHEC DE MANCHE"}
                     </span>
                 </div>
             )}
@@ -147,7 +148,7 @@ export default function Match({
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
               
               {/* Emote Buttons */}
-              <div className="cs-emote-bar">
+              {!isStreak && <div className="cs-emote-bar">
                   {EMOTES.map(txt => (
                       <button 
                         key={txt} 
@@ -158,7 +159,7 @@ export default function Match({
                           {txt}
                       </button>
                   ))}
-              </div>
+              </div>}
 
               <button className="cs-btn cs-btn-t" onClick={onLeave} style={{ padding: '0.8rem 1.5rem', fontSize: '0.8rem', opacity: 0.8 }}>
                 ABANDONNER
@@ -221,4 +222,3 @@ export default function Match({
     </div>
   );
 }
-

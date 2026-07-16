@@ -1,6 +1,6 @@
 import { makeId } from "../utils/id.js";
 // QUESTIONS import removed, we use DB now
-import { logMatchResult, registerUser, loginUser, createUserSession, getUserBySession, deleteUserSession, updateUserProfile, sendFriendRequest, acceptFriendRequest, removeFriendship, getFriendOverview, getUserByUsername, updateUserElo, getLeaderboard, getRandomQuestions } from "../db/database.js";
+import { logMatchResult, registerUser, loginUser, createUserSession, getUserBySession, deleteUserSession, updateUserProfile, sendFriendRequest, acceptFriendRequest, removeFriendship, getFriendOverview, getUserByUsername, updateUserElo, getLeaderboard, getStreakLeaderboard, getRandomQuestions, saveBestStreak } from "../db/database.js";
 import { calculateElo } from "../utils/elo.js";
 import { attachTournamentHandlers, reportTournamentResult, replayTournamentDraw } from "./tournaments.js";
 
@@ -110,7 +110,9 @@ function startNextQuestion(io, match) {
   match.currentQuestionIndex++;
   
   if (match.currentQuestionIndex >= match.questions.length) {
-    if (!match.ended) { 
+    if (match.isStreak) {
+        endStreak(io, match, "question_bank_completed");
+    } else if (!match.ended) {
         endMatch(io, match);
         // Clean up match after a short delay to allow for any late acks or disconnects
         setTimeout(() => {
@@ -159,8 +161,46 @@ function startNextQuestion(io, match) {
   if (match.timer) clearTimeout(match.timer);
 
   match.timer = setTimeout(() => {
-    startNextQuestion(io, match);
+    if (match.isStreak) endStreak(io, match, "timeout");
+    else startNextQuestion(io, match);
   }, duration + 1000); // 1s buffer
+}
+
+async function endStreak(io, match, reason = "wrong_answer") {
+  if (!match || match.ended) return;
+  match.ended = true;
+  if (match.timer) clearTimeout(match.timer);
+
+  const pid = match.players[0];
+  const streak = match.scores[pid] || 0;
+  let bestStreak = streak;
+  try {
+    const playerSocket = io.sockets.sockets.get(pid);
+    const userId = playerSocket?.data.user?.id || match.userId;
+    if (userId) {
+      bestStreak = await saveBestStreak(userId, streak);
+      if (playerSocket?.data.user) {
+        playerSocket.data.user.bestStreak = bestStreak;
+      }
+    }
+  } catch (error) {
+    console.error("[Streak] Impossible d'enregistrer le record:", error);
+  }
+
+  io.to(pid).emit("matchEnd", {
+    result: "finished",
+    yourScore: streak,
+    oppScore: 0,
+    elo: match.elos[pid],
+    eloChange: 0,
+    isSolo: true,
+    isStreak: true,
+    streak,
+    bestStreak,
+    newRecord: streak > (match.previousBestStreak || 0),
+    reason,
+  });
+  setTimeout(() => matches.delete(match.matchId), 5000);
 }
 
 export function attachMatchmaking(io) {
@@ -175,7 +215,7 @@ export function attachMatchmaking(io) {
             socket.data.user = user;
             socket.data.nickname = user.username;
             socket.data.elo = user.elo;
-            cb({ success: true, user: { username: user.username, elo: user.elo, avatarSeed: user.avatarSeed, favoriteTeam: user.favoriteTeam } });
+            cb({ success: true, user: { username: user.username, elo: user.elo, avatarSeed: user.avatarSeed, favoriteTeam: user.favoriteTeam, bestStreak: user.bestStreak } });
         } catch (e) {
             cb({ success: false, error: "Impossible de restaurer la session" });
         }
@@ -213,7 +253,7 @@ export function attachMatchmaking(io) {
             socket.data.elo = user.elo;
             
             const token = await createUserSession(user.id);
-            cb({ success: true, token, user: { username: user.username, elo: user.elo, avatarSeed: user.avatarSeed, favoriteTeam: user.favoriteTeam } });
+            cb({ success: true, token, user: { username: user.username, elo: user.elo, avatarSeed: user.avatarSeed, favoriteTeam: user.favoriteTeam, bestStreak: user.bestStreak } });
         } catch (e) {
             cb({ success: false, error: e.message });
         }
@@ -223,6 +263,15 @@ export function attachMatchmaking(io) {
         try {
             const leaderboard = await getLeaderboard(50);
             cb(leaderboard);
+        } catch (e) {
+            console.error(e);
+            cb([]);
+        }
+    });
+
+    socket.on("getStreakLeaderboard", async (cb) => {
+        try {
+            cb(await getStreakLeaderboard(50));
         } catch (e) {
             console.error(e);
             cb([]);
@@ -337,6 +386,57 @@ export function attachMatchmaking(io) {
         setTimeout(() => {
             startNextQuestion(io, match);
         }, 1000);
+    });
+
+    socket.on("startStreak", async () => {
+        if (!socket.data.user) {
+            socket.emit("authRequired", { message: "Connexion requise pour jouer" });
+            return;
+        }
+
+        try {
+          const matchId = makeId(10);
+          socket.join(matchId);
+          const questions = await getRandomQuestions(1000);
+          if (!questions.length) {
+              socket.emit("matchEnd", { isSolo: true, isStreak: true, yourScore: 0, reason: "no_questions" });
+              return;
+          }
+
+          const match = {
+            matchId,
+            players: [socket.id],
+            nicknames: { [socket.id]: socket.data.user.username },
+            elos: { [socket.id]: socket.data.elo || 1000 },
+            isRanked: false,
+            isSolo: true,
+            isStreak: true,
+            userId: socket.data.user.id,
+            previousBestStreak: socket.data.user.bestStreak || 0,
+            startedAt: Date.now(),
+            ended: false,
+            currentQuestionIndex: -1,
+            timer: null,
+            answers: { [socket.id]: {} },
+            scores: { [socket.id]: 0 },
+            questions,
+          };
+          matches.set(matchId, match);
+
+          const clientQuestions = questions.map(({ id, question, choices, type, clues, category }) => ({ id, question, choices, type, clues, category }));
+          socket.emit("matchFound", {
+            matchId,
+            you: { id: socket.id, nickname: socket.data.user.username, elo: match.elos[socket.id] },
+            opponent: { id: "streak", nickname: "MODE SÉRIE", elo: 0 },
+            questions: clientQuestions,
+            startedAt: match.startedAt,
+            isStreak: true,
+          });
+          setTimeout(() => startNextQuestion(io, match), 1000);
+        } catch (error) {
+          console.error("[Streak] Impossible de démarrer la partie:", error);
+          socket.emit("matchEnd", { isSolo: true, isStreak: true, yourScore: 0, reason: "no_questions" });
+        }
     });
 
     socket.on("joinQueue", async () => {
@@ -484,7 +584,7 @@ export function attachMatchmaking(io) {
         socket.emit("answerAck", {
           questionId,
           correct,
-          canRetry: !correct && attempts.length < 4,
+          canRetry: !match.isStreak && !correct && attempts.length < 4,
           attemptsUsed: attempts.length,
           score: match.scores[socket.id] + (correct ? 1 : 0),
         });
@@ -511,6 +611,8 @@ export function attachMatchmaking(io) {
           setTimeout(() => {
             if (!match.ended && match.questions[match.currentQuestionIndex] === currentQ) startNextQuestion(io, match);
           }, 1000);
+        } else if (match.isStreak) {
+          setTimeout(() => endStreak(io, match, "wrong_answer"), 700);
         }
         return;
       }
@@ -571,10 +673,11 @@ export function attachMatchmaking(io) {
       }
 
       // Send Ack FIRST before moving to next question (to ensure client processes it)
+      const nextScore = match.scores[socket.id] + (correct ? 1 : 0);
       socket.emit("answerAck", {
         questionId,
         correct,
-        score: match.scores[socket.id],
+        score: nextScore,
       });
 
       const opp = getOpponent(match, socket.id);
@@ -605,7 +708,9 @@ export function attachMatchmaking(io) {
                  startNextQuestion(io, match);
             }
         }, 1000); 
-      } 
+      } else if (match.isStreak) {
+        setTimeout(() => endStreak(io, match, "wrong_answer"), 700);
+      }
       
     });
 
@@ -628,6 +733,10 @@ export function attachMatchmaking(io) {
       const match = matches.get(matchId);
       if (!match || match.ended) return;
       if (!match.players.includes(socket.id)) return;
+      if (match.isStreak) {
+        endStreak(io, match, "left");
+        return;
+      }
 
       const opp = getOpponent(match, socket.id);
       match.ended = true;
@@ -692,6 +801,7 @@ export function attachMatchmaking(io) {
         if (!match.players.includes(socket.id)) continue;
 
         if (match.isSolo) {
+            if (match.isStreak) endStreak(io, match, "left");
             matches.delete(mid);
             continue;
         }
