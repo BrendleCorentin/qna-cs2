@@ -39,7 +39,17 @@ export default function App() {
     if (!s) return;
 
     const restoreSession = () => {
-      const token = localStorage.getItem("counterQuizSession");
+      const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+      const oauthToken = hashParams.get("oauth_token");
+      const oauthError = hashParams.get("oauth_error");
+      if (oauthToken) {
+        localStorage.setItem("counterQuizSession", oauthToken);
+        window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
+      } else if (oauthError) {
+        console.error("[OAuth]", oauthError);
+        window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
+      }
+      const token = oauthToken || localStorage.getItem("counterQuizSession");
       if (!token) return;
       s.emit("resumeSession", { token }, (response) => {
         if (response?.success) {

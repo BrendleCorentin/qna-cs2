@@ -2,6 +2,7 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import { attachMatchmaking } from "./services/matchmaking.js";
+import { attachOAuthRoutes } from "./services/oauth.js";
 import { 
   getAllQuestions, 
   addQuestion, 
@@ -30,6 +31,8 @@ const io = new Server(server, {
 app.get("/", (_req, res) => {
   res.json({ ok: true, name: "qna-1v1-server" });
 });
+
+attachOAuthRoutes(app);
 
 // Admin Routes
 app.get("/admin/questions", async (req, res) => {

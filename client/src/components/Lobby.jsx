@@ -27,8 +27,6 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
   const [password, setPassword] = useState("");
   const [errorLocal, setErrorLocal] = useState("");
   const [loading, setLoading] = useState(false);
-  const [friends, setFriends] = useState([]);
-  const [friendName, setFriendName] = useState("");
   const [socialMessage, setSocialMessage] = useState("");
   const [modal, setModal] = useState(null);
   const [profileUsername, setProfileUsername] = useState("");
@@ -47,20 +45,6 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
             setLoadingLeaderboard(false);
         });
     }
-  }, [user, socket]);
-
-  useEffect(() => {
-    if (!user || !socket) return;
-    const refreshFriends = () => socket.emit("getFriends", (response) => {
-      if (response?.success) setFriends(response.friends || []);
-    });
-    refreshFriends();
-    socket.on("friendsUpdated", refreshFriends);
-    const interval = setInterval(refreshFriends, 15000);
-    return () => {
-      clearInterval(interval);
-      socket.off("friendsUpdated", refreshFriends);
-    };
   }, [user, socket]);
 
   useEffect(() => {
@@ -86,12 +70,6 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
       setTimeout(() => setModal(null), 600);
     });
   };
-
-  const refreshFriends = () => socket.emit("getFriends", (response) => response?.success && setFriends(response.friends || []));
-  const friendAction = (event, payload) => socket.emit(event, payload, (response) => {
-    setSocialMessage(response?.success ? "Action effectuée" : response?.error || "Erreur");
-    if (response?.success) { setFriendName(""); refreshFriends(); }
-  });
 
   // --- NOUVEAU DESIGN DU LOBBY CONNECTÉ ---
   if (user) {
@@ -246,26 +224,6 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
                     )}
                 </div>
 
-                <div className="cs-panel cs-friends-panel">
-                    <h3 className="cs-panel-title">AMIS <span className="cs-tag">{friends.filter(f => f.status === 'accepted').length}/20</span></h3>
-                    <div className="cs-friend-add">
-                        <input className="cs-input" value={friendName} onChange={(e) => setFriendName(e.target.value)} placeholder="Pseudo du joueur" />
-                        <button className="cs-btn-small" disabled={!friendName.trim()} onClick={() => friendAction("sendFriendRequest", { username: friendName })}>+ AJOUTER</button>
-                    </div>
-                    {socialMessage && <p className="cs-social-message">{socialMessage}</p>}
-                    <div className="cs-friends-list">
-                      {friends.length === 0 && <p className="cs-empty-text">Aucun ami pour le moment.</p>}
-                      {friends.map((friend) => (
-                        <div className="cs-friend-row" key={friend.id}>
-                          <TeamAvatar {...friend} />
-                          <div><strong>{friend.username}</strong><small>{friend.status === 'accepted' ? (friend.online ? 'En ligne' : 'Hors ligne') : friend.requestedBy === friend.id ? 'Demande reçue' : 'Demande envoyée'}</small></div>
-                          {friend.status === 'pending' && friend.requestedBy === friend.id
-                            ? <button className="cs-btn-small" onClick={() => friendAction("acceptFriendRequest", { userId: friend.id })}>ACCEPTER</button>
-                            : <button className="cs-friend-remove" onClick={() => friendAction("removeFriend", { userId: friend.id })} title="Supprimer">×</button>}
-                        </div>
-                      ))}
-                    </div>
-                </div>
             </main>
             {modal && (
               <div className="cs-modal-backdrop" onMouseDown={() => setModal(null)}>
@@ -373,6 +331,15 @@ export default function Lobby({ socket, user, setUser, setNickname, onLogout, on
             <h2>{isRegistering ? "Créer un compte" : "Bon retour parmi nous"}</h2>
             <p>{isRegistering ? "Inscris-toi pour commencer à jouer." : "Connecte-toi pour accéder à tous les modes."}</p>
         </div>
+        <div className="cs-oauth-buttons">
+            <button type="button" className="cs-oauth-btn google" onClick={() => { window.location.href = "https://counter-quiz.com/auth/google"; }}>
+                <span className="cs-oauth-icon">G</span> CONTINUER AVEC GOOGLE
+            </button>
+            <button type="button" className="cs-oauth-btn twitch" onClick={() => { window.location.href = "https://counter-quiz.com/auth/twitch"; }}>
+                <span className="cs-oauth-icon">◈</span> CONTINUER AVEC TWITCH
+            </button>
+        </div>
+        <div className="cs-auth-separator"><span>OU</span></div>
         
         <div className="cs-auth-tabs">
             <button 

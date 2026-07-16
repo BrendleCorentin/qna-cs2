@@ -1,6 +1,6 @@
 import { makeId } from "../utils/id.js";
 // QUESTIONS import removed, we use DB now
-import { logMatchResult, registerUser, loginUser, createUserSession, getUserBySession, deleteUserSession, updateUserProfile, sendFriendRequest, acceptFriendRequest, removeFriendship, getFriendOverview, getUserByUsername, updateUserElo, getLeaderboard, getStreakLeaderboard, getRandomQuestions, saveBestStreak } from "../db/database.js";
+import { logMatchResult, registerUser, loginUser, createUserSession, getUserBySession, deleteUserSession, updateUserProfile, updateUserElo, getLeaderboard, getStreakLeaderboard, getRandomQuestions, saveBestStreak } from "../db/database.js";
 import { calculateElo } from "../utils/elo.js";
 import { attachTournamentHandlers, reportTournamentResult, replayTournamentDraw } from "./tournaments.js";
 
@@ -276,49 +276,6 @@ export function attachMatchmaking(io) {
             console.error(e);
             cb([]);
         }
-    });
-
-    const emitFriendsUpdated = (userId) => {
-        for (const candidate of io.sockets.sockets.values()) {
-            if (candidate.data.user?.id === userId) candidate.emit("friendsUpdated");
-        }
-    };
-
-    socket.on("getFriends", async (cb = () => {}) => {
-        if (!socket.data.user) return cb({ success: false, error: "Connexion requise" });
-        try {
-            const rows = await getFriendOverview(socket.data.user.id);
-            const onlineIds = new Set([...io.sockets.sockets.values()].map((candidate) => candidate.data.user?.id).filter(Boolean));
-            cb({ success: true, friends: rows.map((friend) => ({ ...friend, online: onlineIds.has(friend.id) })) });
-        } catch (e) { cb({ success: false, error: e.message }); }
-    });
-
-    socket.on("sendFriendRequest", async ({ username } = {}, cb = () => {}) => {
-        if (!socket.data.user) return cb({ success: false, error: "Connexion requise" });
-        try {
-            const target = await getUserByUsername(String(username || "").trim());
-            await sendFriendRequest(socket.data.user.id, username);
-            if (target) emitFriendsUpdated(target.id);
-            cb({ success: true });
-        } catch (e) { cb({ success: false, error: e.message }); }
-    });
-
-    socket.on("acceptFriendRequest", async ({ userId } = {}, cb = () => {}) => {
-        if (!socket.data.user) return cb({ success: false, error: "Connexion requise" });
-        try {
-            await acceptFriendRequest(socket.data.user.id, Number(userId));
-            emitFriendsUpdated(Number(userId));
-            cb({ success: true });
-        } catch (e) { cb({ success: false, error: e.message }); }
-    });
-
-    socket.on("removeFriend", async ({ userId } = {}, cb = () => {}) => {
-        if (!socket.data.user) return cb({ success: false, error: "Connexion requise" });
-        try {
-            await removeFriendship(socket.data.user.id, Number(userId));
-            emitFriendsUpdated(Number(userId));
-            cb({ success: true });
-        } catch (e) { cb({ success: false, error: e.message }); }
     });
 
     socket.on("updateProfile", async ({ username, avatarSeed, favoriteTeam } = {}, cb = () => {}) => {

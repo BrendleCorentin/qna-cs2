@@ -114,6 +114,9 @@ function initDB() {
         avatar_seed TEXT,
         favorite_team TEXT,
         best_streak INTEGER DEFAULT 0,
+        auth_provider TEXT DEFAULT 'local',
+        provider_id TEXT,
+        email TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `, (err) => {
@@ -132,20 +135,13 @@ function initDB() {
       if (!columns.some((column) => column.name === "best_streak")) {
         db.run("ALTER TABLE users ADD COLUMN best_streak INTEGER DEFAULT 0");
       }
+      if (!columns.some((column) => column.name === "auth_provider")) db.run("ALTER TABLE users ADD COLUMN auth_provider TEXT DEFAULT 'local'");
+      if (!columns.some((column) => column.name === "provider_id")) db.run("ALTER TABLE users ADD COLUMN provider_id TEXT");
+      if (!columns.some((column) => column.name === "email")) db.run("ALTER TABLE users ADD COLUMN email TEXT");
+      db.run("CREATE UNIQUE INDEX IF NOT EXISTS idx_users_provider ON users(auth_provider, provider_id) WHERE provider_id IS NOT NULL");
     });
 
-    db.run(`
-      CREATE TABLE IF NOT EXISTS friendships (
-        user1_id INTEGER NOT NULL,
-        user2_id INTEGER NOT NULL,
-        requested_by INTEGER NOT NULL,
-        status TEXT NOT NULL DEFAULT 'pending',
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (user1_id, user2_id),
-        FOREIGN KEY(user1_id) REFERENCES users(id) ON DELETE CASCADE,
-        FOREIGN KEY(user2_id) REFERENCES users(id) ON DELETE CASCADE
-      )
-    `);
+    db.run("DROP TABLE IF EXISTS friendships");
 
     db.run(`
       CREATE TABLE IF NOT EXISTS sessions (
@@ -208,6 +204,9 @@ export async function loginUser(username, password) {
         console.log(`[DB] User ${username} not found`);
         throw new Error("Utilisateur inconnu");
     }
+    if (!user.password_hash) {
+        throw new Error(`Ce compte utilise la connexion ${user.auth_provider === "twitch" ? "Twitch" : "Google"}`);
+    }
 
     console.log(`[DB] Verifying password for ${username}`);
     const match = await bcrypt.compare(password, user.password_hash);
@@ -218,6 +217,43 @@ export async function loginUser(username, password) {
 
     console.log(`[DB] Login successful for ${username}`);
     return { id: user.id, username: user.username, elo: user.elo, avatarSeed: user.avatar_seed || user.username, favoriteTeam: user.favorite_team || "", bestStreak: user.best_streak || 0 };
+}
+
+function sanitizeOAuthUsername(value) {
+    const cleaned = String(value || "joueur").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 20);
+    return cleaned.length >= 3 ? cleaned : `joueur${crypto.randomInt(1000, 9999)}`;
+}
+
+async function findAvailableUsername(preferred) {
+    const base = sanitizeOAuthUsername(preferred);
+    if (!await getUserByUsername(base)) return base;
+    for (let suffix = 2; suffix < 1000; suffix++) {
+        const candidate = `${base.slice(0, 20 - String(suffix).length)}${suffix}`;
+        if (!await getUserByUsername(candidate)) return candidate;
+    }
+    return `joueur${crypto.randomBytes(4).toString("hex")}`.slice(0, 20);
+}
+
+export async function findOrCreateOAuthUser({ provider, providerId, username, email = null, avatarSeed = null }) {
+    if (!["google", "twitch"].includes(provider) || !providerId) throw new Error("Identité OAuth invalide");
+    const existing = await new Promise((resolve, reject) => {
+        db.get("SELECT * FROM users WHERE auth_provider = ? AND provider_id = ?", [provider, String(providerId)], (err, row) => err ? reject(err) : resolve(row));
+    });
+    if (existing) {
+        return { id: existing.id, username: existing.username, elo: existing.elo, avatarSeed: existing.avatar_seed || existing.username, favoriteTeam: existing.favorite_team || "", bestStreak: existing.best_streak || 0 };
+    }
+
+    const availableUsername = await findAvailableUsername(username);
+    return new Promise((resolve, reject) => {
+        db.run(
+            "INSERT INTO users (username, password_hash, avatar_seed, auth_provider, provider_id, email) VALUES (?, NULL, ?, ?, ?, ?)",
+            [availableUsername, avatarSeed || availableUsername, provider, String(providerId), email],
+            function(err) {
+                if (err) return reject(err);
+                resolve({ id: this.lastID, username: availableUsername, elo: 1000, avatarSeed: avatarSeed || availableUsername, favoriteTeam: "", bestStreak: 0 });
+            }
+        );
+    });
 }
 
 const hashSessionToken = (token) => crypto.createHash('sha256').update(token).digest('hex');
@@ -279,57 +315,6 @@ export function updateUserProfile(userId, username, avatarSeed, favoriteTeam) {
             else if (!this.changes) reject(new Error("Utilisateur introuvable"));
             else db.get("SELECT id, username, elo, COALESCE(avatar_seed, username) AS avatarSeed, COALESCE(favorite_team, '') AS favoriteTeam, COALESCE(best_streak, 0) AS bestStreak FROM users WHERE id = ?", [userId], (getErr, row) => getErr ? reject(getErr) : resolve(row));
         });
-    });
-}
-
-export function sendFriendRequest(userId, targetUsername) {
-    return new Promise((resolve, reject) => {
-        db.get("SELECT id FROM users WHERE username = ? COLLATE NOCASE", [String(targetUsername || "").trim()], (err, target) => {
-            if (err) return reject(err);
-            if (!target) return reject(new Error("Joueur introuvable"));
-            if (target.id === userId) return reject(new Error("Tu ne peux pas t'ajouter toi-même"));
-            const user1 = Math.min(userId, target.id);
-            const user2 = Math.max(userId, target.id);
-            db.run("INSERT INTO friendships (user1_id, user2_id, requested_by) VALUES (?, ?, ?)", [user1, user2, userId], (insertErr) => {
-                if (insertErr?.code === "SQLITE_CONSTRAINT") reject(new Error("Une relation ou demande existe déjà"));
-                else if (insertErr) reject(insertErr);
-                else resolve();
-            });
-        });
-    });
-}
-
-export function acceptFriendRequest(userId, requesterId) {
-    const user1 = Math.min(userId, requesterId);
-    const user2 = Math.max(userId, requesterId);
-    return new Promise((resolve, reject) => {
-        db.run("UPDATE friendships SET status = 'accepted' WHERE user1_id = ? AND user2_id = ? AND requested_by = ? AND status = 'pending'", [user1, user2, requesterId], function(err) {
-            if (err) reject(err);
-            else if (!this.changes) reject(new Error("Demande introuvable"));
-            else resolve();
-        });
-    });
-}
-
-export function removeFriendship(userId, otherUserId) {
-    const user1 = Math.min(userId, otherUserId);
-    const user2 = Math.max(userId, otherUserId);
-    return new Promise((resolve, reject) => {
-        db.run("DELETE FROM friendships WHERE user1_id = ? AND user2_id = ?", [user1, user2], (err) => err ? reject(err) : resolve());
-    });
-}
-
-export function getFriendOverview(userId) {
-    return new Promise((resolve, reject) => {
-        db.all(`
-          SELECT u.id, u.username, COALESCE(u.avatar_seed, u.username) AS avatarSeed,
-                 COALESCE(u.favorite_team, '') AS favoriteTeam,
-                 f.status, f.requested_by AS requestedBy
-          FROM friendships f
-          JOIN users u ON u.id = CASE WHEN f.user1_id = ? THEN f.user2_id ELSE f.user1_id END
-          WHERE f.user1_id = ? OR f.user2_id = ?
-          ORDER BY u.username COLLATE NOCASE
-        `, [userId, userId, userId], (err, rows) => err ? reject(err) : resolve(rows));
     });
 }
 
